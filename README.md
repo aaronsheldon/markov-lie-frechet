@@ -12,4 +12,5 @@ This repository will contain the work of a Masters project in statistics.
 * Representations of the second Frechet derivative of the exponential map
 * Multivariable Pade approximation of the second Frechet derivative of the exponential map
 * Construction of a Newton-Raphson method for maximum likelihood estimation of the generator of a continuous Markov process
+* Projection maps in the computation of first passage time distributions 
 * Application to survival data in continuing care settings
