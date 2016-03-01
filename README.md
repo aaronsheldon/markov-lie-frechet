@@ -1,6 +1,6 @@
 # markov-lie-frechet
 
-This repository will contain the work of a Master project in statistics.
+This repository will contain the work of a Masters project in statistics.
 
 ## Work to incorporate
 
