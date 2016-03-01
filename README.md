@@ -8,7 +8,7 @@ This repository will contain the work of a Master project in statistics.
 * Abstract definition of the Lie group of invertible stochastic linear maps
 * Computation of strucutre coefficients of the generators of the Lie algebra of stochastic linear maps
 * Representations of the Frechet derivative of the exponential map
-* Pade approximation of the Frechet derivative ofthe exponential map and Kroenecker product expansion of the adjoint
+* Pade approximation of the Frechet derivative of the exponential map and Kroenecker product expansion of the adjoint
 * Representations of the second Frechet derivative of the exponential map
 * Multivariable Pade approximation of the second Frechet derivative of the exponential map
 * Construction of a Newton-Raphson method for maximum likelihood estimation of the generator of a continuous Markov process
