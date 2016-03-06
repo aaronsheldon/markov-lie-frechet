@@ -1,0 +1,129 @@
+% Use the class supplied by the University of Calgary
+\documentclass[12pt]{ucalgthes1}
+
+% External references
+\usepackage[letterpaper,top=1in, bottom= 1in, left= 1in, right= 1in]{geometry}
+\usepackage{hyperref}
+\usepackage{mathptmx}
+
+% Static definitions
+\title{The Application of Lie Algebras to Markov Processes\\ \bigskip
+Computation of the Maximum Likelihood Estimators of the Generators of Continuous 
+Time Markov Processes from Stopped Random Variables}
+\author{Aaron Geoffrey Sheldon}
+\thesisyear{2016}
+\thesis{project}
+\newcommand{\thesistitle}{The Application of Lie Algebras to Markov Processes}
+\monthname{August}
+\dept{GRADUATE PROGRAM IN "Statistics"}
+\degree{"Masters of Science"}
+
+% Start of main
+\begin{document}
+	\makethesistitle
+	\pagenumbering{roman}
+	\setcounter{page}{2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter*{UNIVERSITY OF CALGARY \\ FACULTY OF GRADUATE STUDIES}
+%\thispagestyle{empty}
+%The undersigned certify that they have read, and recommend
+%to the Faculty of Graduate Studies for acceptance, a \Thesis\ entitled
+%``\thesistitle'' submitted by \Author\
+%in partial fulfillment of the requirements for the degree of
+%\Degree.\\
+%
+%                 Substitute  List of Examiners
+%
+%\begin{signing}{Department of Academic Computing}
+%\signline
+%Chairman, Dr.~John D.~Doe \\
+%Department of Academic Computing \\
+%Services  \\
+%\signline
+%Chairman, Dr.~John D.~Doe \\
+%Department of Academic Computing \\
+%Services  \\
+%\signline
+%Chairman, Dr.~John D.~Doe \\
+%Department of Academic Computing \\
+%Services  \\
+%\signline
+%Chairman, Dr.~John D.~Doe \\
+%Department of Academic Computing \\
+%Services  \\
+%\newsigncolumn         use this command to start a new column if necessary
+%\newsigncolumn
+%\signline
+%Chairman, Dr.~John D.~Doe \\
+%Department of Academic Computing \\
+%Services  \\
+%\signline
+%Dr.~Jane Smith \\
+%Department of Academic Computing  \\
+
+%\signline
+%Dr.~A.~B.~Brown \\
+%Department of Academic Computing  \\
+%\end{signing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	% Preamble chapters
+	\newpage
+	\phantomsection
+	
+	% Abstract
+	\altchapter{\bf{Abstract}}
+	Continuous time Markov processes and Lie algebras have individually been 
+	highly productive fields of investigation for more than a century; however, 
+	the two fields remain ripe for cross pollination. In particular the 
+	application of results from Lie algebra theory will fruitfully yield novel 
+	computational methods for estimation problems in continuous time Markov 
+	processes. In this project we derive the minimal Lie algebra that contains the
+	generators of a continuous time Markov process, and then using the guarantees 
+	of algebraic closure construct a Newton-Raphson algorithm for maximum 
+	likelihood estimation of the generator of a continuous time Markov process 
+	from stopped random variables using P\'ade approximations for Taylor series
+	expressions of the first and second order derivatives of the exponential map.
+	
+	\newpage
+	\phantomsection
+	
+	% Acknowledgements
+	\altchapter{\bf{Acknowledgements}}
+	Anyone who has the patience to deal with me.
+	
+	% Contents listings
+	\begin{singlespace}
+		\newpage
+		\phantomsection
+		\tableofcontents
+		\pagestyle{plain}
+		\newpage
+		\phantomsection
+		\listoftables
+		\pagestyle{plain}
+		\newpage
+		\phantomsection
+		\listoffigures
+		\pagestyle{plain}
+		\clearpage
+		\clearpage
+	\end{singlespace}
+	\newpage
+	\phantomsection
+	\chapter*{\bf{List of Symbols, Abbreviations and Nomenclature}\hfill} \addcontentsline{toc}{chapter}{List of Symbols}
+	\listofsymbols
+	\pagestyle{plain}
+	\clearpage
+	\pagenumbering{arabic}
+
+	% Content of project
+	\include{project-chapter-1}
+	\include{project-chapter-2}
+	%\include{project-chapter-3}
+	%\include{project-chapter-4}
+	%\include{project-chapter-5}
+	%\appendix
+	%\include{project-appendix-1}
+\end{document}
