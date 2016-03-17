@@ -6,10 +6,35 @@ of the special unitary algebra $\mathfrak{su}(n)$, can all be defined in terms
 of invariants of a Banach space, such as the matrix invariants of the 
 determinant, trace, or norm. In contrast stochastic matrices are always 
 characterized with respect to a chosen vector, which we will denote 
-$\hat{\mathbbm{1}}$, for reasons that will become clear later.
-$ST(\hat{e})$ and $\mathfrak{st}(\hat{e})$
+$\hat{\mathbbm{1}}$, for reasons that will become clear later. For an $n \times n$
+matrix this serves as $n$ linear constraints, leaving $n^2 - n$ linear degrees of
+freedom.
+\begin{definition}
+	Let $St(\hat{\mathbbm{1}})$ denote the group of invertible matrices stochastic with respect to $\hat{\mathbbm{1}}$
+\end{definition}
+\begin{lemma}
+	$St(\hat{\mathbbm{1}})$ is a Lie group
+\end{lemma}
+\begin{definition}
+	Let $\mathfrak{st}(\hat{\mathbbm{1}})$ denote the Lie algebra of $St(\hat{\mathbbm{1}})$
+\end{definition}
+\begin{lemma}
+	The canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ are $C_{ij} = \frac{1}{\sqrt{2}} \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$
+\end{lemma}
+The previous lemma serves as the definition of the canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+\begin{lemma}
+	$\exp\left(C_{ij}\right) = e$
+\end{lemma}
+\begin{lemma}
+	$C_{ij}C_{kl} = \delta$
+\end{lemma}
 \subsection{Doubly Stochastic Matrices}
-$ST(\hat{e},\hat{e})$ and $\mathfrak{st}(\hat{e},\hat{e})$
+Doubly stochastic matrices require double conservation of the vector $\hat{\mathbbm{1}}$, leaving
+only $\left(n - 1\right)^2$ linear degrees of freedom. This is an important clue in the construction
+of a canonical representation. In fact the representation can be found by choosing one additional
+vector $\hat{e}_n$ to ``omit''. This vector plays a similar role to the diagonal in the previous
+construction and is used to balance the row and column sums back to zero.
+$St(\hat{\mathbbm{1}},\hat{e}_n)$ and $\mathfrak{st}(\hat{\mathbbm{1}},\hat{e}_n)$
 \section{Structure Constants of the Generator Algebra}
 \subsection{Stochastic Matrices}
 \subsection{Doubly Stochastic Matrices}
