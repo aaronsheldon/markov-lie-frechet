@@ -1,30 +1,30 @@
-\chapter{The Lie Algebra of the Generators of Continuous Time Markov Processes}
+\chapter{The Lie Algebra of the Generators of Continuous Time Markov Processes on Finite State Spaces}
 \section{Stochastic Matrices}
 The classical Lie algebras of physics, like the infinitesimal symmetries
 of the special unitary algebra $\mathfrak{su}(n)$, are defined with respect to
 invariants of a Banach algebra, such as the matrix invariants of the 
 determinant, trace, or norm. In contrast stochastic matrices are always 
 characterized with respect to a specific unit vector, which we will denote 
-$\hat{\mathbbm{1}}$. In the next two subsections we provide an explicit 
+$\hat{\mathbbm{1}}$. In the next two sections we provide an explicit 
 construction and characterization of the Lie algebra of stochastic matrices, 
 building on the original the work of ??.
 
 The common approach to stochastic matrices begins with the restriction that the 
-matrices have positive entries with respect to the standard orthonormal basis 
-for the vector space on which it acts; namely $\left\langle\hat{e}_i,A \hat{e}_j\right\rangle \ge 0$
+matrices have non-negative entries with respect to the standard orthonormal 
+basis for the vector space on which it acts; namely $\left\langle\hat{e}_i,A \hat{e}_j\right\rangle \ge 0$
 for all $i,j$. In addition to allowing for singular matrices this poses an 
 immediate obstacle to the necessary closure with respect to matrix inversion 
 required for matrix groups. As the inverse of a stochastic matrix need not have 
 non-negative entries with respect to the standard orthonormal basis. 
 
-For the moment we will set aside the non-negative entries restriction, and 
-instead begin with a generalization of the concept of fixed row sums. We will 
-show this generalization is preserved by matrix inversion, and then develop an 
-orthonormal basis from which specific matrices with positive entries, with 
-respect to the basis, can be constructed. In essence tackling the problem from 
-the reverse direction, starting with the more general idea of fixed row sums, 
-then specifying to matrices with positive entries with respect to a constructed 
-orthonormal basis.
+For the moment we will set aside the restriction that the entries be 
+non-negative, and instead begin with a generalization of the concept of fixed 
+row sums. We will show this generalization is preserved by matrix inversion, and 
+then develop an orthonormal basis from which specific matrices with non-negative 
+entries, with respect to the basis, can be constructed. In essence tackling the 
+problem from the reverse direction, starting with the more general idea of fixed 
+row sums, then specifying to matrices with non-negative entries with respect to 
+a constructed orthonormal basis.
 
 \begin{definition}
 	A matrix $A$ is stochastic with respect to the unit vector $\hat{\mathbbm{1}}$ 
@@ -43,7 +43,7 @@ foundational definitions.
 
 It is tempting to view the name stochastic Lie group has a bait and switch, or 
 at least an abuse of the terminology, given we have removed the usual convex
-polytope stochastic matrices and replaced it with a group of invertible 
+polytope of stochastic matrices and replaced it with a group of invertible 
 matrices with a common eigenvector $\hat{\mathbbm{1}}$. Previous authors have 
 denoted the convex polytope of stochastic matrices as the stochastic semi-group 
 and the group invertible matrices as the pseudo-stochastic Lie group. One could 
@@ -121,12 +121,14 @@ free dimensions on $\mathfrak{st}(\hat{\mathbbm{1}})$, when considered as a
 vector space. This hints that we can construct a generator of $\mathfrak{st}(\hat{\mathbbm{1}})$
 from order pairs of basis elements $\hat{e}_i$ for the vector space of $\hat{\mathbbm{1}}$.
 To see how this is done we first construct a useful basis for the vector space
-of $\hat{\mathbbm{1}}$.
+to which $\hat{\mathbbm{1}}$ is a member.
 
 \begin{lemma}
 	There exists an orthonormal basis $\hat{e}_i$ such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
 	for all $i$
 \end{lemma}
+
+% Fix the fractions in this proof.
 
 \begin{proof}
 	While a basis with the stipulated properties can be constructed through the
@@ -139,8 +141,123 @@ of $\hat{\mathbbm{1}}$.
 		that is orthogonal to $\hat{\mathbbm{1}}$ and construct the unit vector
 		$\hat{e}_{n+1} = \frac{1}{\sqrt{n+1}} \hat{\mathbbm{1}} + \sqrt{\frac{n}{n+1}} \hat{e}_{\perp}$.
 		Clearly $\hat{e}_{n+1}$ satisfies the condition $\left\langle \hat{e}_{n+1}, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n+1}}$.
-		Next construct a new row sum unit vector $\hat{\mathbbm{1}}_n$ in one 
-		dimension lower by projecting onto the subspace orthogonal to $\hat{e}_{\perp}$ 
+		\item To use the the induction assumption we construct a new row sum unit 
+		vector $\hat{\mathbbm{1}}_n = \frac{n}{\sqrt{n^2 - n}} \hat{\mathbbm{1}} - \sqrt{\frac{n}{n^2 - n}} \hat{e}_{\perp}$ 
+		in one dimension lower by projecting onto the subspace orthogonal to $\hat{e}_{n+1}$.
+		\item By the induction assumption there exists a basis $\hat{e}_i$ with $i \le n$, 
+		such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle = \frac{1}{\sqrt{n}}$
+		\item Because $\hat{e}_i$ with $i \le n$ was constructed in the space 
+		orthogonal to $\hat{e}_{n+1}$ if follows that $\left\langle \hat{e}_i, \hat{e}_j \right\rangle = \delta{ij}$
+		for all $i,j \le n+1 $.
+		\item Then using the definitions of $\hat{e}_{n+1}$ and $\hat{\mathbbm{1}}_n$
+		we can calculate the inner product $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle$
+		for $i \le n$
+		\begin{IEEEeqnarray*}{rCl}
+			\frac{1}{\sqrt{n}}
+				& = & \left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle\\
+				& = & \frac{n}{\sqrt{n^2 - n}} \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle - \sqrt{\frac{n}{n^2 - n}} \left\langle \hat{e}_i, \hat{e}_{\perp} \right\rangle\\
+				& = & \frac{\sqrt{n^3+n^2} + \sqrt{n}}{\sqrt{n^3 - n}} \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle - \sqrt{\frac{n}{n^2 - n}} \left\langle \hat{e}_i, \hat{e}_{n+1} \right\rangle
+		\end{IEEEeqnarray*}
+		Inverting the fraction in the equality yields $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n+1}}$
+	\end{enumerate}
+\end{proof}
+
+To establish the central result of this chapter, that the algebraic closure of
+the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$,
+we need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$
+are linear combinations of matrices $C_{ij}$
+
+\begin{lemma}
+	\begin{IEEEeqnarray*}{rCl}
+		C_{ij}C_{kl} & = &
+		\begin{cases}
+			- C_{il} & i=k,\\
+			C_{il} - C_{ij} & j=k,\\
+			0 & \text{otherwise}.
+		\end{cases}
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{proof}
+	We proceed in two steps; calculating the terms of the products, then 
+	simplifying the cases, always assuming $i \neq j$ and $k \neq l$.
+	\begin{enumerate}
+		\item Term wise computation yields
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ij}C_{kl}
+				& = & \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right) \hat{e}_k \otimes \left( \hat{e}_l - \hat{e}_k \right)\\
+				& = & \hat{e}_i \otimes \hat{e}_j \hat{e}_k \otimes \hat{e}_l + \hat{e}_i \otimes \hat{e}_i \hat{e}_k \otimes \hat{e}_k - \hat{e}_i \otimes \hat{e}_j \hat{e}_k \otimes \hat{e}_k - \hat{e}_i \otimes \hat{e}_i \hat{e}_k \otimes \hat{e}_l\\
+				& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l + \delta_{ik} \hat{e}_i \otimes \hat{e}_k - \delta_{jk} \hat{e}_i \otimes \hat{e}_k - \delta_{ik} \hat{e}_i \otimes \hat{e}_l\\
+				& = & \left(\delta_{jk} - \delta_{ik} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_k \right)
+		\end{IEEEeqnarray*}
+		\item We work through each case of $\delta_{jk} - \delta_{ik}$, starting 
+		with the case $i=k$ 
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ij}C_{il}
+				& = & \left(\delta_{jk} - \delta_{ii} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_i \right)\\
+				& = & - \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_i \right)\\
+				& = & - C_{il}
+		\end{IEEEeqnarray*}
+		\item When $j=k$ we have
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ij}C_{jl}
+				& = & \left(\delta_{jj} - \delta_{ij} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_j \right)\\
+				& = & \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_j \right)\\
+				& = & \hat{e}_i \otimes \left( \hat{e_l} - \hat{e}_i + \hat{e}_i - \hat{e}_j \right)\\
+				& = & C_{il} - C_{ij}
+		\end{IEEEeqnarray*}
+		\item Finally when none of the previous conditions apply
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ij}C_{kl}
+				& = & \left(\delta_{jk} - \delta_{ik} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_k \right)\\
+				& = & 0 \cdot \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_k \right)\\
+				& = & 0
+		\end{IEEEeqnarray*}
+	\end{enumerate}
+\end{proof}
+
+While this result is sufficient to accomplish the central result, it is worth
+carrying through with a computation of the structure constants of the generators.
+
+\begin{corollary}
+	\begin{IEEEeqnarray*}{rCl}
+		\left[C_{ij},C_{kl}\right] & = &
+		\begin{cases}
+			C_{ij} - C_{il} & i=k,\\
+			C_{kj} - C_{ki} & i=l,\\
+			C_{il} - C_{ij} & j=k,\\
+			0 & \text{otherwise}.
+		\end{cases}
+	\end{IEEEeqnarray*}
+\end{corollary}
+
+\begin{proof}
+	As in the previous lemma we work case wise through the equalities.
+	\begin{enumerate}
+		\item Starting with $i=k$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ij},C_{il}\right]
+				& = & C_{ij}C_{il} - C_{il}C_{ij}\\
+				& = & C_{ij} - C_{il}
+		\end{IEEEeqnarray*}
+		\item For $i=l$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ij},C_{ki}\right]
+				& = & C_{ij}C_{ki} - C_{ki}C_{ij}\\
+				& = & C_{kj} - C_{ki}
+		\end{IEEEeqnarray*}
+		\item For $j=k$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ij},C_{jl}\right]
+				& = & C_{ij}C_{jl} - C_{jl}C_{ij}\\
+				& = & C_{il} - C_{ij}
+		\end{IEEEeqnarray*}
+		\item When none of the conditions apply
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ij},C_{kl}\right]
+				& = & C_{ij}C_{kl} - C_{kl}C_{ij}\\
+				& = & 0
+		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{proof}
 
@@ -148,12 +265,14 @@ We can now proceed with the central result that motivates this chapter.
 
 \begin{theorem}
 	The canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ are 
-	$C_{ij} = \frac{1}{\sqrt{2}} \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$
+	$C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$
 \end{theorem}
 
 \begin{proof}
-	To prove that the smallest algebra that contains $C_{ij}$ is $\mathfrak{st}(\hat{\mathbbm{1}})$ 
-	it suffices to prove that matrices $C_{ij}$ from a basis for $\mathfrak{st}(\hat{\mathbbm{1}})$.
+	The previous lemma has established that the products, and thus the 
+	commutators, of $C_{ij}$ are linear in $C_{ij}$. We then have to prove that 
+	the smallest algebra that contains $C_{ij}$ is $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+	As thus, it is sufficient to prove that matrices $C_{ij}$ from a basis for $\mathfrak{st}(\hat{\mathbbm{1}})$.
 	This is because a necessary condition for an algebra to contain the matrices
 	$C_{ij}$ is that it must contain all sums of the matrices $C_{ij}$. If one
 	could sum their way out of the algebra then it would not be an algebra.
@@ -165,49 +284,76 @@ We can now proceed with the central result that motivates this chapter.
 		the definition of the canonical generators
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ij} \hat{\mathbbm{1}}
-				& = & \frac{1}{\sqrt{2}} \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right) \hat{\mathbbm{1}}\\
-				& = & \frac{1}{\sqrt{2}} \hat{e}_i \left( \left\langle \hat{e}_j, \hat{\mathbbm{1}} \right\rangle - \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle \right)\\
-				& = & \frac{1}{\sqrt{2}} \hat{e}_i \left(\frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n}}\right)\\
+				& = & \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right) \hat{\mathbbm{1}}\\
+				& = & \hat{e}_i \left( \left\langle \hat{e}_j, \hat{\mathbbm{1}} \right\rangle - \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle \right)\\
+				& = & \hat{e}_i \left(\frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n}}\right)\\
 				& = & 0
 		\end{IEEEeqnarray*}
 		\item $C_{ij}$ is a set of $n^2-n$ linear independent matrices and so must
-		form a basis for all of $\mathfrak{st}(\hat{\mathbbm{1}})$. Again the formal 
-		proof of this claim is found through induction on the dimension $n$.
+		form a basis for all of $\mathfrak{st}(\hat{\mathbbm{1}})$. That there are
+		only $n^2-n$ matrices is clear from the fact that $C_{ii} = 0$. While the 
+		formal proof of linear independence is again found through induction on the 
+		dimension $n$.
 	\end{enumerate}
 \end{proof}
 
 The previous theorem serves as the definition of a set of canonical generators 
-of $\mathfrak{st}(\hat{\mathbbm{1}})$, the $\frac{1}{\sqrt{2}}$ factor just a 
-pleasant normalization constant for the vector $\hat{e}_j - \hat{e}_i$. It is 
-important to note that neither the basis $\hat{e}_i$ nor the canonical 
-generators $C_{ij}$ are unique. They are uniquely defined only up to rotations 
-orthogonal to the vector $\hat{\mathbbm{1}}$.
+of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the 
+basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
+uniquely defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
 
 Before moving on it is worth briefly revisiting the distinction between the 
 standard convex polytope of stochastic matrices and the stochastic Lie group, to
 develop some physical intuition into the relationship between the two sets of
 matrices which have a non-trivial and geometrical interesting intersection.
 
-% need to keep going look at n=2,3
-
-The first result from this theorem is the ability to calculate the structure
-constants of the generators of the algebra. We proceed by studying the products
-of the generators.
+% need to keep going, look at n=2,3
 
 \begin{corollary}
-	$C_{ij}C_{kl} = \delta$
+	$\exp\left(\alpha C_{ij}\right) = I + \left(1 - e^{-\alpha} \right)C_{ij}$
 \end{corollary}
 
-Which taking the commuators yields the structure constants.
+\begin{proof}
+	From the definition of the matrix exponential
+	\begin{IEEEeqnarray*}{rCl}
+		\exp\left(\alpha C_{ij}\right)
+			& = & \sum_{n=0}^{\infty} \frac{1}{n!}\alpha^n C_{ij}^n\\
+			& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-1\right)^{n+1} \alpha^n C_{ij}\\
+			& = & I + \left(1 - e^{-\alpha} \right)C_{ij}
+	\end{IEEEeqnarray*}	
+\end{proof}
 
-\begin{corollary}
-	$\exp\left(C_{ij}\right) = e$
-\end{corollary}
+This last corollary admits a pleasant heuristic interpretation: that each 
+canonical generator $C_{ij}$ can be thought of as measuring the infinitesimal 
+flow of probability from the state represented by basis element $\hat{e}_i$ to 
+the state represented by the basis element $\hat{e}_j$. This can be seen by 
+considering the matrix representation of $\exp\left(\alpha C_{ij}\right)$ in the
+basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
 
-% The basis elements represent the states of a continuous markov process.
-% When the multipliers of the canonical generators are postive, this gives a
-% proper transition matrix for a continuous Markov process. The reverse is 
-% also true (needs proof)
+\begin{IEEEeqnarray*}{rCl}
+	I + \left(1 - e^{-\alpha} \right)C_{ij}
+		& = & 
+		\begin{pmatrix}
+			1 & 0\\
+			0 & 1
+		\end{pmatrix}
+		+ \left(1 - e^{-\alpha} \right)
+		\begin{pmatrix}
+			-1 & 1\\
+			0 & 0
+		\end{pmatrix}\\
+		& = &
+		\begin{pmatrix}
+			e^{-\alpha} & 1 - e^{-\alpha}\\
+			0 & 1
+		\end{pmatrix}		
+\end{IEEEeqnarray*}	
+
+The basis elements $\hat{e}_i$ represent the states of a continuous Markov 
+process on a finite state space; in that when the multipliers of the canonical 
+generators are positive the matrix exponential gives a proper transition matrix 
+the process. The reverse is also true, and can be summarized in the following
+corollary.
 
 \section{Doubly Stochastic Matrices}
 Doubly stochastic matrices require double conservation of the vector $\hat{\mathbbm{1}}$, leaving
