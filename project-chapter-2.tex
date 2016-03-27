@@ -128,26 +128,23 @@ to which $\hat{\mathbbm{1}}$ is a member.
 	for all $i$
 \end{lemma}
 
-% Fix the fractions in this proof.
-
 \begin{proof}
 	While a basis with the stipulated properties can be constructed through the
-	Gram-Schmidt process, the proof of the existence of such a basis proceeds by
-	induction.
+	Gram-Schmidt process, the proof of the existence proceeds by induction.
 	\begin{enumerate}
 		\item For $n=1$ the desired basis is precisely the trivial set $\left\lbrace \hat{\mathbbm{1}} \right\rbrace$ 
-		which satisfies the condition that $\left\langle \hat{\mathbbm{1}}, \hat{\mathbbm{1}} \right\rangle = 1$
+		which satisfies the condition that $\left\langle \hat{\mathbbm{1}}, \hat{\mathbbm{1}} \right\rangle = 1$.
 		\item Assume the claim is true for $n$. For $n+1$ pick a unit vector $\hat{e}_{\perp}$
 		that is orthogonal to $\hat{\mathbbm{1}}$ and construct the unit vector
 		$\hat{e}_{n+1} = \frac{1}{\sqrt{n+1}} \hat{\mathbbm{1}} + \sqrt{\frac{n}{n+1}} \hat{e}_{\perp}$.
 		Clearly $\hat{e}_{n+1}$ satisfies the condition $\left\langle \hat{e}_{n+1}, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n+1}}$.
 		\item To use the the induction assumption we construct a new row sum unit 
-		vector $\hat{\mathbbm{1}}_n = \frac{n}{\sqrt{n^2 - n}} \hat{\mathbbm{1}} - \sqrt{\frac{n}{n^2 - n}} \hat{e}_{\perp}$ 
+		vector $\hat{\mathbbm{1}}_n = \sqrt{\frac{n+1}{n}}\hat{\mathbbm{1}} - \frac{1}{\sqrt{n}}\hat{e}_{n+1}$ 
 		in one dimension lower by projecting onto the subspace orthogonal to $\hat{e}_{n+1}$.
 		\item By the induction assumption there exists a basis $\hat{e}_i$ with $i \le n$, 
-		such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle = \frac{1}{\sqrt{n}}$
+		such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle = \frac{1}{\sqrt{n}}$.
 		\item Because $\hat{e}_i$ with $i \le n$ was constructed in the space 
-		orthogonal to $\hat{e}_{n+1}$ if follows that $\left\langle \hat{e}_i, \hat{e}_j \right\rangle = \delta{ij}$
+		orthogonal to $\hat{e}_{n+1}$ if follows that $\left\langle \hat{e}_i, \hat{e}_j \right\rangle = \delta_{ij}$
 		for all $i,j \le n+1 $.
 		\item Then using the definitions of $\hat{e}_{n+1}$ and $\hat{\mathbbm{1}}_n$
 		we can calculate the inner product $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle$
@@ -155,17 +152,25 @@ to which $\hat{\mathbbm{1}}$ is a member.
 		\begin{IEEEeqnarray*}{rCl}
 			\frac{1}{\sqrt{n}}
 				& = & \left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle\\
-				& = & \frac{n}{\sqrt{n^2 - n}} \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle - \sqrt{\frac{n}{n^2 - n}} \left\langle \hat{e}_i, \hat{e}_{\perp} \right\rangle\\
-				& = & \frac{\sqrt{n^3+n^2} + \sqrt{n}}{\sqrt{n^3 - n}} \left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle - \sqrt{\frac{n}{n^2 - n}} \left\langle \hat{e}_i, \hat{e}_{n+1} \right\rangle
+				& = & \sqrt{\frac{n+1}{n}} \left\langle \hat{e}_j, \hat{\mathbbm{1}} \right\rangle - \frac{1}{\sqrt{n}} \left\langle \hat{e}_i, \hat{e}_{n+1} \right\rangle\\
+				& = & \sqrt{\frac{n+1}{n}} \left\langle \hat{e}_j, \hat{\mathbbm{1}} \right\rangle
 		\end{IEEEeqnarray*}
 		Inverting the fraction in the equality yields $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n+1}}$
+		for all $i \le n+1$.
 	\end{enumerate}
 \end{proof}
 
-To establish the central result of this chapter, that the algebraic closure of
-the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$,
-we need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$
-are linear combinations of matrices $C_{ij}$
+As a direct result of the construction of the basis vectors $\hat{e}_i$ we see 
+that $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$. Thus $\vec{\mathbbm{1}}$ can
+be interpreted as the row sum vector in basis $\hat{e}_i$.
+
+The constructed basis leads naturally to considering the minimal non-trivial 
+matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$ as 
+holding significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+In fact this will be the central result of this chapter: that the algebraic 
+closure of the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+To establish this result we need a preliminary result that proves the 
+commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_{ij}$.
 
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
@@ -217,7 +222,7 @@ are linear combinations of matrices $C_{ij}$
 \end{proof}
 
 While this result is sufficient to accomplish the central result, it is worth
-carrying through with a computation of the structure constants of the generators.
+carrying through with the computation of the structure constants of the generators.
 
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
@@ -264,8 +269,7 @@ carrying through with a computation of the structure constants of the generators
 We can now proceed with the central result that motivates this chapter.
 
 \begin{theorem}
-	The canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ are 
-	$C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$
+	The canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ are $C_{ij}$
 \end{theorem}
 
 \begin{proof}
@@ -302,12 +306,9 @@ of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the
 basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
 uniquely defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
 
-Before moving on it is worth briefly revisiting the distinction between the 
-standard convex polytope of stochastic matrices and the stochastic Lie group, to
-develop some physical intuition into the relationship between the two sets of
-matrices which have a non-trivial and geometrical interesting intersection.
-
-% need to keep going, look at n=2,3
+Since $C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ its matrix exponential must
+be in $St(\hat{\mathbbm{1}})$, which can be summarized in the following 
+corollary.
 
 \begin{corollary}
 	$\exp\left(\alpha C_{ij}\right) = I + \left(1 - e^{-\alpha} \right)C_{ij}$
@@ -323,12 +324,12 @@ matrices which have a non-trivial and geometrical interesting intersection.
 	\end{IEEEeqnarray*}	
 \end{proof}
 
-This last corollary admits a pleasant heuristic interpretation: that each 
+This last corollary admits a intuitive heuristic interpretation: that each 
 canonical generator $C_{ij}$ can be thought of as measuring the infinitesimal 
-flow of probability from the state represented by basis element $\hat{e}_i$ to 
-the state represented by the basis element $\hat{e}_j$. This can be seen by 
-considering the matrix representation of $\exp\left(\alpha C_{ij}\right)$ in the
-basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
+transition rate, or flow of probability, from the state represented by basis 
+element $\hat{e}_i$ to the state represented by the basis element $\hat{e}_j$. 
+This can be seen by considering the matrix representation of $\exp\left(\alpha C_{ij}\right)$ 
+in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
 
 \begin{IEEEeqnarray*}{rCl}
 	I + \left(1 - e^{-\alpha} \right)C_{ij}
@@ -346,19 +347,133 @@ basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
 		\begin{pmatrix}
 			e^{-\alpha} & 1 - e^{-\alpha}\\
 			0 & 1
-		\end{pmatrix}		
-\end{IEEEeqnarray*}	
+		\end{pmatrix}
+\end{IEEEeqnarray*}
 
-The basis elements $\hat{e}_i$ represent the states of a continuous Markov 
-process on a finite state space; in that when the multipliers of the canonical 
-generators are positive the matrix exponential gives a proper transition matrix 
-the process. The reverse is also true, and can be summarized in the following
+Despite the fact that $\mathfrak{st}(\hat{\mathbbm{1}})$ is a real vector space
+the limits in the positive directions of $C_{ij}$ are finite, namely in the
+basis spanned by $\hat{e}_i$ and $\hat{e}_j$
+
+\begin{IEEEeqnarray*}{rCl}
+	\lim_{\alpha \rightarrow \infty} \exp\left(\alpha C_{ij} \right)
+		& = & I + C_{ij}\\
+		& = &
+		\begin{pmatrix}
+			0 & 1\\
+			0 & 1
+		\end{pmatrix}
+\end{IEEEeqnarray*}
+
+% Restate next pargraph as general property of matrix Lie groups and algebras
+
+For a general element of $\mathfrak{st}(\hat{\mathbbm{1}})$, say, $G = \sum_{ij} g_{ij} C_{ij}$ 
+the matrix exponential $\exp\left(G\right)-I$ is by definition an element of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+Which because $\mathfrak{st}(\hat{\mathbbm{1}})$ is a vector space immediately 
+implies that $\exp\left(G\right) = I + \sum_{ij} h_{ij} C_{ij}$. Unfortunately, 
+because polynomials of degree greater than two are generally unsolvable, the 
+relationship between the coefficients $g_{ij}$ and $h_{ij}$ is highly 
+non-trivial in most circumstances.
+
+At this point it is worth briefly revisiting the distinction between the 
+standard convex polytope of stochastic matrices and the stochastic Lie group, to
+develop some physical intuition into the relationship between the two sets of
+matrices which have a non-trivial and geometrical interesting intersection.
+
+% need to keep going, look at n=2,3
+
+The vertexes of the convex polytope of stochastic matrices are exactly the $n^n$
+matrices of the form
+
+\begin{IEEEeqnarray*}{rCl}
+	V_k 
+		& = & \sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{j_n^i\left(k\right)}\\
+		& = & I + \sum_{i=1}^n C_{i j_n^i\left(k\right)}\\
+		& = & \left(1 - n\right) I + \sum_{i=1}^n I + C_{i j_n^i\left(k\right)}\\
+		& = & \left(1 - n\right) I + \sum_{i=1}^n \lim_{\alpha \rightarrow \infty} \exp\left(\alpha C_{i j_n^i\left(k\right)}\right)
+\end{IEEEeqnarray*}
+
+where $j_n^i\left(k\right) = 1 + \left\lfloor \frac{k}{n^{i-1}} \right\rfloor \mod n$ 
+is $1$ plus the $i$ digit of $k \le n^n$ in base $n$.
+
+The basis elements $\hat{e}_i$ are a well defined enumeration the states of a 
+continuous Markov process on a finite state space; in that when the multipliers 
+of the canonical generators are non-negative the matrix exponential gives a 
+proper transition matrix for the process. The reverse is also true, up to choice
+of branch of the matrix logarithm, and can be summarized in the following 
 corollary.
 
+\begin{corollary}
+	$G = \sum_{ij} g_{ij} C_{ij}$ is the generator of a continuous time Markov 
+	process on a finite state space enumerated by $\hat{e}_i$ if and only if $g_{ij} \ge 0$
+\end{corollary}
+
+We have developed an interpretation of the Eigen equation $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
+as a conservation of the row sums of $A$; likewise the Eigen equation $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
+can be interpreted as the conservation of the column sums of $A$. The dual 
+definitions for the Lie group and algebra follow natural.
+
+\begin{definition}
+	Let $St^T(\hat{\mathbbm{1}})$ denote the dual stochastic Lie group of 
+	invertible matrices whose transpose is stochastic with respect to $\hat{\mathbbm{1}}$.
+\end{definition}
+
+\begin{definition}
+	Let $\mathfrak{st}^T(\hat{\mathbbm{1}})$ denote the dual stochastic Lie 
+	algebra of $St^T(\hat{\mathbbm{1}})$.
+\end{definition}
+
+Thus if $C_{ij}$ are generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ then $C_{ij}^T = \left(\hat{e}_j - \hat{e}_i \right) \otimes \hat{e}_i$
+are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. That $St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$ 
+is a Lie group and $\mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$ 
+is a Lie algebra will be used extensively in the next section.
+
 \section{Doubly Stochastic Matrices}
-Doubly stochastic matrices require double conservation of the vector $\hat{\mathbbm{1}}$, leaving
-only $\left(n - 1\right)^2$ linear degrees of freedom. This is an important clue in the construction
-of a canonical representation. In fact the representation can be found by choosing one additional
-vector $\hat{e}_n$ to ``omit''. This vector plays a similar role to the diagonal in the previous
-construction and is used to balance the row and column sums back to zero.
-$St(\hat{\mathbbm{1}},\hat{\mathbbm{1}})$ and $\mathfrak{st}(\hat{\mathbbm{1}},\hat{\mathbbm{1}})$
+Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
+in the sense that both $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ 
+must hold. This leaves only $\left(n - 1\right)^2$ linear degrees of freedom. 
+This is an important clue in the construction of a canonical representation. In 
+fact the representation can be found by choosing one additional vector $\hat{e}_n$ 
+to center the combinatorial construction of the generators of the algebra 
+around. This vector plays a similar role to the diagonal in the previous 
+construction and is used to balance the row and column sums back to zero; as 
+such we start with the definition
+
+\begin{definition}
+	Let $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly stochastic 
+	Lie group of invertible matrices $A$ such that both $A$ and $A^T$ are 
+	stochastic with respect to $\hat{\mathbbm{1}}$
+\end{definition}
+
+We can immediately observe with out proof that $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$;
+leading to the next definition.
+
+\begin{definition}
+	Let $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly 
+	stochastic Lie algebra of $St(\hat{\mathbbm{1}})$.
+\end{definition}
+
+Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
+The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+is the algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the 
+kernel of both $A$ and $A^T$. We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+
+% preface this with products, commutators, and structure constants
+
+\begin{theorem}
+	$C_{ijn} = C_{ij} - C_{in} - C_{nj}$ are canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
+\end{theorem}
+
+\begin{proof}
+	The proof proceeds in the same manner as the proof of the sibling theorem in
+	the previous section.
+\end{proof}
+
+Sensibly, the canonical generators are closed with respect to transpositions, 
+since $C_{ijn}^T = C_{jin}$. As with the stochastic Lie algebra the generators 
+of the doubly stochastic Lie algebra are not unique, not only do they depend on 
+the choice of the basis $\hat{e}_i$ but also on the choice of the basis element 
+$\hat{e}_n$ used to sum the rows and columns to zero.
+
+% Discuss Birkhoff polytope versus Lie group, construct vertexes vis-a-vi 
+% Birkhoff-von Neumann theorem. Again vector space structure means every
+% DS is linear sum.
