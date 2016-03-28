@@ -392,6 +392,8 @@ orthonormal basis
 		\end{pmatrix}
 \end{IEEEeqnarray*}
 
+% need a figure here displaying the parameter space
+
 The matrix is invertible when $\det\left(A\right) = 1 - a - b \ne 0$, and has 
 non-negative entries in the standard orthonormal basis when $a,b \in \left[0,1\right]$. 
 The convex polytope of $2 \times 2$ stochastic matrices in the standard basis is
@@ -405,10 +407,9 @@ the convex hull of the vertexes
 \end{IEEEeqnarray*}
 
 Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
-of a unit hypercube $\left[0,1\right]^{\left(n-1\right)^n}$ in which the general
-stochastic matrices have non-negative entries with respect to the basis. The
-vertexes of the convex polytope of stochastic matrices are the $n^n$ sums of the
-limiting elements 
+of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
+to $\mathfrak{st}(\hat{\mathbbm{1}})$. The vertexes of the convex polytope of 
+stochastic matrices are the $n^n$ sums of the limiting elements 
 
 \begin{IEEEeqnarray*}{rCl}
 	V_k 
@@ -420,10 +421,11 @@ limiting elements
 
 where $j_n^i\left(k\right) = 1 + \left\lfloor \frac{k}{n^{i-1}} \right\rfloor \mod n$ 
 is $1$ plus the $i$ digit of $0 \le k < n^n$ in base $n$. Analytically $St(\hat{\mathbbm{1}})$
-is not closed with respect to limits along the directions $C_{ij}$, yet its
-closure contains the vertexes for the convex polytope of stochastic matrices.
+is not closed with respect to limits along the directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$, 
+yet its closure contains the vertexes for the convex polytope of stochastic 
+matrices.
 
-The constructed basis elements $\hat{e}_i$ are a well defined enumeration the 
+The constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
 states of a continuous Markov process on a finite state space; in that when the 
 multipliers of the canonical generators are non-negative the matrix exponential
 gives a proper transition matrix for the process. The reverse is also true, up
@@ -460,13 +462,16 @@ is a Lie algebra will be used extensively in the next section.
 \section{Doubly Stochastic Matrices}
 Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
 in the sense that both $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ 
-must hold. This leaves only $\left(n - 1\right)^2$ linear degrees of freedom. 
-This is an important clue in the construction of a canonical representation. In 
-fact the representation can be found by choosing one additional vector $\hat{e}_n$ 
-to center the combinatorial construction of the generators of the algebra 
-around. This vector plays a similar role to the diagonal in the previous 
-construction and is used to balance the row and column sums back to zero; as 
-such we start with the definition
+must hold. The group of invertible doubly stochastic matrices is then a subgroup
+of the group of stochastic matrices. The two constraints of row and column 
+conservation leaves only $\left(n - 1\right)^2$ linear degrees of freedom. This 
+is an important clue in the construction of a canonical representation. In fact 
+the representation can be found by choosing one additional vector $\hat{e}_n$, 
+from the basis constructed in the previous section, to center the combinatorial 
+construction of the generators of the algebra around. This vector plays a 
+similar role to the diagonal in the previous construction and is used to balance 
+the row and column sums back to zero. As in the previous section we start with 
+a foundational definition.
 
 \begin{definition}
 	Let $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly stochastic 
@@ -485,25 +490,129 @@ leading to the next definition.
 Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
 The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 is the algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the 
-kernel of both $A$ and $A^T$. We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+kernel of both $A$ and $A^T$.
 
-% preface this with products, commutators, and structure constants
+We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+by similar methods as in the previous section. Given a constructed basis $\hat{e}_i$
+such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
+we pick a single arbitrary element from the basis, say $\hat{e}_n$, the last
+element for example. We then balance a transition rate from $i$ to $j$, with the
+reverse rates from $i$ to $n$ and $n$ to $j$, and completing the circuit with
+any entry for $n$ to $n$, yielding the matrix $C_{ijn} = \hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n$.
+
+% Need a figure here of the circuit
+
+The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}})$, as 
+can be seen from by $C_{ijn} = C_{ij} - C_{in} - C_{nj}$. Furthermore they are a
+closed set with respect to matrix transposition, because $C_{ijn}^T = C_{jin}$.
+As in the previous section we develop the products, commutators, and structure 
+constants through a lemma and a corollary.
+
+\begin{lemma}
+	\begin{IEEEeqnarray*}{rCl}
+		C_{ijn}C_{kln} & = &
+		\begin{cases}
+			2 C_{iln} & j=k,\\
+			C_{iln} & \text{otherwise}.
+		\end{cases}
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{proof}
+	We proceed by calculating the terms of the products and then simplifying the 
+	cases; assuming $i \neq j$, $k \neq l$, and $i,j,k,l \neq n$.
+	\begin{enumerate}
+		\item Term wise computation of the Kronecker products yields
+			\begin{IEEEeqnarray*}{rCl}
+				C_{ijn}C_{kln}
+					& = & \left(\hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n \right)\\
+					&   & \cdot \left( \hat{e}_k \otimes \hat{e}_l - \hat{e}_k \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_l + \hat{e}_n \otimes \hat{e}_n \right)\\
+					& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l - \delta_{jk} \hat{e}_i \otimes \hat{e}_n + \hat{e}_i \otimes \hat{e}_l - \hat{e}_i \otimes \hat{e}_n\\
+					&   & - \delta_{jk} \hat{e}_n \otimes \hat{e}_l + \delta_{jk} \hat{e}_n \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_l + \hat{e}_n \otimes \hat{e}_n\\
+					& = & \left(1 + \delta_{jk}\right) C_{iln}
+			\end{IEEEeqnarray*}
+		\item Each case follows from simplifying $1 + \delta_{jk}$
+	\end{enumerate}
+\end{proof}
+
+Moving immediately to the commutators we have
+
+\begin{corollary}
+	\begin{IEEEeqnarray*}{rCl}
+		\left[C_{ijn},C_{kln}\right] & = &
+		\begin{cases}
+			2\left(C_{iin} - C_{jjn}\right) & i=l \text{ and } j=k,\\
+			C_{iin} - 2C_{kj} & i=l,\\
+			2C_{iln} - C_{jjn} & j=k,\\
+			C_{iln} - C_{kjn} & \text{otherwise}.
+		\end{cases}
+	\end{IEEEeqnarray*}
+\end{corollary}
+
+\begin{proof}
+	We work case wise through the equalities.
+	\begin{enumerate}
+		\item Starting with $i=l$ and $j=k$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{jin}\right]
+				& = & C_{ijn}C_{jin} - C_{jin}C_{ijn}\\
+				& = & 2C_{iin} - 2C_{jjn}
+		\end{IEEEeqnarray*}
+		\item For $i=l$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{kin}\right]
+				& = & C_{ijn}C_{kin} - C_{kin}C_{ijn}\\
+				& = & C_{iin} - 2C_{kjn}
+		\end{IEEEeqnarray*}
+		\item For $j=k$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{jln}\right]
+				& = & C_{ijn}C_{jln} - C_{jln}C_{ijn}\\
+				& = & 2C_{iln} - C_{jjn}
+		\end{IEEEeqnarray*}
+		\item When none of the conditions apply
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{kln}\right]
+				& = & C_{ijn}C_{kln} - C_{kln}C_{ijn}\\
+				& = & C_{iln} - C_{kjn}
+		\end{IEEEeqnarray*}
+	\end{enumerate}
+\end{proof}
+
+This then makes the sibling theorem accessible.
 
 \begin{theorem}
-	$C_{ijn} = C_{ij} - C_{in} - C_{nj}$ are canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
+	$C_{ijn}$ are canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
 \end{theorem}
 
 \begin{proof}
 	The proof proceeds in the same manner as the proof of the sibling theorem in
 	the previous section.
+	\begin{enumerate}
+		\item As discussed before $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+		is an $\left(n-1\right)^2$ dimensional vector space.
+		\item By construction there are only $\left(n-1\right)^2$ matrices $C_{ijn}$
+		for a fixed choice of $\hat{e}_n$.
+		\item Through induction the matrices $C_{ijn}$ are linearly independent for
+		a fixed choice of $\hat{e}_n$.
+		\item Thus the matrices $C_{ijn}$, for a fixed choice of $\hat{e}_n$, are a 
+		basis for $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
+		\item By the previous lemma the commutators of matrices $C_{ijn}$ are linear
+		combinations of themselves.
+		\item It follows then that the smallest algebra that contains the matrices $C_{ijn}$
+		is $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
+	\end{enumerate}
 \end{proof}
 
-Sensibly, the canonical generators are closed with respect to transpositions, 
-since $C_{ijn}^T = C_{jin}$. As with the stochastic Lie algebra the generators 
-of the doubly stochastic Lie algebra are not unique, not only do they depend on 
-the choice of the basis $\hat{e}_i$ but also on the choice of the basis element 
-$\hat{e}_n$ used to sum the rows and columns to zero.
+As with the stochastic Lie algebra the generators of the doubly stochastic Lie 
+algebra are not unique, not only do they depend on the choice of the basis $\hat{e}_i$ 
+but also on the choice of the basis element $\hat{e}_n$ used to sum the rows and 
+columns to zero.
 
 % Discuss Birkhoff polytope versus Lie group, construct vertexes vis-a-vi 
 % Birkhoff-von Neumann theorem. Again vector space structure means every
 % DS is linear sum.
+
+% Basis choice unqiuely gives the Birkhoff polytope, it is independent of the
+% choice of conservation unit vector. Requires proof the vertexes are 
+% independent of conservation vector.
