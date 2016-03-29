@@ -498,22 +498,38 @@ such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\s
 we pick a single arbitrary element from the basis, say $\hat{e}_n$, the last
 element for example. We then balance a transition rate from $i$ to $j$, with the
 reverse rates from $i$ to $n$ and $n$ to $j$, and completing the circuit with
-any entry for $n$ to $n$, yielding the matrix $C_{ijn} = \hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n$.
+any entry for $n$ to $n$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$.
 
 % Need a figure here of the circuit
 
-The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}})$, as 
-can be seen from by $C_{ijn} = C_{ij} - C_{in} - C_{nj}$. Furthermore they are a
-closed set with respect to matrix transposition, because $C_{ijn}^T = C_{jin}$.
-As in the previous section we develop the products, commutators, and structure 
-constants through a lemma and a corollary.
+The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+Furthermore they are a closed set with respect to matrix transposition, because 
+$C_{ijn}^T = C_{jin}$. The algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ is 
+isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$ matrices,
+which can be seen by the relationships, for any $i,j \le n-1$.
+
+\begin{IEEEeqnarray*}{rCl}
+	- C_{iin} = \hat{e}_i \otimes \hat{e_i} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_i + \hat{e}_n \otimes \hat{e}_n\\
+	C_{ijn} - C_{iin} - C_{jjn} = \hat{e}_i \otimes \hat{e_j} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n
+\end{IEEEeqnarray*}
+
+The intuition being that any $n \times n$ matrix with fixed row and column sums
+can be created by starting with any matrix and appending a compensating $n$ row
+and $n$ column. These relationships are implicitly used extensively in proving 
+the following lemma and corollary on the products, commutators, and structure 
+constants of $C_{ijn}$.
 
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
 		C_{ijn}C_{kln} & = &
 		\begin{cases}
-			2 C_{iln} & j=k,\\
-			C_{iln} & \text{otherwise}.
+			C_{jin} - 2C_{ijn} & i=k \text{ and } j=l,\\
+			- \left(C_{ijn} + C_{jin}\right) & i=l \text{ and } j=k,\\
+			C_{jin} - C_{iln} - C_{iin} - C_{jjn} + C_{lln} & i=k,\\
+			C_{jkn} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
+			C_{iln} - C_{jln} - C_{ijn} & j=k,\\
+			C_{iin} - C_{jjn} - C_{kkn} + C_{jkn} - C_{ijn} & j=l,\\
+			C_{jjn} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
 \end{lemma}
@@ -523,15 +539,62 @@ constants through a lemma and a corollary.
 	cases; assuming $i \neq j$, $k \neq l$, and $i,j,k,l \neq n$.
 	\begin{enumerate}
 		\item Term wise computation of the Kronecker products yields
-			\begin{IEEEeqnarray*}{rCl}
-				C_{ijn}C_{kln}
-					& = & \left(\hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n \right)\\
-					&   & \cdot \left( \hat{e}_k \otimes \hat{e}_l - \hat{e}_k \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_l + \hat{e}_n \otimes \hat{e}_n \right)\\
-					& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l - \delta_{jk} \hat{e}_i \otimes \hat{e}_n + \hat{e}_i \otimes \hat{e}_l - \hat{e}_i \otimes \hat{e}_n\\
-					&   & - \delta_{jk} \hat{e}_n \otimes \hat{e}_l + \delta_{jk} \hat{e}_n \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_l + \hat{e}_n \otimes \hat{e}_n\\
-					& = & \left(1 + \delta_{jk}\right) C_{iln}
-			\end{IEEEeqnarray*}
-		\item Each case follows from simplifying $1 + \delta_{jk}$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{kln}
+				& = & \left(\hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_i + \hat{e}_n \otimes \hat{e}_i - \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_n - \hat{e}_j \otimes \hat{e}_j\right)\\
+				&   & \cdot \left(\hat{e}_k \otimes \hat{e}_l - \hat{e}_k \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_k - \hat{e}_n \otimes \hat{e}_n + \hat{e}_l \otimes \hat{e}_n - \hat{e}_l \otimes \hat{e}_l\right)\\
+				& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l - \delta_{jk} \hat{e}_i \otimes \hat{e}_k + \delta_{jl} \hat{e}_i \otimes \hat{e}_n - \delta_{jl} \hat{e}_i \otimes \hat{e}_l\\
+				&   & - \delta_{ik} \hat{e}_i \otimes \hat{e}_l + \delta_{ik} \hat{e}_i \otimes \hat{e}_k - \delta_{il} \hat{e}_i \otimes \hat{e}_n + \delta_{il} \hat{e}_i \otimes \hat{e}_l\\
+				&   & \delta_{ik} \hat{e}_n \otimes \hat{e}_l - \delta_{ik} \hat{e}_n \otimes \hat{e}_k + \delta_{il} \hat{e}_n \otimes \hat{e}_n - \delta_{il} \hat{e}_n \otimes \hat{e}_l\\
+				&   & - \hat{e}_n \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_n\\
+				&   & -\delta_{jk} \hat{e}_j \otimes \hat{e}_l + \delta_{jk} \hat{e}_j \otimes \hat{e}_k - \delta_{jl} \hat{e}_j \otimes \hat{e}_n + \delta_{jl} \hat{e}_j \otimes \hat{e}_l\\
+				& = & C_{jk} - C_{jn} + C_{nk}\\
+				&   & + \delta_{ik} \left(C_{nl} - C_{il} - C_{ni}\right) - \delta_{il} \left(C_{in} + C_{ni}\right)\\
+				&   & + \delta_{jk} \left(C_{il} - C_{ij} - C_{jl}\right) + \delta_{jl} \left(C_{in} - C_{ij} - C_{jn}\right)
+		\end{IEEEeqnarray*}
+		\item The cases follow from simplifying the $\delta$ functions; starting
+		with $i=k$ and $j=l$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{ijn}
+				& = & C_{ji} - 2C_{jn} + C_{nj} - 2C_{ij} + C_{in}\\
+				& = & C_{jin} - 2C_{ijn}
+		\end{IEEEeqnarray*}
+		\item When $i=l$ and $j=k$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{jin}
+				& = & C_{nj} - C_{jn} - C_{in} - C_{ni} - C_{ij} - C_{ji}\\
+				& = & - \left(C_{ijn} + C_{jin}\right)
+		\end{IEEEeqnarray*}
+		\item When $i=k$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{iln}
+				& = & C_{ji} - C_{jn} + C_{ni} + C_{nl} - C_{il} -C_{ni}\\
+				& = & C_{jin} - C_{iln} - C_{iin} - C_{jjn} + C_{lln}
+		\end{IEEEeqnarray*}
+		\item When $i=l$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{kin}
+				& = & C_{jk} - C_{jn} + C_{nk} - C_{in} - C_{ni}\\
+				& = & C_{jkn} - C_{iin} - C_{jjn} - C_{kkn}
+		\end{IEEEeqnarray*}
+		\item When $j=k$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{jln}
+				& = & C_{nj} - C_{jn} + C_{il} - C_{ij} + C_{jl}\\
+				& = & C_{iln} - C_{jln} - C_{ijn}
+		\end{IEEEeqnarray*}
+		\item When $j=l$
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{kjn}
+				& = & C_{ij} + 2C_{jk} + C_{nj} - C_{jn} - C_{ik}\\
+				& = & C_{iin} - C_{jjn} - C_{kkn} + C_{jkn} - C_{ijn}
+		\end{IEEEeqnarray*}
+		\item When none of the conditions apply
+		\begin{IEEEeqnarray*}{rCl}
+			C_{ijn}C_{kln}
+				& = & C_{jk} - C_{jn} + C_{nk}\\
+				& = & C_{jjn}
+		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{proof}
 
@@ -541,45 +604,74 @@ Moving immediately to the commutators we have
 	\begin{IEEEeqnarray*}{rCl}
 		\left[C_{ijn},C_{kln}\right] & = &
 		\begin{cases}
-			2\left(C_{iin} - C_{jjn}\right) & i=l \text{ and } j=k,\\
-			C_{iin} - 2C_{kj} & i=l,\\
-			2C_{iln} - C_{jjn} & j=k,\\
-			C_{iln} - C_{kjn} & \text{otherwise}.
+			0 & i=k \text{ and } j=l,\\
+			0 & i=l \text{ and } j=k,\\
+			C_{ijn} + C_{jin} - C_{iln} - C_{lin} - 2C_{jjn} - 2C_{lln} & i=k,\\
+			C_{jkn} - C_{kjn} - C_{ijn} - C_{kin} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
+			C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln} & j=k,\\
+			C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn} & j=l,\\
+			C_{jjn} - C_{lln} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
 \end{corollary}
 
 \begin{proof}
-	We work case wise through the equalities.
+	We work case wise through the equalities; assuming $i \neq j$, $k \neq l$, and 
+	$i,j,k,l \neq n$.
 	\begin{enumerate}
-		\item Starting with $i=l$ and $j=k$
+		\item Starting with $i=k$ and $j=l$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{ijn}\right]
+				& = & C_{ijn}C_{ijn} - C_{ijn}C_{ijn}\\
+				& = & 0
+		\end{IEEEeqnarray*}
+		\item When $i=l$ and $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jin}\right]
 				& = & C_{ijn}C_{jin} - C_{jin}C_{ijn}\\
-				& = & 2C_{iin} - 2C_{jjn}
+				& = & - \left(C_{ijn} + C_{jin}\right) + \left(C_{jin} + C_{ijn}\right)\\
+				& = & 0
 		\end{IEEEeqnarray*}
-		\item For $i=l$
+		\item When $i=k$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{iln}\right]
+				& = & C_{ijn}C_{iln} - C_{iln}C_{ijn}\\
+				& = & C_{ijn} + C_{jin} - C_{iln} - C_{lin} - 2C_{jjn} - 2C_{lln}
+		\end{IEEEeqnarray*}
+		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kin}\right]
 				& = & C_{ijn}C_{kin} - C_{kin}C_{ijn}\\
-				& = & C_{iin} - 2C_{kjn}
+				& = & C_{jkn} - C_{kjn} - C_{ijn} - C_{kin} - C_{iin} - C_{jjn} - C_{kkn}
 		\end{IEEEeqnarray*}
-		\item For $j=k$
+		\item When $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jln}\right]
 				& = & C_{ijn}C_{jln} - C_{jln}C_{ijn}\\
-				& = & 2C_{iln} - C_{jjn}
+				& = & C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln}
+		\end{IEEEeqnarray*}
+		\item When $j=l$
+		\begin{IEEEeqnarray*}{rCl}
+			\left[C_{ijn},C_{kjn}\right]
+				& = & C_{ijn}C_{kjn} - C_{kjn}C_{ijn}\\
+				& = & C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kln}\right]
 				& = & C_{ijn}C_{kln} - C_{kln}C_{ijn}\\
-				& = & C_{iln} - C_{kjn}
+				& = & C_{jjn} - C_{lln}
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{proof}
 
-This then makes the sibling theorem accessible.
+Restricting to the matrices where both the row and column sums are zero, which
+is equivalent to demanding the conservation of the transition rates, or 
+infinitesimal flows of probability, introduces a significant degree of
+complexity to the algebra. In particular demanding that all the transition rates
+be balanced by transitions through $\hat{e}_n$ means that only the simplest two
+and three state processes have easily calculable algebras. Nevertheless, the 
+result makes the sibling theorem accessible.
 
 \begin{theorem}
 	$C_{ijn}$ are canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
