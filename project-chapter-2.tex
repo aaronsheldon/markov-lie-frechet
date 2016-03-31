@@ -335,16 +335,6 @@ in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
 
 \begin{IEEEeqnarray*}{rCl}
 	I + \left(1 - e^{-\alpha} \right)C_{ij}
-		& = & 
-		\begin{pmatrix}
-			1 & 0\\
-			0 & 1
-		\end{pmatrix}
-		+ \left(1 - e^{-\alpha} \right)
-		\begin{pmatrix}
-			-1 & 1\\
-			0 & 0
-		\end{pmatrix}\\
 		& = &
 		\begin{pmatrix}
 			e^{-\alpha} & 1 - e^{-\alpha}\\
@@ -352,9 +342,9 @@ in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
 		\end{pmatrix}
 \end{IEEEeqnarray*}
 
-Despite the fact that $\mathfrak{st}(\hat{\mathbbm{1}})$ is a real vector space
-the limits in $St(\hat{\mathbbm{1}})$ in the positive directions of $C_{ij}$ are
-finite, namely, in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$
+Taking the limit as $\alpha \rightarrow \infty$ shows while the limits in the 
+positive directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$
+maybe finite, $St(\hat{\mathbbm{1}})$ is not closed.
 
 \begin{IEEEeqnarray*}{rCl}
 	\lim_{\alpha \rightarrow \infty} \exp\left(\alpha C_{ij} \right)
@@ -366,15 +356,28 @@ finite, namely, in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$
 		\end{pmatrix}
 \end{IEEEeqnarray*}
 
+The interpretation of $C_ij$ as measuring a real flow is more nuanced, as $e^{-\alpha} > 0$ 
+for all $\alpha \in \mathbb{R}$. To realize $e^{-\alpha} > 0$ requires that $\mathbb{I}m\left(\alpha\right) \mod 2 = \pi$. 
+The role of imaginary numbers becomes clear when considering the generator $\alpha \left(C_{ij} + C_{ji}\right)$
+
 In general, a matrix Lie group $M$ is it's Lie algebra offset by the identity 
 element $M = I + \mathfrak{m}$; which can be seen from the Taylor series
 expansion of the matrix exponential. It follows that for a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$
 the matrix exponential is $\exp\left(G\right) = I + \sum_{ij} h_{ij} C_{ij}$.
-Unfortunately, because polynomials of degree greater than two are generally 
+
+Unfortunately, because polynomials of degree greater than four are generally 
 unsolvable, the relationship between the coefficients $g_{ij}$ and $h_{ij}$ is 
-highly non-trivial in most circumstances. We shall see that an exception to this
-difficulty can be found in the formulation of the distribution of first hitting
-times from a fixed initial state.
+highly non-trivial in most circumstances. An exception to this
+difficulty can be found in the formulation of the of first exit
+times from a fixed initial state. The generator of the first exit from $i$ to any
+state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$, from which
+we have
+
+\begin{IEEEeqnarray*}{rCl}
+	\exp\left(G_i\right)
+		& = & I + \sum_{n=1}^{\infty} \left(-\sum_{i \ne j} \alpha_j\right)^{n-1} \sum_{i \ne j} \alpha_j C_{ij}\\
+		& = & I +\frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} \sum_{i \ne j} \alpha_j C_{ij}
+\end{IEEEeqnarray*}
 
 At this point it is worth briefly revisiting the distinction between the 
 standard convex polytope of stochastic matrices and the stochastic Lie group, to
@@ -421,8 +424,8 @@ stochastic matrices are the $n^n$ sums of the limiting elements
 
 where $j_n^i\left(k\right) = 1 + \left\lfloor \frac{k}{n^{i-1}} \right\rfloor \mod n$ 
 is $1$ plus the $i$ digit of $0 \le k < n^n$ in base $n$. Analytically $St(\hat{\mathbbm{1}})$
-is not closed with respect to limits along the directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$, 
-yet its closure contains the vertexes for the convex polytope of stochastic 
+is not closed with respect to some limits along the directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$, 
+yet its closure contains the all vertexes for the convex polytope of stochastic 
 matrices.
 
 The constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
@@ -700,6 +703,11 @@ As with the stochastic Lie algebra the generators of the doubly stochastic Lie
 algebra are not unique, not only do they depend on the choice of the basis $\hat{e}_i$ 
 but also on the choice of the basis element $\hat{e}_n$ used to sum the rows and 
 columns to zero.
+
+% Unlike stochastic Lie group there are no nice guareentees on properness with
+% respect to postive sums. No matter what generators of the algebra are chosen
+% there will always be Markov processes that require negative terms in the sum.
+% the physical intuition is that to composing cicuits will require cancellation.
 
 % Discuss Birkhoff polytope versus Lie group, construct vertexes vis-a-vi 
 % Birkhoff-von Neumann theorem. Again vector space structure means every
