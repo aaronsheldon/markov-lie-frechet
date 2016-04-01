@@ -308,22 +308,43 @@ of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the
 basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
 uniquely defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
 
-Since $C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ its matrix exponential must
-be in $St(\hat{\mathbbm{1}})$, which can be summarized in the following 
-corollary.
+Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
+of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
+to $\mathfrak{st}(\hat{\mathbbm{1}})$. For specificity, we refer to this as the
+convex polytope of matrices stochastic with respect to basis $\hat{e}_i$. 
+Analytically $St(\hat{\mathbbm{1}})$ is open, yet the boundary of the polytope 
+is always a limit point of $St(\hat{\mathbbm{1}})$. In particular every vertex
+of the polytope is a limit point of $St(\hat{\mathbbm{1}})$. Probabilistically, 
+the constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
+states of a continuous Markov process on a finite state space.
+
+Since $C_{ij},C_{ji} \in \mathfrak{st}(\hat{\mathbbm{1}})$ their matrix 
+exponentials must be in $St(\hat{\mathbbm{1}})$. This can be summarized in the 
+following corollary, which reformulates the classic two state continuous Markov
+process.
 
 \begin{corollary}
-	$\exp\left(\alpha C_{ij}\right) = I + \left(1 - e^{-\alpha} \right)C_{ij}$
+	$\exp\left(\alpha C_{ij} + \beta C_{ji}\right) = I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right)$
 \end{corollary}
 
 \begin{proof}
-	From the definition of the matrix exponential
-	\begin{IEEEeqnarray*}{rCl}
-		\exp\left(\alpha C_{ij}\right)
-			& = & \sum_{n=0}^{\infty} \frac{1}{n!}\alpha^n C_{ij}^n\\
-			& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-1\right)^{n+1} \alpha^n C_{ij}\\
-			& = & I + \left(1 - e^{-\alpha} \right)C_{ij}
-	\end{IEEEeqnarray*}	
+	We first work out the powers of $\alpha C_{ij} + \beta C_{ji}$, and then apply
+	the calculation to the definition of the matrix exponential.
+	\begin{enumerate}
+		\item Consider the square of $\alpha C_{ij} + \beta C_{ji}$
+		\begin{IEEEeqnarray*}{rCl}
+			\left(\alpha C_{ij} + \beta C_{ji}\right)^2
+				& = & \alpha^2 C_{ij}^2 + \alpha\beta C_{ij}C_{ji} + \alpha\beta C_{ji}C_{ij} + \beta^2 C_{ji}^2\\
+				& = & - \left(\alpha + \beta \right) \left(\alpha C_{ij} + \beta C_{ji}\right)
+		\end{IEEEeqnarray*}
+		\item It immediately follows that $\left(\alpha C_{ij} + \beta C_{ji}\right)^n = \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)$ 
+		and thus the exponential is
+		\begin{IEEEeqnarray*}{rCl}
+			\exp\left(\alpha C_{ij} + \beta C_{ji}\right)
+				& = & I + \sum_{n=1}^{\infty} \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+				& = & I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right)
+		\end{IEEEeqnarray*}
+	\end{enumerate}
 \end{proof}
 
 This last corollary admits a intuitive heuristic interpretation: that each 
@@ -356,13 +377,72 @@ maybe finite, $St(\hat{\mathbbm{1}})$ is not closed.
 		\end{pmatrix}
 \end{IEEEeqnarray*}
 
-The interpretation of $C_ij$ as measuring a real flow is more nuanced, as $e^{-\alpha} > 0$ 
-for all $\alpha \in \mathbb{R}$. To realize $e^{-\alpha} > 0$ requires that $\mathbb{I}m\left(\alpha\right) \mod 2 = \pi$. 
-The role of imaginary numbers becomes clear when considering the generator $\alpha \left(C_{ij} + C_{ji}\right)$
+The interpretation of $C_{ij}$ as measuring a real flow is more nuanced than may
+first appear, as $e^{-\alpha} > 0$ for all $\alpha \in \mathbb{R}$. To realize $e^{-\alpha} > 0$
+requires that $\mathbb{I}m\left(\alpha\right) \mod 2 = \pi$. The importance of 
+imaginary numbers becomes clear when considering exponential of the generator 
+$\alpha \left(C_{ij} + C_{ji}\right)$.
 
-In general, a matrix Lie group $M$ is it's Lie algebra offset by the identity 
-element $M = I + \mathfrak{m}$; which can be seen from the Taylor series
-expansion of the matrix exponential. It follows that for a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$
+\begin{IEEEeqnarray*}{rCl}
+	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
+		& = & I + \frac{1-e^{-2\alpha}}{2}\left(C_{ij} + C_{ji}\right)
+\end{IEEEeqnarray*}
+
+Taking the positive limit of $\alpha$ yields an open limit point on the boundary
+of $St(\hat{\mathbbm{1}})$, but still in the the convex polytope of stochastic 
+matrices with respect to basis $\hat{e}_i$.
+
+\begin{IEEEeqnarray*}{rCl}
+	\lim_{\alpha \rightarrow \infty} \exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
+		& = & I + \frac{1}{2}\left(C_{ij} + C_{ji}\right)\\
+		& = & \frac{1}{2}
+		\begin{pmatrix}
+			1 & 1\\
+			1 & 1
+		\end{pmatrix}
+\end{IEEEeqnarray*}
+
+However not all matrices inside the convex polytope are realized by positive 
+values of $\alpha$. For example to find the vertex of the convex polytope on the 
+line $\alpha$, we need to consider $\alpha = i\frac{\pi}{2}$.
+
+\begin{IEEEeqnarray*}{rCl}
+	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
+		& = & I + \left(C_{ij} + C_{ji}\right)\\
+		& = &
+		\begin{pmatrix}
+			0 & 1\\
+			1 & 0
+		\end{pmatrix}
+\end{IEEEeqnarray*}
+
+In the binary basis $\hat{e}_i$ and $\hat{e}_j$ the vertexes can be summarized
+as
+
+\begin{IEEEeqnarray*}{rCl}
+	V_0 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow \infty}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+			& = & I + C_{ji} \notin St(\hat{\mathbbm{1}})\\
+	V_1 & = & \lim_{\substack{\alpha \rightarrow i\frac{\pi}{2}\\ \beta \rightarrow i\frac{\pi}{2}}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+			& = & I + C_{ij} + C_{ji} \in St(\hat{\mathbbm{1}})\\
+	V_2 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow 0}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+			& = & I \in St(\hat{\mathbbm{1}})\\
+	V_3 & = & \lim_{\substack{\alpha \rightarrow \infty\\ \beta \rightarrow 0}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+			& = & I + C_{ij} \notin St(\hat{\mathbbm{1}})
+\end{IEEEeqnarray*}
+
+% Need a figure showing the geometry of the limits
+
+% Discuss what this means probabilistically for the imaginary flows
+
+% What is the generalization of this limit process? How do we get higher dimensional vertexes?
+% Need to show what a vertex is j any function n to n natural numbers consider V = I + sum Cij(i)
+
+We have seen that the vertexes are linear combinations of $C_{ij}$, and it may 
+seem plausible that the exponential of a linear combination of $C_{ij}$ is 
+always linear combination of $C_{ij}$. In fact, this is true in general for any
+matrix Lie group $M$, namely it is the Lie algebra offset by the identity 
+element $M = I + \mathfrak{m}$. This can be seen from the Taylor series 
+expansion of the matrix exponential. It follows that for a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ 
 the matrix exponential is $\exp\left(G\right) = I + \sum_{ij} h_{ij} C_{ij}$.
 
 Unfortunately, because polynomials of degree greater than four are generally 
@@ -378,64 +458,6 @@ we have
 		& = & I + \sum_{n=1}^{\infty} \left(-\sum_{i \ne j} \alpha_j\right)^{n-1} \sum_{i \ne j} \alpha_j C_{ij}\\
 		& = & I +\frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} \sum_{i \ne j} \alpha_j C_{ij}
 \end{IEEEeqnarray*}
-
-At this point it is worth briefly revisiting the distinction between the 
-standard convex polytope of stochastic matrices and the stochastic Lie group, to
-develop some physical intuition into the relationship between the two sets of
-matrices which have a non-trivial and geometrical interesting intersection.
-Consider a general stochastic matrix $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$,
-not necessarily invertible, on a $n=2$ dimensional vector space, in the standard
-orthonormal basis
-
-\begin{IEEEeqnarray*}{rCl}
-	A & = & 
-		\begin{pmatrix}
-			1-a & a\\
-			b & 1-b
-		\end{pmatrix}
-\end{IEEEeqnarray*}
-
-% need a figure here displaying the parameter space
-
-The matrix is invertible when $\det\left(A\right) = 1 - a - b \ne 0$, and has 
-non-negative entries in the standard orthonormal basis when $a,b \in \left[0,1\right]$. 
-The convex polytope of $2 \times 2$ stochastic matrices in the standard basis is
-the convex hull of the vertexes 
-
-\begin{IEEEeqnarray*}{rCl}
-	V_0 & = & I + C_{21}\\
-	V_1 & = & I + C_{12} + C_{21}\\
-	V_2 & = & I\\
-	V_3 & = & I + C_{12}
-\end{IEEEeqnarray*}
-
-Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
-of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
-to $\mathfrak{st}(\hat{\mathbbm{1}})$. The vertexes of the convex polytope of 
-stochastic matrices are the $n^n$ sums of the limiting elements 
-
-\begin{IEEEeqnarray*}{rCl}
-	V_k 
-		& = & \sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{j_n^i\left(k\right)}\\
-		& = & I + \sum_{i=1}^n C_{i j_n^i\left(k\right)}\\
-		& = & \left(1 - n\right) I + \sum_{i=1}^n I + C_{i j_n^i\left(k\right)}\\
-		& = & \left(1 - n\right) I + \sum_{i=1}^n \lim_{\alpha \rightarrow \infty} \exp\left(\alpha C_{i j_n^i\left(k\right)}\right)
-\end{IEEEeqnarray*}
-
-where $j_n^i\left(k\right) = 1 + \left\lfloor \frac{k}{n^{i-1}} \right\rfloor \mod n$ 
-is $1$ plus the $i$ digit of $0 \le k < n^n$ in base $n$. Analytically $St(\hat{\mathbbm{1}})$
-is not closed with respect to some limits along the directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$, 
-yet its closure contains the all vertexes for the convex polytope of stochastic 
-matrices.
-
-The constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
-states of a continuous Markov process on a finite state space; in that when the 
-multipliers of the canonical generators are non-negative the matrix exponential
-gives a proper transition matrix for the process. The reverse is also true, up
-to a choice of branch of the matrix logarithm. Proofs of either direction of
-inclusions can be found in a number of texts, for example ??, and typically
-involve studying the resolvent of the matrices of $St(\hat{\mathbbm{1}})$, and
-the derivatives of the exponentials of the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$.
 
 % The resolvent as either the Laplace or Fourier transform of an element of st(1)
 % extends St(1) to Gl(1) through contours that intersect with st(1) at the element
@@ -487,7 +509,7 @@ leading to the next definition.
 
 \begin{definition}
 	Let $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly 
-	stochastic Lie algebra of $St(\hat{\mathbbm{1}})$.
+	stochastic Lie algebra of $St(\hat{\mathbbm{1}},\hat{\mathbbm{1}})$.
 \end{definition}
 
 Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
@@ -500,27 +522,26 @@ by similar methods as in the previous section. Given a constructed basis $\hat{e
 such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
 we pick a single arbitrary element from the basis, say $\hat{e}_n$, the last
 element for example. We then balance a transition rate from $i$ to $j$, with the
-reverse rates from $i$ to $n$ and $n$ to $j$, and completing the circuit with
-any entry for $n$ to $n$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$.
+reverse rates from $j$ to $n$ and $n$ to $i$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$.
 
 % Need a figure here of the circuit
 
-The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$. 
 Furthermore they are a closed set with respect to matrix transposition, because 
-$C_{ijn}^T = C_{jin}$. The algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ is 
-isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$ matrices,
-which can be seen by the relationships, for any $i,j \le n-1$.
+$C_{ijn}^T = C_{jin}$. The algebra $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+is isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$ 
+matrices, which can be seen by the relationship, for any $i,j \le n-1$.
 
 \begin{IEEEeqnarray*}{rCl}
-	- C_{iin} = \hat{e}_i \otimes \hat{e_i} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_i + \hat{e}_n \otimes \hat{e}_n\\
-	C_{ijn} - C_{iin} - C_{jjn} = \hat{e}_i \otimes \hat{e_j} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n
+	C_{ijn} - C_{iin} - C_{jjn}
+		& = & \hat{e}_i \otimes \hat{e_j} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n
 \end{IEEEeqnarray*}
 
 The intuition being that any $n \times n$ matrix with fixed row and column sums
-can be created by starting with any matrix and appending a compensating $n$ row
-and $n$ column. These relationships are implicitly used extensively in proving 
-the following lemma and corollary on the products, commutators, and structure 
-constants of $C_{ijn}$.
+can be created by starting with any $\left(n-1\right) \times \left(n-1\right)$ 
+matrix and appending a compensating $n$ row and $n$ column. This relationship is 
+implicitly used extensively in proving the following lemma and corollary on the 
+products, commutators, and structure constants of $C_{ijn}$.
 
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
@@ -528,11 +549,11 @@ constants of $C_{ijn}$.
 		\begin{cases}
 			C_{jin} - 2C_{ijn} & i=k \text{ and } j=l,\\
 			- \left(C_{ijn} + C_{jin}\right) & i=l \text{ and } j=k,\\
-			C_{jin} - C_{iln} - C_{iin} - C_{jjn} + C_{lln} & i=k,\\
+			C_{jin} - C_{jjn} - 2C_{iin} + C_{lln} & i=k,\\
 			C_{jkn} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
-			C_{iln} - C_{jln} - C_{ijn} & j=k,\\
-			C_{iin} - C_{jjn} - C_{kkn} + C_{jkn} - C_{ijn} & j=l,\\
-			C_{jjn} & \text{otherwise}.
+			C_{iln} - C_{ijn} - C_{jln} & j=k,\\
+			C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn} & j=l,\\
+			C_{jkn} - C_{jjn} - C_{kkn} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
 \end{lemma}
@@ -551,69 +572,65 @@ constants of $C_{ijn}$.
 				&   & \delta_{ik} \hat{e}_n \otimes \hat{e}_l - \delta_{ik} \hat{e}_n \otimes \hat{e}_k + \delta_{il} \hat{e}_n \otimes \hat{e}_n - \delta_{il} \hat{e}_n \otimes \hat{e}_l\\
 				&   & - \hat{e}_n \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_n\\
 				&   & -\delta_{jk} \hat{e}_j \otimes \hat{e}_l + \delta_{jk} \hat{e}_j \otimes \hat{e}_k - \delta_{jl} \hat{e}_j \otimes \hat{e}_n + \delta_{jl} \hat{e}_j \otimes \hat{e}_l\\
-				& = & C_{jk} - C_{jn} + C_{nk}\\
-				&   & + \delta_{ik} \left(C_{nl} - C_{il} - C_{ni}\right) - \delta_{il} \left(C_{in} + C_{ni}\right)\\
-				&   & + \delta_{jk} \left(C_{il} - C_{ij} - C_{jl}\right) + \delta_{jl} \left(C_{in} - C_{ij} - C_{jn}\right)
+				& = & C_{jkn} - C_{jjn} - C_{kkn} + \delta_{ik} \left(C_{lln} - C_{iln}\right) - \delta_{il} C_{iin}\\
+				&   & + \delta_{jk} \left(C_{jjn} + C_{iln} - C_{ijn} - C_{jln}\right) + \delta_{jl} \left(C_{iin} - C_{ijn}\right)
 		\end{IEEEeqnarray*}
 		\item The cases follow from simplifying the $\delta$ functions; starting
 		with $i=k$ and $j=l$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{ijn}
-				& = & C_{ji} - 2C_{jn} + C_{nj} - 2C_{ij} + C_{in}\\
+				& = & C_{jin} - C_{jjn} - C_{iin} + C_{jjn} - C_{ijn} + C_{iin} - C_{ijn}\\
 				& = & C_{jin} - 2C_{ijn}
 		\end{IEEEeqnarray*}
 		\item When $i=l$ and $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{jin}
-				& = & C_{nj} - C_{jn} - C_{in} - C_{ni} - C_{ij} - C_{ji}\\
+				& = & C_{jjn} - C_{jjn} - C_{jjn} + C_{jjn} + C_{iin} - C_{ijn} - C_{jin} - C_{iin}\\
 				& = & - \left(C_{ijn} + C_{jin}\right)
 		\end{IEEEeqnarray*}
 		\item When $i=k$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{iln}
-				& = & C_{ji} - C_{jn} + C_{ni} + C_{nl} - C_{il} -C_{ni}\\
-				& = & C_{jin} - C_{iln} - C_{iin} - C_{jjn} + C_{lln}
+				& = & C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iin}\\
+				& = & C_{jin} - C_{jjn} - 2C_{iin} + C_{lln}
 		\end{IEEEeqnarray*}
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kin}
-				& = & C_{jk} - C_{jn} + C_{nk} - C_{in} - C_{ni}\\
 				& = & C_{jkn} - C_{iin} - C_{jjn} - C_{kkn}
 		\end{IEEEeqnarray*}
 		\item When $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{jln}
-				& = & C_{nj} - C_{jn} + C_{il} - C_{ij} + C_{jl}\\
-				& = & C_{iln} - C_{jln} - C_{ijn}
+				& = & C_{jjn} - C_{jjn} - C_{jjn} + C_{jjn} + C_{iln} - C_{ijn} - C_{jln}\\
+				& = & C_{iln} - C_{ijn} - C_{jln}
 		\end{IEEEeqnarray*}
 		\item When $j=l$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kjn}
-				& = & C_{ij} + 2C_{jk} + C_{nj} - C_{jn} - C_{ik}\\
-				& = & C_{iin} - C_{jjn} - C_{kkn} + C_{jkn} - C_{ijn}
+				& = & C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kln}
-				& = & C_{jk} - C_{jn} + C_{nk}\\
-				& = & C_{jjn}
+				& = & C_{jkn} - C_{jjn} - C_{kkn}
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{proof}
 
 Moving immediately to the commutators we have
-
+% the following needs major fixing for i=l and j=k
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
 		\left[C_{ijn},C_{kln}\right] & = &
 		\begin{cases}
 			0 & i=k \text{ and } j=l,\\
 			0 & i=l \text{ and } j=k,\\
-			C_{ijn} + C_{jin} - C_{iln} - C_{lin} - 2C_{jjn} - 2C_{lln} & i=k,\\
+			C_{jin} - C_{lin} - 2C_{jjn}  + 2C_{lln} & i=k,\\
 			C_{jkn} - C_{kjn} - C_{ijn} - C_{kin} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
 			C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln} & j=k,\\
-			C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn} & j=l,\\
-			C_{jjn} - C_{lln} & \text{otherwise}.
+			C_{jkn} - C_{ijn} + 2C_{iin} - 2C_{kkn} - C_{jin} + C_{kjn} & j=l,\\
+			C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
 \end{corollary}
@@ -639,7 +656,8 @@ Moving immediately to the commutators we have
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{iln}\right]
 				& = & C_{ijn}C_{iln} - C_{iln}C_{ijn}\\
-				& = & C_{ijn} + C_{jin} - C_{iln} - C_{lin} - 2C_{jjn} - 2C_{lln}
+				& = & C_{jin} - C_{jjn} - 2C_{iin} + C_{lln} - C_{lin} + C_{lln} + 2C_{iin} - C_{jjn}\\
+				& = & C_{jin} - C_{lin} - 2C_{jjn}  + 2C_{lln}
 		\end{IEEEeqnarray*}
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
@@ -657,13 +675,14 @@ Moving immediately to the commutators we have
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kjn}\right]
 				& = & C_{ijn}C_{kjn} - C_{kjn}C_{ijn}\\
-				& = & C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn}
+				& = & C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn} - C_{jin} + C_{kjn} - C_{kkn} + C_{jjn} + C_{iin}\\
+				& = & C_{jkn} - C_{ijn} + 2C_{iin} - 2C_{kkn} - C_{jin} + C_{kjn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kln}\right]
 				& = & C_{ijn}C_{kln} - C_{kln}C_{ijn}\\
-				& = & C_{jjn} - C_{lln}
+				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin}
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{proof}
