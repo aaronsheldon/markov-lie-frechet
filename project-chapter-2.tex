@@ -1,4 +1,4 @@
-\chapter{The Lie Algebra of the Generators of Continuous Time Markov Processes on Finite State Spaces}
+\chapter{The Lie Algebra Continuous Time Markov Processes on Finite State Spaces}
 \section{Stochastic Matrices}
 The classical Lie algebras of physics, like the infinitesimal symmetries
 of the special unitary algebra $\mathfrak{su}(n)$, are defined with respect to
@@ -62,7 +62,7 @@ necessitates proof of the claim embedded in the definition.
 \end{lemma}
 
 \begin{proof}
-	We proceed by working mechanistically through the Lie group axioms.
+	We proceed by working mechanistically through the Lie group axioms??.
 	\begin{enumerate}
 		\item The identity element $I$ is in $St(\hat{\mathbbm{1}})$. Clearly $I$ is
 		invertible and $I \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
@@ -71,8 +71,11 @@ necessitates proof of the claim embedded in the definition.
 		\item If $A \in St(\hat{\mathbbm{1}})$ then $A^{-1} \in St(\hat{\mathbbm{1}})$.
 		Recognize that $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ implies $\hat{\mathbbm{1}} = A^{-1} A \hat{\mathbbm{1}} = A^{-1} \hat{\mathbbm{1}}$.
 		\item Associativity follows from $St(\hat{\mathbbm{1}})$ being a subgroup of $GL\left(n\right)$.
-		\item Finally, that the matrix product $A^{-1}B$ is smooth for all $A,B \in St(\hat{\mathbbm{1}})$
-		likewise follows from $St(\hat{\mathbbm{1}}) < GL\left(n\right)$.
+		\item Finally, we need to prove that is $St(\hat{\mathbbm{1}})$ closed 
+		within $GL\left(n\right)$. Consider a sequence $A_n \in St(\hat{\mathbbm{1}})$ 
+		that converges to $A$, then $\hat{\mathbbm{1}} = A_n \hat{\mathbbm{1}} \rightarrow A \hat{\mathbbm{1}}$. 
+		Now if $A$ is invertible then we are done, and if $A$ is not invertible then 
+		$A \notin GL\left(n\right)$, again satisfying closure within $GL\left(n\right)$.
 	\end{enumerate}
 \end{proof}
 
@@ -307,6 +310,8 @@ The previous theorem serves as the definition of a set of canonical generators
 of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the 
 basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
 uniquely defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
+Nevertheless we can immediately see by Jacobi's formula that when $G = \sum_{i,j} \alpha_{ij} C_{ij}$ 
+then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
 
 Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
 of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
@@ -316,11 +321,8 @@ Analytically $St(\hat{\mathbbm{1}})$ is open, yet the boundary of the polytope
 is always a limit point of $St(\hat{\mathbbm{1}})$. In particular every vertex
 of the polytope is a limit point of $St(\hat{\mathbbm{1}})$. Probabilistically, 
 the constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
-states of a continuous Markov process on a finite state space.
-
-Since $C_{ij},C_{ji} \in \mathfrak{st}(\hat{\mathbbm{1}})$ their matrix 
-exponentials must be in $St(\hat{\mathbbm{1}})$. This can be summarized in the 
-following corollary, which reformulates the classic two state continuous Markov
+states of a continuous Markov process on a finite state space. For example, we
+can Lie theoretically reformulate the classic two state continuous Markov 
 process.
 
 \begin{corollary}
@@ -341,7 +343,7 @@ process.
 		and thus the exponential is
 		\begin{IEEEeqnarray*}{rCl}
 			\exp\left(\alpha C_{ij} + \beta C_{ji}\right)
-				& = & I + \sum_{n=1}^{\infty} \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+				& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)\\
 				& = & I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right)
 		\end{IEEEeqnarray*}
 	\end{enumerate}
@@ -379,9 +381,9 @@ maybe finite, $St(\hat{\mathbbm{1}})$ is not closed.
 
 The interpretation of $C_{ij}$ as measuring a real flow is more nuanced than may
 first appear, as $e^{-\alpha} > 0$ for all $\alpha \in \mathbb{R}$. To realize $e^{-\alpha} > 0$
-requires that $\mathbb{I}m\left(\alpha\right) \mod 2 = \pi$. The importance of 
-imaginary numbers becomes clear when considering exponential of the generator 
-$\alpha \left(C_{ij} + C_{ji}\right)$.
+requires that $\mathbb{I}m\left(\alpha\right) \equiv \pi \bmod 2 \pi$. The 
+importance of imaginary numbers becomes clear when considering the exponential 
+of the generator $\alpha \left(C_{ij} + C_{ji}\right)$.
 
 \begin{IEEEeqnarray*}{rCl}
 	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
@@ -403,11 +405,12 @@ matrices with respect to basis $\hat{e}_i$.
 \end{IEEEeqnarray*}
 
 However not all matrices inside the convex polytope are realized by positive 
-values of $\alpha$. For example to find the vertex of the convex polytope on the 
-line $\alpha$, we need to consider $\alpha = i\frac{\pi}{2}$.
+values of $\alpha$. For example to find the invertible vertex of the convex 
+polytope on the line $\alpha$, we need to consider $\alpha = \mathrm{i}\frac{\pi}{2}$.
 
 \begin{IEEEeqnarray*}{rCl}
 	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
+		& = & I + \frac{1-e^{- \mathrm{i} \pi}}{2}\left(C_{ij} + C_{ji}\right)\\
 		& = & I + \left(C_{ij} + C_{ji}\right)\\
 		& = &
 		\begin{pmatrix}
@@ -416,13 +419,13 @@ line $\alpha$, we need to consider $\alpha = i\frac{\pi}{2}$.
 		\end{pmatrix}
 \end{IEEEeqnarray*}
 
-In the binary basis $\hat{e}_i$ and $\hat{e}_j$ the vertexes can be summarized
-as
+In the binary basis of $\hat{e}_i$ and $\hat{e}_j$ the vertexes can be 
+summarized as
 
 \begin{IEEEeqnarray*}{rCl}
 	V_0 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow \infty}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
 			& = & I + C_{ji} \notin St(\hat{\mathbbm{1}})\\
-	V_1 & = & \lim_{\substack{\alpha \rightarrow i\frac{\pi}{2}\\ \beta \rightarrow i\frac{\pi}{2}}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
+	V_1 & = & \lim_{\substack{\alpha \rightarrow \mathrm{i}\frac{\pi}{2}\\ \beta \rightarrow \mathrm{i}\frac{\pi}{2}}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
 			& = & I + C_{ij} + C_{ji} \in St(\hat{\mathbbm{1}})\\
 	V_2 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow 0}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
 			& = & I \in St(\hat{\mathbbm{1}})\\
@@ -432,32 +435,127 @@ as
 
 % Need a figure showing the geometry of the limits
 
-% Discuss what this means probabilistically for the imaginary flows
-
 % What is the generalization of this limit process? How do we get higher dimensional vertexes?
 % Need to show what a vertex is j any function n to n natural numbers consider V = I + sum Cij(i)
 
-We have seen that the vertexes are linear combinations of $C_{ij}$, and it may 
-seem plausible that the exponential of a linear combination of $C_{ij}$ is 
-always linear combination of $C_{ij}$. In fact, this is true in general for any
-matrix Lie group $M$, namely it is the Lie algebra offset by the identity 
-element $M = I + \mathfrak{m}$. This can be seen from the Taylor series 
-expansion of the matrix exponential. It follows that for a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ 
-the matrix exponential is $\exp\left(G\right) = I + \sum_{ij} h_{ij} C_{ij}$.
+A general vertex $V$ of the convex polytope of stochastic $n \times n$ matrices 
+in is given by 
+
+\begin{IEEEeqnarray*}{rCl}
+	V & = & I + \sum_{i=1}^n C_{ij\left(i\right)}
+\end{IEEEeqnarray*}
+
+where $j(i) : \left\lbrace 1,\dots,n \right\rbrace \mapsto J \subseteq \left\lbrace 1,\dots,n \right\rbrace$
+is any one of the $n^n$ such functions. Given that the vertexes are linear 
+combinations of $C_{ij}$, and it may seem plausible that the exponential of a 
+linear combination of $C_{ij}$ is always linear combination of $C_{ij}$. In 
+fact, this is true in general for any matrix Lie group $M$, namely it is the Lie 
+algebra offset by the identity element $M = I + \mathfrak{m}$. This can be seen 
+from the Taylor series expansion of the matrix exponential. It follows that for 
+a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ the matrix 
+exponential is $\exp G = I + \sum_{ij} h_{ij} C_{ij}$.
 
 Unfortunately, because polynomials of degree greater than four are generally 
 unsolvable, the relationship between the coefficients $g_{ij}$ and $h_{ij}$ is 
 highly non-trivial in most circumstances. An exception to this
 difficulty can be found in the formulation of the of first exit
-times from a fixed initial state. The generator of the first exit from $i$ to any
-state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$, from which
-we have
+times from a fixed initial state. The generator of the first exit from $i$ to 
+any state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$ (proof to 
+follow in chapter four), from which we have
 
 \begin{IEEEeqnarray*}{rCl}
-	\exp\left(G_i\right)
-		& = & I + \sum_{n=1}^{\infty} \left(-\sum_{i \ne j} \alpha_j\right)^{n-1} \sum_{i \ne j} \alpha_j C_{ij}\\
-		& = & I +\frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} \sum_{i \ne j} \alpha_j C_{ij}
+	\exp G_i
+		& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-\sum_{i \ne j} \alpha_j\right)^{n-1} \sum_{i \ne j} \alpha_j C_{ij}\\
+		& = & I +\frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} \sum_{i \ne j} \alpha_j C_{ij}\\
+		& = & I + \frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} G_i
 \end{IEEEeqnarray*}
+
+Likewise the generator for the exclusive entrance to a state $j$, from any state 
+$i \ne j$, is $G_j = \sum_{i \ne j} \alpha_i C_{ij}$, which yields
+
+\begin{IEEEeqnarray*}{rCl}
+	\exp G_j
+		& = & I - \sum_{n=1}^{\infty} \frac{1}{n!} \sum_{i \ne j} \left(-\alpha_i\right)^n C_{ij}\\
+		& = & I + \sum_{i \ne j} \left(1 - e^{-\alpha_i}\right) C_{ij}
+\end{IEEEeqnarray*}
+
+It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure;
+most importantly it is not connected. This can be seen because $St(\hat{\mathbbm{1}})$
+contains both matrices with positive and negative determinants, while matrices 
+with a determinant of zero are excluded, because they are not invertible. There
+is a sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance to 
+continuous Markov processes on finite state spaces.
+
+\begin{definition}
+	The stochastic contraction Lie group $St^{+}(\hat{\mathbbm{1}})$ is the set
+	of matrices such that $A \in St(\hat{\mathbbm{1}})$ and $\det A \in \mathbb{R}^{+}$
+\end{definition}
+
+Again this definition necessitates a proof of a stronger version of the claim in
+the definition.
+
+\begin{corollary}
+	$St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal sub-group of $St(\hat{\mathbbm{1}})$
+\end{corollary}
+
+\begin{proof}
+	It should be clear that $St^{+}(\hat{\mathbbm{1}})$ is a Lie sub-group of $St^{+}(\hat{\mathbbm{1}})$,
+	thus we need only prove normality and simply connectedness.
+	\begin{enumerate}
+		\item Starting with normality, let $A \in St^{+}(\hat{\mathbbm{1}})$ and $B \in St(\hat{\mathbbm{1}})$,
+		then
+		\begin{IEEEeqnarray*}{rCl}
+			\det \left( BAB^{-1} \right)
+				& = & \left(\det B\right)\left(\det A\right)\left(\det B\right)^{-1}\\
+				& = & \det A
+		\end{IEEEeqnarray*}
+		thus $BAB^{-1} \in St^{+}(\hat{\mathbbm{1}})$
+		\item It is sufficient to prove that $St^{+}(\hat{\mathbbm{1}})$ is simply
+		connected through the identity element.
+		\item Starting with a continuous path $A\left(t\right) \in St^{+}(\hat{\mathbbm{1}})$
+		parameterized by $t \in \left[0,1\right]$ such that $A\left(0\right) = A\left(1\right) = I$,
+		by definition of the Lie algebra there exists a continuous path $G\left(t \right) = \sum_{ij} \alpha_{ij}\left(t\right) C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ 
+		such that $A\left(t\right) = \exp G\left(t\right)$, and $\alpha_{ij}\left(0\right) = \alpha_{ij}\left(1\right) = 0$.
+		\item It follows that $\det A\left(t\right) = \exp\left(\sum_{ij} \alpha_{ij}\left(t\right)\right) \in \mathbb{R}^{+}$.
+		\item Now consider $s \in \left[0,1\right]$, and $A_s\left(t\right) = \exp\left(sG\left(t\right)\right)$,
+		then $A_1\left(t\right) = A\left(t\right)$ and $A_0\left(t\right) = I$,
+		furthermore $\det A_s\left(t\right) = \exp\left(s \sum_{ij} \alpha_{ij}\left(t\right)\right) \in \mathbb{R}^{+}$.
+	\end{enumerate}
+\end{proof}
+
+The use of the nomenclature of contraction is in deference to the equivalent
+definition used for the generators of continuous Markov processes on finite 
+state spaces. Of course every good Lie group deserves a Lie algebra.
+
+\begin{definition}
+	Let $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ denote the stochastic contraction Lie 
+	algebra of $St^{+}(\hat{\mathbbm{1}})$
+\end{definition}
+
+This definition admits a similar characterization as before.
+
+\begin{corollary}
+	$C_{ij}$ over $\mathbb{R}$ generates $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
+\end{corollary}
+
+\begin{proof}
+	The result follows in much the same method as the central theorem of this 
+	chapter, except to show that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real
+	vector space over the basis $C_{ij}$. While it is possible to find $\alpha_{ij} \in \mathbb{C}$ 
+	such a that $\exp\left(\sum_{ij} \alpha_{ij} C_{ij}\right) \in St^{+}(\hat{\mathbbm{1}})$,
+	Jacobi's formula requires that $\mathbb{I}m\left(\sum_{ij} \alpha_{ij}\right) \equiv 0 \bmod 2 \pi$
+	which prevents $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ from being a vector 
+	space over $\mathbb{C}$.
+\end{proof}
+
+That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has 
+an important consequence for continuous Markov processes on finite  state 
+spaces, in that the determinant of the transition probability matrix will always 
+be positive. This can be seen because the path through $St(\hat{\mathbbm{1}})$ 
+defined by any transition probability matrix must always start at the identity 
+matrix, and so be contained in $St^{+}(\hat{\mathbbm{1}})$. Thus if the basis $\hat{e}_i$
+enumerates a finite state space, then the generator has a real (positive) 
+expansion in the basis $C_{ij}$.
 
 % The resolvent as either the Laplace or Fourier transform of an element of st(1)
 % extends St(1) to Gl(1) through contours that intersect with st(1) at the element
@@ -480,9 +578,11 @@ definitions for the Lie group and algebra follow natural.
 \end{definition}
 
 Thus if $C_{ij}$ are generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ then $C_{ij}^T = \left(\hat{e}_j - \hat{e}_i \right) \otimes \hat{e}_i$
-are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. That $St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$ 
+are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. The definitions of the
+dual stochastic contraction Lie group $St^{+T}(\hat{\mathbbm{1}})$ and Lie algebra $\mathfrak{st}^{+T}(\hat{\mathbbm{1}})$
+follow analogously. That $St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$ 
 is a Lie group and $\mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$ 
-is a Lie algebra will be used extensively in the next section.
+is a Lie algebra will be foundational for the next section.
 
 \section{Doubly Stochastic Matrices}
 Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
@@ -515,7 +615,12 @@ leading to the next definition.
 Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
 The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 is the algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the 
-kernel of both $A$ and $A^T$.
+kernel of both $A$ and $A^T$. As with $St(\hat{\mathbbm{1}})$, the Lie group $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+is not connected, and contains the splitting contraction sub-group $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$,
+with its similarly defined contraction sub-algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$. 
+$St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ has the same properties of 
+normality and simple connectedness within $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$; 
+of course it is not normal within $St(\hat{\mathbbm{1}})$.
 
 We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 by similar methods as in the previous section. Given a constructed basis $\hat{e}_i$
@@ -733,5 +838,5 @@ columns to zero.
 % DS is linear sum.
 
 % Basis choice unqiuely gives the Birkhoff polytope, it is independent of the
-% choice of conservation unit vector. Requires proof the vertexes are 
-% independent of conservation vector.
+% choice of balancing unit vector. Requires proof the vertexes are 
+% independent of balancing vector.
