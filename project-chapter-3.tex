@@ -113,3 +113,39 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 % polytope is in closure, limits will be proper row sum, but might lose invertibility
 
 \section{The Hessian}
+
+We compute the Hessian by symmetrizing the partial differential. 
+
+\begin{IEEEeqnarray*}{rCl}
+	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
+		& = & \frac{1}{2} \frac{\partial}{\partial x} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \frac{\partial}{\partial y} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
+		& = & \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
+		&   & \quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
+		&   & \quad\quad +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
+		&   & \quad\quad\quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\left[\frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}\right]\right) e^X\\
+		&   & \quad\quad\quad\quad +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \operatorname{ad}_X^{n-m} \left[ \frac{\partial X}{\partial x}, \operatorname{ad}_X^m \frac{\partial X}{\partial y}\right]  \right) e^X\\
+		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
+		&   & \quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
+		&   & \quad\quad +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial y \partial x} \right) + \frac{\partial^2 X}{\partial y \partial x}\right) e^X\\
+		&   & \quad\quad\quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\left[\frac{\partial X}{\partial y}, \frac{\partial X}{\partial x}\right]\right) e^X\\
+		&   & \quad\quad\quad\quad +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \operatorname{ad}_X^{n-m} \left[ \frac{\partial X}{\partial y}, \operatorname{ad}_X^m \frac{\partial X}{\partial x}\right]  \right) e^X\\
+		& = & \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
+		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
+		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
+		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \binom{n-m}{k} \sum_{k=0}^{n-m} \left[ \operatorname{ad}_X^k \frac{\partial X}{\partial x}, \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y}\right] \right) e^X\\
+		&   & +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \binom{n-m}{k} \sum_{k=0}^{n-m} \left[ \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y}, \operatorname{ad}_X^{k} \frac{\partial X}{\partial x}\right] \right) e^X\\
+		& = & \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
+		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
+		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
+		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X
+\end{IEEEeqnarray*}
+
+The only terms requiring approximation are precisely the approximation we 
+derived in the previous section. Reusing the components in the algorithm in the
+previous section we can present an algorithm for the Hessian.
+
+\section{General Fr\'{e}chet Derivatives}
