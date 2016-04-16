@@ -18,44 +18,48 @@ required for matrix groups. As the inverse of a stochastic matrix need not have
 non-negative entries with respect to the standard orthonormal basis. 
 
 For the moment we will set aside the restriction that the entries be 
-non-negative, and instead begin with a generalization of the concept of fixed 
-row sums. We will show that this generalization is preserved by matrix 
-inversion, and then develop an orthonormal basis from which specific matrices 
-with non-negative entries, with respect to the basis, can be constructed. In 
-essence tackling the problem from the reverse direction, starting with the more 
-general idea of fixed row sums, and then specifying to matrices with 
-non-negative entries with respect to a constructed orthonormal basis.
+non-negative, and instead begin with a generalization to abstract linear 
+operators of the concept of fixed row sums. We will show that this 
+generalization is preserved by operator inversion, and then develop an 
+orthonormal basis from which specific representations of the abstract linear 
+operators as matrices with non-negative entries, in the basis, can be 
+constructed. In essence tackling the problem from the reverse direction, 
+starting with the an abstract generalization of the idea of fixed row sums, and 
+then specifying to matrices with non-negative entries with respect to a 
+constructed orthonormal basis.
 
 \begin{definition}
-	A matrix $A$ is stochastic with respect to the unit vector $\hat{\mathbbm{1}}$ 
-	if $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
+	A bounded linear operator $A$ on a finite dimensional Hilbert space is 
+	stochastic with respect to the unit vector $\hat{\mathbbm{1}}$ if $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
 \end{definition}
 
 Note that this definition does not stipulate any conditions on non-singularity,
-and thus includes all the matrices in the convex polytope of stochastic 
-matrices. For an $n$ dimensional vector space the vector $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ 
-acts as the row sum operator on matrices stochastic with respect to $\hat{\mathbbm{1}}$. 
+and thus includes, as representations of the linear operators, all the matrices 
+in the convex polytope of stochastic matrices. For an $n$ dimensional vector 
+space the vector $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ acts as the 
+row sum operator on bounded linear operators stochastic with respect to $\hat{\mathbbm{1}}$. 
 We will make this claim more precise after we dispense with a few more 
 foundational definitions.
 
 \begin{definition}
 	Let $St(\hat{\mathbbm{1}})$ denote the stochastic Lie group of invertible 
-	matrices stochastic with respect to $\hat{\mathbbm{1}}$
+	bounded linear operators stochastic with respect to $\hat{\mathbbm{1}}$.
 \end{definition}
 
 It is tempting to view the name stochastic Lie group as a bait and switch, or 
 at least an abuse of the terminology, given we have removed the usual convex
 polytope of stochastic matrices and replaced it with a group of invertible 
-matrices with a common eigenvector $\hat{\mathbbm{1}}$. Previous authors ?? have 
-denoted the convex polytope of stochastic matrices as the stochastic semi-group, 
-and the group of invertible matrices as the pseudo-stochastic Lie group. One 
-could even consider incorporating Markov into the name, in reference to the 
-fact that the transition matrices of a continuous Markov process on a finite 
-state space are by definition invertible and have common eigenvector $\hat{\mathbbm{1}}$. 
-However the suffix of Lie group in the name connotes both sufficient additional 
-restrictions to make the name distinct, and still allows for an indication of a 
-relationship with the original concept. Of course, this definition immediately 
-necessitates proof of the claim embedded in the definition.
+bounded linear operators with a common eigenvector $\hat{\mathbbm{1}}$. Previous 
+authors ?? have denoted the convex polytope of stochastic matrices as the 
+stochastic semi-group, and the group of invertible matrices as the 
+pseudo-stochastic Lie group. One could even consider incorporating Markov into 
+the name, in reference to the fact that the transition matrices of a continuous 
+Markov process on a finite state space are by definition invertible, and have 
+common eigenvector $\hat{\mathbbm{1}}$. However the suffix of Lie group in the 
+name connotes both sufficient additional restrictions to make the name distinct, 
+and still allows for an indication of a relationship with the original concept. 
+Of course, this definition immediately necessitates proof of the claim embedded 
+in the definition.
 
 \begin{lemma}
 	$St(\hat{\mathbbm{1}})$ is a Lie group
@@ -79,7 +83,7 @@ necessitates proof of the claim embedded in the definition.
 	\end{enumerate}
 \end{IEEEproof}
 
-That $St(\hat{\mathbbm{1}})$ is a proper matrix Lie group implies that it must be
+That $St(\hat{\mathbbm{1}})$ is a proper Lie group implies that it must be
 infinitesimal generated by elements of a Lie algebra.
 
 \begin{definition}
@@ -87,20 +91,20 @@ infinitesimal generated by elements of a Lie algebra.
 \end{definition}
 
 By infinitesimally generated we mean that every element of $St(\hat{\mathbbm{1}})$
-is a matrix exponential of at least one element in $\mathfrak{st}(\hat{\mathbbm{1}})$. 
-We can fully characterize this algebra as the set of matrices such that their 
-row sums are zero with respect to $\hat{\mathbbm{1}}$.
+is the exponential map of at least one element in $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+We can fully characterize this algebra as the set of bounded linear operators 
+such that $\hat{\mathbbm{1}}$ is in the kernel of each operator.
 
 \begin{lemma}
 	The algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ is exactly the set of all 
-	matrices with $\hat{\mathbbm{1}}$ in their kernel.
+	bounded linear operators with $\hat{\mathbbm{1}}$ in their kernel.
 \end{lemma}
 
 \begin{IEEEproof}
 	Working through the forward and backward inclusions we have
 	\begin{enumerate}
 		\item Suppose $A \hat{\mathbbm{1}} = 0$ then from the definition of the 
-		matrix exponential we have:
+		exponential map we have:
 		\begin{IEEEeqnarray*}{rCl}
 			\exp\left(A\right) \hat{\mathbbm{1}}
 				& = & \sum_{n=0}^{\infty} \frac{1}{n!} A^n \hat{\mathbbm{1}}\\
@@ -655,7 +659,7 @@ products, commutators, and structure constants of $C_{ijn}$.
 		\begin{cases}
 			C_{jin} - 2C_{ijn} & i=k \text{ and } j=l,\\
 			- \left(C_{ijn} + C_{jin}\right) & i=l \text{ and } j=k,\\
-			C_{jin} - C_{jjn} - 2C_{iin} + C_{lln} & i=k,\\
+			C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln} & i=k,\\
 			C_{jkn} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
 			C_{iln} - C_{ijn} - C_{jln} & j=k,\\
 			C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn} & j=l,\\
@@ -673,11 +677,11 @@ products, commutators, and structure constants of $C_{ijn}$.
 			C_{ijn}C_{kln}
 				& = & \left(\hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_i + \hat{e}_n \otimes \hat{e}_i - \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_n - \hat{e}_j \otimes \hat{e}_j\right)\\
 				&   & \cdot \left(\hat{e}_k \otimes \hat{e}_l - \hat{e}_k \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_k - \hat{e}_n \otimes \hat{e}_n + \hat{e}_l \otimes \hat{e}_n - \hat{e}_l \otimes \hat{e}_l\right)\\
-				& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l - \delta_{jk} \hat{e}_i \otimes \hat{e}_k + \delta_{jl} \hat{e}_i \otimes \hat{e}_n - \delta_{jl} \hat{e}_i \otimes \hat{e}_l\\
-				&   & - \delta_{ik} \hat{e}_i \otimes \hat{e}_l + \delta_{ik} \hat{e}_i \otimes \hat{e}_k - \delta_{il} \hat{e}_i \otimes \hat{e}_n + \delta_{il} \hat{e}_i \otimes \hat{e}_l\\
-				&   & \delta_{ik} \hat{e}_n \otimes \hat{e}_l - \delta_{ik} \hat{e}_n \otimes \hat{e}_k + \delta_{il} \hat{e}_n \otimes \hat{e}_n - \delta_{il} \hat{e}_n \otimes \hat{e}_l\\
-				&   & - \hat{e}_n \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_n\\
-				&   & -\delta_{jk} \hat{e}_j \otimes \hat{e}_l + \delta_{jk} \hat{e}_j \otimes \hat{e}_k - \delta_{jl} \hat{e}_j \otimes \hat{e}_n + \delta_{jl} \hat{e}_j \otimes \hat{e}_l\\
+				& = & - \hat{e}_n \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_n\\
+				&   & \delta_{ik}\left(- \hat{e}_i \otimes \hat{e}_l + \hat{e}_i \otimes \hat{e}_k + \hat{e}_n \otimes \hat{e}_l - \hat{e}_n \otimes \hat{e}_k\right)\\
+				&   & \delta_{il}\left(- \hat{e}_i \otimes \hat{e}_n + \hat{e}_i \otimes \hat{e}_l + \hat{e}_n \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_l\right)\\
+				&   & \delta_{jk}\left(\hat{e}_i \otimes \hat{e}_l - \hat{e}_i \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_l + \hat{e}_j \otimes \hat{e}_k\right)\\
+				&   & \delta_{jl}\left(\hat{e}_i \otimes \hat{e}_n - \hat{e}_i \otimes \hat{e}_l - \hat{e}_j \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_l\right)\\
 				& = & C_{jkn} - C_{jjn} - C_{kkn} + \delta_{ik} \left(C_{lln} - C_{iln}\right) - \delta_{il} C_{iin}\\
 				&   & + \delta_{jk} \left(C_{jjn} + C_{iln} - C_{ijn} - C_{jln}\right) + \delta_{jl} \left(C_{iin} - C_{ijn}\right)
 		\end{IEEEeqnarray*}
@@ -697,8 +701,7 @@ products, commutators, and structure constants of $C_{ijn}$.
 		\item When $i=k$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{iln}
-				& = & C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iin}\\
-				& = & C_{jin} - C_{jjn} - 2C_{iin} + C_{lln}
+				& = & C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln}
 		\end{IEEEeqnarray*}
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
@@ -725,17 +728,17 @@ products, commutators, and structure constants of $C_{ijn}$.
 \end{IEEEproof}
 
 Moving immediately to the commutators we have
-% the following needs major fixing for i=l and j=k
+% the following needs major fixing for j=k
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
 		\left[C_{ijn},C_{kln}\right] & = &
 		\begin{cases}
 			0 & i=k \text{ and } j=l,\\
 			0 & i=l \text{ and } j=k,\\
-			C_{jin} - C_{lin} - 2C_{jjn}  + 2C_{lln} & i=k,\\
-			C_{jkn} - C_{kjn} - C_{ijn} - C_{kin} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
+			C_{ijn} + C_{jin} - C_{il} - C_{lin} - 2C_{jjn}  + 2C_{lln} & i=k,\\
+			C_{ijn} + C_{jkn} - C_{kjn} + C_{kin} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
 			C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln} & j=k,\\
-			C_{jkn} - C_{ijn} + 2C_{iin} - 2C_{kkn} - C_{jin} + C_{kjn} & j=l,\\
+			C_{iln} - C_{lin} - C_{ijn} - C_{jln} + C_{iin} + C_{jjn} + C_{lln} & j=l,\\
 			C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
@@ -762,27 +765,31 @@ Moving immediately to the commutators we have
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{iln}\right]
 				& = & C_{ijn}C_{iln} - C_{iln}C_{ijn}\\
-				& = & C_{jin} - C_{jjn} - 2C_{iin} + C_{lln} - C_{lin} + C_{lln} + 2C_{iin} - C_{jjn}\\
-				& = & C_{jin} - C_{lin} - 2C_{jjn}  + 2C_{lln}
+				& = & \left(C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln}\right)\\
+				&   & - \left(C_{lin} - C_{lln} - C_{iin} + C_{jjn} - C_{ijn}\right)\\
+				& = & C_{ijn} + C_{jin} - C_{il} - C_{lin} - 2C_{jjn}  + 2C_{lln}
 		\end{IEEEeqnarray*}
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kin}\right]
 				& = & C_{ijn}C_{kin} - C_{kin}C_{ijn}\\
-				& = & C_{jkn} - C_{kjn} - C_{ijn} - C_{kin} - C_{iin} - C_{jjn} - C_{kkn}
+				& = & \left(C_{jkn} - C_{iin} - C_{jjn} - C_{kkn}\right) - \left(C_{kjn} - C_{kin} - C_{ijn}\right)\\
+				& = & C_{ijn} + C_{jkn} - C_{kjn} + C_{kin} - C_{iin} - C_{jjn} - C_{kkn}
 		\end{IEEEeqnarray*}
 		\item When $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jln}\right]
 				& = & C_{ijn}C_{jln} - C_{jln}C_{ijn}\\
-				& = & C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln}
+				& = & \left(C_{iln} - C_{ijn} - C_{jln}\right) - \left(C_{lin} - C_{jjn} - C_{lln} - C_{iin}\right)\\
+				& = & C_{iln} - C_{lin} - C_{ijn} - C_{jln} + C_{iin} + C_{jjn} + C_{lln}
 		\end{IEEEeqnarray*}
 		\item When $j=l$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kjn}\right]
 				& = & C_{ijn}C_{kjn} - C_{kjn}C_{ijn}\\
-				& = & C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn} - C_{jin} + C_{kjn} - C_{kkn} + C_{jjn} + C_{iin}\\
-				& = & C_{jkn} - C_{ijn} + 2C_{iin} - 2C_{kkn} - C_{jin} + C_{kjn}
+				& = & \left(C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn}\right)\\
+				&   & - \left(C_{jin} - C_{kjn} + C_{kkn} - C_{jjn} - C_{iin}\right)\\
+				& = & C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{+rCl+x*}
