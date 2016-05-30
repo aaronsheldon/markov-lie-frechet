@@ -485,19 +485,23 @@ $i \ne j$, is $G_j = \sum_{i \ne j} \alpha_i C_{ij}$, which yields
 \end{IEEEeqnarray*}
 
 It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure;
-most importantly it is not connected. This can be seen because $St(\hat{\mathbbm{1}})$
-contains both matrices with positive and negative determinants, while matrices 
-with a determinant of zero are excluded, because they are not invertible. There
-is a sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance to 
+most importantly it is connected, but not simply connected. This can be seen 
+because $St(\hat{\mathbbm{1}})$ contains both matrices with positive, negative, 
+and complex determinants, while matrices with a determinant of zero are 
+excluded, because they are not invertible. There is a simply connected normal 
+sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance to 
 continuous Markov processes on finite state spaces.
+
+% Need a figure and geometric interpretation of trying to shink a loop in the 
+% complex plane to a point, when the loop is around a pole at the origin.
 
 \begin{definition}
 	The stochastic contraction Lie group $St^{+}(\hat{\mathbbm{1}})$ is the set
 	of matrices such that $A \in St(\hat{\mathbbm{1}})$ and $\det A \in \mathbb{R}^{+}$
 \end{definition}
 
-Again this definition necessitates a proof of a stronger version of the claim in
-the definition.
+Again this definition necessitates a proof of the claim in the previous 
+paragraph.
 
 \begin{corollary}
 	$St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal sub-group of $St(\hat{\mathbbm{1}})$
@@ -556,11 +560,11 @@ This definition admits a similar characterization as before.
 That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has 
 an important consequence for continuous Markov processes on finite  state 
 spaces, in that the determinant of the transition probability matrix will always 
-be positive. This can be seen because the path through $St(\hat{\mathbbm{1}})$ 
+be positive. This can be seen because the continuous path through $St(\hat{\mathbbm{1}})$ 
 defined by any transition probability matrix must always start at the identity 
-matrix, and so be contained in $St^{+}(\hat{\mathbbm{1}})$. Thus if the basis $\hat{e}_i$
-enumerates a finite state space, then the generator has a real (positive) 
-expansion in the basis $C_{ij}$.
+matrix, and so must be contained in $St^{+}(\hat{\mathbbm{1}})$. Thus if the 
+basis $\hat{e}_i$ enumerates a finite state space, then the generator has a real 
+(positive) expansion in the basis $C_{ij}$.
 
 % The resolvent as either the Laplace or Fourier transform of an element of st(1)
 % extends St(1) to Gl(1) through contours that intersect with st(1) at the element

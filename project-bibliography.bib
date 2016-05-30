@@ -1,0 +1,243 @@
+
+@article{hall_elementary_2000,
+	title = {An {Elementary} {Introduction} to {Groups} and {Representations}},
+	url = {http://arxiv.org/abs/math-ph/0005032},
+	abstract = {These notes give an elementary introduction to Lie groups, Lie algebras, and their representations. Designed to be accessible to graduate students in mathematics or physics, they have a minimum of prerequisites. Topics include definitions and examples of Lie groups and Lie algebras, the relationship between Lie groups and Lie algebras via the exponential mapping, the basics of representations theory, the Baker-Campbell-Hausdorff formula, a detailed study of the representations of SU(3), and a brief survey of the representation theory of general semisimple groups.},
+	urldate = {2016-05-30},
+	journal = {arXiv:math-ph/0005032},
+	author = {Hall, Brian C.},
+	month = may,
+	year = {2000},
+	note = {arXiv: math-ph/0005032},
+	keywords = {81R05, 22E30, Mathematical Physics},
+	file = {arXiv\:math-ph/0005032 PDF:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/3VATBT8U/Hall - 2000 - An Elementary Introduction to Groups and Represent.pdf:application/pdf;arXiv.org Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/QCKE9CHV/0005032.html:text/html}
+}
+
+@article{al-mohy_new_2009,
+	title = {A {New} {Scaling} and {Squaring} {Algorithm} for the {Matrix} {Exponential}},
+	volume = {31},
+	issn = {0895-4798},
+	url = {http://epubs.siam.org/doi/abs/10.1137/09074721X},
+	doi = {10.1137/09074721X},
+	abstract = {The scaling and squaring method for the matrix exponential is based on the approximation \$e{\textasciicircum}A {\textbackslash}approx (r\_m(2{\textasciicircum}\{-s\}A)){\textasciicircum}\{2{\textasciicircum}s\}\$, where \$r\_m(x)\$ is the \$[m/m]\$ Padé approximant to \$e{\textasciicircum}x\$ and the integers m and s are to be chosen. Several authors have identified a weakness of existing scaling and squaring algorithms termed overscaling, in which a value of s much larger than necessary is chosen, causing a loss of accuracy in floating point arithmetic. Building on the scaling and squaring algorithm of Higham [SIAM J. Matrix Anal. Appl., 26 (2005), pp. 1179–1193], which is used by the MATLAB function expm, we derive a new algorithm that alleviates the overscaling problem. Two key ideas are employed. The first, specific to triangular matrices, is to compute the diagonal elements in the squaring phase as exponentials instead of from powers of \$r\_m\$. The second idea is to base the backward error analysis that underlies the algorithm on members of the sequence \${\textbackslash}\{{\textbackslash}{\textbar}A{\textasciicircum}k{\textbackslash}{\textbar}{\textasciicircum}\{1/k\}{\textbackslash}\}\$ instead of \${\textbackslash}{\textbar}A{\textbackslash}{\textbar}\$, since for nonnormal matrices it is possible that \${\textbackslash}{\textbar}A{\textasciicircum}k{\textbackslash}{\textbar}{\textasciicircum}\{1/k\}\$ is much smaller than \${\textbackslash}{\textbar}A{\textbackslash}{\textbar}\$, and indeed this is likely when overscaling occurs in existing algorithms. The terms \${\textbackslash}{\textbar}A{\textasciicircum}k{\textbackslash}{\textbar}{\textasciicircum}\{1/k\}\$ are estimated without computing powers of A by using a matrix 1-norm estimator in conjunction with a bound of the form \${\textbackslash}{\textbar}A{\textasciicircum}k{\textbackslash}{\textbar}{\textasciicircum}\{1/k\} {\textbackslash}le {\textbackslash}max{\textbackslash}bigl( {\textbackslash}{\textbar}A{\textasciicircum}p{\textbackslash}{\textbar}{\textasciicircum}\{1/p\}, {\textbackslash}{\textbar}A{\textasciicircum}q{\textbackslash}{\textbar}{\textasciicircum}\{1/q\} {\textbackslash}bigr)\$ that holds for certain fixed p and q less than k. The improvements to the truncation error bounds have to be balanced by the potential for a large \${\textbackslash}{\textbar}A{\textbackslash}{\textbar}\$ to cause inaccurate evaluation of \$r\_m\$ in floating point arithmetic. We employ rigorous error bounds along with some heuristics to ensure that rounding errors are kept under control. Our numerical experiments show that the new algorithm generally provides accuracy at least as good as the existing algorithm of Higham at no higher cost, while for matrices that are triangular or cause overscaling it usually yields significant improvements in accuracy, cost, or both.},
+	number = {3},
+	urldate = {2016-05-30},
+	journal = {SIAM Journal on Matrix Analysis and Applications},
+	author = {Al-Mohy, A. and Higham, N.},
+	month = aug,
+	year = {2009},
+	pages = {970--989},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/NTBSIQ8I/09074721X.html:text/html}
+}
+
+@article{al-mohy_computing_2011,
+	title = {Computing the {Action} of the {Matrix} {Exponential}, with an {Application} to {Exponential} {Integrators}},
+	volume = {33},
+	issn = {1064-8275},
+	url = {http://epubs.siam.org/doi/abs/10.1137/100788860},
+	doi = {10.1137/100788860},
+	abstract = {A new algorithm is developed for computing \$e{\textasciicircum}\{tA\}B\$, where A is an \$n{\textbackslash}times n\$ matrix and B is \$n{\textbackslash}times n\_0\$ with \$n\_0 {\textbackslash}ll n\$. The algorithm works for any A, its computational cost is dominated by the formation of products of A with \$n{\textbackslash}times n\_0\$ matrices, and the only input parameter is a backward error tolerance. The algorithm can return a single matrix \$e{\textasciicircum}\{tA\}B\$ or a sequence \$e{\textasciicircum}\{t\_kA\}B\$ on an equally spaced grid of points \$t\_k\$. It uses the scaling part of the scaling and squaring method together with a truncated Taylor series approximation to the exponential. It determines the amount of scaling and the Taylor degree using the recent analysis of Al-Mohy and Higham [SIAM J. Matrix Anal. Appl., 31 (2009), pp. 970–989], which provides sharp truncation error bounds expressed in terms of the quantities \${\textbackslash}{\textbar}A{\textasciicircum}k{\textbackslash}{\textbar}{\textasciicircum}\{1/k\}\$ for a few values of k, where the norms are estimated using a matrix norm estimator. Shifting and balancing are used as preprocessing steps to reduce the cost of the algorithm. Numerical experiments show that the algorithm performs in a numerically stable fashion across a wide range of problems, and analysis of rounding errors and of the conditioning of the problem provides theoretical support. Experimental comparisons with MATLAB codes based on Krylov subspace, Chebyshev polynomial, and Laguerre polynomial methods show the new algorithm to be sometimes much superior in terms of computational cost and accuracy. An important application of the algorithm is to exponential integrators for ordinary differential equations. It is shown that the sums of the form \${\textbackslash}sum\_\{k=0\}{\textasciicircum}p {\textbackslash}varphi\_k(A)u\_k\$ that arise in exponential integrators, where the \${\textbackslash}varphi\_k\$ are related to the exponential function, can be expressed in terms of a single exponential of a matrix of dimension \$n+p\$ built by augmenting A with additional rows and columns, and the algorithm of this paper can therefore be employed.},
+	number = {2},
+	urldate = {2016-05-30},
+	journal = {SIAM Journal on Scientific Computing},
+	author = {Al-Mohy, A. and Higham, N.},
+	month = jan,
+	year = {2011},
+	pages = {488--511},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/4PAR3UCP/100788860.html:text/html}
+}
+
+@article{al-mohy_computing_2009,
+	title = {Computing the {Fréchet} {Derivative} of the {Matrix} {Exponential}, with an {Application} to {Condition} {Number} {Estimation}},
+	volume = {30},
+	issn = {0895-4798},
+	url = {http://epubs.siam.org/doi/abs/10.1137/080716426},
+	doi = {10.1137/080716426},
+	abstract = {The matrix exponential is a much-studied matrix function having many applications. The Fréchet derivative of the matrix exponential describes the first-order sensitivity of \$e{\textasciicircum}A\$ to perturbations in A and its norm determines a condition number for \$e{\textasciicircum}A\$. Among the numerous methods for computing \$e{\textasciicircum}A\$ the scaling and squaring method is the most widely used. We show that the implementation of the method in [N. J. Higham, The scaling and squaring method for the matrix exponential revisited, SIAM J. Matrix Anal. Appl., 26 (2005), pp. 1179–1193] can be extended to compute both \$e{\textasciicircum}A\$ and the Fréchet derivative at A in the direction E, denoted by \$L(A,E)\$, at a cost about three times that for computing \$e{\textasciicircum}A\$ alone. The algorithm is derived from the scaling and squaring method by differentiating the Padé approximants and the squaring recurrence, reusing quantities computed during the evaluation of the Padé approximant, and intertwining the recurrences in the squaring phase. To guide the choice of algorithmic parameters, an extension of the existing backward error analysis for the scaling and squaring method is developed which shows that, modulo rounding errors, the approximations obtained are \$e{\textasciicircum}\{A+{\textbackslash}Delta A\}\$ and \$L(A+{\textbackslash}Delta A,E+{\textbackslash}Delta E)\$, with the same \${\textbackslash}Delta A\$ in both cases, and with computable bounds on \${\textbackslash}{\textbar}{\textbackslash}Delta A{\textbackslash}{\textbar}\$ and \${\textbackslash}{\textbar}{\textbackslash}Delta E{\textbackslash}{\textbar}\$. The algorithm for \$L(A,E)\$ is used to develop an algorithm that computes \$e{\textasciicircum}A\$ together with an estimate of its condition number. In addition to results specific to the exponential, we develop some results and techniques for arbitrary functions. We show how a matrix iteration for \$f(A)\$ yields an iteration for the Fréchet derivative and show how to efficiently compute the Fréchet derivative of a power series. We also show that a matrix polynomial and its Fréchet derivative can be evaluated at a cost at most three times that of computing the polynomial itself and give a general framework for evaluating a matrix function and its Fréchet derivative via Padé approximation.},
+	number = {4},
+	urldate = {2016-05-30},
+	journal = {SIAM Journal on Matrix Analysis and Applications},
+	author = {Al-Mohy, A. and Higham, N.},
+	month = jan,
+	year = {2009},
+	pages = {1639--1657},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/964VNNUE/080716426.html:text/html}
+}
+
+@book{rogers_diffusions_2000,
+	address = {Cambridge, U.K. ; New York},
+	edition = {2 edition},
+	title = {Diffusions, {Markov} {Processes}, and {Martingales}: {Volume} 1, {Foundations}},
+	isbn = {978-0-521-77594-6},
+	shorttitle = {Diffusions, {Markov} {Processes}, and {Martingales}},
+	abstract = {Now available in paperback, this celebrated book remains a key systematic guide to a large part of the modern theory of Probability. The authors not only present the subject of Brownian motion as a dry part of mathematical analysis, but convey its real meaning and fascination. The opening, heuristic chapter does just this, and it is followed by a comprehensive and self-contained account of the foundations of theory of stochastic processes. Chapter 3 is a lively presentation of the theory of Markov processes. Together with its companion volume, this book equips graduate students for research into a subject of great intrinsic interest and wide applications.},
+	language = {English},
+	publisher = {Cambridge University Press},
+	author = {Rogers, L. C. G. and Williams, David},
+	month = may,
+	year = {2000}
+}
+
+@book{rogers_diffusions_2000-1,
+	address = {Cambridge, U.K. ; New York},
+	edition = {2 edition},
+	title = {Diffusions, {Markov} {Processes} and {Martingales}: {Volume} 2, {Itô} {Calculus}},
+	isbn = {978-0-521-77593-9},
+	shorttitle = {Diffusions, {Markov} {Processes} and {Martingales}},
+	abstract = {The second volume concentrates on stochastic integrals, stochastic differential equations, excursion theory and the general theory of processes. These subjects are made accessible in the many concrete examples that illustrate techniques of calculation, and in the treatment of all topics from the ground up, starting from simple cases. Many of the examples and proofs are new; some important calculational techniques appear for the first time in this book.},
+	language = {English},
+	publisher = {Cambridge University Press},
+	author = {Rogers, L. C. G. and Williams, David},
+	month = sep,
+	year = {2000}
+}
+
+@book{higham_functions_2008,
+	address = {Philadelphia},
+	title = {Functions of {Matrices}: {Theory} and {Computation}},
+	isbn = {978-0-89871-646-7},
+	shorttitle = {Functions of {Matrices}},
+	language = {English},
+	publisher = {Society for Industrial \& Applied Mathematics,U.S.},
+	author = {Higham, Nicholas J.},
+	month = mar,
+	year = {2008}
+}
+
+@article{lamport_how_2012,
+	title = {How to write a 21st century proof},
+	volume = {11},
+	issn = {1661-7738, 1661-7746},
+	url = {http://link.springer.com/article/10.1007/s11784-012-0071-6},
+	doi = {10.1007/s11784-012-0071-6},
+	abstract = {A method of writing proofs is described that makes it harder to prove things that are not true. The method, based on hierarchical structuring, is simple and practical. The author’s twenty years of experience writing such proofs is discussed. In addition to developing the students’ intuition about the beautiful concepts of analysis, it is surely equally important to persuade them that precision and rigor are neither deterrents to intuition, nor ends in themselves, but the natural medium in which to formulate and think about mathematical questions. Michael Spivak, Calculus [7]},
+	language = {en},
+	number = {1},
+	urldate = {2016-05-30},
+	journal = {Journal of Fixed Point Theory and Applications},
+	author = {Lamport, Leslie},
+	month = mar,
+	year = {2012},
+	keywords = {03B35, 03F07, Analysis, Mathematical Methods in Physics, Mathematics, general, Structured proofs, teaching proofs},
+	pages = {43--63},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/GW9MIMAZ/10.html:text/html}
+}
+
+@book{hall_lie_2004,
+	address = {New York},
+	edition = {1st ed. 2003. Corr. 2nd printing 2004 edition},
+	title = {Lie {Groups}, {Lie} {Algebras}, and {Representations}: {An} {Elementary} {Introduction}},
+	isbn = {978-0-387-40122-5},
+	shorttitle = {Lie {Groups}, {Lie} {Algebras}, and {Representations}},
+	abstract = {Lie groups, Lie algebras, and representation theory are the main focus of this text. In order to keep the prerequisites to a minimum, the author restricts attention to matrix Lie groups and Lie algebras. This approach keeps the discussion concrete, allows the reader to get to the heart of the subject quickly, and covers all of the most interesting examples. The book also introduces the often-intimidating machinery of roots and the Weyl group in a gradual way, using examples and representation theory as motivation. The text is divided into two parts. The first covers Lie groups and Lie algebras and the relationship between them, along with basic representation theory. The second part covers the theory of semisimple Lie groups and Lie algebras, beginning with a detailed analysis of the representations of SU(3). The author illustrates the general theory with numerous images pertaining to Lie algebras of rank two and rank three, including images of root systems, lattices of dominant integral weights, and weight diagrams. This book is sure to become a standard textbook for graduate students in mathematics and physics with little or no prior exposure to Lie theory. Brian Hall is an Associate Professor of Mathematics at the University of Notre Dame.},
+	language = {English},
+	publisher = {Springer},
+	author = {Hall, Brian},
+	month = aug,
+	year = {2004}
+}
+
+@article{johnson_markovtype_1985,
+	title = {Markov‐type {Lie} groups in {GL}(n,{R})},
+	volume = {26},
+	issn = {0022-2488, 1089-7658},
+	url = {http://scitation.aip.org/content/aip/journal/jmp/26/2/10.1063/1.526654},
+	doi = {10.1063/1.526654},
+	abstract = {The general linear group GL(n,R) is decomposed into a Markov‐type Lie group and an abelian scale group. The Markov‐type Lie group basis is shown to generate all singly stochastic matrices which are continuously connected to the identity when non‐negative parameters are used. A basis is found which shows that it in turn contains a Lie subgroup which corresponds to doubly stochastic matrices, which basis, over the complex field, is shown to give the symmetric group for certain discrete values of the complex parameters. The basis of the Markov algebra is shown to give the negative of the corresponding M‐matrices with property ‘‘C’’ (for non‐negative combinations). These stochastic Lie groups are shown to be isomorphic to the affine group and the general linear group in one less dimension. The basis generates transformations with a natural interpretation for physical applications.},
+	number = {2},
+	urldate = {2016-05-30},
+	journal = {Journal of Mathematical Physics},
+	author = {Johnson, Joseph E.},
+	month = feb,
+	year = {1985},
+	keywords = {Algebras, Lie groups},
+	pages = {252--257},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/JJQSU3K6/1.html:text/html}
+}
+
+@article{moler_nineteen_1978,
+	title = {Nineteen {Dubious} {Ways} to {Compute} the {Exponential} of a {Matrix}},
+	volume = {20},
+	issn = {0036-1445},
+	url = {http://epubs.siam.org/doi/abs/10.1137/1020098},
+	doi = {10.1137/1020098},
+	abstract = {In principle, the exponential of a matrix could be computed in many ways. Methods involving approximation theory, differential equations, the matrix eigenvalues, and the matrix characteristic polynomial have been proposed. In practice, consideration of computational stability and efficiency indicates that some of the methods are preferable to others, but that none are completely satisfactory.},
+	number = {4},
+	urldate = {2016-05-30},
+	journal = {SIAM Review},
+	author = {Moler, C. and Van Loan, C.},
+	month = oct,
+	year = {1978},
+	pages = {801--836},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/P8KAZNB3/1020098.html:text/html}
+}
+
+@article{moler_nineteen_2003,
+	title = {Nineteen {Dubious} {Ways} to {Compute} the {Exponential} of a {Matrix}, {Twenty}-{Five} {Years} {Later}},
+	volume = {45},
+	issn = {0036-1445},
+	url = {http://epubs.siam.org/doi/abs/10.1137/S00361445024180},
+	doi = {10.1137/S00361445024180},
+	abstract = {In principle, the exponential of a matrix could be computed in many ways. Methods involving approximation theory, differential equations, the matrix eigenvalues, and the matrix characteristic polynomial have been proposed. In practice, consideration of computational stability and efficiency indicates that some of the methods are preferable to others but that none are completely satisfactory.Most of this paper was originally published in 1978. An update, with a separate bibliography, describes a few recent developments.},
+	number = {1},
+	urldate = {2016-05-30},
+	journal = {SIAM Review},
+	author = {Moler, C. and Van Loan, C.},
+	month = jan,
+	year = {2003},
+	pages = {3--49},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/C96WJ64F/S00361445024180.html:text/html}
+}
+
+@book{billingsley_probability_1995,
+	address = {New York},
+	edition = {3 edition},
+	title = {Probability and {Measure}},
+	isbn = {978-0-471-00710-4},
+	abstract = {PROBABILITY AND MEASURE  Third Edition  Now in its new third edition, Probability and Measure offers advanced students, scientists, and engineers an integrated introduction to measure theory and probability. Retaining the unique approach of the previous editions, this text interweaves material on probability and measure, so that probability problems generate an interest in measure theory and measure theory is then developed and applied to probability. Probability and Measure provides thorough coverage of probability, measure, integration, random variables and expected values, convergence of distributions, derivatives and conditional probability, and stochastic processes. The Third Edition features an improved treatment of Brownian motion and the replacement of queuing theory with ergodic theory.  Like the previous editions, this new edition will be well received by students of mathematics, statistics, economics, and a wide variety of disciplines that require a solid understanding of probability theory.},
+	language = {English},
+	publisher = {Wiley-Interscience},
+	author = {Billingsley, Patrick},
+	month = may,
+	year = {1995}
+}
+
+@article{higham_scaling_2005,
+	title = {The {Scaling} and {Squaring} {Method} for the {Matrix} {Exponential} {Revisited}},
+	volume = {26},
+	issn = {0895-4798},
+	url = {http://epubs.siam.org/doi/abs/10.1137/04061101X},
+	doi = {10.1137/04061101X},
+	abstract = {The scaling and squaring method is the most widely used method for computing the matrix exponential, not least because it is the method implemented in MATLAB's \{{\textbackslash}tt expm\} function. The method scales the matrix by a power of 2 to reduce the norm to order 1, computes a Padé approximant to the matrix exponential, and then repeatedly squares to undo the effect of the scaling. We give a new backward error analysis of the method (in exact arithmetic) that employs sharp bounds for the truncation errors and leads to an implementation of essentially optimal efficiency. We also give new rounding error analysis that shows the computed Padé approximant of the scaled matrix to be highly accurate. For IEEE double precision arithmetic the best choice of degree of Padé approximant turns out to be 13, rather than the 6 or 8 used by previous authors. Our implementation of the scaling and squaring method always requires at least two fewer matrix multiplications than \{{\textbackslash}tt expm\} when the matrix norm exceeds 1, which can amount to a 37\% saving in the number of multiplications, and it is typically more accurate, owing to the fewer required squarings. We also investigate a different scaling and squaring algorithm proposed by Najfeld and Havel that employs a Padé approximation to the function \$x {\textbackslash}coth(x)\$. This method is found to be essentially a variation of the standard one with weaker supporting error analysis.},
+	number = {4},
+	urldate = {2016-05-30},
+	journal = {SIAM Journal on Matrix Analysis and Applications},
+	author = {Higham, N.},
+	month = jan,
+	year = {2005},
+	pages = {1179--1193},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/PBUQRVPR/04061101X.html:text/html}
+}
+
+@article{higham_scaling_2009,
+	title = {The {Scaling} and {Squaring} {Method} for the {Matrix} {Exponential} {Revisited}},
+	volume = {51},
+	issn = {0036-1445},
+	url = {http://epubs.siam.org/doi/abs/10.1137/090768539},
+	doi = {10.1137/090768539},
+	abstract = {The scaling and squaring method is the most widely used method for computing the matrix exponential, not least because it is the method implemented in the MATLAB function expm. The method scales the matrix by a power of 2 to reduce the norm to order 1, computes a Padé approximant to the matrix exponential, and then repeatedly squares to undo the effect of the scaling. We give a new backward error analysis of the method (in exact arithmetic) that employs sharp bounds for the truncation errors and leads to an implementation of essentially optimal efficiency. We also give a new rounding error analysis that shows the computed Padé approximant of the scaled matrix to be highly accurate. For IEEE double precision arithmetic the best choice of degree of Padé approximant turns out to be 13, rather than the 6 or 8 used by previous authors. Our implementation of the scaling and squaring method always requires at least two fewer matrix multiplications than the expm function in MATLAB 7.0 when the matrix norm exceeds 1, which can amount to a 37\% saving in the number of multiplications, and it is typically more accurate, owing to the fewer required squarings. We also investigate a different scaling and squaring algorithm proposed by Najfeld and Havel that employs a Padé approximation to the function \$x {\textbackslash}coth(x)\$. This method is found to be essentially a variation of the standard one with weaker supporting error analysis.},
+	number = {4},
+	urldate = {2016-05-30},
+	journal = {SIAM Review},
+	author = {Higham, N.},
+	month = nov,
+	year = {2009},
+	pages = {747--764},
+	file = {Snapshot:/home/aaron/.zotero/zotero/oh5623lz.default/zotero/storage/N55NADDS/090768539.html:text/html}
+}
+
+@misc{center_for_history_and_new_media_zotero_????,
+	title = {Zotero {Quick} {Start} {Guide}},
+	url = {http://zotero.org/support/quick_start_guide},
+	author = {{Center for History and New Media}}
+}
