@@ -1,27 +1,66 @@
 \chapter{Introduction}
-\section{Motivation and Direction}
-Markov process have a rich and extensive history in the statistical and 
-probability analysis of fields such as the life sciences, operations research,
-queuing theory communications, natural language, finance and machine learning.
-Have modeled syntax of sentences, disease states, cancer survival, epidemiology
-and demographics, with models such as phase type, birth-death, and hidden
-State of the art computational methods are focused on hidden Markov Models on
-a finite state set, and discrete time steps; assuming all transitions are
-observed but are obscured with noise. This is the focus of the Baum-Welch and
-Viterbi algorithms, and more recently RUST models. This is because Markov models
-have an intuitive phenomenological interpretation.
+\section{Motivation}
+Markov processes are a central subject of study in probability theory, and are a 
+rich source of distributions for parameter estimation in statistics\cite{billingsley_probability_1995,rogers_diffusions_2000,rogers_diffusions_2000-1}.
+They have applications in diverse disciplines ranging through the physical and 
+life sciences, including operations research, chemical process engineering, 
+queuing theory, communications theory, natural language processing, finance, and 
+machine learning. Under mild assumptions and constraints they offer tractable,
+and even closed form models; that can be reasoned about using physical heuristic 
+analogies, and intuitive phenomenological interpretations. To varying degrees of 
+rigor, methods for both simulation, and parameter estimation have been developed 
+for many types of observed random and pseudo-random processes such as the syntax 
+of sentences, disease states, cancer survival, epidemiology, and demographics. 
+Simplifying assumptions include discretization of time and state spaces, 
+homogeneity of the process, and restrictions of the allowed transitions; 
+resulting in models such as phase type distributions, branching processes, 
+birth-death processes, and hidden Markov models.
 
-The reason for the focus on discrete time finite state Markov processes is that
-in dimension greater than four the matrix exponential does not have a closed form
-entry wise. This is because polynomials of degree greater than four are not
-generally solvable. Instead computational approximations for the matrix
-exponential must be used. This work extends and generalizes those computational
-methods to include the gradient and Hessian of the matrix exponential.
+State of the art computational methods are focused on maximum likelihood 
+parameter estimation by expectation maximization of hidden Markov Models; which 
+assumes a finite state space obscured by random noise, with discrete homogeneous 
+time steps, with all times of transitions being observed. The discretization of 
+time allows for the time evolution of transition probabilities to be explicitly 
+parameterized through matrix multiplication. The discrete time construction of
+hidden Markov models is successfully exploited by the Baum-Welch, Viterbi, and 
+forward-backward algorithms to estimate parameters.
 
-The work presented in this project concerns continuous time Markov processes on
-a finite state space, where by definition it is not possible to observe all the
-transitions. Instead what is observed typical is are stopped statistics, such
-as first hitting times from one state to another.
+In contrast continuous time homogeneous Markov processes on a finite state space
+can only parameterized through the generator, because the time evolution is 
+represented through matrix exponentiation. Unfortunately parameterization of the 
+generators of Markov processes, in more than four states, does not in general 
+yield tractable closed from transition probabilities. This is because any 
+explicit formulation of the transition probabilities from the generator would 
+require solving the characteristic polynomial of the generator, which is not 
+generally possible in dimensions greater than four. Yet computational 
+approximations of the matrix exponential have been well developed, with methods 
+to compute the gradient receiving recent attention; especially with regard to 
+computing the condition number of numerical problems, as a measure of 
+convergence and stability of the numerical solution\cite{al-mohy_computing_2009}.
+
+Given a computational method to calculate the matrix exponential, and it's 
+gradient, and Hessian, an application of the chain rule then allows for the 
+computation of maximum likelihood estimates of any differentiable
+parameterization of the generators of a continuous time homogeneous Markov 
+process on a finite state space; from stopped statistics, like the first hitting 
+times of transitions from a fixed source state to a fixed target state. As such 
+this work extends the current computational methods to include Hessian of the 
+matrix exponential; and further develops an alternate direct computation of the 
+gradient of the matrix exponential.
+
+Throughout this work we will attempt to conform to a simplified version of 
+Lamport's guide to structuring and presenting proofs\cite{lamport_how_2012}.
+
+\section{Overview}
+From the perspective of Lie theory, classical parameter estimation of Markov 
+processes has been a manifold first approach; starting with an explicit 
+construction of an extrinsic smooth coordinate chart (parameterization) on a 
+neighborhood of the sub-manifold to which the generators belong, and only then 
+looking for computational simplifications and solutions. As hinted to in the 
+previous section, we will proceed with an algebra first approach; developing the 
+intrinsic algebraic structure of the Lie algebra of the generators, and then 
+exploiting the implicit function theorem to carry out computations in specific 
+parameterizations.
 
 The second chapter establishes the algebraic and analytic closure properties
 necessary for chapter three. Chapter two has a secondary role to help develop the 
@@ -29,13 +68,11 @@ physical intuition for the stochastic Lie group necessary to work through the
 derivatives and approximations of chapter three.
 The third chapter derives the the first and second order derivatives of the exponential
 map and their Pad\'{e} Approximation.
-The fourth chapter derives the maximum likelihood estimators from first hitting times
+The fourth chapter derives the maximum likelihood estimators from first hitting times, and the Newton-Raphson computation.
 The fifth chapter concludes with summarizing remarks and a discussion of the direction
 for further investigation.
-Throughout this work we will attempt to conform to a simplified version of 
-Lamport's guide to structuring and presenting proofs\cite{hall_elementary_2000}.
 \section{Background}
-\subsection{Continuous Time Markov Process}
+\subsection{Continuous Time Homogeneous Markov Process}
 \subsection{Maximum Likelihood Estimation}
 \subsection{Lie Theory}
 \subsection{Pad\'{e} Approximation}

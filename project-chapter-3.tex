@@ -1,19 +1,23 @@
 \chapter{Pad\'{e} Approximation of the Fr\'{e}chet Derivatives of the Exponential Map}
 \section{The Gradient}
-In ??, and revisited in ?? ?? reviewed algorithms for calculating the matrix 
-exponential. Recently ?? optimized the Pad\'{e} approximation of the matrix 
-exponential for numerical computing on modern $64$ bit architectures. In ?? an 
-algorithm to approximate the derivative of the matrix exponential was for 
-formulated, essentially by taking the derivative of the Pad\'{e} approximation 
-of the matrix exponential and then working out a recursive calculation for the
-derivatives of the powers of a matrix.
+Moler and Van Loan seminally reviewed algorithms for calculating the matrix 
+exponential in 1978, and revisited that review in 2003\cite{moler_nineteen_1978,moler_nineteen_2003}. 
+Building on the discussions of Moler and Van Loan, Higham established the 
+standard implementation of the matrix exponential based on scaling and scaring 
+and Pad\'{e} approximation\cite{higham_scaling_2005,higham_functions_2008}.
+The Higham implementation was further optimized for $64$ bit architectures by 
+Al-Mohy\cite{al-mohy_new_2009}. The same work developed an algorithm to 
+approximate the derivative of the matrix exponential was for formulated, 
+essentially by taking the derivative of the Pad\'{e} approximation of the matrix 
+exponential, and then working out a recursive calculation for the derivatives of 
+matrix powers\cite{al-mohy_computing_2009}.
 
 While the derivative of the Pad\'{e} approximation of an analytic function will 
 converge to the derivative of the analytic function, it is not true that the
 derivative of the Pad\'{e} approximation of an analytic function is the Pad\'{e} 
 approximation of the derivative of an analytic function. In the sense that 
-Pad\'{e} approximations of analytic functions are an optimal series algebraic 
-approximations the method proposed in ?? is not optimal.
+Pad\'{e} approximations of analytic functions are an optimal series of algebraic 
+approximations the 2009 method proposed by Al-Mohy is not optimal.
 
 In this chapter we will develop an approximation for the first, and second order
 Fr\'{e}chet derivatives of the matrix exponential, by decomposing the 
@@ -138,21 +142,21 @@ the Kronecker representation follows as
 
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X \frac{\partial X}{\partial x} 
-		& = & \operatorname{mat}\left( \left(I \otimes X - X \otimes I \right) \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
+		& = & \operatorname{mat}\left( \left(I \otimes X - X^T \otimes I \right) \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
 
 Proceeding by induction we find that 
 
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X^n \frac{\partial X}{\partial x} 
-		& = & \operatorname{mat}\left(\left(I \otimes X - X \otimes I \right)^n\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
+		& = & \operatorname{mat}\left(\left(I \otimes X - X^T \otimes I \right)^n\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
 
 It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X \otimes I \right)^n \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
+		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^n \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
 % break the algorithm into two parts, Pade and perturbation
@@ -166,7 +170,10 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 
 Need preamble on combinatorics of powers of adjoint.
 
-We compute the Hessian by symmetrizing the partial differential, assuming $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ are continuous (why can we do this? pick a basis then compute the derivatives of the inner products...). 
+Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
+are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
+We can then compute the Hessian by symmetrizing the partial differential so that 
+antisymmetric terms cancel out.
 
 \begin{IEEEeqnarray*}{rCl}
 	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
