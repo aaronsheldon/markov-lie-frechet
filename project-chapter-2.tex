@@ -7,7 +7,9 @@ determinant, trace, or norm. In contrast stochastic matrices are always
 characterized with respect to a specific unit vector, which we will denote 
 $\hat{\mathbbm{1}}$. In the next two sections we provide an explicit 
 construction and characterization of the Lie algebra of stochastic matrices, 
-building on the original the work of Johnson\cite{johnson_markovtype_1985}.
+building on the original the work of Johnson\cite{johnson_markov-type_1985}, and
+distilling the recent works of Sumner et al.\cite{sumner_lie_2012,fernandez-sanchez_lie_2012},
+Mourad\cite{mourad_lie-theoretic_2004}, and Chruściński et al.\cite{chruscinski_pseudo-stochastic_2015}.
 
 The common approach to stochastic matrices begins with the restriction that the 
 matrices have non-negative entries with respect to the standard orthonormal 
@@ -49,7 +51,7 @@ It is tempting to view the name stochastic Lie group as a bait and switch, or
 at least an abuse of the terminology, given we have removed the usual convex
 polytope of stochastic matrices and replaced it with a group of invertible 
 bounded linear operators with a common eigenvector $\hat{\mathbbm{1}}$. Previous 
-authors ?? have denoted the convex polytope of stochastic matrices as the 
+authors have denoted the convex polytope of stochastic matrices as the 
 stochastic semi-group, and the group of invertible matrices as the 
 pseudo-stochastic Lie group. One could even consider incorporating Markov into 
 the name, in reference to the fact that the transition matrices of a continuous 
@@ -362,7 +364,7 @@ of the polytope is a limit point of $St(\hat{\mathbbm{1}})$. Probabilistically,
 the constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
 states of a continuous time homogeneous Markov process on a finite state space. 
 For example, we can Lie theoretically reformulate the classic two state 
-continuous Markov process.
+continuous time homogeneous Markov process.
 
 \begin{corollary}
 	$\exp\left(\alpha C_{ij} + \beta C_{ji}\right) = I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right)$
@@ -492,15 +494,14 @@ fact, this is true in general for any matrix Lie group $M$, namely it is the Lie
 algebra offset by the identity element $M = I + \mathfrak{m}$. This can be seen 
 from the Taylor series expansion of the matrix exponential. It follows that for 
 a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ the matrix 
-exponential is $\exp G = I + \sum_{ij} h_{ij} C_{ij}$.
+exponential is $\exp G = I + \sum_{ij} h_{ij} C_{ij}$. Unfortunately, because 
+polynomials of degree greater than four are generally unsolvable, the 
+relationship between the coefficients $g_{ij}$ and $h_{ij}$ is highly 
+non-trivial in most circumstances. 
 
-Unfortunately, because polynomials of degree greater than four are generally 
-unsolvable, the relationship between the coefficients $g_{ij}$ and $h_{ij}$ is 
-highly non-trivial in most circumstances. An exception to this
-difficulty can be found in the formulation of the of first exit
-times from a fixed initial state. The generator of the first exit from $i$ to 
-any state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$,
-\footnote{A complete proof of the result will be given in chapter four.} 
+An exception to this difficulty can be found in the formulation of the of first 
+exit times from a fixed initial state. Previewing the results of chapter four, 
+the generator of the first exit from $i$ to any state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$,
 from which we have
 
 \begin{IEEEeqnarray*}{rCl}
@@ -568,8 +569,9 @@ paragraph.
 \end{IEEEproof}
 
 The use of the nomenclature of contraction is in deference to the equivalent
-definition used for the generators of continuous Markov processes on finite 
-state spaces. Of course every good Lie group deserves a Lie algebra.
+definition used for the generators of continuous time homogeneous Markov 
+processes on finite state spaces. Of course every good Lie group deserves a Lie 
+algebra.
 
 \begin{definition}
 	Let $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ denote the stochastic contraction Lie 
