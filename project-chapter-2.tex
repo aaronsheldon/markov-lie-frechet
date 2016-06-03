@@ -1,5 +1,7 @@
 \chapter{The Lie Algebra of Markov Processes Generators}
 \section{Stochastic Matrices}
+\subsection{Foundational Preliminaries}
+
 The classical Lie algebras of physics, like the infinitesimal symmetries
 of the special unitary algebra $\mathfrak{su}(n)$, are defined with respect to
 invariants of a Banach algebra, such as the matrix invariants of the 
@@ -113,7 +115,7 @@ such that $\hat{\mathbbm{1}}$ is in the kernel of each operator.
 				& = & \hat{\mathbbm{1}}
 		\end{IEEEeqnarray*}
 		Thus $\exp\left(A\right) \in St(\hat{\mathbbm{1}})$ implying that $A \in \mathfrak{st}(\hat{\mathbbm{1}})$
-		\item Now begin with the reverse assumption, that $A \in \mathfrak{st}(\hat{\mathbbm{1}})$.
+		\item Now proceeding with the reverse assumption, that $A \in \mathfrak{st}(\hat{\mathbbm{1}})$.
 		For all $t \in \mathbb{R}$ we have $\exp\left(tA\right) \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
 		Differentiation with respect to $t$ and evaluation at $t = 0$ yields
 		\begin{IEEEeqnarray*}{+rCl+x*}
@@ -125,11 +127,11 @@ such that $\hat{\mathbbm{1}}$ is in the kernel of each operator.
 	\end{enumerate}
 \end{IEEEproof}
 
-The following chapter will hinge on taking the derivatives of parameterizations
-$X : \mathbb{R}^k \mapsto \mathfrak{st}(\hat{\mathbbm{1}})$. The principle role
-of this chapter is to assure ourselves that we will not differentiate ourselves
-out of $\mathfrak{st}(\hat{\mathbbm{1}}$. The next corollary nicely provides
-just such an assurance:
+The following chapter will hinge on taking the derivatives of smooth 
+parameterizations $X : \mathbb{R}^k \mapsto \mathfrak{st}(\hat{\mathbbm{1}})$. 
+The principle role of this chapter is to assure ourselves that we will not 
+differentiate ourselves out of $\mathfrak{st}(\hat{\mathbbm{1}}$. The next 
+corollary nicely provides just such an assurance:
 
 \begin{corollary}
 	The tangent space $T\mathfrak{st}(\hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}})$
@@ -156,10 +158,14 @@ just such an assurance:
 
 Clearly the tangent space to a normed vector space is the normed vector space.
 After all one can just choose a fixed basis and then differentiate the 
-individual parameterized in products. However the preceding corollary was 
-presented in its form to illustrate the intuition that any increase in a 
-particular element has to be compensated for by an equal decrease in some other
+individual smoothly parameterized in projections. However, the proof of the 
+preceding corollary was constructed to explicitly the connect algebraic closure 
+and differentiation, with the norm implicitly used in the differentiation. The 
+proof further illustrates the intuition that any increase in a particular matrix 
+element has to be compensated for by an equal decrease in some other matrix 
 elements.
+
+\subsection{Canonical Generators}
 
 Over an $n$ dimensional vector space, the condition on a matrix $A$ that $A \hat{\mathbbm{1}} = 0$
 places $n$ constraints on the $n^2$ dimensions of $A$. This leaves $n^2 - n$ 
@@ -350,9 +356,13 @@ We can now proceed with the central result that motivates this chapter.
 The previous theorem serves as the definition of a set of canonical generators 
 of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the 
 basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
-uniquely defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
-Nevertheless we can immediately see by Jacobi's formula that when $G = \sum_{i,j} \alpha_{ij} C_{ij}$ 
-then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
+defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
+Regardless of the choice of basis $\hat{e}_i$ Jacobi's formula implies that if 
+$G = \sum_{i,j} \alpha_{ij} C_{ij}$ then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
+
+% Everything below this is scattered and needs fixing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Vertexes}
 
 Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
 of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
@@ -520,6 +530,10 @@ $i \ne j$, is $G_j = \sum_{i \ne j} \alpha_i C_{ij}$, which yields
 		& = & I + \sum_{i \ne j} \left(1 - e^{-\alpha_i}\right) C_{ij}
 \end{IEEEeqnarray*}
 
+% Okay from here below, everthing above needs re-working %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Contraction and Dual Algebras}
+
 It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure;
 most importantly it is connected, but not simply connected. This can be seen 
 because $St(\hat{\mathbbm{1}})$ contains matrices with positive, negative, and 
@@ -544,7 +558,7 @@ paragraph.
 \end{corollary}
 
 \begin{IEEEproof}
-	It should be clear that $St^{+}(\hat{\mathbbm{1}})$ is a Lie sub-group of $St^{+}(\hat{\mathbbm{1}})$,
+	It should be clear that $St^{+}(\hat{\mathbbm{1}})$ is a Lie sub-group of $St(\hat{\mathbbm{1}})$,
 	thus we need only prove normality and simply connectedness.
 	\begin{enumerate}
 		\item Starting with normality, let $A \in St^{+}(\hat{\mathbbm{1}})$ and $B \in St(\hat{\mathbbm{1}})$,
@@ -564,7 +578,9 @@ paragraph.
 		\item It follows that $\det A\left(t\right) = \exp\left(\sum_{ij} \alpha_{ij}\left(t\right)\right) \in \mathbb{R}^{+}$.
 		\item Now consider $s \in \left[0,1\right]$, and $A_s\left(t\right) = \exp\left(sG\left(t\right)\right)$,
 		then $A_1\left(t\right) = A\left(t\right)$ and $A_0\left(t\right) = I$,
-		furthermore $\det A_s\left(t\right) = \exp\left(s \sum_{ij} \alpha_{ij}\left(t\right)\right) \in \mathbb{R}^{+}$.\hfill\IEEEQEDhere
+		furthermore $\det A_s\left(t\right) = \exp\left(s \sum_{ij} \alpha_{ij}\left(t\right)\right) \in \mathbb{R}^{+}$.
+		\item Taking the limit as $s$ goes to $0$ provides the necessary simple 
+		connectedness.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
 
@@ -587,8 +603,8 @@ This definition admits a similar characterization as before.
 \begin{IEEEproof}
 	The result follows in much the same method as the central theorem of this 
 	chapter, except to show that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real
-	vector space over the basis $C_{ij}$, whose main argument requires checking
-	the condition of linear sum and scalar multiplication closure:
+	vector space over the basis $C_{ij}$. It is sufficient to check for closure
+	with respect to linear sums and scalar multiplications:
 	\begin{enumerate}
 		\item For any $\alpha_{ij} \in \mathbb{C}$ such that $\exp\left(\sum_{ij} \alpha_{ij} C_{ij}\right) \in St^{+}(\hat{\mathbbm{1}})$
 		Jacobi's formula requires that $\mathbb{I}m\left(\sum_{ij} \alpha_{ij}\right) \equiv 0 \bmod 2 \pi$.
@@ -650,18 +666,20 @@ definitions for the Lie group and algebra follow natural.
 Thus if $C_{ij}$ are generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ then $C_{ij}^T = \left(\hat{e}_j - \hat{e}_i \right) \otimes \hat{e}_i$
 are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. The definitions of the
 dual stochastic contraction Lie group $St^{+T}(\hat{\mathbbm{1}})$ and Lie algebra $\mathfrak{st}^{+T}(\hat{\mathbbm{1}})$
-follow analogously. That $St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$ 
-is a Lie group and $\mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$ 
-is a Lie algebra will be foundational for the next section.
+follow analogously. That $St^{+}(\hat{\mathbbm{1}}) \cap St^{+T}(\hat{\mathbbm{1}}) \subseteq St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}}) \subseteq St(\hat{\mathbbm{1}})$ 
+are a Lie groups and $\mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+T}(\hat{\mathbbm{1}}) \subseteq \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}}) \subseteq \mathfrak{st}(\hat{\mathbbm{1}})$ 
+are a Lie algebras will be foundational for the next section.
 
 \section{Doubly Stochastic Matrices}
+\subsection{Foundational Preliminaries}
+
 Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
 in the sense that both $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ 
 must hold. The group of invertible doubly stochastic matrices is then a subgroup
 of the group of stochastic matrices. The two constraints of row and column 
 conservation leaves only $\left(n - 1\right)^2$ linear degrees of freedom. This 
-is an important clue in the construction of a canonical representation. In fact 
-the representation can be found by choosing one additional vector $\hat{e}_n$, 
+will be an important clue in the construction of canonical generators. In fact 
+the canonical generators can be found by choosing one additional vector $\hat{e}_n$, 
 from the basis constructed in the previous section, to center the combinatorial 
 construction of the generators of the algebra around. This vector plays a 
 similar role to the diagonal in the previous construction and is used to balance 
@@ -674,7 +692,7 @@ a foundational definition.
 	stochastic with respect to $\hat{\mathbbm{1}}$
 \end{definition}
 
-We can immediately observe with out proof that $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$;
+We can immediately observe without proof that $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$;
 leading to the next definition.
 
 \begin{definition}
@@ -686,11 +704,14 @@ Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1
 The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 is the algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the 
 kernel of both $A$ and $A^T$. As with $St(\hat{\mathbbm{1}})$, the Lie group $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-is not connected, and contains the splitting contraction sub-group $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$,
-with its similarly defined contraction sub-algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$. 
+is not connected, and contains the splitting contraction sub-group $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St^{+}(\hat{\mathbbm{1}}) \cap St^{+T}(\hat{\mathbbm{1}})$,
+with its similarly defined contraction sub-algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+T}(\hat{\mathbbm{1}})$. 
 $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ has the same properties of 
 normality and simple connectedness within $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$; 
-of course it is not normal within $St(\hat{\mathbbm{1}})$.
+of course it is not normal within $St(\hat{\mathbbm{1}})$, because $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+is not normal within $St(\hat{\mathbbm{1}})$.
+
+\subsection{Canonical Generators}
 
 We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 by similar methods as in the previous section. Given a constructed basis $\hat{e}_i$
@@ -709,6 +730,7 @@ matrices, which can be seen by the relationship, for any $i,j \le n-1$.
 
 \begin{IEEEeqnarray*}{rCl}
 	C_{ijn} - C_{iin} - C_{jjn}
+		& = & C_{ij} - C_{in} - C_{nj}\\
 		& = & \hat{e}_i \otimes \hat{e_j} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n
 \end{IEEEeqnarray*}
 
@@ -901,6 +923,7 @@ algebra are not unique, not only do they depend on the choice of the basis $\hat
 but also on the choice of the basis element $\hat{e}_n$ used to sum the rows and 
 columns to zero.
 
+\subsection{Vertexes}
 % Unlike stochastic Lie group there are no nice guareentees on properness with
 % respect to postive sums. No matter what generators of the algebra are chosen
 % there will always be Markov processes that require negative terms in the sum.
