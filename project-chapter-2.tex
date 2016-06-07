@@ -774,7 +774,8 @@ The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\m
 Furthermore they are a closed set with respect to matrix transposition, because 
 $C_{ijn}^T = C_{jin}$. The algebra $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 is isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$ 
-matrices, which can be seen by the relationship, for any $i,j \le n-1$.
+matrices; which can be seen by the from the improper commutators, where for any 
+$i,j \le n-1$.
 
 \begin{IEEEeqnarray*}{rCl}
 	C_{iin} + C_{jjn} - C_{ijn}
@@ -782,8 +783,8 @@ matrices, which can be seen by the relationship, for any $i,j \le n-1$.
 		& = & \hat{e}_i \otimes \hat{e}_n + \hat{e}_n \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e_j} - \hat{e}_n \otimes \hat{e}_n
 \end{IEEEeqnarray*}
 
-The state transitions of the dual algebra matrices $C_{iin} + C_{jjn} - C_{ijn}$
-are illustrated in figure \ref{fig:dualdoublestochastic}.
+The state transitions of the improper commutators $C_{iin} + C_{jjn} - C_{ijn}$
+are illustrated in figure \ref{fig:improperdoublestochastic}.
 
 \begin{figure}
 	\centering
@@ -797,8 +798,8 @@ are illustrated in figure \ref{fig:dualdoublestochastic}.
 			(i) edge [bend right] node [below] {$+1\quad$} (n)
 			(n) edge [bend right] node [below] {$+1$} (j);
 	\end{tikzpicture}
-	\caption[Dual algebra $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the dual algebra $C_{iin} + C_{jjn} - C_{ijn}$ to the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
-	\label{fig:dualdoublestochastic}
+	\caption[Improper generators $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the improper generators $C_{iin} + C_{jjn} - C_{ijn}$ to the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:improperdoublestochastic}
 \end{figure} 
 
 The intuition being that any $n \times n$ matrix with fixed row and column sums
