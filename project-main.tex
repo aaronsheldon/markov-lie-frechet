@@ -1,9 +1,16 @@
+% Thesis class does bad things to figure float, mostly because of the doulbe
+% spacing. So save off the kernel version of float spacing for reinstatement.
+\makeatletter
+\let\kernel@xfloat\@xfloat
+\makeatother
+
 % Use the class supplied by the University of Calgary
 \documentclass[12pt]{ucalgthes1}
 
 % External references
 \usepackage[letterpaper,top=1in, bottom= 1in, left= 1in, right= 1in]{geometry}
 \usepackage{hyperref}
+\usepackage[all]{hypcap}
 \usepackage{mathptmx}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
@@ -14,6 +21,27 @@
 \usepackage{mathrsfs}
 \usepackage[canadian]{babel}
 \usepackage{bbm}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Syntax highlighting for julia
+\include{project-julia}
+
+% To get Tikz and PGF to work we reinstate the original float
+\makeatletter
+\def\@xfloat#1[#2]{
+        \kernel@xfloat#1[#2]%
+        \def\baselinestretch{1}%
+        \@normalsize \normalsize
+}
+\makeatother
+
+% Return to our originally scheduled programming
+\usepackage{pgf}
+\usepackage{tikz}
+
+% For the Markov chain diagrams
+\usetikzlibrary{arrows,automata}
 
 % Static definitions
 \title{The Application of Lie Theory to Markov Processes\\ \bigskip

@@ -1,2 +1,43 @@
 \chapter{Julia Implementations}
-Code dumps of implementations of the algorithms in Julia.
+Basic implementations of the algorithms presented in Julia.
+
+\begin{lstlisting}[language=Julia,caption=Poor man's symbolic computation of the Pade coefficients of the generalized hyperbolic functions in Julia]
+# The polynomials package provides both the polynomial type and
+# the Pade approximation algorithm. If it is not installed 
+# uncomment the next line
+# Pkg.install('Polynomials')
+using('Polynomials')
+
+# General function to compute the [n/m] approximation of
+# 1 / (a k + b)!
+f(n,m,a,b) = Pade
+(
+	Poly
+	(
+		[Rational(1,factorial(BigInt(a*k+b))) for k=0:(n+m+1)]
+	),
+	n,
+	m
+)
+
+# Compute the desired coefficients
+c = f(16,16,1,2)
+
+# Print the numerator coefficients
+c.p.a
+
+# Print the denominator coefficients
+c.q.a
+\end{lstlisting}
+
+\begin{lstlisting}[language=Julia,caption=An unoptimized implementation of gradient of the matrix exponential in Julia]
+function dexpm(X,DX)
+	# Check for commutation
+	if X * DX = DX * X
+		DX * expm(X)
+		
+	# Use the Pade coefficients to compute dexpm
+	else
+	end
+end
+\end{lstlisting}

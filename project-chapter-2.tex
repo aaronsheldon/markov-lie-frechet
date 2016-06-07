@@ -217,12 +217,26 @@ that $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$. Thus $\vec{\mathbbm{1}}$ can
 be interpreted as the row sum vector in basis $\hat{e}_i$.
 
 The constructed basis leads naturally to considering the minimal non-trivial 
-matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$ as 
-holding significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$.
-In fact this will be the central result of this chapter: that the algebraic 
-closure of the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. 
+matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$, with 
+state transitions illustrated in figure \ref{fig:singlestochastic}, as holding 
+significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$. In fact 
+this will be the central result of this chapter: that the algebraic closure of 
+the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. 
 To establish this result we need a preliminary result that proves the 
 commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_{ij}$.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)              {$\hat{e}_i$};
+		\node[state] (j) [right of=i] {$\hat{e}_j$};
+		\path
+			(i) edge [loop left] node         {$-1$} (i)
+			(i) edge             node [above] {$+1$} (j);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{ij}$]{State transition circuit diagram of the canonical generators $C_{ij}$ of $\mathfrak{st}(\hat{\mathbbm{1}})$}
+	\label{fig:singlestochastic}
+\end{figure}
 
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
@@ -713,14 +727,48 @@ is not normal within $St(\hat{\mathbbm{1}})$.
 
 \subsection{Canonical Generators}
 
-We can then find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
+We can find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
 by similar methods as in the previous section. Given a constructed basis $\hat{e}_i$
 such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
 we pick a single arbitrary element from the basis, say $\hat{e}_n$, the last
 element for example. We then balance a transition rate from $i$ to $j$, with the
 reverse rates from $j$ to $n$ and $n$ to $i$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$.
+The state transitions of the symmetric matrix $C_{iin}$ are illustrated in 
+figure \ref{fig:symmetricdoublestochastic}, and the state transitions of the 
+asymmetric matrix $C_{ijn}$ are illustrated in figure \ref{fig:doublestochastic}. 
 
-% Need a figure here of the circuit
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)              {$\hat{e}_i$};
+		\node[state] (n) [right of=i] {$\hat{e}_n$};
+		\path
+			(i) edge [loop left]  node         {$-1$} (i)
+			(i) edge [bend left]  node [above] {$+1$} (n)
+			(n) edge [bend left]  node [below] {$+1$} (i)
+			(n) edge [loop right] node         {$-1$} (n);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{iin}$]{State transition circuit diagram of the canonical generators $C_{iin}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:symmetricdoublestochastic}
+\end{figure} 
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)                    {$\hat{e}_i$};
+		\node[state] (n) [below right of=i] {$\hat{e}_n$};
+		\node[state] (j) [above right of=n] {$\hat{e}_j$};
+		\path
+			(i) edge [loop left]  node         {$-1$} (i)
+			(j) edge [loop right] node         {$-1$} (j)
+			(n) edge [loop below] node         {$-1$} (n)
+			(i) edge [bend left]  node [above] {$+1$} (j)
+			(j) edge [bend left]  node [below] {$+1$} (n)
+			(n) edge [bend left]  node [below] {$+1\quad$} (i);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{ijn}$]{State transition circuit diagram of the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:doublestochastic}
+\end{figure} 
 
 The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$. 
 Furthermore they are a closed set with respect to matrix transposition, because 
@@ -729,10 +777,29 @@ is isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$
 matrices, which can be seen by the relationship, for any $i,j \le n-1$.
 
 \begin{IEEEeqnarray*}{rCl}
-	C_{ijn} - C_{iin} - C_{jjn}
-		& = & C_{ij} - C_{in} - C_{nj}\\
-		& = & \hat{e}_i \otimes \hat{e_j} - \hat{e}_i \otimes \hat{e}_n - \hat{e}_n \otimes \hat{e}_j + \hat{e}_n \otimes \hat{e}_n
+	C_{iin} + C_{jjn} - C_{ijn}
+		& = & C_{in} + C_{nj} - C_{ij}\\
+		& = & \hat{e}_i \otimes \hat{e}_n + \hat{e}_n \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e_j} - \hat{e}_n \otimes \hat{e}_n
 \end{IEEEeqnarray*}
+
+The state transitions of the dual algebra matrices $C_{iin} + C_{jjn} - C_{ijn}$
+are illustrated in figure \ref{fig:dualdoublestochastic}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)                    {$\hat{e}_i$};
+		\node[state] (n) [below right of=i] {$\hat{e}_n$};
+		\node[state] (j) [above right of=n] {$\hat{e}_j$};
+		\path
+			(n) edge [loop below] node         {$-1$} (n)
+			(i) edge [bend left]  node [above] {$-1$} (j)
+			(i) edge [bend right] node [below] {$+1\quad$} (n)
+			(n) edge [bend right] node [below] {$+1$} (j);
+	\end{tikzpicture}
+	\caption[Dual algebra $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the dual algebra $C_{iin} + C_{jjn} - C_{ijn}$ to the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:dualdoublestochastic}
+\end{figure} 
 
 The intuition being that any $n \times n$ matrix with fixed row and column sums
 can be created by starting with any $\left(n-1\right) \times \left(n-1\right)$ 
@@ -747,9 +814,9 @@ products, commutators, and structure constants of $C_{ijn}$.
 			C_{jin} - 2C_{ijn} & i=k \text{ and } j=l,\\
 			- \left(C_{ijn} + C_{jin}\right) & i=l \text{ and } j=k,\\
 			C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln} & i=k,\\
-			C_{jkn} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
+			C_{jkn} - C_{jjn} - C_{kkn} - C_{iin} & i=l,\\
 			C_{iln} - C_{ijn} - C_{jln} & j=k,\\
-			C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn} & j=l,\\
+			C_{jkn} - C_{jjn} - C_{kkn} + C_{iin} - C_{ijn} & j=l,\\
 			C_{jkn} - C_{jjn} - C_{kkn} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
@@ -782,7 +849,7 @@ products, commutators, and structure constants of $C_{ijn}$.
 		\item When $i=l$ and $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{jin}
-				& = & C_{jjn} - C_{jjn} - C_{jjn} + C_{jjn} + C_{iin} - C_{ijn} - C_{jin} - C_{iin}\\
+				& = & C_{jjn} - C_{jjn} - C_{jjn} - C_{iin} + C_{jjn} + C_{iin} - C_{ijn} - C_{jin}\\
 				& = & - \left(C_{ijn} + C_{jin}\right)
 		\end{IEEEeqnarray*}
 		\item When $i=k$
@@ -793,7 +860,7 @@ products, commutators, and structure constants of $C_{ijn}$.
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kin}
-				& = & C_{jkn} - C_{iin} - C_{jjn} - C_{kkn}
+				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{iin}
 		\end{IEEEeqnarray*}
 		\item When $j=k$
 		\begin{IEEEeqnarray*}{rCl}
@@ -804,7 +871,7 @@ products, commutators, and structure constants of $C_{ijn}$.
 		\item When $j=l$
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kjn}
-				& = & C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn}
+				& = & C_{jkn} - C_{jjn} - C_{kkn} + C_{iin} - C_{ijn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{+rCl+x*}
@@ -814,18 +881,18 @@ products, commutators, and structure constants of $C_{ijn}$.
 	\end{enumerate}
 \end{IEEEproof}
 
-Moving immediately to the commutators we have
-% the following needs major fixing for j=k
+Moving immediately to the commutators we have:
+
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
 		\left[C_{ijn},C_{kln}\right] & = &
 		\begin{cases}
 			0 & i=k \text{ and } j=l,\\
 			0 & i=l \text{ and } j=k,\\
-			C_{ijn} + C_{jin} - C_{il} - C_{lin} - 2C_{jjn}  + 2C_{lln} & i=k,\\
-			C_{ijn} + C_{jkn} - C_{kjn} + C_{kin} - C_{iin} - C_{jjn} - C_{kkn} & i=l,\\
-			C_{iln} - C_{lin} - C_{ijn} - C_{jln} - C_{iin} - C_{jjn} - C_{lln} & j=k,\\
-			C_{iln} - C_{lin} - C_{ijn} - C_{jln} + C_{iin} + C_{jjn} + C_{lln} & j=l,\\
+			C_{jin} - 2 C_{jjn} + 2 C_{lln} - C_{iln} - C_{lin} + C_{ijn} & i=k,\\
+			C_{jkn} - C_{jjn} - C_{kkn} - C_{iin} - C_{kjn} + C_{kin} + C_{ijn} & i=l,\\
+			C_{iln} - C_{ijn} - C_{jln} - C_{lin} + C_{lln} + C_{iin} + C_{jjn} & j=k,\\
+			C_{jkn} - 2 C_{kkn} + 2 C_{iin} - C_{ijn} - C_{jin} + C_{kjn} & j=l,\\
 			C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin} & \text{otherwise}.
 		\end{cases}
 	\end{IEEEeqnarray*}
@@ -854,29 +921,29 @@ Moving immediately to the commutators we have
 				& = & C_{ijn}C_{iln} - C_{iln}C_{ijn}\\
 				& = & \left(C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln}\right)\\
 				&   & - \left(C_{lin} - C_{lln} - C_{iin} + C_{jjn} - C_{ijn}\right)\\
-				& = & C_{ijn} + C_{jin} - C_{il} - C_{lin} - 2C_{jjn}  + 2C_{lln}
+				& = & C_{jin} - 2 C_{jjn} + 2 C_{lln} - C_{iln} - C_{lin} + C_{ijn}
 		\end{IEEEeqnarray*}
 		\item When $i=l$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kin}\right]
 				& = & C_{ijn}C_{kin} - C_{kin}C_{ijn}\\
-				& = & \left(C_{jkn} - C_{iin} - C_{jjn} - C_{kkn}\right) - \left(C_{kjn} - C_{kin} - C_{ijn}\right)\\
-				& = & C_{ijn} + C_{jkn} - C_{kjn} + C_{kin} - C_{iin} - C_{jjn} - C_{kkn}
+				& = & \left(C_{jkn} - C_{jjn} - C_{kkn} - C_{iin}\right) - \left(C_{kjn} - C_{kin} - C_{ijn}\right)\\
+				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{iin} - C_{kjn} + C_{kin} + C_{ijn}
 		\end{IEEEeqnarray*}
 		\item When $j=k$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jln}\right]
 				& = & C_{ijn}C_{jln} - C_{jln}C_{ijn}\\
-				& = & \left(C_{iln} - C_{ijn} - C_{jln}\right) - \left(C_{lin} - C_{jjn} - C_{lln} - C_{iin}\right)\\
-				& = & C_{iln} - C_{lin} - C_{ijn} - C_{jln} + C_{iin} + C_{jjn} + C_{lln}
+				& = & \left(C_{iln} - C_{ijn} - C_{jln}\right) - \left(C_{lin} - C_{lln} - C_{iin} - C_{jjn}\right)\\
+				& = & C_{iln} - C_{ijn} - C_{jln} - C_{lin} + C_{lln} + C_{iin} + C_{jjn}
 		\end{IEEEeqnarray*}
 		\item When $j=l$
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kjn}\right]
 				& = & C_{ijn}C_{kjn} - C_{kjn}C_{ijn}\\
-				& = & \left(C_{jkn} - C_{ijn} + C_{iin} - C_{jjn} - C_{kkn}\right)\\
-				&   & - \left(C_{jin} - C_{kjn} + C_{kkn} - C_{jjn} - C_{iin}\right)\\
-				& = & C_{jkn} + C_{kjn} - C_{ijn} - C_{jin} + 2C_{iin} - 2C_{kkn}
+				& = & \left(C_{jkn} - C_{jjn} - C_{kkn} + C_{iin} - C_{ijn}\right)\\
+				&   & - \left(C_{jin} - C_{jjn} - C_{iin} + C_{kkn} - C_{kjn}\right)\\
+				& = & C_{jkn} - 2 C_{kkn} + 2 C_{iin} - C_{ijn} - C_{jin} + C_{kjn}
 		\end{IEEEeqnarray*}
 		\item When none of the conditions apply
 		\begin{IEEEeqnarray*}{+rCl+x*}

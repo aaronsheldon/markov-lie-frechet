@@ -1,0 +1,36 @@
+% Julia language highlighting
+\lstdefinelanguage{Julia}
+{
+	keywordsprefix=\@,
+	morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,end,
+			export,false,for,function,immutable,import,importall,if,in,macro,module,
+			otherwise,quote,return,switch,true,try,type,typealias,using,while,begin,
+			exit,whos,edit,load,is,isa,isequal,typeof,tuple,ntuple,uid,hash,finalizer,
+			convert,promote,subtype,typemin,typemax,realmin,realmax,sizeof,eps,
+			promote_type,method_exists,applicable,invoke,dlopen,dlsym,system,error,
+			throw,assert,new,Inf,Nan,pi,im,let,bitstype,ccall,baremodule,local,global,
+			Bool,Int,Int8,Int16,Int32,Int64,Uint,Uint8,Uint16,Uint32,Uint64,Float32,
+			Float64,Complex64,Complex128,Any,Nothing,None},
+	sensitive=true,
+	alsoother={$},
+	morecomment=[l]\#,
+	morecomment=[n]{\#=}{=\#},
+	morestring=[s]{"}{"},
+	morestring=[m]{'}{'},
+}[keywords,comments,strings]
+
+\lstset{
+	language         = Julia,
+	basicstyle       = \ttfamily,
+	numbers          = left, 
+	numberstyle      = \small\ttfamily\color{Gray},
+	keywordstyle     = \bfseries\color{blue},
+	stringstyle      = \color{Maroon},
+	commentstyle     = \color{ForestGreen},
+	showstringspaces = false,     
+	breaklines       = true,    
+	tabsize          = 2,
+	lineskip         = -1.5pt,
+	extendedchars    = true,
+	captionpos       = b
+}
