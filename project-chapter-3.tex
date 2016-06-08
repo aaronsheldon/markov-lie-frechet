@@ -170,6 +170,84 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 
 Need preamble on combinatorics of powers of adjoint.
 
+\begin{lemma}
+	For any matrix $A$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, and integer $n \ge 0$
+	\begin{IEEEeqnarray*}{rCl}
+		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n\right]\left( A\right)
+			& = & \sum_{k=1}^n \left(\operatorname{ad}_X^{k-1} A \right)\left(\operatorname{ad}_{\frac{\partial X}{\partial x}} A\right)  \left(\operatorname{ad}_X^{n-k} A \right)
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{IEEEproof}
+	Proceed by induction on $n$.\hfill\IEEEQEDhere
+\end{IEEEproof}
+
+\begin{lemma}
+	For any matrices $X,A,B$, and integer $n \ge 0$
+	\begin{IEEEeqnarray*}{rCl}
+		\operatorname{ad}_X^n AB
+			& = & \sum_{k=0}^n \binom{n}{k} \left(\operatorname{ad}_X^k A \right)\left(\operatorname{ad}_X^{n-k} B \right)
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{IEEEproof}
+	Proceed by induction on $n$.\hfill\IEEEQEDhere
+\end{IEEEproof}
+
+\begin{lemma}
+	For any matrices $X,A,B$, and integer $n \ge 0$
+	\begin{IEEEeqnarray*}{rCl}
+		\operatorname{ad}_X^n \left[A,B\right]
+			& = & \sum_{k=0}^n \binom{n}{k} \left[\operatorname{ad}_X^k A , \operatorname{ad}_X^{n-k} B \right]
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{IEEEproof}
+	Take the antisymmetric difference of previous lemma.\hfill\IEEEQEDhere
+\end{IEEEproof}
+
+\begin{corollary}
+	For any differentiable matrix function $X$ parameterized by $x,y \in \mathbb{R}$
+	\begin{IEEEeqnarray*}{rCl}
+		\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right)
+			& = & - \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
+	\end{IEEEeqnarray*}
+\end{corollary}
+
+\begin{lemma}
+	For any $n,m \ge 0$
+	\begin{IEEEeqnarray*}{rCl}
+		\sum_{k=m}^{n+m} \binom{k}{m}
+			& = & \binom{n+m+1}{n}
+	\end{IEEEeqnarray*}
+\end{lemma}
+
+\begin{IEEEproof}
+	Proceed by induction on $n$.\hfill\IEEEQEDhere
+\end{IEEEproof}
+
+\begin{IEEEproof}
+	Apply the previous two lemmas in the order there were stated to the symmetric 
+	sum of the two terms.
+	\begin{IEEEeqnarray*}{+rCl+x*}
+		\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right) \quad \\
+			+\: \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
+			& = & \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \operatorname{ad}_{\frac{\partial X}{\partial x}} \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y}\\
+			&   & +\: \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \operatorname{ad}_{\frac{\partial X}{\partial y}} \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial x}\\
+			& = & \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \left[ \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y} \right]\\
+			&   & +\: \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \left[ \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{n-k} \frac{\partial X}{\partial x} \right]\\
+			& = & \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \sum_{m=0}^{k-1} \binom{k-1}{m} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m-1} \frac{\partial X}{\partial y} \right]\\
+			&   & +\: \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \sum_{m=0}^{k-1} \binom{k-1}{m} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{n-m-1} \frac{\partial X}{\partial x} \right]\\
+			& = & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} \sum_{k=0}^n \sum_{m=0}^{k} \binom{k}{m} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]\\
+			&   & +\: \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} \sum_{k=0}^n \sum_{m=0}^{k} \binom{k}{m} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial x} \right]\\
+			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] \sum_{k=m}^{n+m} \binom{k}{m}\\
+			&   & +\: \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} \right] \sum_{k=n}^{n+m} \binom{k}{n}\\
+			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] \\
+			&   & \cdot\: \left(\binom{n+m+1}{n} - \binom{n+m+1}{m} \right)\\
+			& = & \sum_{n,m \ge 0}^\infty \frac{n-m}{\left(n+m+2\right)} \left[ \frac{1}{\left(m+1\right)!} \operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\frac{1}{\left(n+1\right)!} \operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] & \IEEEQEDhere
+	\end{IEEEeqnarray*}
+\end{IEEEproof}
+
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
 We can then compute the Hessian by symmetrizing the partial differential so that 
