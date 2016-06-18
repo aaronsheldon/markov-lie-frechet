@@ -6,11 +6,10 @@ Building on the discussions of Moler and Van Loan, Higham established the
 standard implementation of the matrix exponential based on scaling and scaring 
 and Pad\'{e} approximation\cite{higham_scaling_2005,higham_functions_2008}.
 The Higham implementation was further optimized for $64$ bit architectures by 
-Al-Mohy\cite{al-mohy_new_2009}. The same work developed an algorithm to 
-approximate the derivative of the matrix exponential was for formulated, 
-essentially by taking the derivative of the Pad\'{e} approximation of the matrix 
-exponential, and then working out a recursive calculation for the derivatives of 
-matrix powers\cite{al-mohy_computing_2009}.
+Al-Mohy\cite{al-mohy_new_2009}. In the same work Al-Mohy developed an algorithm 
+to approximate the derivative of the matrix exponential, formulated by taking 
+the derivative of the Pad\'{e} approximation of the matrix exponential, and then 
+working out a recursive calculation for the derivatives of matrix powers\cite{al-mohy_computing_2009}.
 
 While the derivative of the Pad\'{e} approximation of an analytic function will 
 converge to the derivative of the analytic function, it is not true that the
@@ -206,14 +205,6 @@ Need preamble on combinatorics of powers of adjoint.
 	Take the antisymmetric difference of previous lemma.\hfill\IEEEQEDhere
 \end{IEEEproof}
 
-\begin{corollary}
-	For any differentiable matrix function $X$ parameterized by $x,y \in \mathbb{R}$
-	\begin{IEEEeqnarray*}{rCl}
-		\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right)
-			& = & - \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
-	\end{IEEEeqnarray*}
-\end{corollary}
-
 \begin{lemma}
 	For any $n,m \ge 0$
 	\begin{IEEEeqnarray*}{rCl}
@@ -226,12 +217,27 @@ Need preamble on combinatorics of powers of adjoint.
 	Proceed by induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
 
+\begin{corollary}
+	For any differentiable matrix function $X$ parameterized by $x,y \in \mathbb{R}$
+	\begin{IEEEeqnarray*}{rCl}
+		\IEEEeqnarraymulticol{3}{l}
+		{
+			\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right)
+			+ \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
+		}\\\quad
+			& = & \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
+	\end{IEEEeqnarray*}
+\end{corollary}
+
 \begin{IEEEproof}
-	Apply the previous two lemmas in the order there were stated to the symmetric 
-	sum of the two terms.
-	\begin{IEEEeqnarray*}{+rCl+x*}
-		\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right) \quad \\
-			+\: \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
+	Apply the previous lemmas in the order there were stated to the symmetric sum 
+	of the two terms.
+	\begin{IEEEeqnarray*}{rCl}
+		\IEEEeqnarraymulticol{3}{l}
+		{
+			\left[\frac{\partial}{\partial x} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial X}{\partial y}\right)
+			+ \left[\frac{\partial}{\partial y} \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right]\left(\frac{\partial Y}{\partial x}\right)
+		}\\\quad
 			& = & \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \operatorname{ad}_{\frac{\partial X}{\partial x}} \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y}\\
 			&   & +\: \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \operatorname{ad}_{\frac{\partial X}{\partial y}} \operatorname{ad}_X^{n-k} \frac{\partial X}{\partial x}\\
 			& = & \sum_{n=1}^\infty \frac{1}{\left(n+1\right)!} \sum_{k=1}^n \operatorname{ad}_X^{k-1} \left[ \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-k} \frac{\partial X}{\partial y} \right]\\
@@ -242,11 +248,72 @@ Need preamble on combinatorics of powers of adjoint.
 			&   & +\: \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} \sum_{k=0}^n \sum_{m=0}^{k} \binom{k}{m} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial x} \right]\\
 			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] \sum_{k=m}^{n+m} \binom{k}{m}\\
 			&   & +\: \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} \right] \sum_{k=n}^{n+m} \binom{k}{n}\\
-			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] \\
-			&   & \cdot\: \left(\binom{n+m+1}{n} - \binom{n+m+1}{m} \right)\\
-			& = & \sum_{n,m \ge 0}^\infty \frac{n-m}{\left(n+m+2\right)} \left[ \frac{1}{\left(m+1\right)!} \operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\frac{1}{\left(n+1\right)!} \operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right] & \IEEEQEDhere
+			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left(\binom{n+m+1}{n} - \binom{n+m+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right]\\
+			& = & \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]\\
+			& = & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} F_n
 	\end{IEEEeqnarray*}
+	Where we have defined $F_n$ recursively as:
+	\begin{IEEEeqnarray*}{rCl}
+		F_0 & = & 0\\
+		F_{n+1} & = &  \left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right] + \operatorname{ad}_X F_n - \left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]
+	\end{IEEEeqnarray*}
+	This recursive calculation is illustrate in figure \ref{fig:pascaldivergence},
+	and the proof is found by carrying out induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\node[text=gray] at (   0,  0) {$ 0$};
+		
+		\node[text=gray] at (-1/2, -1) {$ 1$};
+		\node[text=gray] at ( 1/2, -1) {$-1$};
+		
+		\node[text=gray] at (  -1, -2) {$ 1$};
+		\node[font=\bf ] at (   0, -2) {$ 0$};
+		\node[text=gray] at (   1, -2) {$-1$};
+		
+		\node[text=gray] at (-3/2, -3) {$ 1$};
+		\node[font=\bf ] at (-1/2, -3) {$ 1$};
+		\node[font=\bf ] at ( 1/2, -3) {$-1$};
+		\node[text=gray] at ( 3/2, -3) {$-1$};
+		
+		\node[text=gray] at (  -2, -4) {$ 1$};
+		\node[font=\bf ] at (  -1, -4) {$ 2$};
+		\node[font=\bf ] at (   0, -4) {$ 0$};
+		\node[font=\bf ] at (   1, -4) {$-2$};
+		\node[text=gray] at (   2, -4) {$-1$};
+		
+		\node[text=gray] at (-5/2, -5) {$ 1$};
+		\node[font=\bf ] at (-3/2, -5) {$ 3$};
+		\node[font=\bf ] at (-1/2, -5) {$ 2$};
+		\node[font=\bf ] at ( 1/2, -5) {$-2$};
+		\node[font=\bf ] at ( 3/2, -5) {$-3$};
+		\node[text=gray] at ( 5/2, -5) {$-1$};
+		
+		\node[text=gray] at (  -3, -6) {$ 1$};
+		\node[font=\bf ] at (  -2, -6) {$ 4$};
+		\node[font=\bf ] at (  -1, -6) {$ 5$};
+		\node[font=\bf ] at (   0, -6) {$ 0$};
+		\node[font=\bf ] at (   1, -6) {$-5$};
+		\node[font=\bf ] at (   2, -6) {$-4$};
+		\node[text=gray] at (   3, -6) {$-1$};
+		
+		\node[text=gray] at (-7/2, -7) {$ 1$};
+		\node[font=\bf ] at (-5/2, -7) {$ 5$};
+		\node[font=\bf ] at (-3/2, -7) {$ 9$};
+		\node[font=\bf ] at (-1/2, -7) {$ 5$};
+		\node[font=\bf ] at ( 1/2, -7) {$-5$};
+		\node[font=\bf ] at ( 3/2, -7) {$-9$};
+		\node[font=\bf ] at ( 5/2, -7) {$-5$};
+		\node[text=gray] at ( 7/2, -7) {$-1$};
+		
+		\node[text=gray] at (  -4, -8) {$\left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right]$};
+		\node[text=gray] at (   4, -8) {$-\left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]$};
+	\end{tikzpicture}
+	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 6 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
+	\label{fig:pascaldivergence}
+\end{figure}
 
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
@@ -284,5 +351,3 @@ antisymmetric terms cancel out.
 The only terms requiring approximation are precisely the approximation we 
 derived in the previous section. Reusing the components in the algorithm in the
 previous section we can present an algorithm for the Hessian.
-
-\section{General Fr\'{e}chet Derivatives}
