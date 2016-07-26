@@ -103,9 +103,9 @@ for a rational approximation of the non-commutative perturbation Taylor series.
 This method has two shortcomings: first, the approximation found in this manner 
 is not itself a Pad\'{e} approximation of the anomaly Taylor series, and so is 
 not bound by the same theoretical asymptotic results as Pad\'{e} approximations;
-second, computation by $\frac{e^{x} -1 - x}{x^2}$ suffers from the same floating 
-point errors near $0$ as naive computation of $e^x - 1$ by first computing $e^x$ 
-and then subtracting $1$.
+second, computation by $\frac{e^{x} - 1 - x}{x^2}$ suffers from the same 
+floating point errors near $0$ as naive computation of $e^x - 1$ by first 
+computing $e^x$ and then subtracting $1$.
 
 While it is clear that $\frac{e^x}{x^2}\gamma\left(2,x\right) : x \mapsto \frac{e^{x} -1 - x}{x^2}$ 
 is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be 
@@ -322,30 +322,18 @@ antisymmetric terms cancel out.
 
 \begin{IEEEeqnarray*}{rCl}
 	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
-		& = & \frac{1}{2} \frac{\partial}{\partial x} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
-		&   & +\: \frac{1}{2} \frac{\partial}{\partial y} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
-		& = & \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
-		&   & \quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
-		&   & \quad\quad +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
-		&   & \quad\quad\quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\left[\frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}\right]\right) e^X\\
-		&   & \quad\quad\quad\quad +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \operatorname{ad}_X^{n-m} \left[ \frac{\partial X}{\partial x}, \operatorname{ad}_X^{m-1} \frac{\partial X}{\partial y}\right]  \right) e^X\\
-		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
-		&   & \quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
-		&   & \quad\quad +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial y \partial x} \right) + \frac{\partial^2 X}{\partial y \partial x}\right) e^X\\
-		&   & \quad\quad\quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\left[\frac{\partial X}{\partial y}, \frac{\partial X}{\partial x}\right]\right) e^X\\
-		&   & \quad\quad\quad\quad +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \operatorname{ad}_X^{n-m} \left[ \frac{\partial X}{\partial y}, \operatorname{ad}_X^{m-1} \frac{\partial X}{\partial x}\right]  \right) e^X\\
-		& = & \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
-		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
-		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
-		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
-		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X\\
-		&   & +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \sum_{k=0}^{n-m} \binom{n-m}{k} \left[ \operatorname{ad}_X^k \frac{\partial X}{\partial x}, \operatorname{ad}_X^{n-k-1} \frac{\partial X}{\partial y}\right] \right) e^X\\
-		&   & +\: \frac{1}{2} \left(\sum_{n=1}^{\infty} \frac{1}{\left(n+2\right)!} \sum_{m=1}^n \sum_{k=0}^{n-m} \binom{n-m}{k} \left[ \operatorname{ad}_X^k \frac{\partial X}{\partial y}, \operatorname{ad}_X^{n-k-1} \frac{\partial X}{\partial x}\right] \right) e^X\\
-		& = & \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}\right) e^X\\
-		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right)\\
-		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right) e^X\\
-		&   & +\: \frac{1}{2} \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) + \frac{\partial X}{\partial x}\right)\\
-		&   & \quad\quad \cdot \left(\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial y} \right) + \frac{\partial X}{\partial y}\right) e^X
+		& = & \frac{1}{2} \frac{\partial}{\partial x} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \frac{\partial}{\partial y} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		& = & \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
+		&   & \quad +\: \frac{1}{2} \left[ \frac{\partial}{\partial x} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & \quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial y \partial x} \right) e^X\\
+		&   & \quad\quad +\: \frac{1}{2} \left[\frac{\partial}{\partial y} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x}\right) e^X\\
+		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 \end{IEEEeqnarray*}
 
 The only terms requiring approximation are precisely the approximation we 
