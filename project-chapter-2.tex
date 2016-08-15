@@ -1,68 +1,63 @@
 \chapter{The Lie Algebra of Markov Process Generators}
 \section{Stochastic Matrices}
-\subsection{Foundational Preliminaries}
+\subsection{Preliminaries}
 
-The classical Lie algebras of physics, like the infinitesimal symmetries
-of the special unitary algebra $\mathfrak{su}(n)$, are defined with respect to
-invariants of a Banach algebra, such as the matrix invariants of the 
-determinant, trace, or norm. In contrast stochastic matrices are always 
-characterized with respect to a specific unit vector, which we will denote 
-$\hat{\mathbbm{1}}$. In the next two sections we provide an explicit 
-construction and characterization of the Lie algebra of stochastic matrices, 
-building on the original the work of Johnson\cite{johnson_markov-type_1985}, and
-distilling the recent works of Sumner et al.\cite{sumner_lie_2012,fernandez-sanchez_lie_2012},
+The classical Lie algebras of physics, like the infinitesimal symmetries of the special
+unitary algebra $\mathfrak{su}(n)$, are defined with respect to invariants of a Banach
+algebra, such as the matrix invariants of the determinant, trace, or norm. In contrast
+stochastic matrices are always characterized with respect to a specific unit vector, which
+we will denote by $\hat{\mathbbm{1}}$, for reasons that will become clear later. In the next
+two sections we provide an explicit construction and characterization of the Lie algebra of
+stochastic matrices, building on the original the work of Johnson\cite{johnson_markov-type_1985},
+and distilling the recent works of Sumner et al.\cite{sumner_lie_2012,fernandez-sanchez_lie_2012}, 
 Mourad\cite{mourad_lie-theoretic_2004}, and Chruściński et al.\cite{chruscinski_pseudo-stochastic_2015}.
 
-The common approach to stochastic matrices begins with the restriction that the 
-matrices have non-negative entries with respect to the standard orthonormal 
-basis for the vector space on which it acts; namely $\left\langle\hat{e}_i,A \hat{e}_j\right\rangle \ge 0$
-for all $i,j$. In addition to allowing for singular matrices, this poses an 
-immediate obstacle to the necessary closure with respect to matrix inversion 
-required for matrix groups; as the inverse of a stochastic matrix need not have 
-non-negative entries with respect to the standard orthonormal basis. 
+The common approach to stochastic matrices begins with the restriction that the matrices
+have non-negative entries with respect to the standard orthonormal basis for the vector
+space on which it acts; namely $\left\langle\hat{e}_i,A \hat{e}_j\right\rangle \ge 0$ for
+all $i,j$. In addition to allowing for singular matrices, this poses an immediate obstacle
+to the necessary closure with respect to matrix inversion required for matrix groups; as the
+inverse of a stochastic matrix need not have non-negative entries with respect to the
+standard orthonormal basis. 
 
-For the moment we will set aside the restriction that the entries be 
-non-negative, and instead begin with a generalization of fixed row sums to 
-abstract linear operators. We will show that this generalization is preserved by 
-operator inversion, and then develop an orthonormal basis from which matrix 
-representations of the abstract linear operators can be constructed with 
-non-negative entries. In essence tackling the problem from the reverse 
-direction, starting with the an abstract generalization of the idea of fixed row 
-sums, and then specifying matrices with non-negative entries with respect to a 
-constructed orthonormal basis.
-
-\begin{definition}
-	A bounded linear operator $A$ on a finite dimensional Hilbert space is 
-	stochastic with respect to the unit vector $\hat{\mathbbm{1}}$ if $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
-\end{definition}
-
-Note that this definition does not stipulate any conditions on non-singularity,
-and thus includes, as representations of the linear operators, all the matrices 
-in the convex polytope of stochastic matrices. For an $n$ dimensional vector 
-space the vector $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ acts as the 
-row sum operator on bounded linear operators stochastic with respect to $\hat{\mathbbm{1}}$. 
-We will make this claim more precise after we dispense with a few more 
-foundational definitions.
+For the moment we will set aside the restriction that the entries be non-negative, and
+instead begin with a generalization of fixed row sums to abstract linear operators. We will
+show that this generalization is preserved by operator inversion, and then develop an
+orthonormal basis from which matrix representations of the abstract linear operators can be
+constructed with non-negative entries. In essence tackling the problem from the reverse
+direction, starting with the an abstract generalization of the idea of fixed row sums, and
+then specifying matrices with non-negative entries with respect to a constructed orthonormal
+basis.
 
 \begin{definition}
-	Let $St(\hat{\mathbbm{1}})$ denote the stochastic Lie group of invertible 
-	bounded linear operators stochastic with respect to $\hat{\mathbbm{1}}$.
+	A bounded linear operator $A$ on a finite dimensional Hilbert space is stochastic with
+	respect to the unit vector $\hat{\mathbbm{1}}$ if $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
 \end{definition}
 
-It is tempting to view the name stochastic Lie group as a bait and switch, or 
-at least an abuse of the terminology, given we have removed the usual convex
-polytope of stochastic matrices and replaced it with a group of invertible 
-bounded linear operators with a common eigenvector $\hat{\mathbbm{1}}$. Previous 
-authors have denoted the convex polytope of stochastic matrices as the 
-stochastic semi-group, and the group of invertible matrices as the 
-pseudo-stochastic Lie group. One could even consider incorporating Markov into 
-the name, in reference to the fact that the transition matrices of a continuous 
-time homogeneous Markov process on a finite state space are by definition 
-invertible, and have common eigenvector $\hat{\mathbbm{1}}$. However the suffix 
-of Lie group in the name connotes both sufficient additional restrictions to 
-make the name distinct, and still allows for an indication of a relationship 
-with the original concept. Of course, this definition immediately necessitates a
-proof of the claim embedded in the definition.
+Note that this definition does not stipulate any conditions on non-singularity, and thus
+includes, as representations of the linear operators, all the matrices in the convex
+polytope of stochastic matrices. For an $n$ dimensional vector space the vector $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$
+acts as the row sum operator on bounded linear operators stochastic with respect to $\hat{\mathbbm{1}}$. 
+We will make this claim more precise after we dispense with a few more foundational
+definitions.
+
+\begin{definition}
+	Let $St(\hat{\mathbbm{1}})$ denote the stochastic Lie group of invertible bounded linear
+	operators stochastic with respect to $\hat{\mathbbm{1}}$.
+\end{definition}
+
+It is tempting to view the name stochastic Lie group as a bait and switch, or at least an
+abuse of the terminology, given we have removed the usual convex polytope of stochastic
+matrices and replaced it with a group of invertible bounded linear operators with a common
+eigenvector $\hat{\mathbbm{1}}$. Previous authors have denoted the convex polytope of
+stochastic matrices as the stochastic semi-group, and the group of invertible matrices as
+the pseudo-stochastic Lie group. One could even consider incorporating Markov into the name,
+in reference to the fact that the transition matrices of a continuous time homogeneous
+Markov process on a finite state space are by definition invertible, and have common
+eigenvector $\hat{\mathbbm{1}}$. However the suffix of Lie group in the name connotes both
+sufficient additional restrictions to make the name distinct, and still allows for an
+indication of a relationship with the original concept. Of course, this definition
+immediately necessitates a proof of the claim embedded in the definition.
 
 \begin{lemma}
 	$St(\hat{\mathbbm{1}})$ is a Lie group
@@ -71,43 +66,42 @@ proof of the claim embedded in the definition.
 \begin{IEEEproof}
 	We proceed by working mechanistically through the Lie group axioms\cite{hall_lie_2004}.
 	\begin{enumerate}
-		\item The identity element $I$ is in $St(\hat{\mathbbm{1}})$. Clearly $I$ is
-		invertible and $I \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
-		\item If $A,B \in St(\hat{\mathbbm{1}})$ then $AB \in St(\hat{\mathbbm{1}})$. 
-		This follows from the computation $AB \hat{\mathbbm{1}} = A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
+		\item The identity element $I$ is in $St(\hat{\mathbbm{1}})$. Clearly $I$ is invertible
+		and $I \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
+		\item If $A,B \in St(\hat{\mathbbm{1}})$ then $AB \in St(\hat{\mathbbm{1}})$. This
+		follows from the computation $AB \hat{\mathbbm{1}} = A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
 		\item If $A \in St(\hat{\mathbbm{1}})$ then $A^{-1} \in St(\hat{\mathbbm{1}})$.
 		Recognize that $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ implies $\hat{\mathbbm{1}} = A^{-1} A \hat{\mathbbm{1}} = A^{-1} \hat{\mathbbm{1}}$.
 		\item Associativity follows from $St(\hat{\mathbbm{1}})$ being a subgroup of $GL\left(n\right)$.
-		\item Finally, we need to prove that is $St(\hat{\mathbbm{1}})$ closed 
-		within $GL\left(n\right)$. Consider a sequence $A_n \in St(\hat{\mathbbm{1}})$ 
-		that converges to $A$, then $\hat{\mathbbm{1}} = A_n \hat{\mathbbm{1}} \rightarrow A \hat{\mathbbm{1}}$. 
-		Now if $A$ is invertible then we are done, and if $A$ is not invertible then 
-		$A \notin GL\left(n\right)$, again satisfying closure within $GL\left(n\right)$.\hfill\IEEEQEDhere
+		\item Finally, we need to prove that is $St(\hat{\mathbbm{1}})$ closed within $GL\left(n\right)$.
+		Consider a sequence $A_n \in St(\hat{\mathbbm{1}})$ that converges to $A$, then $\hat{\mathbbm{1}} = A_n \hat{\mathbbm{1}} \rightarrow A \hat{\mathbbm{1}}$. 
+		Now if $A$ is invertible then we are done, and if $A$ is not invertible then $A \notin GL\left(n\right)$,
+		again satisfying closure within $GL\left(n\right)$.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
 
-That $St(\hat{\mathbbm{1}})$ is a proper Lie group implies that it must be
-infinitesimal generated by elements of a Lie algebra.
+That $St(\hat{\mathbbm{1}})$ is a proper Lie group implies that it must be infinitesimal
+generated by elements of a Lie algebra.
 
 \begin{definition}
 	Let $\mathfrak{st}(\hat{\mathbbm{1}})$ denote the stochastic Lie algebra of $St(\hat{\mathbbm{1}})$
 \end{definition}
 
-By infinitesimally generated we mean that every element of $St(\hat{\mathbbm{1}})$
-is the exponential map of at least one element in $\mathfrak{st}(\hat{\mathbbm{1}})$. 
-We can fully characterize this algebra as the set of bounded linear operators 
-such that $\hat{\mathbbm{1}}$ is in the kernel of each operator.
+By infinitesimally generated we mean that every element of $St(\hat{\mathbbm{1}})$ is the
+exponential map of at least one element in $\mathfrak{st}(\hat{\mathbbm{1}})$. We can fully
+characterize this algebra as the set of bounded linear operators such that $\hat{\mathbbm{1}}$
+is in the kernel of each operator.
 
 \begin{lemma}
-	The algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ is exactly the set of all 
-	bounded linear operators with $\hat{\mathbbm{1}}$ in their kernel.
+	The algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ is exactly the set of all bounded linear
+	operators with $\hat{\mathbbm{1}}$ in their kernel.
 \end{lemma}
 
 \begin{IEEEproof}
 	Working through the forward and backward inclusions we have
 	\begin{enumerate}
-		\item Suppose $A \hat{\mathbbm{1}} = 0$ then from the definition of the 
-		exponential map we have:
+		\item Suppose $A \hat{\mathbbm{1}} = 0$ then from the definition of the exponential map
+		we have:
 		\begin{IEEEeqnarray*}{rCl}
 			\exp\left(A\right) \hat{\mathbbm{1}}
 				& = & \sum_{n=0}^{\infty} \frac{1}{n!} A^n \hat{\mathbbm{1}}\\
@@ -127,19 +121,18 @@ such that $\hat{\mathbbm{1}}$ is in the kernel of each operator.
 	\end{enumerate}
 \end{IEEEproof}
 
-The following chapter will hinge on taking the derivatives of smooth 
-parameterizations $X : \mathbb{R}^k \mapsto \mathfrak{st}(\hat{\mathbbm{1}})$. 
-The principle role of this chapter is to assure ourselves that we will not 
-differentiate ourselves out of $\mathfrak{st}(\hat{\mathbbm{1}}$. The next 
-corollary nicely provides just such an assurance:
+The following chapter will hinge on taking the derivatives of smooth parameterizations $X : \mathbb{R}^k \mapsto \mathfrak{st}(\hat{\mathbbm{1}})$. 
+The principle role of this chapter is to assure ourselves that we will not differentiate
+ourselves out of $\mathfrak{st}(\hat{\mathbbm{1}}$. The next corollary nicely provides just
+such an assurance:
 
 \begin{corollary}
 	The tangent space $T\mathfrak{st}(\hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}})$
 \end{corollary}
 
 \begin{IEEEproof}
-	The proof is complementary to the preceding lemma and moves through each 
-	direction of inclusion:
+	The proof is complementary to the preceding lemma and moves through each direction of
+	inclusion:
 	\begin{enumerate}
 		\item To show that $\mathfrak{st}(\hat{\mathbbm{1}})\subseteq T\mathfrak{st}(\hat{\mathbbm{1}})$
 		consider $X\left(x\right) = x X_0$ where $x$ is a scalar parameter and $X_0 \in \mathfrak{st}(\hat{\mathbbm{1}})$
@@ -156,24 +149,23 @@ corollary nicely provides just such an assurance:
 	\end{enumerate}
 \end{IEEEproof}
 
-Clearly the tangent space to a normed vector space is the normed vector space.
-After all one can just choose a fixed basis and then differentiate the 
-individual smoothly parameterized in projections. However, the proof of the 
-preceding corollary was constructed to explicitly the connect algebraic closure 
-and differentiation, with the norm implicitly used in the differentiation. The 
-proof further illustrates the intuition that any increase in a particular matrix 
-element has to be compensated for by an equal decrease in some other matrix 
-elements.
+Clearly the tangent space to a normed vector space is the normed vector space. After all one
+can just choose a fixed basis and then differentiate the individual smoothly parameterized
+in projections. However, the proof of the preceding corollary was constructed to explicitly
+the connect algebraic closure and differentiation, with the norm implicitly used in the
+differentiation. The proof further illustrates the intuition that any increase in a
+particular matrix element has to be compensated for by an equal decrease in some other
+matrix elements.
 
 \subsection{Canonical Generators}
 
 Over an $n$ dimensional vector space, the condition on a matrix $A$ that $A \hat{\mathbbm{1}} = 0$
-places $n$ constraints on the $n^2$ dimensions of $A$. This leaves $n^2 - n$ 
-free dimensions on $\mathfrak{st}(\hat{\mathbbm{1}})$, when considered as a
-vector space. This hints that we can construct a generator of $\mathfrak{st}(\hat{\mathbbm{1}})$
-from order pairs of basis elements $\hat{e}_i$ for the vector space of $\hat{\mathbbm{1}}$.
-To see how this is done we first construct a useful basis for the vector space
-to which $\hat{\mathbbm{1}}$ is a member.
+places $n$ constraints on the $n^2$ dimensions of $A$. This leaves $n^2 - n$ free dimensions
+on $\mathfrak{st}(\hat{\mathbbm{1}})$, when considered as a vector space. This hints that we
+can construct a generator of $\mathfrak{st}(\hat{\mathbbm{1}})$ from order pairs of basis
+elements $\hat{e}_i$ for the vector space of $\hat{\mathbbm{1}}$. To see how this is done we
+first construct a useful basis for the vector space to which $\hat{\mathbbm{1}}$ is a
+member.
 
 \begin{lemma}
 	There exists an orthonormal basis $\hat{e}_i$ such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
@@ -181,8 +173,8 @@ to which $\hat{\mathbbm{1}}$ is a member.
 \end{lemma}
 
 \begin{IEEEproof}
-	While a basis with the stipulated properties can be constructed through the
-	Gram-Schmidt process, the proof of the existence proceeds by induction.
+	While a basis with the stipulated properties can be constructed through the Gram-Schmidt
+	process, the proof of the existence proceeds by induction.
 	\begin{enumerate}
 		\item For $n=1$ the desired basis is precisely the trivial set $\left\lbrace \hat{\mathbbm{1}} \right\rbrace$ 
 		which satisfies the condition that $\left\langle \hat{\mathbbm{1}}, \hat{\mathbbm{1}} \right\rangle = 1$.
@@ -190,16 +182,15 @@ to which $\hat{\mathbbm{1}}$ is a member.
 		that is orthogonal to $\hat{\mathbbm{1}}$ and construct the unit vector
 		$\hat{e}_{n+1} = \frac{1}{\sqrt{n+1}} \hat{\mathbbm{1}} + \sqrt{\frac{n}{n+1}} \hat{e}_{\perp}$.
 		Clearly $\hat{e}_{n+1}$ satisfies the condition $\left\langle \hat{e}_{n+1}, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n+1}}$.
-		\item To use the the induction assumption we construct a new row sum unit 
-		vector $\hat{\mathbbm{1}}_n = \sqrt{\frac{n+1}{n}}\hat{\mathbbm{1}} - \frac{1}{\sqrt{n}}\hat{e}_{n+1}$ 
+		\item To use the the induction assumption we construct a new row sum unit vector $\hat{\mathbbm{1}}_n = \sqrt{\frac{n+1}{n}}\hat{\mathbbm{1}} - \frac{1}{\sqrt{n}}\hat{e}_{n+1}$ 
 		in one dimension lower by projecting onto the subspace orthogonal to $\hat{e}_{n+1}$.
-		\item By the induction assumption there exists a basis $\hat{e}_i$ with $i \le n$, 
-		such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle = \frac{1}{\sqrt{n}}$.
-		\item Because $\hat{e}_i$ with $i \le n$ was constructed in the space 
-		orthogonal to $\hat{e}_{n+1}$ if follows that $\left\langle \hat{e}_i, \hat{e}_j \right\rangle = \delta_{ij}$
-		for all $i,j \le n+1 $.
-		\item Then using the definitions of $\hat{e}_{n+1}$ and $\hat{\mathbbm{1}}_n$
-		we can calculate the inner product $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle$
+		\item By the induction assumption there exists a basis $\hat{e}_i$ with $i \le n$, such
+		that $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle = \frac{1}{\sqrt{n}}$.
+		\item Because $\hat{e}_i$ with $i \le n$ was constructed in the space orthogonal to $\hat{e}_{n+1}$
+		it follows that $\left\langle \hat{e}_i, \hat{e}_j \right\rangle = \delta_{ij}$ for all
+		$i,j \le n+1 $.
+		\item Then using the definitions of $\hat{e}_{n+1}$ and $\hat{\mathbbm{1}}_n$ we can
+		calculate the inner product $\left\langle \hat{e}_i, \hat{\mathbbm{1}}_n \right\rangle$
 		for $i \le n$
 		\begin{IEEEeqnarray*}{rCl}
 			\frac{1}{\sqrt{n}}
@@ -212,18 +203,16 @@ to which $\hat{\mathbbm{1}}$ is a member.
 	\end{enumerate}
 \end{IEEEproof}
 
-As a direct result of the construction of the basis vectors $\hat{e}_i$ we see 
-that $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$. Thus $\vec{\mathbbm{1}}$ can
-be interpreted as the row sum vector in basis $\hat{e}_i$.
+As a direct result of the construction of the basis vectors $\hat{e}_i$ we see that $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$.
+Thus $\vec{\mathbbm{1}}$ can be interpreted as the row sum vector in basis $\hat{e}_i$.
 
-The constructed basis leads naturally to considering the minimal non-trivial 
-matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$, with 
-state transitions illustrated in figure \ref{fig:singlestochastic}, as holding 
-significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$. In fact 
-this will be the central result of this chapter: that the algebraic closure of 
-the matrices $C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. 
-To establish this result we need a preliminary result that proves the 
-commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_{ij}$.
+The constructed basis leads naturally to considering the minimal non-trivial matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$,
+with state transitions illustrated in figure \ref{fig:singlestochastic}, as holding
+significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$. In fact this will be
+the central result of this chapter: that the algebraic closure of the matrices $C_{ij}$ is
+the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. To establish this result we
+need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$ are
+linear combinations of matrices $C_{ij}$.
 
 \begin{figure}
 	\centering
@@ -250,8 +239,8 @@ commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_
 \end{lemma}
 
 \begin{IEEEproof}
-	We proceed in two steps; calculating the terms of the products, then 
-	simplifying the cases, always assuming $i \neq j$ and $k \neq l$.
+	We proceed in two steps; calculating the terms of the products, then simplifying the
+	cases, always assuming $i \neq j$ and $k \neq l$.
 	\begin{enumerate}
 		\item Term wise computation of the Kronecker products yields
 		\begin{IEEEeqnarray*}{rCl}
@@ -261,8 +250,7 @@ commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_
 				& = & \delta_{jk} \hat{e}_i \otimes \hat{e}_l + \delta_{ik} \hat{e}_i \otimes \hat{e}_k - \delta_{jk} \hat{e}_i \otimes \hat{e}_k - \delta_{ik} \hat{e}_i \otimes \hat{e}_l\\
 				& = & \left(\delta_{jk} - \delta_{ik} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_k \right)
 		\end{IEEEeqnarray*}
-		\item We work through each case of $\delta_{jk} - \delta_{ik}$, starting 
-		with the case $i=k$ 
+		\item We work through each case of $\delta_{jk} - \delta_{ik}$, starting with the case $i=k$ 
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ij}C_{il}
 				& = & \left(\delta_{jk} - \delta_{ii} \right) \hat{e}_i \otimes \left( \hat{e}_l - \hat{e}_i \right)\\
@@ -287,8 +275,8 @@ commutators $\left[C_{ij},C_{kl}\right]$ are linear combinations of matrices $C_
 	\end{enumerate}
 \end{IEEEproof}
 
-While this result is sufficient to accomplish the central result, it is worth
-carrying through with the computation of the structure constants of the generators.
+While this result is sufficient to accomplish the central result, it is worth carrying
+through with the computation of the structure constants of the generators.
 
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
@@ -339,19 +327,19 @@ We can now proceed with the central result that motivates this chapter.
 \end{theorem}
 
 \begin{IEEEproof}
-	The previous lemma has established that the products, and thus the 
-	commutators, of $C_{ij}$ are linear in $C_{ij}$. We then have to prove that 
-	the smallest algebra that contains $C_{ij}$ is $\mathfrak{st}(\hat{\mathbbm{1}})$. 
-	As thus, it is sufficient to prove that matrices $C_{ij}$ from a basis for $\mathfrak{st}(\hat{\mathbbm{1}})$.
-	This is because a necessary condition for an algebra to contain the matrices
-	$C_{ij}$ is that it must contain all sums of the matrices $C_{ij}$. If one
-	could sum their way out of the algebra then it would not be an algebra.
+	The previous lemma has established that the products, and thus the commutators, of $C_{ij}$
+	are linear in $C_{ij}$. We then have to prove that the smallest algebra that contains $C_{ij}$
+	is $\mathfrak{st}(\hat{\mathbbm{1}})$. As thus, it is sufficient to prove that matrices $C_{ij}$
+	from a basis for $\mathfrak{st}(\hat{\mathbbm{1}})$. This is because a necessary condition
+	for an algebra to contain the matrices $C_{ij}$ is that it must contain all sums of the
+	matrices $C_{ij}$. If one could sum their way out of the algebra then it would not be an
+	algebra.
 	\begin{enumerate}
-		\item That $\mathfrak{st}(\hat{\mathbbm{1}})$ is an $n^2-n$ dimensional 
-		vector space should be clear from the previous discussion. A full formal
-		proof of this claim is found through induction on the dimension $n$.
-		\item The matrices $C_{ij}$ are in $\mathfrak{st}(\hat{\mathbbm{1}})$. From
-		the definition of the canonical generators
+		\item That $\mathfrak{st}(\hat{\mathbbm{1}})$ is an $n^2-n$ dimensional vector space
+		should be clear from the previous discussion. A full formal proof of this claim is found
+		through induction on the dimension $n$.
+		\item The matrices $C_{ij}$ are in $\mathfrak{st}(\hat{\mathbbm{1}})$. From the 
+		definition of the canonical generators
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ij} \hat{\mathbbm{1}}
 				& = & \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right) \hat{\mathbbm{1}}\\
@@ -359,192 +347,131 @@ We can now proceed with the central result that motivates this chapter.
 				& = & \hat{e}_i \left(\frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n}}\right)\\
 				& = & 0
 		\end{IEEEeqnarray*}
-		\item $C_{ij}$ is a set of $n^2-n$ linear independent matrices and so must
-		form a basis for all of $\mathfrak{st}(\hat{\mathbbm{1}})$. That there are
-		only $n^2-n$ matrices is clear from the fact that $C_{ii} = 0$. While the 
-		formal proof of linear independence is again found through induction on the 
-		dimension $n$.\hfill\IEEEQEDhere
+		\item $C_{ij}$ is a set of $n^2-n$ linear independent matrices and so must form a basis
+		for all of $\mathfrak{st}(\hat{\mathbbm{1}})$. That there are only $n^2-n$ matrices is
+		clear from the fact that $C_{ii} = 0$. While the formal proof of linear independence is
+		again found through induction on the dimension $n$.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
 
-The previous theorem serves as the definition of a set of canonical generators 
-of $\mathfrak{st}(\hat{\mathbbm{1}})$. It is  important to note that neither the 
-basis $\hat{e}_i$ nor the canonical generators $C_{ij}$ are unique. They are 
-defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
-Regardless of the choice of basis $\hat{e}_i$ Jacobi's formula implies that if 
-$G = \sum_{i,j} \alpha_{ij} C_{ij}$ then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
+The previous theorem serves as the definition of a set of canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+It is  important to note that neither the basis $\hat{e}_i$ nor the canonical generators $C_{ij}$
+are unique. They are defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
+Regardless of the choice of basis $\hat{e}_i$ Jacobi's formula implies that if $G = \sum_{i,j} \alpha_{ij} C_{ij}$
+then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
 
-% Everything below this is scattered and needs fixing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ToDo: Fill in the blanks of the vertexes
 
 \subsection{Vertexes}
 
-Geometrically fixing a basis $\hat{e}_i$ defines a convex polytope in the form
-of a unit hypercube $\left[0,1\right]^{n^2-n}$ in the parameter space isomorphic 
-to $\mathfrak{st}(\hat{\mathbbm{1}})$. For specificity, we refer to this as the
-convex polytope of matrices stochastic with respect to basis $\hat{e}_i$. 
-Analytically $St(\hat{\mathbbm{1}})$ is open, yet the boundary of the polytope 
-is always a limit point of $St(\hat{\mathbbm{1}})$. In particular every vertex
-of the polytope is a limit point of $St(\hat{\mathbbm{1}})$. Probabilistically, 
-the constructed basis elements $\hat{e}_i$ are a well defined enumeration of the 
-states of a continuous time homogeneous Markov process on a finite state space. 
-For example, we can Lie theoretically reformulate the classic two state 
-continuous time homogeneous Markov process.
+Geometrically fixing a basis $\hat{e}_i$ defines the convex polytope of all matrices, $M$,
+stochastic with respect to $\hat{\mathbbm{1}}$ that have nonnegative entries with respect to
+$\hat{e}_i$; so that $M\hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $\left\langle \hat{e}_i, M \hat{e}_j \right\rangle \ge 0$
+for all $i,j$. The vertexes of the convex polytope of nonnegative stochastic matrices with 
+respect to $\hat{e}_i$ can be formulated as linear combinations of the generators $C_{ij}$
+of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+
+\begin{definition}
+	For a function $j(i): \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
+	the vertex matrix is given by $V_{j\left(\cdot\right)} = I + \sum_{i=1}^n C_{ij\left(i\right)}$
+\end{definition}
+
+Every vertex matrix is uniquely dual to matrix in $\mathfrak{st}(\hat{\mathbbm{1}})$ 
+through the relationship
+
+\begin{IEEEeqnarray*}{rCl}
+	V_{j\left(\cdot\right)} - I
+		& = & \sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{j\left(i\right)} - \hat{e}_i \otimes \hat{e}_i\\
+		& = & C_{j\left(\cdot\right)}
+\end{IEEEeqnarray*}
+
+It is important to note that in general the vertex duals $C_{j\left(\cdot\right)}$ in $\mathfrak{st}(\hat{\mathbbm{1}})$
+are not the generators, or logarithms, of the vertexes $V_{j\left(\cdot\right)}$. In fact, 
+if there exists $i_1 \ne i_2$ such that $j\left(i_i\right) = j\left(i_2\right)$ then $V_{j\left(\cdot\right)}$
+does not have a generator, or logarithm. However, in this situation we will show that $V_{j\left(\cdot\right)}$
+is a limit point of the boundary of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+
+For now we need to establish the claim implicit in the definition of the vertex matrices.
+
+\begin{lemma}
+	The convex hull of the $n^n$ vertex matrices $V_{j\left(\cdot\right)}$ is the convex
+	polytope of nonnegative stochastic matrices with respect to $\hat{e}_i$.
+\end{lemma}
+
+\begin{IEEEproof}
+	In the forward direction...
+\end{IEEEproof}
+
+The vertex dual matrices $C_{j\left(\cdot\right)}$ are algebraically closed, and have a
+powerful commutator relationship. To get there we start with a calculation of the products
+of vertex dual matrices.
 
 \begin{corollary}
-	$\exp\left(\alpha C_{ij} + \beta C_{ji}\right) = I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right)$
+	$C_{j\left(\cdot\right)} C_{k\left(\cdot\right)} = C_{k\left(j\left(\cdot\right)\right)} - C_{j\left(\cdot\right)} - C_{k\left(\cdot\right)}$
 \end{corollary}
 
 \begin{IEEEproof}
-	We first work out the powers of $\alpha C_{ij} + \beta C_{ji}$, and then apply
-	the calculation to the definition of the matrix exponential.
-	\begin{enumerate}
-		\item Consider the square of $\alpha C_{ij} + \beta C_{ji}$
-		\begin{IEEEeqnarray*}{rCl}
-			\left(\alpha C_{ij} + \beta C_{ji}\right)^2
-				& = & \alpha^2 C_{ij}^2 + \alpha\beta C_{ij}C_{ji} + \alpha\beta C_{ji}C_{ij} + \beta^2 C_{ji}^2\\
-				& = & - \left(\alpha + \beta \right) \left(\alpha C_{ij} + \beta C_{ji}\right)
-		\end{IEEEeqnarray*}
-		\item It immediately follows that $\left(\alpha C_{ij} + \beta C_{ji}\right)^n = \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)$ 
-		and thus the exponential is
-		\begin{IEEEeqnarray*}{+rCl+x*}
-			\exp\left(\alpha C_{ij} + \beta C_{ji}\right)
-				& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-\alpha - \beta\right)^{n-1}\left(\alpha C_{ij} + \beta C_{ji}\right)\\
-				& = & I + \frac{1 - e^{-\alpha - \beta }}{\alpha + \beta} \left(\alpha C_{ij} + \beta C_{ji}\right) & \IEEEQEDhere
-		\end{IEEEeqnarray*}
-	\end{enumerate}
+	Calculating directly from the definitions
+	\begin{IEEEeqnarray*}{+rCl+x*}
+		C_{j\left(\cdot\right)} C_{k\left(\cdot\right)}
+			& = & \left(\sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{j\left(i\right)} - \hat{e}_i \otimes \hat{e}_i\right) \left(\sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{k\left(i\right)} - \hat{e}_i \otimes \hat{e}_i\right)\\
+			& = & \sum_{i=1}^n \hat{e}_i \otimes \hat{e}_{k\left(j\left(i\right)\right)} - \hat{e}_i \otimes \hat{e}_{j\left(i\right)} - \hat{e}_i \otimes \hat{e}_{k\left(i\right)} + \hat{e}_i \otimes \hat{e}_i\\
+			& = & C_{k\left(j\left(\cdot\right)\right)} - C_{j\left(\cdot\right)} - C_{k\left(\cdot\right)}\\
+			& = & C_{j \circ k \left(\cdot\right)} - C_{j\left(\cdot\right)} - C_{k\left(\cdot\right)} & \IEEEQEDhere
+	\end{IEEEeqnarray*}
 \end{IEEEproof}
 
-This last corollary admits a intuitive heuristic interpretation: that each 
-canonical generator $C_{ij}$ can be thought of as measuring the infinitesimal 
-transition rate, or flow of probability, from the state represented by basis 
-element $\hat{e}_i$ to the state represented by the basis element $\hat{e}_j$. 
-This can be seen by considering the matrix representation of $\exp\left(\alpha C_{ij}\right)$ 
-in the basis spanned by $\hat{e}_i$ and $\hat{e}_j$.
+We can state immediately without proof, that the commutators of $C_{j\left(\cdot\right)}$
+carry through with the commutation of $j\left(\cdot\right)$ and $k\left(\cdot\right)$.
+
+\begin{corollary}
+	$\left[C_{j\left(\cdot\right)}, C_{k\left(\cdot\right)}\right] = C_{k\left(j\left(\cdot\right)\right)} - C_{j\left(k\left(\cdot\right)\right)}$
+\end{corollary}
+
+Furthermore, recognizing that $C_{j^0\left(\cdot\right)} = 0$, because $j^0_{\left(i\right)} = i$
+for all $i$, we have that the powers of $C_{j\left(\cdot\right)}$ have the binomial form.
+
+\begin{corollary}
+	For $n>0$ we have $C_{j\left(\cdot\right)}^n = \sum_{m=0}^n \binom{n}{m} \left(-1\right)^{n-m} C_{j^m\left(\cdot\right)}$
+\end{corollary}
+
+\begin{IEEEproof}
+	Starting with $n = 1$ carry through with induction...
+\end{IEEEproof}
+
+Furthermore in the case where $j\left(\cdot\right)$ we can relate powers of $C_{j\left(\cdot\right)}$
+to powers of $j\left(\cdot\right)$.
+
+\begin{corollary}
+	If $j\left(\cdot\right)$ is a permutation then for $n>0$ we have $\left(I + C_{j\left(\cdot\right)}\right)^n = I + C_{j^n\left(\cdot\right)}$
+\end{corollary}
+
+\begin{IEEEproof}
+	Starting with $n = 1$ carry through with induction...
+\end{IEEEproof}
+
+Decompositions of $j$ results in a linear decomposition of $C$...a decomposition of $j$ is a
+partition such that...equivalent to non-communicating states...$j$ can be decomposed into
+cyclic permutations and transients...unique binary partition into a transient set and a
+permutation.
 
 \begin{IEEEeqnarray*}{rCl}
-	I + \left(1 - e^{-\alpha} \right)C_{ij}
-		& = &
-		\begin{pmatrix}
-			e^{-\alpha} & 1 - e^{-\alpha}\\
-			0 & 1
-		\end{pmatrix}
+	V_{j\left(\cdot\right)} & = & \exp\left(\alpha_0 C_{j_t\left(\cdot\right)} + \sum_{n=1}^{p-1} \alpha_n C_{j_p^n\left(\cdot\right)} \right)
 \end{IEEEeqnarray*}
 
-Taking the limit as $\alpha \rightarrow \infty$ shows while the limits in the 
-positive directions in the tangent space $\mathfrak{st}(\hat{\mathbbm{1}})$
-maybe finite, $St(\hat{\mathbbm{1}})$ is not closed.
+The vertex is recovered with $\alpha_0 \rightarrow \infty$, and the Pythagorean coefficients
 
 \begin{IEEEeqnarray*}{rCl}
-	\lim_{\alpha \rightarrow \infty} \exp\left(\alpha C_{ij} \right)
-		& = & I + C_{ij}\\
-		& = &
-		\begin{pmatrix}
-			0 & 1\\
-			0 & 1
-		\end{pmatrix}
+	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)
 \end{IEEEeqnarray*}
 
-The interpretation of $C_{ij}$ as measuring a real flow is more nuanced than may
-first appear, as $e^{-\alpha} > 0$ for all $\alpha \in \mathbb{R}$. To realize $e^{-\alpha} < 0$
-requires that $\mathbb{I}m\left(\alpha\right) \equiv \pi \bmod 2 \pi$. The 
-importance of imaginary numbers becomes clear when considering the exponential 
-of the generator $\alpha \left(C_{ij} + C_{ji}\right)$.
+when $p$ is odd, and
 
 \begin{IEEEeqnarray*}{rCl}
-	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
-		& = & I + \frac{1-e^{-2\alpha}}{2}\left(C_{ij} + C_{ji}\right)
+	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}}
 \end{IEEEeqnarray*}
 
-Taking the positive limit of $\alpha$ yields an open limit point on the boundary
-of $St(\hat{\mathbbm{1}})$, but still in the the convex polytope of stochastic 
-matrices with respect to basis $\hat{e}_i$.
-
-\begin{IEEEeqnarray*}{rCl}
-	\lim_{\alpha \rightarrow \infty} \exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
-		& = & I + \frac{1}{2}\left(C_{ij} + C_{ji}\right)\\
-		& = & \frac{1}{2}
-		\begin{pmatrix}
-			1 & 1\\
-			1 & 1
-		\end{pmatrix}
-\end{IEEEeqnarray*}
-
-However not all matrices inside the convex polytope are realized by positive 
-values of $\alpha$. For example to find the invertible vertex of the convex 
-polytope on the line $\alpha$, we need to consider $\alpha = \mathrm{i}\frac{\pi}{2}$.
-
-\begin{IEEEeqnarray*}{rCl}
-	\exp\left(\alpha \left(C_{ij} + C_{ji}\right)\right)
-		& = & I + \frac{1-e^{- \mathrm{i} \pi}}{2}\left(C_{ij} + C_{ji}\right)\\
-		& = & I + \left(C_{ij} + C_{ji}\right)\\
-		& = &
-		\begin{pmatrix}
-			0 & 1\\
-			1 & 0
-		\end{pmatrix}
-\end{IEEEeqnarray*}
-
-In the binary basis of $\hat{e}_i$ and $\hat{e}_j$ the vertexes can be 
-summarized as
-
-\begin{IEEEeqnarray*}{rCl}
-	V_0 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow \infty}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
-			& = & I + C_{ji} \notin St(\hat{\mathbbm{1}})\\
-	V_1 & = & \lim_{\substack{\alpha \rightarrow \mathrm{i}\frac{\pi}{2}\\ \beta \rightarrow \mathrm{i}\frac{\pi}{2}}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
-			& = & I + C_{ij} + C_{ji} \in St(\hat{\mathbbm{1}})\\
-	V_2 & = & \lim_{\substack{\alpha \rightarrow 0\\ \beta \rightarrow 0}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
-			& = & I \in St(\hat{\mathbbm{1}})\\
-	V_3 & = & \lim_{\substack{\alpha \rightarrow \infty\\ \beta \rightarrow 0}}\exp\left(\alpha C_{ij} + \beta C_{ji}\right)\\
-			& = & I + C_{ij} \notin St(\hat{\mathbbm{1}})
-\end{IEEEeqnarray*}
-
-% Need a figure showing the geometry of the limits
-
-% What is the generalization of this limit process? How do we get higher dimensional vertexes?
-% Need to show what a vertex is j any function n to n natural numbers consider V = I + sum Cij(i)
-
-A general vertex $V$ of the convex polytope of stochastic $n \times n$ matrices 
-in is given by 
-
-\begin{IEEEeqnarray*}{rCl}
-	V & = & I + \sum_{i=1}^n C_{ij\left(i\right)}
-\end{IEEEeqnarray*}
-
-where $j(i) : \left\lbrace 1,\dots,n \right\rbrace \mapsto J \subseteq \left\lbrace 1,\dots,n \right\rbrace$
-is any one of the $n^n$ such functions. Given that the vertexes are linear 
-combinations of $C_{ij}$, and it may seem plausible that the exponential of a 
-linear combination of $C_{ij}$ is always linear combination of $C_{ij}$. In 
-fact, this is true in general for any matrix Lie group $M$, namely it is the Lie 
-algebra offset by the identity element $M = I + \mathfrak{m}$. This can be seen 
-from the Taylor series expansion of the matrix exponential. It follows that for 
-a $G = \sum_{ij} g_{ij} C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ the matrix 
-exponential is $\exp G = I + \sum_{ij} h_{ij} C_{ij}$. Unfortunately, because 
-polynomials of degree greater than four are generally unsolvable, the 
-relationship between the coefficients $g_{ij}$ and $h_{ij}$ is highly 
-non-trivial in most circumstances. 
-
-An exception to this difficulty can be found in the formulation of the of first 
-exit times from a fixed initial state. Previewing the results of chapter four, 
-the generator of the first exit from $i$ to any state $j \ne i$ is given by $G_i = \sum_{i \ne j} \alpha_j C_{ij}$,
-from which we have
-
-\begin{IEEEeqnarray*}{rCl}
-	\exp G_i
-		& = & I + \sum_{n=1}^{\infty} \frac{1}{n!} \left(-\sum_{i \ne j} \alpha_j\right)^{n-1} \sum_{i \ne j} \alpha_j C_{ij}\\
-		& = & I +\frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} \sum_{i \ne j} \alpha_j C_{ij}\\
-		& = & I + \frac{1 - e^{-\sum_{i \ne k} \alpha_k}}{\sum_{i \ne l} \alpha_l} G_i
-\end{IEEEeqnarray*}
-
-Likewise the generator for the exclusive entrance to a state $j$, from any state 
-$i \ne j$, is $G_j = \sum_{i \ne j} \alpha_i C_{ij}$, which yields
-
-\begin{IEEEeqnarray*}{rCl}
-	\exp G_j
-		& = & I - \sum_{n=1}^{\infty} \frac{1}{n!} \sum_{i \ne j} \left(-\alpha_i\right)^n C_{ij}\\
-		& = & I + \sum_{i \ne j} \left(1 - e^{-\alpha_i}\right) C_{ij}
-\end{IEEEeqnarray*}
-
-% Okay from here below, everthing above needs re-working %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+when $p$ is even.
 
 \subsection{Contraction and Dual Algebras}
 
@@ -633,15 +560,20 @@ This definition admits a similar characterization as before.
 		\item Finally checking scalar multiplication, for fixed $a \in \mathbb{C}$,
 		and any $\alpha_{ij} \in \mathbb{C}$ such that $\exp\left(\sum_{ij} \alpha_{ij} C_{ij}\right) \in St^{+}(\hat{\mathbbm{1}})$
 		we have
-		\begin{IEEEeqnarray*}{+rCl+x*}
+		\begin{IEEEeqnarray*}{rCl}
 			0 
 				& \equiv & \mathbb{I}m\left(a \sum_{ij} \alpha_{ij}\right) \bmod 2 \pi \\
 				& \equiv & \mathbb{R}e\left(a\right) \mathbb{I}m\left(\sum_{ij} \alpha_{ij}\right) + \mathbb{I}m\left(a\right) \mathbb{R}e\left(\sum_{ij} \alpha_{ij}\right) \bmod 2 \pi \\
 				& \equiv & \mathbb{I}m\left(a\right) \mathbb{R}e\left(\sum_{ij} \alpha_{ij}\right) \bmod 2 \pi \\
-				& = & \mathbb{I}m\left(a\right) & \IEEEQEDhere
+				& = & \mathbb{I}m\left(a\right)
 		\end{IEEEeqnarray*}
+		\item It follows then that $\mathbb{I}m\left(a\right) = 0$\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
+
+Note that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space, but that it is
+augmented, through outer sum with the group of integers $\mathbb{Z}$. This is because every
+real point has added to it every multiple of $\mathrm{i}2\pi$.
 
 That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has 
 an important consequence for the generator estimation methods developed in the 
@@ -685,7 +617,7 @@ are a Lie groups and $\mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+
 are a Lie algebras will be foundational for the next section.
 
 \section{Doubly Stochastic Matrices}
-\subsection{Foundational Preliminaries}
+\subsection{Preliminaries}
 
 Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
 in the sense that both $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ 
@@ -798,7 +730,7 @@ are illustrated in figure \ref{fig:improperdoublestochastic}.
 			(i) edge [bend right] node [below] {$+1\quad$} (n)
 			(n) edge [bend right] node [below] {$+1$} (j);
 	\end{tikzpicture}
-	\caption[Improper generators $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the improper generators $C_{iin} + C_{jjn} - C_{ijn}$ to the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\caption[Improper generators $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the improper generators $C_{iin} + C_{jjn} - C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
 	\label{fig:improperdoublestochastic}
 \end{figure} 
 
@@ -992,6 +924,40 @@ but also on the choice of the basis element $\hat{e}_n$ used to sum the rows and
 columns to zero.
 
 \subsection{Vertexes}
+
+In the case of the doubly stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$, 
+the basis elements $\hat{e}_i$ define a special convex polytope known as the Birkhoff 
+polytope. This polytope is given by the matrices doubly stochastic with respect to $\hat{\mathbbm{1}}$,
+and that have nonnegative entries with respect to $\hat{e}_i$. By the Birkhoff-von Neumann 
+theorem there are $n!$ vertexes of the Birkhoff polytope, $V_{j\left(\cdot\right)}$, given
+by the $n!$ permutations $j\left(i\right):\left\lbrace 1,\dots,n \right\rbrace \mapsto \left\lbrace 1,\dots,n \right\rbrace$.
+
+From the work in the previous section on the vertexes of the convex polytope of singly
+stochastic matrices we can state immediately that the vertexes of the Birkhoff polytope are 
+generated by:
+
+\begin{IEEEeqnarray*}{rCl}
+	V_{j\left(\cdot\right)} & = & \exp\left(\sum_{n=1}^{p-1} \alpha_n C_{j^n\left(\cdot\right)} \right)
+\end{IEEEeqnarray*}
+
+Where $p$ is the period of the permutation $j\left(\cdot\right)$. The vertex is recovered
+with the Pythagorean coefficients.
+
+\begin{IEEEeqnarray*}{rCl}
+	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)
+\end{IEEEeqnarray*}
+
+when $p$ is odd, and
+
+\begin{IEEEeqnarray*}{rCl}
+	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}}
+\end{IEEEeqnarray*}
+
+when $p$ is even.
+
+This particular logarithm is not unique, nor is it even the principle branch in general.
+Other logarithms can be quickly generated by further decomposing the permutation $j\left(\cdot\right)$
+into sub-cycles, and applying the same formula for the coefficients $\alpha_n$.
 % Unlike stochastic Lie group there are no nice guareentees on properness with
 % respect to postive sums. No matter what generators of the algebra are chosen
 % there will always be Markov processes that require negative terms in the sum.
