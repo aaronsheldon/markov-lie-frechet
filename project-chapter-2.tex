@@ -366,17 +366,16 @@ then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
 
 Geometrically fixing a basis $\hat{e}_i$ defines the convex polytope of all matrices, $M$,
 stochastic with respect to $\hat{\mathbbm{1}}$ that have nonnegative entries with respect to
-$\hat{e}_i$; so that $M\hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $\left\langle \hat{e}_i, M \hat{e}_j \right\rangle \ge 0$
-for all $i,j$. The vertexes of the convex polytope of nonnegative stochastic matrices with 
-respect to $\hat{e}_i$ can be formulated as linear combinations of the generators $C_{ij}$
-of $\mathfrak{st}(\hat{\mathbbm{1}})$.
+$\hat{e}_i$; also designated the convex polytope of singly stochastic matrices. The vertexes 
+of the convex polytope of nonnegative stochastic matrices with respect to $\hat{e}_i$ can be
+formulated as linear combinations of the generators $C_{ij}$ of $\mathfrak{st}(\hat{\mathbbm{1}})$.
 
 \begin{definition}
 	For a function $j(i): \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
 	the vertex matrix is given by $V_{j\left(\cdot\right)} = I + \sum_{i=1}^n C_{ij\left(i\right)}$
 \end{definition}
 
-Every vertex matrix is uniquely dual to matrix in $\mathfrak{st}(\hat{\mathbbm{1}})$ 
+Every vertex matrix is uniquely dual to a matrix in $\mathfrak{st}(\hat{\mathbbm{1}})$ 
 through the relationship
 
 \begin{IEEEeqnarray*}{rCl}
@@ -399,7 +398,50 @@ For now we need to establish the claim implicit in the definition of the vertex 
 \end{lemma}
 
 \begin{IEEEproof}
-	In the forward direction...
+	The proof proceeds by showing each direction of inclusion.
+	\begin{enumerate}
+		\item Starting with the forward inclusion, clearly every $V_{j\left(\cdot\right)}$ 
+		belongs to the convex polytope of singly stochastic matrices.
+		\item It follows that any convex sum of the vertexes $V_{j\left(\cdot\right)}$ belongs
+		to the convex polytope of singly stochastic matrices.
+		\item In the reverse inclusion, we work analogously to the Birkhoff-von Neumann theorem;
+		where starting with an $M$ in the convex polytope of singly stochastic matrices we 
+		eliminate nonzero entries from $M$ with convex sums involving $V_{j\left(\cdot\right)}$.
+		\item Begin by picking an $i,j$ such that $m_{ij} = \left\langle \hat{e}_i, M \hat{e}_j \right\rangle$
+		is the smallest $m_{ij} > 0$. Which we can always do because $M \vec{\mathbbm{1}} = \vec{\mathbbm{1}}$.
+		If $m_{ij} = 1$ then by definition $M$ is a vertex matrix and we are done.
+		\item By the same argument we can pick a function $f^{\left(1\right)}\left(k\right) : \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
+		such that $f^{\left(1\right)}\left(i\right)=j$ and $m_{k f^{\left(1\right)}\left(k\right)} > 0$ for all other $k \ne i$.
+		\item Letting $M^{\left(0\right)} = M$ we can decompose $M^{\left(1\right)}$ into the 
+		convex sum
+		\begin{IEEEeqnarray*}{rCl}
+			M^{\left(0\right)}
+				& = & \left(1 - m_{ij} \right) M^{\left(1\right)} + m_{ij} V_{f^{\left(1\right)}\left(\cdot\right)}
+		\end{IEEEeqnarray*}
+		It remains then to establish that $M^{\left(1\right)}$ is an element of the convex 
+		polytope of singly stochastic matrices.
+		\item Checking that $M^{\left(1\right)}$ has $\hat{\mathbbm{1}}$ as an Eigen vector with Eigen value $1$
+		\begin{IEEEeqnarray*}{rCl}
+			M^{\left(1\right)} \hat{\mathbbm{1}}
+				& = & \frac{M^{\left(0\right)}  \hat{\mathbbm{1}} - m_{ij}V_{f^{\left(1\right)}\left(\cdot\right)}  \hat{\mathbbm{1}}}{1 - m_{ij}}\\
+				& = & \frac{1 - m_{ij}}{1 - m_{ij}} \hat{\mathbbm{1}}\\
+				& = & \hat{\mathbbm{1}}
+		\end{IEEEeqnarray*}
+		\item Next we check to ensure that $\left\langle \hat{e}_k, M^{\left(1\right)} \hat{e}_l \right\rangle > 0$
+		for every $k,l$
+		\begin{IEEEeqnarray*}{rCl}
+			\left\langle \hat{e}_k, M^{\left(1\right)} \hat{e}_l \right\rangle
+				&  =  & \frac{\left\langle \hat{e}_k,M^{\left(0\right)} \hat{e}_l\right\rangle -  m_{ij} \left\langle \hat{e}_k, V_{f^{\left(1\right)}\left(\cdot\right)} \hat{e}_l\right\rangle }{1 - m_{ij}}\\
+				&  =  & \frac{m_{kl} - m_{ij} \delta_{f\left(k\right)l}}{1 - m_{ij}}\\
+				& \ge & 0
+		\end{IEEEeqnarray*}
+		because $1 > m_{ij}$, or else we are done; and $m_{kl} \ge m_{ij}$ for all $k,l$ by 
+		construction.
+		\item Finally, observe that $\left\langle \hat{e}_i, M^{\left(1\right)} \hat{e}_j \right\rangle = 0$, 
+		so that we can carry out finite induction on this process, at most $n^2$ times. This 
+		will generate matrices $M^{\left(t\right)}$ and $V_{f^{\left(t\right)}\left(\cdot\right)}$, 
+		proving that $M$ is the convex sum of vertexes $V_{f^{\left(t\right)}\left(\cdot\right)}$.\hfill\IEEEQEDhere
+	\end{enumerate}
 \end{IEEEproof}
 
 The vertex dual matrices $C_{j\left(\cdot\right)}$ are algebraically closed, and have a
@@ -436,11 +478,26 @@ for all $i$, we have that the powers of $C_{j\left(\cdot\right)}$ have the binom
 \end{corollary}
 
 \begin{IEEEproof}
-	Starting with $n = 1$ carry through with induction...
+	Starting with $n = 1$ we carry through with induction.
+	\begin{enumerate}
+		\item Explicitly calculating for $n = 1$ we have
+		\begin{IEEEeqnarray*}{rCl}
+			C_{j\left(\cdot\right)} 
+				& = & C_{j\left(\cdot\right)} - C_{j^0\left(\cdot\right)}\\
+				& = & \sum_{m=0}^1 \binom{1}{m} \left(-1\right)^{1-m} C_{j^m\left(\cdot\right)}
+		\end{IEEEeqnarray*}
+		\item Now assume the claim is true for a fixed $n$, setting up the calculation for $n+1$
+		we have
+		\begin{IEEEeqnarray*}{rCl}
+			C^{n+1}_{j\left(\cdot\right)}
+				& = & C_{j\left(\cdot\right)} \sum_{m=0}^n \binom{n}{m} \left(-1\right)^{n-m} C_{j^m\left(\cdot\right)}\\
+				& = & \sum_{m=1}^n \binom{n}{m} \left(-1\right)^{n-m} \left(C_{j^{m+1}\left(\cdot\right)} - C_{j^m\left(\cdot\right)} - C_{j\left(\cdot\right)} \right)
+		\end{IEEEeqnarray*}
+	\end{enumerate}
 \end{IEEEproof}
 
-Furthermore in the case where $j\left(\cdot\right)$ we can relate powers of $C_{j\left(\cdot\right)}$
-to powers of $j\left(\cdot\right)$.
+Furthermore in the case where $j\left(\cdot\right)$ is a permutation we can relate powers of 
+$C_{j\left(\cdot\right)}$ to compositions of $j\left(\cdot\right)$.
 
 \begin{corollary}
 	If $j\left(\cdot\right)$ is a permutation then for $n>0$ we have $\left(I + C_{j\left(\cdot\right)}\right)^n = I + C_{j^n\left(\cdot\right)}$
@@ -571,9 +628,9 @@ This definition admits a similar characterization as before.
 	\end{enumerate}
 \end{IEEEproof}
 
-Note that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space, but that it is
-augmented, through outer sum with the group of integers $\mathbb{Z}$. This is because every
-real point has added to it every multiple of $\mathrm{i}2\pi$.
+Note that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space, but it is 
+augmented with the group of integers $\mathbb{Z}$. This is because every real point has 
+added to it every multiple of $\mathrm{i}2\pi$.
 
 That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has 
 an important consequence for the generator estimation methods developed in the 
@@ -587,12 +644,7 @@ operations with respect to $C_{ij}$ will always have real (positive) expansion
 in the basis $C_{ij}$. This will occur even if a suitable complex generator is 
 used to generate real (positive) transition probabilities. We can interpret this 
 as meaning that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a closed branch of the 
-matrix logarithm. 
-
-% The resolvent as either the Laplace or Fourier transform of an element of st(1)
-% extends St(1) to Gl(1) through contours that intersect with st(1) at the element
-% being transformed L[exp(ut)exp(tG)] = 1/(u+G) = u exp(-G'). Gl(1) is the Lie 
-% group of of invertible matrices with 1 as the eigenvector. gl(1) = st(1) + 1 
+matrix logarithm.
 
 We have developed an interpretation of the Eigen equation $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
 as a conservation of the row sums of $A$; likewise the Eigen equation $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
