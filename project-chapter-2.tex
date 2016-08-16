@@ -551,22 +551,31 @@ Nearly without any further proof we can state the following observations
 				& = & C_{j_E\left(\cdot\right)} + C_{j_T\left(\cdot\right)} - C_{j_E\left(\cdot\right)} - C_{j_T\left(\cdot\right)}\\
 				& = & 0
 		\end{IEEEeqnarray*}
-		\item $\left(\alpha C_{j_T\left(\cdot\right)} + \beta C_{j_E\left(\cdot\right)}\right)^n = \sum_{m=0}^n \alpha^{m}\beta^{n-m} C^m_{j_T\left(\cdot\right)} C^{n-m}_{j_E\left(\cdot\right)}$
+	\end{enumerate}
+\end{observation}
+
+The last observation admits a further generalization that will be of use in the following
+calculations
+\begin{observation}
+	If $\left[A,B\right]= AB$ then
+	\begin{enumerate}
+		\item $\left(A+B\right)^n=\sum_{m=0}^n A^m B^{n-m}$
+		\item $\exp\left(A+B\right)=\sum_{n,m} \frac{1}{\left(n+m\right)!}A^mB^n$
 	\end{enumerate}
 \end{observation}
 
 By construction $j_E\left(\cdot\right)$ is a permutation, and at the very least has a 
-period $p > 0$; the permutation may also contain sub-cycles. As well there is a $t>n$ such 
-that for ever $i \in T_{j\left(\cdot\right)}$ we have $j^t_T\left(i\right) \in E_{j\left(\cdot\right)}$.
-Thus to find a limit in the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ we 
-need only consider a coefficient $\alpha_0$ for $C_{j_T\left(\cdot\right)}$ and $p-1$
+period $P > 0$; the permutation may also contain sub-cycles. As well, there is a $T>0$ such 
+that for each $i \in T_{j\left(\cdot\right)}$ is absorbed by $j^t_T\left(i\right) = i_T \in E_{j\left(\cdot\right)}$
+for all $t > T$. Thus to find a limit in the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$
+we need only consider a coefficient $\alpha_0$ for $C_{j_T\left(\cdot\right)}$ and $p-1$
 coefficients $\alpha_n$ for the $p-1$ vertex dual matrices $C_{j^n_E\left(\cdot\right)}$. We
 propose a trial solution for $V_{j\left(\cdot\right)}$, to which we apply the previous 
 observations to simply.
 \begin{IEEEeqnarray*}{rCl}
 	V_{j\left(\cdot\right)} 
-		& = & \exp\left(\alpha_0 C_{j_T\left(\cdot\right)} + \sum_{n=1}^{p-1} \alpha_n C_{j_E^n\left(\cdot\right)} \right)\\
-		& = & \sum_{m=0}^\infty \frac{1}{m!} \left( \alpha_0 C_{j_T\left(\cdot\right)} + \sum_{n=1}^{p-1} \alpha_n C_{j_E^n\left(\cdot\right)} \right)^m
+		& = & \exp\left(\alpha_0 C_{j_T\left(\cdot\right)} + \sum_{l=1}^{p-1} \alpha_l C_{j_E^l\left(\cdot\right)} \right)\\
+		& = & \sum_{n,m}\frac{1}{\left(n+m\right)!} \left(\alpha_0 C_{j_T\left(\cdot\right)}\right)^m \left(\sum_{l=1}^{p-1} \alpha_l C_{j_E^l\left(\cdot\right)}\right)^n
 \end{IEEEeqnarray*}
 
 The vertex is recovered with $\alpha_0 \rightarrow \infty$, and the Pythagorean
