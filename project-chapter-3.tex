@@ -138,7 +138,7 @@ $x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
 The symbolic computation of the exact rational coefficients of the $\left[13/14\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language\cite{bezanson_julia:_2014}
 using big integer mathematics, and the Polynomials package. The results of the computation 
-are displayed in table \ref{tab:padecoefficients}. The order of the Pad\'{e} approximation 
+are displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation 
 was chosen so that the largest denominator in the rational coefficients of the numerator
 polynomial $\left(7244400176133120000\right)$, and the largest denominator in the rational 
 coefficients of the denominator polynomial $\left(6761440164390912000\right)$ were the 
@@ -179,45 +179,14 @@ And thus can be approximated by
 		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
-We can summarize this work in an algorithm to compute the non-commutative perturbation\ref{alg:noncommutativperturbation}.
-\begin{algorithm}
-	\caption[Non-commutative Perturbation]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
-	\label{alg:noncommutativperturbation}
-	\begin{algorithmic}[1]
-		\Function{PER}{$X$,$dX$}
-			\If{$\left[X,dX\right] = 0$}
-				\State $Y \gets 0$\Comment{Short circuit commutative case}
-			\Else
-				\State $adX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{dx} \gets \operatorname{VEC}\left(dX\right)$\Comment{Change of indexing}
-				\State $P \gets P_{13}\left(adX\right)$\Comment{Recursive squaring and summing}
-				\State $Q \gets Q_{14}\left(adX\right)$\Comment{Recursive squaring and summing}
-				\State Solve for $\vec{y}$: $P \vec{dx} = Q \vec{y}$\Comment{Call to linear solver}
-				\State $Y \gets \operatorname{MAT}\left(\vec{y}\right)$\Comment{Change of indexing}
-			\EndIf
-			\State \Return $Y$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-
+We can summarize this work in an algorithm to compute the non-commutative perturbation\ref{alg:perturbation}.
 This algorithm servers as a sketch only, highlighting only the novel elements developed in
 this section. Many additional optimizations could be implemented including minimizing memory 
 assignments by carrying out in place computations, conditioning matrices to improve
-numerical stability, and using squaring methods to efficiently compute the matrix 
-polynomials. A point of concern is the first assignment of the Kronecker product, which 
-results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
+numerical stability, and using recursive squaring and summing methods to efficiently compute
+the matrix polynomials. A point of concern is the first assignment of the Kronecker product, 
+which results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
 compute the gradient of the matrix exponential can be formulated\ref{alg:gradient}.
-\begin{algorithm}
-	\caption[Gradient]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
-	\label{alg:gradient}
-	\begin{algorithmic}[1]
-		\Function{DEX}{$X$,$dX$}
-			\State $E \gets e^X$\Comment{Call to matrix exponential}
-			\State $P \gets \operatorname{PER}\left(X,dX\right)$\Comment{Call to non-commutative perturbation}
-			\State \Return $\left(P + dX\right) E$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
 
 \section{The Hessian}
 
@@ -257,7 +226,7 @@ We will also find use of the following corollary to the binomial theorem.
 	Proceed by induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
 
-In the next step of developing the Hessian we find the Taylor series for the bilinear
+In the next step of developing the Hessian we derive the Taylor series for the bilinear 
 non-commutative perturbation. Unfortunately because this form is a bilinear map it does
 not admit the formulation of Pad\'{e} approximation.
 \begin{corollary}
@@ -273,8 +242,8 @@ not admit the formulation of Pad\'{e} approximation.
 \end{corollary}
 
 \begin{IEEEproof}
-	Apply the previous lemmas in the order they were stated to the symmetric sum 
-	of the two terms.
+	Apply the previous results in the order they were stated to the symmetric sum of the two
+	terms.
 	\begin{IEEEeqnarray*}{rCl}
 		\IEEEeqnarraymulticol{3}{l}
 		{
@@ -300,15 +269,43 @@ not admit the formulation of Pad\'{e} approximation.
 		F_0 & = & 0\\
 		F_{n+1} & = &  \left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right] + \operatorname{ad}_X F_n - \left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]
 	\end{IEEEeqnarray*}
-	This recursive calculation is illustrate in figure \ref{fig:pascaldivergence},
-	and the proof is found by carrying out induction on $n$.\hfill\IEEEQEDhere
+	This recursive calculation is illustrate in figure \ref{fig:pascaldivergence}. The proof 
+	of which is found by carrying out induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
+
+There are three special cases that simplify the calculation of Taylor series considerably.
+\begin{IEEEeqnarray*}{rCl}
+	\sum_{n=0}^\infty \frac{ F_n}{\left(n+2\right)!}
+	& = & 
+		\begin{cases}
+			0
+				& \operatorname{ad}_X \frac{\partial X}{\partial x} = 0 \text{ and } \operatorname{ad}_X \frac{\partial X}{\partial y} = 0\\[1ex]
+			\left[\frac{\partial X}{\partial x}, \sum_{n=0}^\infty \frac{n}{\left(n+2\right)!} \operatorname{ad}_X^n \frac{\partial X}{\partial y}\right]
+				& \operatorname{ad}_X  \frac{\partial X}{\partial x} = 0\\[1ex]
+			\left[\frac{\partial X}{\partial y}, \sum_{n=0}^\infty \frac{n}{\left(n+2\right)!} \operatorname{ad}_X^n \frac{\partial X}{\partial x}\right]
+				& \operatorname{ad}_X  \frac{\partial X}{\partial y} = 0
+		\end{cases}
+\end{IEEEeqnarray*}
+
+The Taylor series in the last two cases does admit a Pad\'{e} approximation, by the same
+reasoning as presented in the previous section. In particular we can further reduce the
+Taylor series.
+\begin{IEEEeqnarray*}{rCl}
+	\sum_{n=0}^\infty \frac{n}{\left(n+2\right)!} x^n
+		& = & \sum_{n=1}^\infty \frac{n}{\left(n+2\right)!} x^n\\
+		& = & \left(\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n\right)x
+\end{IEEEeqnarray*}
+
+Using the same criteria as in the previous section yields a $\left[a/b\right]_f\left(x\right)$
+Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
+The coefficients of the Pad\'{e} approximation are summarized in table\ref{tab:bilinear}. 
+This approximation is then used in a pair of branches in the calculation of the bilinear 
+non-commutative perturbation to the Hessian\ref{alg:bilinear}.
 
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
 We can then compute the Hessian by symmetrizing the partial differential so that 
 antisymmetric terms cancel out.
-
 \begin{IEEEeqnarray*}{rCl}
 	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
 		& = & \frac{1}{2} \frac{\partial}{\partial x} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
@@ -325,15 +322,14 @@ antisymmetric terms cancel out.
 		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 \end{IEEEeqnarray*}
 
-The only terms requiring approximation are precisely the approximation we 
-derived in the previous section. Reusing the components in the algorithm in the
-previous section we can present an algorithm for the Hessian.
+The bilinear non-commutative perturbation is then called in the calculation of the Hessian
+of the matrix exponential\ref{alg:hessian}.
 
 \section{Figures and Illustrations}
 
 \begin{longtable}{r r r}
-	\caption{Pad\'{e} Approximation Coefficients}
-	\label{tab:padecoefficients}\\
+	\caption{Pad\'{e} Approximation of $\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$}
+	\label{tab:perturbation}\\
 	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
 	\hline
 	\endfirsthead
@@ -362,7 +358,39 @@ previous section we can present an algorithm for the Hessian.
 	$x^{14}$ & & $\frac{1}{6761440164390912000}$
 \end{longtable}
 
-\begin{figure}[!hb]
+\begin{algorithm}
+	\caption[Non-commutative Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
+	\label{alg:perturbation}
+	\begin{algorithmic}[1]
+		\Function{PER}{$X$,$Dx$}
+			\If{$\left[X,Dx\right] = 0$}
+				\State $Y \gets 0$\Comment{Short circuit commutative case}
+			\Else
+				\State $adX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{dx} \gets \operatorname{VEC}\left(Dx\right)$\Comment{Change of indexing}
+				\State $P \gets P_{13}\left(adX\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(adX\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{y}$: $P \vec{dx} = Q \vec{y}$\Comment{Call to linear solver}
+				\State $Y \gets \operatorname{MAT}\left(\vec{y}\right)$\Comment{Change of indexing}
+			\EndIf
+			\State \Return $Y$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption[Gradient of $e^X$]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
+	\label{alg:gradient}
+	\begin{algorithmic}[1]
+		\Function{GEX}{$X$,$Dx$}
+			\State $E \gets e^X$\Comment{Call to matrix exponential}
+			\State $P \gets \operatorname{PER}\left(X,Dx\right)$\Comment{Call to non-commutative perturbation}
+			\State \Return $\left(P + Dx\right) E$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{figure}
 	\centering
 	\begin{tikzpicture}
 		\node[text=gray] at (   0,   0) {$  0$};
@@ -436,3 +464,56 @@ previous section we can present an algorithm for the Hessian.
 	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 8 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
 	\label{fig:pascaldivergence}
 \end{figure}
+
+\begin{longtable}{r r r}
+	\caption{Pad\'{e} Approximation of $\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$}
+	\label{tab:bilinear}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endfirsthead
+	\caption*{Continued from previous page.}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endhead
+	\caption*{Continued on next page.}
+	\endfoot
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ a/b \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
+	\endlastfoot
+	$x^{0}$ & $\frac{1}{1}$ & $\frac{1}{1}$
+\end{longtable}
+
+\begin{algorithm}[!hb]
+	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\label{alg:bilinear}
+	\begin{algorithmic}[1]
+		\Function{BIL}{$X$,$Dx$,$Dy$,$\epsilon = \text{machine float precision}$}
+			\State $Ax \gets \left[X,Dx\right]$\Comment{Allocates memory}
+			\State $Ay \gets \left[X,Dy\right]$\Comment{Allocates memory}
+			\State $Z \gets 0$\Comment{Allocates memory}
+			\If{$Ax \ne 0$ \textbf{and} $Ay \ne 0$}
+				\State $F \gets \left[Dx, Ay\right] + \left[Dy,Ax\right]$\Comment{Allocates memory}
+				\State $m \gets 3$\Comment{Factorial scalars}
+				\State $n \gets 6$\Comment{Factorial scalars}
+				\While{$ \left\| F \right\| > n\epsilon$}
+					\State $Z \gets Z + \frac{F}{n}$\Comment{In place computation}
+					\State $Ax \gets \left[X,Ax\right]$\Comment{In place computation}
+					\State $Ay \gets \left[X,Ay\right]$\Comment{In place computation}
+					\State $F \gets \left[Dx, Ay\right] + \left[X,F\right] + \left[Dx,Ax\right]$\Comment{In place computation}
+					\State $m \gets m+1$\Comment{Increment factorial}
+					\State $n \gets m n$\Comment{Increment factorial}
+				\EndWhile
+			\EndIf
+			\State \Return $Z$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[!hb]
+	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\label{alg:hessian}
+	\begin{algorithmic}[1]
+		\Function{HEX}{$X$,$Dx$,$Dy$}
+			\State \Return $Z$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
