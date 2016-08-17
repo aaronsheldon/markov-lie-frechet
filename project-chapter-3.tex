@@ -179,62 +179,87 @@ And thus can be approximated by
 		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
-% break the algorithm into two parts, Pade and perturbation
-% need table of [16/16] coefficients.
+We can summarize this work in an algorithm to compute the non-commutative perturbation\ref{alg:noncommutativperturbation}.
+\begin{algorithm}
+	\caption[Non-commutative Perturbation]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
+	\label{alg:noncommutativperturbation}
+	\begin{algorithmic}[1]
+		\Function{PER}{$X$,$dX$}
+			\If{$\left[X,dX\right] = 0$}
+				\State $Y \gets 0$\Comment{Short circuit commutative case}
+			\Else
+				\State $adX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{dx} \gets \operatorname{VEC}\left(dX\right)$\Comment{Change of indexing}
+				\State $P \gets P_{13}\left(adX\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(adX\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{y}$: $P \vec{dx} = Q \vec{y}$\Comment{Call to linear solver}
+				\State $Y \gets \operatorname{MAT}\left(\vec{y}\right)$\Comment{Change of indexing}
+			\EndIf
+			\State \Return $Y$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
 
+This algorithm servers as a sketch only, highlighting only the novel elements developed in
+this section. Many additional optimizations could be implemented including minimizing memory 
+assignments by carrying out in place computations, conditioning matrices to improve
+numerical stability, and using squaring methods to efficiently compute the matrix 
+polynomials. A point of concern is the first assignment of the Kronecker product, which 
+results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
+compute the gradient of the matrix exponential can be formulated\ref{alg:gradient}.
+\begin{algorithm}
+	\caption[Gradient]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
+	\label{alg:gradient}
+	\begin{algorithmic}[1]
+		\Function{DEX}{$X$,$dX$}
+			\State $E \gets e^X$\Comment{Call to matrix exponential}
+			\State $P \gets \operatorname{PER}\left(X,dX\right)$\Comment{Call to non-commutative perturbation}
+			\State \Return $\left(P + dX\right) E$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
 
 \section{The Hessian}
 
 Need preamble on combinatorics of powers of adjoint.
 \begin{lemma}
-	For any matrix $A$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, 
+	For any matrices $A,B$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, 
 	and integer $n \ge 0$
 	\begin{IEEEeqnarray*}{rCl}
-		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n\right]\left( A\right)
-			& = & \sum_{k=1}^n \left(\operatorname{ad}_X^{k-1} A \right)\left(\operatorname{ad}_{\frac{\partial X}{\partial x}} A\right)  \left(\operatorname{ad}_X^{n-k} A \right)
-	\end{IEEEeqnarray*}
-\end{lemma}
-
-\begin{IEEEproof}
-	Proceed by induction on $n$.\hfill\IEEEQEDhere
-\end{IEEEproof}
-
-\begin{lemma}
-	For any matrices $X,A,B$, and integer $n \ge 0$
-	\begin{IEEEeqnarray*}{rCl}
+		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n \cdot\right]\left( A\right)
+			& = & \sum_{k=1}^n \left(\operatorname{ad}_X^{k-1} A \right)\left(\operatorname{ad}_{\frac{\partial X}{\partial x}} A\right)  \left(\operatorname{ad}_X^{n-k} A \right)\\
 		\operatorname{ad}_X^n AB
-			& = & \sum_{k=0}^n \binom{n}{k} \left(\operatorname{ad}_X^k A \right)\left(\operatorname{ad}_X^{n-k} B \right)
-	\end{IEEEeqnarray*}
-\end{lemma}
-
-\begin{IEEEproof}
-	Proceed by induction on $n$.\hfill\IEEEQEDhere
-\end{IEEEproof}
-
-\begin{lemma}
-	For any matrices $X,A,B$, and integer $n \ge 0$
-	\begin{IEEEeqnarray*}{rCl}
+			& = & \sum_{k=0}^n \binom{n}{k} \left(\operatorname{ad}_X^k A \right)\left(\operatorname{ad}_X^{n-k} B \right)\\
 		\operatorname{ad}_X^n \left[A,B\right]
 			& = & \sum_{k=0}^n \binom{n}{k} \left[\operatorname{ad}_X^k A , \operatorname{ad}_X^{n-k} B \right]
 	\end{IEEEeqnarray*}
 \end{lemma}
 
 \begin{IEEEproof}
-	Take the antisymmetric difference of previous lemma.\hfill\IEEEQEDhere
+	For each of the equalities we have:
+	\begin{enumerate}
+		\item Proceed by induction on $n$.
+		\item Proceed by induction on $n$.
+		\item Take the antisymmetric difference of previous equality.\hfill\IEEEQEDhere
+	\end{enumerate}
 \end{IEEEproof}
 
-\begin{lemma}
+We will also find use of the following corollary to the binomial theorem.
+\begin{corollary}
 	For any $n,m \ge 0$
 	\begin{IEEEeqnarray*}{rCl}
 		\sum_{k=m}^{n+m} \binom{k}{m}
 			& = & \binom{n+m+1}{n}
 	\end{IEEEeqnarray*}
-\end{lemma}
+\end{corollary}
 
 \begin{IEEEproof}
 	Proceed by induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
 
+In the next step of developing the Hessian we find the Taylor series for the bilinear
+non-commutative perturbation. Unfortunately because this form is a bilinear map it does
+not admit the formulation of Pad\'{e} approximation.
 \begin{corollary}
 	For any differentiable matrix function $X$ parameterized by $x,y \in \mathbb{R}$
 	\begin{IEEEeqnarray*}{rCl}
@@ -248,7 +273,7 @@ Need preamble on combinatorics of powers of adjoint.
 \end{corollary}
 
 \begin{IEEEproof}
-	Apply the previous lemmas in the order there were stated to the symmetric sum 
+	Apply the previous lemmas in the order they were stated to the symmetric sum 
 	of the two terms.
 	\begin{IEEEeqnarray*}{rCl}
 		\IEEEeqnarraymulticol{3}{l}
