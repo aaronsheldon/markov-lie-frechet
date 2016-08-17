@@ -207,19 +207,6 @@ the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. To establish this
 need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$ are
 linear combinations of matrices $C_{ij}$.
 
-\begin{figure}[hb]
-	\centering
-	\begin{tikzpicture}[->,thick,node distance=3cm]
-		\node[state] (i)              {$\hat{e}_i$};
-		\node[state] (j) [right of=i] {$\hat{e}_j$};
-		\path
-			(i) edge [loop left] node         {$-1$} (i)
-			(i) edge             node [above] {$+1$} (j);
-	\end{tikzpicture}
-	\caption[Canonical generators $C_{ij}$]{State transition circuit diagram of the canonical generators $C_{ij}$ of $\mathfrak{st}(\hat{\mathbbm{1}})$}
-	\label{fig:singlestochastic}
-\end{figure}
-
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
 		C_{ij}C_{kl} & = &
@@ -372,7 +359,7 @@ through the relationship
 \end{IEEEeqnarray*}
 
 It is important to note that in general the vertex duals $C_{j\left(\cdot\right)}$ in $\mathfrak{st}(\hat{\mathbbm{1}})$
-are not the generators, or logarithms, of the vertexes $V_{j\left(\cdot\right)}$. In fact, 
+are not the generators, nor logarithms, of the vertexes $V_{j\left(\cdot\right)}$. In fact, 
 if there exists $i_1 \ne i_2$ such that $j\left(i_i\right) = j\left(i_2\right)$ then $V_{j\left(\cdot\right)}$
 does not have a generator, or logarithm. However, in this situation we will show that $V_{j\left(\cdot\right)}$
 is a limit point of the boundary of $\mathfrak{st}(\hat{\mathbbm{1}})$.
@@ -430,9 +417,8 @@ For now we need to establish the claim implicit in the definition of the vertex 
 	\end{enumerate}
 \end{IEEEproof}
 
-The vertex dual matrices $C_{j\left(\cdot\right)}$ are algebraically closed, and have a
-powerful commutator algebra. We start with a calculation of the products of vertex dual
-matrices.
+The vertex dual matrices $C_{j\left(\cdot\right)}$ have a powerful commutator algebra. We
+start with a calculation of the products of vertex dual matrices.
 \begin{corollary}
 	$C_{j\left(\cdot\right)} C_{k\left(\cdot\right)} = C_{k\left(j\left(\cdot\right)\right)} - C_{j\left(\cdot\right)} - C_{k\left(\cdot\right)}$
 \end{corollary}
@@ -482,6 +468,8 @@ for all $i$, we have that the powers of $C_{j\left(\cdot\right)}$ have the binom
 	\end{enumerate}
 \end{IEEEproof}
 
+As a special case, when $j\left(\cdot\right)$ is idempotent, $j^2\left(i\right)=j\left(i\right)$,
+the vertex dual matrix $C_{j\left(\cdot\right)}$ has odd parity, $C^2_{j\left(\cdot\right)}=-C_{j\left(\cdot\right)}$.
 Furthermore in the case where $j\left(\cdot\right)$ is a permutation with period $p$ we need
 only consider the vertex dual matrices for the first $p$ compositions of $j\left(\cdot\right)$.
 \begin{corollary}
@@ -500,55 +488,51 @@ only consider the vertex dual matrices for the first $p$ compositions of $j\left
 
 The result in the previous corollary hints at the importance of permutations in elucidating
 the structure of the vertex dual matrices. To develop this further for a given function $j\left(\cdot\right)$
-we define a binary partition of the set $\left\lbrace 1,\dots,n \right\rbrace$; composed of
-respectively the numbers for which $j\left(\cdot\right)$ is a permutation, and the numbers
-for which $j\left(\cdot\right)$ is transient.
+we recursively define a partition of the set $\left\lbrace 1,\dots,n \right\rbrace$; 
+composed of respectively the numbers for which $j\left(\cdot\right)$ is a permutation, and 
+the numbers for which $j\left(\cdot\right)$ is transient, of each order.
 \begin{definition}
-	The ergodic and transient subsets $E_{j\left(\cdot\right)}, T_{j\left(\cdot\right)} \subseteq \left\lbrace 1,\dots,n \right\rbrace$,
-	defined by $j\left(\cdot\right)$, are respectively:
+	The ergodic and transient subsets $E_{j\left(\cdot\right)}^{\left(n\right)} \subseteq \left\lbrace 1,\dots,n \right\rbrace$,
+	partitioned by $j\left(\cdot\right)$, are recursively:
 	\begin{IEEEeqnarray*}{rCl}
-		E_{j\left(\cdot\right)} 
+		E_{j\left(\cdot\right)}^{\left(0\right)}
 			& = & \left\lbrace i : \exists p_i > 0 \text{ where } j^{p_i}\left(i\right)=i \right\rbrace\\
-		T_{j\left(\cdot\right)} 
-			& = & E^c_{j\left(\cdot\right)}
+		E_{j\left(\cdot\right)}^{\left(n+1\right)}
+			& = & \left\lbrace i : j\left(i\right) \in E_{j\left(\cdot\right)}^{\left(n\right)} \right\rbrace
 	\end{IEEEeqnarray*}
 \end{definition}
 
-The partitioning into an ergodic subset and a transient subset allows us to construct a pair
-of restriction maps of $j\left(\cdot\right)$.
+The partitioning of the integers into an ergodic subset and transient subsets allows us to
+construct restriction maps of $j\left(\cdot\right)$.
 \begin{definition}
 	The ergodic and transient restrictions of $j\left(\cdot\right)$ are given by:
 	\begin{IEEEeqnarray*}{rCl}
-		j_E\left(i\right) 
+		j_n\left(i\right) 
 			& = &
 			\begin{cases}
-				j\left(i\right) & i \in E_{j\left(\cdot\right)}\\
+				j\left(i\right) & i \in E_{j\left(\cdot\right)}^{\left(n\right)}\\
 				i & \text{otherwise}
 			\end{cases}\\
-		j_T\left(\cdot\right) 
-			& = &
-			\begin{cases}
-				j\left(i\right) & i \in T_{j\left(\cdot\right)}\\
-				i & \text{otherwise}
-			\end{cases}
 	\end{IEEEeqnarray*}
 \end{definition}
 
-Nearly without any further proof we can state the following observations
+If $T$ is the highest order transient of $j\left(\cdot\right)$, so that $T$ is the smallest 
+$t$ such that $j^t\left(i\right) \in E_{j\left(\cdot\right)}^{\left(0\right)}$, then nearly
+without any further proof we can state the following observations
 \begin{observation}
-	The following relationships for $j\left(\cdot\right)$, $j_E\left(\cdot\right)$, and $j_T\left(\cdot\right)$
+	The following relationships for $j\left(\cdot\right)$, and $j_n\left(\cdot\right)$ hold
 	\begin{enumerate}
-		\item $i \in E_{j\left(\cdot\right)} \Rightarrow j_E\left(i\right) \in E_{j\left(\cdot\right)}$
-		\item $\exists i \in T_{j\left(\cdot\right)} : j_T\left(i\right) \in E_{j\left(\cdot\right)}$
-		\item $j\left(i\right) = j_T\left(j_E\left(i\right)\right)$
-		\item $C_{j\left(\cdot\right)} = C_{j_E\left(\cdot\right)} + C_{j_T\left(\cdot\right)}$
-		\item $\operatorname{im}\left(C_{j_T\left(\cdot\right)}\right) \leqslant \ker\left(C_{j_E\left(\cdot\right)}\right)$
+		\item $i \in E_{j\left(\cdot\right)}^{\left(0\right)} \Rightarrow j_0\left(i\right) = j\left(i\right) \in E_{j\left(\cdot\right)}^{\left(0\right)}$
+		\item $n>0 \text{ and } i \in E_{j\left(\cdot\right)}^{\left(n\right)} \Rightarrow j_n\left(i\right) = j\left(i\right) \in E_{j\left(\cdot\right)}^{\left(n-1\right)}$
+		\item $n > 0 \Rightarrow j_n^2\left(i\right) = j_n\left(i\right) $
+		\item $j\left(i\right) = j_0 \circ \cdots \circ j_T \left(i\right)$
+		\item $C_{j\left(\cdot\right)} = \sum_{n=1}^T C_{j_n\left(\cdot\right)}$
+		\item $m < n \Rightarrow \operatorname{im}\left(C_{j_n\left(\cdot\right)}\right) \leqslant \ker\left(C_{j_m\left(\cdot\right)}\right)$
 		which follows from
 		\begin{IEEEeqnarray*}{rCl}
-			C_{j_E\left(\cdot\right)} C_{j_T\left(\cdot\right)}
-				& = & C_{j_T\left(j_E\left(\cdot\right)\right)} - C_{j_E\left(\cdot\right)} - C_{j_T\left(\cdot\right)}\\
-				& = & C_{j\left(\cdot\right)} - C_{j_E\left(\cdot\right)} - C_{j_T\left(\cdot\right)}\\
-				& = & C_{j_E\left(\cdot\right)} + C_{j_T\left(\cdot\right)} - C_{j_E\left(\cdot\right)} - C_{j_T\left(\cdot\right)}\\
+			C_{j_m\left(\cdot\right)} C_{j_n\left(\cdot\right)}
+				& = & C_{j_n\left(j_m\left(\cdot\right)\right)} - C_{j_m\left(\cdot\right)} - C_{j_n\left(\cdot\right)}\\
+				& = & C_{j_m\left(\cdot\right)} + C_{j_n\left(\cdot\right)} - C_{j_m\left(\cdot\right)} - C_{j_n\left(\cdot\right)}\\
 				& = & 0
 		\end{IEEEeqnarray*}
 	\end{enumerate}
@@ -557,62 +541,67 @@ Nearly without any further proof we can state the following observations
 The last observation admits a further generalization that will be of use in the following
 calculations
 \begin{observation}
-	If $\left[A,B\right]= AB$ then
+	If $m < n \Rightarrow \left[A_n,A_m\right]= A_n A_m$ then
 	\begin{enumerate}
-		\item $\left(A+B\right)^n=\sum_{m=0}^n A^m B^{n-m}$
-		\item $\exp\left(A+B\right)=\sum_{n,m} \frac{1}{\left(n+m\right)!}A^mB^n$
+		\item $\left(\sum_{m}A_m\right)^n= \sum_{m_1 + m_2 + \cdots = n} \cdots A_2^{m_2} A_1^{m_1}$
+		\item $\exp\left(\sum_{m}A_m\right)=\sum_{m_1,m_2,\dots \ge 0} \frac{1}{\left(m_1 + m_2 + \cdots\right)!}\cdots A_2^{m_2} A_1^{m_1}$
 	\end{enumerate}
 \end{observation}
 
-By construction $j_E\left(\cdot\right)$ is a permutation, and at the very least has a 
-period $P > 0$; the permutation may also contain sub-cycles. As well, there is a $T>0$ such 
-that for each $i \in T_{j\left(\cdot\right)}$ is absorbed by $j^t_T\left(i\right) = i_T \in E_{j\left(\cdot\right)}$
-for all $t > T$. Thus to find a limit in the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$
-we need only consider a coefficient $\alpha_0$ for $C_{j_T\left(\cdot\right)}$ and $p-1$
-coefficients $\alpha_n$ for the $p-1$ vertex dual matrices $C_{j^n_E\left(\cdot\right)}$. We
-propose a trial solution for $V_{j\left(\cdot\right)}$, to which we apply the previous 
+By construction $j_0\left(\cdot\right)$ is a permutation, and at the very least has a 
+period $P > 0$. As well, $j\left(\cdot\right)$ will have a highest transient order of at 
+most $T > 0$. Taken together this implies that to find a limit in the stochastic Lie 
+algebra $\mathfrak{st}(\hat{\mathbbm{1}})$ that is equal to $V_{j_0\left(\cdot\right)}$ we
+need only consider a coefficient $\alpha_0$ for the $C_{j_n\left(\cdot\right)}$ when $n>0$,
+and $p-1$ coefficients $\alpha_n$ for the $p-1$ vertex dual matrices $C_{j^n_0\left(\cdot\right)}$.
+We propose a trial solution for $V_{j\left(\cdot\right)}$, to which we apply the previous 
 observations to simply.
-\begin{IEEEeqnarray*}{rCl}
-	V_{j\left(\cdot\right)} 
-		& = & \exp\left(\alpha_0 C_{j_T\left(\cdot\right)} + \sum_{l=1}^{p-1} \alpha_l C_{j_E^l\left(\cdot\right)} \right)\\
-		& = & \sum_{n,m}\frac{1}{\left(n+m\right)!} \left(\alpha_0 C_{j_T\left(\cdot\right)}\right)^m \left(\sum_{l=1}^{p-1} \alpha_l C_{j_E^l\left(\cdot\right)}\right)^n
-\end{IEEEeqnarray*}
+\begin{proposition}
+	For a function $j(i): \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
+	\begin{IEEEeqnarray*}{rCl}
+		V_{j\left(\cdot\right)} 
+			& = & \exp\left(\alpha_0 \sum_{l=1}^T C_{j_l\left(\cdot\right)} + \sum_{l=1}^{p-1} \alpha_l C_{j_0^l\left(\cdot\right)} \right)
+	\end{IEEEeqnarray*}
 
-The vertex is recovered with $\alpha_0 \rightarrow \infty$, and the Pythagorean
-coefficients.
-\begin{IEEEeqnarray*}{rCl}
-	\alpha_n 
-		& = & 
-		\begin{cases}
-			\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}} & n \text{ even}\\
-			\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right) & n \text{ odd}
-		\end{cases}
-\end{IEEEeqnarray*}
+	With the vertex recovered by letting $\alpha_0 \rightarrow \infty$, and letting $\alpha_n$ 
+	take on the Pythagorean coefficients.
+	\begin{IEEEeqnarray*}{rCl}
+		\alpha_n 
+			& = & 
+			\begin{cases}
+				\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}} & p \text{ even}\\
+				\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right) & p \text{ odd}
+			\end{cases}
+	\end{IEEEeqnarray*}
+\end{proposition}
 
 The Pythagorean coefficients are so named because $\frac{\pi}{p}\csc\left(\frac{\pi}{p}\right)$ 
-is ratio of $\pi$ to the $p$ inner Pythagorean approximation of $\pi$.
+is ratio of $\pi$ to the $p$ inner Pythagorean approximation of $\pi$. For now this proposition
+remains unproven. However, a hint of the direction to take can be seen by expanding the 
+power series.
+\begin{IEEEeqnarray*}{rCl}
+	V_{j\left(\cdot\right)} 
+		& = & e^{-\sum_{n=1}^{p-1} \alpha_n} \sum_{m_1,\dots, m_{p-1} \ge 0} V^{\sum_{n=1}^{p-1} n m_{n}}_{j_0\left(\cdot\right)} \prod_{n=1}^{p-1}\frac{\alpha_n^{m_n}}{m_n!}
+		+ (1 - e^{-\alpha_0}) \sum_{l=1}^T C_{j_l\left(\cdot\right)} + \cdots \\
+		&   & \cdots + \left(-1\right)^T C_{j_T\left(\cdot\right)} \cdots C_{j_1\left(\cdot\right)}
+		\sum_{m_0,\dots,m_T>0} \frac{\left(-\alpha_1\right)^{m_1} \cdots \left(-\alpha_T\right)^{m_T}}{\left(m_0 + \cdots + m_T\right)!}
+		\left( \sum_{l=1}^{p-1} \alpha_l C_{j_0^l\left(\cdot\right)} \right)^{m_0}
+\end{IEEEeqnarray*}
 
 \subsection{Contraction and Dual Algebras}
 
-It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure;
-most importantly it is connected, but not simply connected. This can be seen 
-because $St(\hat{\mathbbm{1}})$ contains matrices with positive, negative, and 
-complex determinants, while matrices with a determinant of zero are excluded, 
-because they are not invertible. There is a simply connected normal sub-group of 
-$St(\hat{\mathbbm{1}})$ that has particular importance to continuous time 
-homogeneous Markov processes on finite state spaces.
-
-% Need a figure and geometric interpretation of trying to shink a loop in the 
-% complex plane to a point, when the loop is around a pole at the origin.
-
+It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure; most
+importantly it is connected, but not simply connected. This can be seen because $St(\hat{\mathbbm{1}})$
+contains matrices with positive, negative, and complex determinants, while matrices with a 
+determinant of zero are excluded, because they are not invertible. There is a simply 
+connected normal sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance to 
+continuous time homogeneous Markov processes on finite state spaces.
 \begin{definition}
 	The stochastic contraction Lie group $St^{+}(\hat{\mathbbm{1}})$ is the set
 	of matrices such that $A \in St(\hat{\mathbbm{1}})$ and $\det A \in \mathbb{R}^{+}$
 \end{definition}
 
-Again this definition necessitates a proof of the claim in the previous 
-paragraph.
-
+This definition necessitates a proof of the claim in the previous paragraph.
 \begin{corollary}
 	$St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal sub-group of $St(\hat{\mathbbm{1}})$
 \end{corollary}
@@ -629,8 +618,8 @@ paragraph.
 				& = & \det A
 		\end{IEEEeqnarray*}
 		thus $BAB^{-1} \in St^{+}(\hat{\mathbbm{1}})$
-		\item It is sufficient to prove that $St^{+}(\hat{\mathbbm{1}})$ is simply
-		connected through the identity element.
+		\item It is sufficient to prove that $St^{+}(\hat{\mathbbm{1}})$ is simply connected
+		through the identity element.
 		\item Starting with a continuous path $A\left(t\right) \in St^{+}(\hat{\mathbbm{1}})$
 		parameterized by $t \in \left[0,1\right]$ such that $A\left(0\right) = A\left(1\right) = I$,
 		by definition of the Lie algebra there exists a continuous path $G\left(t \right) = \sum_{ij} \alpha_{ij}\left(t\right) C_{ij} \in \mathfrak{st}(\hat{\mathbbm{1}})$ 
@@ -644,27 +633,24 @@ paragraph.
 	\end{enumerate}
 \end{IEEEproof}
 
-The use of the nomenclature of contraction is in deference to the equivalent
-definition used for the generators of continuous time homogeneous Markov 
-processes on finite state spaces. Of course every good Lie group deserves a Lie 
-algebra.
-
+The use of the nomenclature of contraction is in deference to the equivalent definition used
+for the generators of continuous time homogeneous Markov processes on finite state spaces.
+Of course every good Lie group deserves a Lie algebra.
 \begin{definition}
 	Let $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ denote the stochastic contraction Lie 
 	algebra of $St^{+}(\hat{\mathbbm{1}})$
 \end{definition}
 
 This definition admits a similar characterization as before.
-
 \begin{corollary}
 	$C_{ij}$ over $\mathbb{R}$ generates $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
 \end{corollary}
 
 \begin{IEEEproof}
-	The result follows in much the same method as the central theorem of this 
-	chapter, except to show that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real
-	vector space over the basis $C_{ij}$. It is sufficient to check for closure
-	with respect to linear sums and scalar multiplications:
+	The result follows in much the same method as the central theorem of this  chapter, except
+	to show that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space over the basis
+	$C_{ij}$. It is sufficient to check for closure with respect to linear sums and scalar
+	multiplications:
 	\begin{enumerate}
 		\item For any $\alpha_{ij} \in \mathbb{C}$ such that $\exp\left(\sum_{ij} \alpha_{ij} C_{ij}\right) \in St^{+}(\hat{\mathbbm{1}})$
 		Jacobi's formula requires that $\mathbb{I}m\left(\sum_{ij} \alpha_{ij}\right) \equiv 0 \bmod 2 \pi$.
@@ -690,29 +676,26 @@ This definition admits a similar characterization as before.
 	\end{enumerate}
 \end{IEEEproof}
 
-Note that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space, but it is 
-augmented with the group of integers $\mathbb{Z}$. This is because every real point has 
-added to it every multiple of $\mathrm{i}2\pi$.
+Note that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a real vector space that is augmented
+with the group of integers $\mathbb{Z}$. This is because every real point has added to it 
+every multiple of $\mathrm{i}2\pi$.
 
-That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has 
-an important consequence for the generator estimation methods developed in the 
-next chapter. The methods are all constrained to algebraic operations, so that
-by closure of the Lie sub-algebra the algorithms will always result in 
-generators from $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$. This can be seen because 
-any continuous time homogeneous path through $St(\hat{\mathbbm{1}})$ defined 
-must always start at the identity matrix. Thus if the basis $\hat{e}_i$ 
-enumerates a finite state space, then the generator estimated by algebraic 
-operations with respect to $C_{ij}$ will always have real (positive) expansion 
-in the basis $C_{ij}$. This will occur even if a suitable complex generator is 
-used to generate real (positive) transition probabilities. We can interpret this 
-as meaning that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a closed branch of the 
-matrix logarithm.
+That $St^{+}(\hat{\mathbbm{1}})$ is a simply connected normal Lie sub-group has an important
+consequence for the generator estimation methods developed in the next chapter. The methods
+are all constrained to algebraic operations, so that by closure of the Lie sub-algebra the
+algorithms will always result in generators from $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
+This can be seen because any continuous time homogeneous path through $St(\hat{\mathbbm{1}})$
+must always start at the identity matrix. Thus if the basis $\hat{e}_i$  enumerates a finite
+state space, then the generator estimated by algebraic operations with respect to $C_{ij}$
+will always have real (positive) expansion in the basis $C_{ij}$. This will occur even if a
+suitable complex generator is used to generate real (positive) transition probabilities. We
+can interpret this as meaning that $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$ is a closed branch
+of the matrix logarithm.
 
 We have developed an interpretation of the Eigen equation $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
 as a conservation of the row sums of $A$; likewise the Eigen equation $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
-can be interpreted as the conservation of the column sums of $A$. The dual 
-definitions for the Lie group and algebra follow natural.
-
+can be interpreted as the conservation of the column sums of $A$. The dual definitions for
+the Lie group and algebra follow natural.
 \begin{definition}
 	Let $St^T(\hat{\mathbbm{1}})$ denote the dual stochastic Lie group of 
 	invertible matrices whose transpose is stochastic with respect to $\hat{\mathbbm{1}}$.
@@ -724,8 +707,8 @@ definitions for the Lie group and algebra follow natural.
 \end{definition}
 
 Thus if $C_{ij}$ are generators of $\mathfrak{st}(\hat{\mathbbm{1}})$ then $C_{ij}^T = \left(\hat{e}_j - \hat{e}_i \right) \otimes \hat{e}_i$
-are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. The definitions of the
-dual stochastic contraction Lie group $St^{+T}(\hat{\mathbbm{1}})$ and Lie algebra $\mathfrak{st}^{+T}(\hat{\mathbbm{1}})$
+are generators of $\mathfrak{st}^T(\hat{\mathbbm{1}})$. The definitions of the dual 
+stochastic contraction Lie group $St^{+T}(\hat{\mathbbm{1}})$ and Lie algebra $\mathfrak{st}^{+T}(\hat{\mathbbm{1}})$
 follow analogously. That $St^{+}(\hat{\mathbbm{1}}) \cap St^{+T}(\hat{\mathbbm{1}}) \subseteq St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}}) \subseteq St(\hat{\mathbbm{1}})$ 
 are a Lie groups and $\mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+T}(\hat{\mathbbm{1}}) \subseteq \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}}) \subseteq \mathfrak{st}(\hat{\mathbbm{1}})$ 
 are a Lie algebras will be foundational for the next section.
@@ -735,17 +718,15 @@ are a Lie algebras will be foundational for the next section.
 
 Doubly stochastic matrices require row and column conservation of the vector $\hat{\mathbbm{1}}$, 
 in the sense that both $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ and $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ 
-must hold. The group of invertible doubly stochastic matrices is then a subgroup
-of the group of stochastic matrices. The two constraints of row and column 
-conservation leaves only $\left(n - 1\right)^2$ linear degrees of freedom. This 
-will be an important clue in the construction of canonical generators. In fact 
-the canonical generators can be found by choosing one additional vector $\hat{e}_n$, 
-from the basis constructed in the previous section, to center the combinatorial 
-construction of the generators of the algebra around. This vector plays a 
-similar role to the diagonal in the previous construction and is used to balance 
-the row and column sums back to zero. As in the previous section we start with 
-a foundational definition.
-
+must hold. The group of invertible doubly stochastic matrices is then a subgroup of the
+group of stochastic matrices. The two constraints of row and column conservation leaves only
+$\left(n - 1\right)^2$ linear degrees of freedom. This will be an important clue in the
+construction of canonical generators. In fact the canonical generators can be found by
+choosing one additional vector $\hat{e}_n$, from the basis constructed in the previous
+section, to center the combinatorial construction of the generators of the algebra around.
+This vector plays a similar role to the diagonal in the previous construction and is used to
+balance the row and column sums back to zero. As in the previous section we start with a 
+foundational definition.
 \begin{definition}
 	Let $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly stochastic 
 	Lie group of invertible matrices $A$ such that both $A$ and $A^T$ are 
@@ -754,106 +735,52 @@ a foundational definition.
 
 We can immediately observe without proof that $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St(\hat{\mathbbm{1}}) \cap St^T(\hat{\mathbbm{1}})$;
 leading to the next definition.
-
 \begin{definition}
 	Let $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ denote the doubly 
 	stochastic Lie algebra of $St(\hat{\mathbbm{1}},\hat{\mathbbm{1}})$.
 \end{definition}
 
-Again, it should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
-The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-is the algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the 
-kernel of both $A$ and $A^T$. As with $St(\hat{\mathbbm{1}})$, the Lie group $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-is not connected, and contains the splitting contraction sub-group $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St^{+}(\hat{\mathbbm{1}}) \cap St^{+T}(\hat{\mathbbm{1}})$,
-with its similarly defined contraction sub-algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+T}(\hat{\mathbbm{1}})$. 
-$St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ has the same properties of 
-normality and simple connectedness within $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$; 
-of course it is not normal within $St(\hat{\mathbbm{1}})$, because $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-is not normal within $St(\hat{\mathbbm{1}})$.
+It should be clear that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^T(\hat{\mathbbm{1}})$.
+The implication being that $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ is the
+algebra of all matrices $A$ such that $\hat{\mathbbm{1}}$ is in the kernel of both $A$ and $A^T$.
+As with $St(\hat{\mathbbm{1}})$, the Lie group $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ is
+not simply connected. It contains the splitting contraction sub-group $St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = St^{+}(\hat{\mathbbm{1}}) \cap St^{+T}(\hat{\mathbbm{1}})$,
+and analogously defined contraction sub-algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}}) = \mathfrak{st}^{+}(\hat{\mathbbm{1}}) \cap \mathfrak{st}^{+T}(\hat{\mathbbm{1}})$. 
+$St^{+}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ has the same properties of normality and 
+simple connectedness within $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$; of course it is not
+normal within $St(\hat{\mathbbm{1}})$, because $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ is
+not normal within $St(\hat{\mathbbm{1}})$.
 
 \subsection{Canonical Generators}
 
-We can find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-by similar methods as in the previous section. Given a constructed basis $\hat{e}_i$
-such that $\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$
-we pick a single arbitrary element from the basis, say $\hat{e}_n$, the last
-element for example. We then balance a transition rate from $i$ to $j$, with the
-reverse rates from $j$ to $n$ and $n$ to $i$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$.
-The state transitions of the symmetric matrix $C_{iin}$ are illustrated in 
-figure \ref{fig:symmetricdoublestochastic}, and the state transitions of the 
-asymmetric matrix $C_{ijn}$ are illustrated in figure \ref{fig:doublestochastic}. 
-
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[->,thick,node distance=3cm]
-		\node[state] (i)              {$\hat{e}_i$};
-		\node[state] (n) [right of=i] {$\hat{e}_n$};
-		\path
-			(i) edge [loop left]  node         {$-1$} (i)
-			(i) edge [bend left]  node [above] {$+1$} (n)
-			(n) edge [bend left]  node [below] {$+1$} (i)
-			(n) edge [loop right] node         {$-1$} (n);
-	\end{tikzpicture}
-	\caption[Canonical generators $C_{iin}$]{State transition circuit diagram of the canonical generators $C_{iin}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
-	\label{fig:symmetricdoublestochastic}
-\end{figure} 
-
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[->,thick,node distance=3cm]
-		\node[state] (i)                    {$\hat{e}_i$};
-		\node[state] (n) [below right of=i] {$\hat{e}_n$};
-		\node[state] (j) [above right of=n] {$\hat{e}_j$};
-		\path
-			(i) edge [loop left]  node         {$-1$} (i)
-			(j) edge [loop right] node         {$-1$} (j)
-			(n) edge [loop below] node         {$-1$} (n)
-			(i) edge [bend left]  node [above] {$+1$} (j)
-			(j) edge [bend left]  node [below] {$+1$} (n)
-			(n) edge [bend left]  node [below] {$+1\quad$} (i);
-	\end{tikzpicture}
-	\caption[Canonical generators $C_{ijn}$]{State transition circuit diagram of the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
-	\label{fig:doublestochastic}
-\end{figure} 
+We can find canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ by
+similar methods as in the previous section. Given a constructed basis $\hat{e}_i$ such that
+$\left\langle \hat{e}_i, \hat{\mathbbm{1}} \right\rangle = \frac{1}{\sqrt{n}}$ we pick a
+single arbitrary element from the basis, say $\hat{e}_n$, the last element for example. We
+then balance a transition rate from $i$ to $j$, with the reverse rates from $j$ to $n$ and $n$
+to $i$, yielding the matrix $C_{ijn} = C_{ij} + C_{ni} + C_{jn}$. The state transitions of
+the symmetric matrix $C_{iin}$ are illustrated in figure \ref{fig:symmetricdoublestochastic},
+and the state transitions of the asymmetric matrix $C_{ijn}$ are illustrated in figure \ref{fig:doublestochastic}. 
 
 The matrices $C_{ijn}$ are elements of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$. 
-Furthermore they are a closed set with respect to matrix transposition, because 
-$C_{ijn}^T = C_{jin}$. The algebra $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-is isomorphic to the space of $\left(n-1\right) \times \left(n-1\right)$ 
-matrices; which can be seen by the from the improper commutators, where for any 
-$i,j \le n-1$.
-
+Furthermore they are a closed set with respect to matrix transposition, because $C_{ijn}^T = C_{jin}$.
+The algebra $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ is isomorphic to the space
+of $\left(n-1\right) \times \left(n-1\right)$ matrices; which can be seen by the from the
+improper commutators, where for any $i,j \le n-1$.
 \begin{IEEEeqnarray*}{rCl}
 	C_{iin} + C_{jjn} - C_{ijn}
 		& = & C_{in} + C_{nj} - C_{ij}\\
 		& = & \hat{e}_i \otimes \hat{e}_n + \hat{e}_n \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e_j} - \hat{e}_n \otimes \hat{e}_n
 \end{IEEEeqnarray*}
 
-The state transitions of the improper commutators $C_{iin} + C_{jjn} - C_{ijn}$
-are illustrated in figure \ref{fig:improperdoublestochastic}.
+The state transitions of the improper commutators $C_{iin} + C_{jjn} - C_{ijn}$ are
+illustrated in figure \ref{fig:improperdoublestochastic}.
 
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[->,thick,node distance=3cm]
-		\node[state] (i)                    {$\hat{e}_i$};
-		\node[state] (n) [below right of=i] {$\hat{e}_n$};
-		\node[state] (j) [above right of=n] {$\hat{e}_j$};
-		\path
-			(n) edge [loop below] node         {$-1$} (n)
-			(i) edge [bend left]  node [above] {$-1$} (j)
-			(i) edge [bend right] node [below] {$+1\quad$} (n)
-			(n) edge [bend right] node [below] {$+1$} (j);
-	\end{tikzpicture}
-	\caption[Improper generators $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the improper generators $C_{iin} + C_{jjn} - C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
-	\label{fig:improperdoublestochastic}
-\end{figure} 
-
-The intuition being that any $n \times n$ matrix with fixed row and column sums
-can be created by starting with any $\left(n-1\right) \times \left(n-1\right)$ 
-matrix and appending a compensating $n$ row and $n$ column. This relationship is 
-implicitly used extensively in proving the following lemma and corollary on the 
-products, commutators, and structure constants of $C_{ijn}$.
-
+The intuition being that any $n \times n$ matrix with fixed row and column sums can be 
+created by starting with any $\left(n-1\right) \times \left(n-1\right)$ matrix and appending
+a compensating $n$ row and $n$ column. This relationship is implicitly used extensively in
+proving the following lemma and corollary on the products, commutators, and structure
+constants of $C_{ijn}$.
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
 		C_{ijn}C_{kln} & = &
@@ -929,7 +856,6 @@ products, commutators, and structure constants of $C_{ijn}$.
 \end{IEEEproof}
 
 Moving immediately to the commutators we have:
-
 \begin{corollary}
 	\begin{IEEEeqnarray*}{rCl}
 		\left[C_{ijn},C_{kln}\right] & = &
@@ -1001,41 +927,38 @@ Moving immediately to the commutators we have:
 	\end{enumerate}
 \end{IEEEproof}
 
-Restricting to the matrices where both the row and column sums are zero, which
-is equivalent to demanding the conservation of the transition rates, or 
-infinitesimal flows of probability, introduces a significant degree of
-complexity to the algebra. In particular demanding that all the transition rates
-be balanced by transitions through $\hat{e}_n$ means that only the simplest two
-and three state processes have easily calculable algebras. Nevertheless, the 
-result makes the sibling theorem accessible.
-
+Restricting to the matrices where both the row and column sums are zero, which is equivalent
+to demanding the conservation of the transition rates, or infinitesimal flows of 
+probability, introduces a significant degree of complexity to the algebra. In particular
+demanding that all the transition rates be balanced by transitions through $\hat{e}_n$ means
+that only the simplest two and three state processes have easily calculable algebras.
+Nevertheless, the result makes the sibling theorem accessible.
 \begin{theorem}
 	$C_{ijn}$ are canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
 \end{theorem}
 
 \begin{IEEEproof}
-	The proof proceeds in the same manner as the proof of the sibling theorem in
-	the previous section.
+	The proof proceeds in the same manner as the proof of the sibling theorem in the previous
+	section.
 	\begin{enumerate}
-		\item As discussed before $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$
-		is an $\left(n-1\right)^2$ dimensional vector space.
-		\item By construction there are only $\left(n-1\right)^2$ matrices $C_{ijn}$
-		for a fixed choice of $\hat{e}_n$.
-		\item Through induction the matrices $C_{ijn}$ are linearly independent for
-		a fixed choice of $\hat{e}_n$.
-		\item Thus the matrices $C_{ijn}$, for a fixed choice of $\hat{e}_n$, are a 
-		basis for $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
-		\item By the previous lemma the commutators of matrices $C_{ijn}$ are linear
+		\item As discussed before $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ is an 
+		$\left(n-1\right)^2$ dimensional vector space.
+		\item By construction there are only $\left(n-1\right)^2$ matrices $C_{ijn}$ for a fixed
+		choice of $\hat{e}_n$.
+		\item Through induction the matrices $C_{ijn}$ are linearly independent for a fixed 
+		choice of $\hat{e}_n$.
+		\item Thus the matrices $C_{ijn}$, for a fixed choice of $\hat{e}_n$, are a basis for 
+		$\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.
+		\item By the previous lemma the commutators of matrices $C_{ijn}$ are linear 
 		combinations of themselves.
-		\item It follows then that the smallest algebra that contains the matrices $C_{ijn}$
-		is $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.\hfill\IEEEQEDhere
+		\item It follows then that the smallest algebra that contains the matrices $C_{ijn}$ is
+		$\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
 
-As with the stochastic Lie algebra the generators of the doubly stochastic Lie 
-algebra are not unique, not only do they depend on the choice of the basis $\hat{e}_i$ 
-but also on the choice of the basis element $\hat{e}_n$ used to sum the rows and 
-columns to zero.
+As with the stochastic Lie algebra the generators of the doubly stochastic Lie algebra are
+not unique, not only do they depend on the choice of the basis $\hat{e}_i$ but also on the
+choice of the basis element $\hat{e}_n$ used to sum the rows and columns to zero.
 
 \subsection{Vertex Logarithms}
 
@@ -1047,30 +970,29 @@ theorem there are $n!$ vertexes of the Birkhoff polytope, $V_{j\left(\cdot\right
 by the $n!$ permutations $j\left(i\right):\left\lbrace 1,\dots,n \right\rbrace \mapsto \left\lbrace 1,\dots,n \right\rbrace$.
 
 From the work in the previous section on the vertexes of the convex polytope of singly
-stochastic matrices we can state immediately that the vertexes of the Birkhoff polytope are 
-generated by:
+stochastic matrices we can state a more specific version of the proposition from the 
+previous section for the vertexes of the Birkhoff polytope are:
+\begin{proposition}
+	For a permutation $j(i): \left\lbrace 1,\dots,n \right\rbrace \mapsto \left\lbrace 1,\dots,n \right\rbrace$,
+	with period $p$
+	\begin{IEEEeqnarray*}{rCl}
+		V_{j\left(\cdot\right)} 
+			& = & \exp\left(\sum_{n=1}^{p-1} \alpha_n C_{j^n\left(\cdot\right)} \right)
+	\end{IEEEeqnarray*}
 
-\begin{IEEEeqnarray*}{rCl}
-	V_{j\left(\cdot\right)} & = & \exp\left(\sum_{n=1}^{p-1} \alpha_n C_{j^n\left(\cdot\right)} \right)
-\end{IEEEeqnarray*}
+	The vertex recovered is by the Pythagorean coefficients.
+	\begin{IEEEeqnarray*}{rCl}
+		\alpha_n 
+			& = & 
+			\begin{cases}
+				\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}} & p \text{ even}\\
+				\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right) & p \text{ odd}
+			\end{cases}
+	\end{IEEEeqnarray*}
+\end{proposition}
 
-Where $p$ is the period of the permutation $j\left(\cdot\right)$. The vertex is recovered
-with the Pythagorean coefficients.
-
-\begin{IEEEeqnarray*}{rCl}
-	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)
-\end{IEEEeqnarray*}
-
-when $p$ is odd, and
-
-\begin{IEEEeqnarray*}{rCl}
-	\alpha_n & = & \left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}}
-\end{IEEEeqnarray*}
-
-when $p$ is even.
-
-This particular logarithm is not unique, nor is it even the principle branch in general.
-Other logarithms can be quickly generated by further decomposing the permutation $j\left(\cdot\right)$
+The logarithm is not unique, nor is it even the principle branch in general. Other 
+logarithms can be quickly generated by further decomposing the permutation $j\left(\cdot\right)$
 into sub-cycles, and applying the same formula for the coefficients $\alpha_n$.
 % Unlike stochastic Lie group there are no nice guareentees on properness with
 % respect to postive sums. No matter what generators of the algebra are chosen
@@ -1084,3 +1006,81 @@ into sub-cycles, and applying the same formula for the coefficients $\alpha_n$.
 % Basis choice unqiuely gives the Birkhoff polytope, it is independent of the
 % choice of balancing unit vector. Requires proof the vertexes are 
 % independent of balancing vector.
+
+\section{Figures and Illustrations}
+
+\begin{figure}[!hb]
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)              {$\hat{e}_i$};
+		\node[state] (j) [right of=i] {$\hat{e}_j$};
+		\path
+			(i) edge [loop left] node         {$-1$} (i)
+			(i) edge             node [above] {$+1$} (j);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{ij}$]{State transition circuit diagram of the canonical generators $C_{ij}$ of $\mathfrak{st}(\hat{\mathbbm{1}})$}
+	\label{fig:singlestochastic}
+\end{figure}
+
+\begin{figure}[!hb]
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)              {$\hat{e}_i$};
+		\node[state] (n) [right of=i] {$\hat{e}_n$};
+		\path
+			(i) edge [loop left]  node         {$-1$} (i)
+			(i) edge [bend left]  node [above] {$+1$} (n)
+			(n) edge [bend left]  node [below] {$+1$} (i)
+			(n) edge [loop right] node         {$-1$} (n);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{iin}$]{State transition circuit diagram of the canonical generators $C_{iin}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:symmetricdoublestochastic}
+\end{figure} 
+
+\begin{figure}[!hb]
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)                    {$\hat{e}_i$};
+		\node[state] (n) [below right of=i] {$\hat{e}_n$};
+		\node[state] (j) [above right of=n] {$\hat{e}_j$};
+		\path
+			(i) edge [loop left]  node         {$-1$} (i)
+			(j) edge [loop right] node         {$-1$} (j)
+			(n) edge [loop below] node         {$-1$} (n)
+			(i) edge [bend left]  node [above] {$+1$} (j)
+			(j) edge [bend left]  node [below] {$+1$} (n)
+			(n) edge [bend left]  node [below] {$+1\quad$} (i);
+	\end{tikzpicture}
+	\caption[Canonical generators $C_{ijn}$]{State transition circuit diagram of the canonical generators $C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:doublestochastic}
+\end{figure} 
+
+\begin{figure}[!hb]
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=3cm]
+		\node[state] (i)                    {$\hat{e}_i$};
+		\node[state] (n) [below right of=i] {$\hat{e}_n$};
+		\node[state] (j) [above right of=n] {$\hat{e}_j$};
+		\path
+			(n) edge [loop below] node         {$-1$} (n)
+			(i) edge [bend left]  node [above] {$-1$} (j)
+			(i) edge [bend right] node [below] {$+1\quad$} (n)
+			(n) edge [bend right] node [below] {$+1$} (j);
+	\end{tikzpicture}
+	\caption[Improper generators $C_{iin} + C_{jjn} - C_{ijn}$]{State transition circuit diagram of the improper generators $C_{iin} + C_{jjn} - C_{ijn}$ of $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$}
+	\label{fig:improperdoublestochastic}
+\end{figure}
+
+\begin{figure}[!hb]
+	\centering
+	\includegraphics[natwidth=11cm,natheight=11cm]{pythagorean-16.pdf}
+	\caption[Pythagorean coefficients for $p=16$]{Complex plain geometry of the Pythagorean coefficients $\alpha_n$ of period $p=16$. Blue points represent the location of the coefficients in the complex plane. Green lines illustrate the projection of the real component. Grey lines illustrate the imaginary component $\pm \frac{\pi}{16}$.}
+	\label{fig:pythagorean-16}
+\end{figure}
+
+\begin{figure}[!hb]
+	\centering
+	\includegraphics[natwidth=11cm,natheight=11cm]{pythagorean-17.pdf}
+	\caption[Pythagorean coefficients for $p=17$]{Complex plain geometry of the Pythagorean coefficients $\alpha_n$ of period $p=17$. Blue points represent the location of the coefficients in the complex plane. Green lines carry the amplitude though to the intersection of the phase with the imaginary component $\pm \frac{\pi}{17}$.}
+	\label{fig:pythagorean-17}
+\end{figure}

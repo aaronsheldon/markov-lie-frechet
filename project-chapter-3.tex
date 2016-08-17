@@ -1,40 +1,37 @@
 \chapter{Pad\'{e} Approximation of the Fr\'{e}chet Derivatives of the Exponential Map}
 \section{The Gradient}
-Moler and Van Loan seminally reviewed algorithms for calculating the matrix 
-exponential in 1978, and revisited that review in 2003\cite{moler_nineteen_1978,moler_nineteen_2003}. 
-Building on the discussions of Moler and Van Loan, Higham established the 
-standard implementation of the matrix exponential based on scaling and scaring 
-and Pad\'{e} approximation\cite{higham_scaling_2005,higham_functions_2008}.
-The Higham implementation was further optimized for $64$ bit architectures by 
-Al-Mohy\cite{al-mohy_new_2009}. In the same work Al-Mohy developed an algorithm 
-to approximate the derivative of the matrix exponential, formulated by taking 
-the derivative of the Pad\'{e} approximation of the matrix exponential, and then 
-working out a recursive calculation for the derivatives of matrix powers\cite{al-mohy_computing_2009}.
+Moler and Van Loan seminally reviewed algorithms for calculating the matrix exponential in
+1978, and revisited that review in 2003\cite{moler_nineteen_1978,moler_nineteen_2003}. 
+Building on the discussions of Moler and Van Loan, Higham established the standard 
+implementation of the matrix exponential based on scaling and scaring and Pad\'{e} 
+approximation\cite{higham_scaling_2005,higham_functions_2008}. The Higham implementation was
+further optimized for $64$ bit architectures by Al-Mohy\cite{al-mohy_new_2009}. In the same
+work Al-Mohy developed an algorithm to approximate the derivative of the matrix exponential, 
+formulated by taking the derivative of the Pad\'{e} approximation of the matrix exponential, 
+and then working out a recursive calculation for the derivatives of matrix 
+powers\cite{al-mohy_computing_2009}.
 
-While the derivative of the Pad\'{e} approximation of an analytic function will 
-converge to the derivative of the analytic function, it is not true that the
-derivative of the Pad\'{e} approximation of an analytic function is the Pad\'{e} 
-approximation of the derivative of an analytic function. In the sense that 
-Pad\'{e} approximations of analytic functions are an optimal series of algebraic 
-approximations the 2009 method proposed by Al-Mohy is not optimal.
+While the derivative of the Pad\'{e} approximation of an analytic function will converge to 
+the derivative of the analytic function, it is not true that the derivative of the Pad\'{e} 
+approximation of an analytic function is the Pad\'{e} approximation of the derivative of an 
+analytic function. In the sense that Pad\'{e} approximations of analytic functions are an 
+optimal series of algebraic approximations the 2009 method proposed by Al-Mohy is not 
+optimal.
 
-In this chapter we will develop an approximation for the first, and second order
-Fr\'{e}chet derivatives of the matrix exponential, by decomposing the 
-derivatives into components that hold for the commutative condition, and 
-components containing the perturbation due to non-commutativity. We will then 
-derive the Pad\'{e} approximation for the non-commutative perturbation. We begin 
-by listing the eight forms of the Fr\'{e}chet derivative of exponential map, in 
-the direction $\frac{\partial X}{\partial x}$ at the point $X$ in the Lie 
-algebra.
-\footnote{We have abused and confounded the notations for directional 
-derivatives and partial derivatives here by assuming that $X$ is parameterized 
-by $x$ so that $\frac{\partial e^X}{\partial x}$ is the derivative in the
-direction of change of $x$.}
-\footnote{With respect to the adjoint operator, we are using the currying 
-partial application notation of $\left[L f\left(\cdotp\right)\right]\left(y\right)$
-to indicate the application of the operator $L$ to $f\left(x\right)$ followed by
-evaluation of the result at $y$.}
-
+In this chapter we will develop an approximation for the first, and second order Fr\'{e}chet
+derivatives of the matrix exponential, by decomposing the derivatives into components that
+hold for the commutative condition, and components containing the perturbation due to 
+non-commutativity. We will then derive the Pad\'{e} approximation for the non-commutative 
+perturbation. We begin by listing the eight forms of the Fr\'{e}chet derivative of 
+exponential map, in the direction $\frac{\partial X}{\partial x}$ at the point $X$ in the 
+Lie algebra.
+\footnote{We have abused and confounded the notations for directional derivatives and 
+partial derivatives here by assuming that $X$ is parameterized by $x$ so that $\frac{\partial e^X}{\partial x}$
+is the derivative in the direction of change of $x$.}
+\footnote{With respect to the adjoint operator, we are using the currying partial 
+application notation of $\left[L f\left(\cdotp\right)\right]\left(y\right)$ to indicate the 
+application of the operator $L$ to $f\left(x\right)$ followed by evaluation of the result at
+$y$.}
 {\setlength{\IEEEnormaljot}{18pt}
 \begin{IEEEeqnarray*}{rClls}
 	\frac{\partial e^X}{\partial x}
@@ -48,34 +45,29 @@ evaluation of the result at $y$.}
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X & &
 \end{IEEEeqnarray*}}
 
-The last equality demonstrates the non-commutative perturbation term most 
-clearly; where the first multiplicative factor in the derivative accounts for 
-the lack of commutativity between $X$ and $\frac{\partial X}{\partial x}$, and 
-the last term resembles the derivative in the commutative case. This can be seen 
-clearly when considering the condition $\left[X,\frac{\partial X}{\partial x}\right]=0$ 
+The last equality demonstrates the non-commutative perturbation term most clearly; where the
+first multiplicative factor in the derivative accounts for the lack of commutativity between
+$X$ and $\frac{\partial X}{\partial x}$, and the last term resembles the derivative in the
+commutative case. This can be seen clearly when considering the condition $\left[X,\frac{\partial X}{\partial x}\right]=0$ 
 in which case $\frac{\partial e^X}{\partial x} = \frac{\partial X}{\partial x} e^X$. 
 
-Even though the multiplicative factorization provides a transparent 
-representation of the computational terms it is still far from optimal; because,
-when compared to matrix addition, matrix multiplication is both computationally 
-more expensive, and less numerically stable. The numerical stability, and 
-efficiency can be improved by decomposing the first multiplicative factor into a 
-linear sum of the non-commutative perturbation term, which will reduce to $0$ 
-when $\left[X,\frac{\partial X}{\partial x}\right]=0$, and an invariant term 
+Even though the multiplicative factorization provides a transparent representation of the 
+computational terms it is still far from optimal; because, when compared to matrix addition, 
+matrix multiplication is both computationally more expensive, and less numerically stable. 
+The numerical stability, and efficiency can be improved by decomposing the first 
+multiplicative factor into a linear sum of the non-commutative perturbation term, which will 
+reduce to $0$ when $\left[X,\frac{\partial X}{\partial x}\right]=0$, and an invariant term 
 that contains the commutative relationship for all $X$.
-
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
 		& = & \left[\frac{e^{\operatorname{ad}_X \cdotp} - 1 - \operatorname{ad}_X \cdotp }{\operatorname{ad}_X^2 \cdotp} \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) e^X + \frac{\partial X}{\partial x} e^X\\
 		& = & \underbrace{\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)}_{\text{non-commutative anomaly}} e^X + \underbrace{\frac{\partial X}{\partial x}}_{\text{invariant}} e^X
 \end{IEEEeqnarray*}
 
-Formally the infinite series in the non-commutative perturbation is related to 
-the lower incomplete gamma function $\gamma\left(n,x\right)$. This can be seen 
-by considering the general case when the offset of $2$ in the factorial is 
-allowed to be any natural number $n$, and then restating the sum in terms of a 
-truncated exponential series.
-
+Formally the infinite series in the non-commutative perturbation is related to the lower 
+incomplete gamma function $\gamma\left(n,x\right)$. This can be seen by considering the 
+general case when the offset of $2$ in the factorial is allowed to be any natural number $n$, 
+and then restating the sum in terms of a truncated exponential series.
 \begin{IEEEeqnarray*}{rCl}
 	\sum_{m=0}^{\infty} \frac{x^m}{\left(m+n\right)!}
 		& = & \frac{1}{x^n} \sum_{m=n}^{\infty} \frac{x^m}{m!}\\
@@ -86,73 +78,64 @@ truncated exponential series.
 		& = & \frac{e^x}{\left(n-1\right)! x^n} \gamma\left(n,x\right)
 \end{IEEEeqnarray*}
 
-The non-commutative perturbation series is linear in $\frac{\partial X}{\partial x}$ 
-and a Taylor series in the powers of $\operatorname{ad}_X \cdotp$, thus any 
-computation of an approximation will be in the powers of $\operatorname{ad}_X \cdotp$. 
-As was discussed in the background material, naive computation of the Taylor 
-series itself results in an approximation that will converge slowly, requiring a
-larger number of powers to be computed before the threshold of floating point 
-error is reached. Pad\'{e} approximation by rational functions remedy this 
-problem, by offering convergence to the threshold of floating point error in 
-smaller powers, and fewer computational steps.
+The non-commutative perturbation series is linear in $\frac{\partial X}{\partial x}$  and a 
+Taylor series in the powers of $\operatorname{ad}_X \cdotp$. Thus any computation of an 
+approximation will be in the powers of $\operatorname{ad}_X \cdotp$. As was discussed in the 
+Moler and Van Loan\cite{moler_nineteen_1978,moler_nineteen_2003}, naive computation of the 
+Taylor series itself results in an approximation that will converge slowly, requiring a
+larger number of powers to be computed before the threshold of floating point error is 
+reached. Pad\'{e} approximation by rational functions remedy this problem, by offering 
+convergence to the threshold of floating point error in smaller powers, and fewer 
+computational steps.
 
-However the question remains, given that $\frac{e^{x} -1 - x}{x^2}$ is a 
-rational perturbation of $e^x$, why not simply reuse the polynomials of the 
-Pad\'{e} approximation of the exponential function to compute new polynomials 
-for a rational approximation of the non-commutative perturbation Taylor series. 
-This method has two shortcomings: first, the approximation found in this manner 
-is not itself a Pad\'{e} approximation of the anomaly Taylor series, and so is 
-not bound by the same theoretical asymptotic results as Pad\'{e} approximations;
-second, computation by $\frac{e^{x} - 1 - x}{x^2}$ suffers from the same 
-floating point errors near $0$ as naive computation of $e^x - 1$ by first 
-computing $e^x$ and then subtracting $1$.
+However the question remains, given that $\frac{e^{x} -1 - x}{x^2}$ is a rational 
+perturbation of $e^x$, why not simply reuse the polynomials of the Pad\'{e} approximation of 
+the exponential function to compute new polynomials for a rational approximation of the 
+non-commutative perturbation Taylor series. This method has two shortcomings: first, the 
+approximation found in this manner is not itself a Pad\'{e} approximation of the anomaly 
+Taylor series, and so is not bound by the same theoretical asymptotic results as Pad\'{e} 
+approximations; second, computation by $\frac{e^{x} - 1 - x}{x^2}$ suffers from the same 
+floating point errors near $0$ as naive computation of $e^x - 1$ by first computing $e^x$ 
+and then subtracting $1$.
 
 While it is clear that $\frac{e^x}{x^2}\gamma\left(2,x\right) : x \mapsto \frac{e^{x} -1 - x}{x^2}$ 
-is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be 
-approximated by a Pad\'{e} series with coefficients in $\mathbb{C}$; that the
-rational approximation with the same coefficients can be extended to $\operatorname{ad}_X \cdotp$ 
-requires more careful consideration.
+is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be approximated by a 
+Pad\'{e} series with coefficients in $\mathbb{C}$; that the rational approximation with the 
+same coefficients can be extended to $\operatorname{ad}_X \cdotp$ requires more careful 
+consideration.
 
-Blah, blah, blah the next paragraphs are non-sense and needing replacing. Instead 
-show that the adjoint belongs to an algebra, so that solutions $Y$ to rational 
-equations $P(X)=Q(X)Y$ can be found, when they exist, should make it clear $[P(X),Q(X)]=0$,
-as part of justifying rational approximation vis-a-vi can be computed using 
-standard linear algebra. After that return to developing how to carry out of the 
-computation using Kronecker representation of adjoint. Need to point out that
-the adjoint in a linear operator itself so has a representation as matrix.
+When $X$ is in $\mathfrak{st}(\hat{\mathbbm{1}})$ the adjoint operator $\operatorname{ad}_X \cdotp$
+is a linear endomorphism on the vector space $\mathfrak{st}(\hat{\mathbbm{1}})$; and so 
+belongs to the algebra of general linear operators $GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$. 
+For a Pad\'{e} approximation with numerator polynomial $P\left(X\right)$ and denominator 
+polynomial $Q\left(X\right)$, that $\operatorname{ad}_X \cdotp \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$
+implies that $P\left(\operatorname{ad}_X \cdotp\right), Q\left(\operatorname{ad}_X \cdotp\right) \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$.
+It follows that when a solution $Y$ to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $ exists 
+it is guaranteed to belong to $\mathfrak{st}(\hat{\mathbbm{1}})$, because $\frac{\partial X}{\partial x} \in \mathfrak{st}(\hat{\mathbbm{1}})$.
 
-The operator $\operatorname{ad}_X \cdotp$ has tensorial relationships to the 
-underlying vector space on which $X$ is a linear operator. Specifically $\operatorname{ad}_X \cdotp$
-is a bounded, and thus continuous, linear operator, such that if the underlying 
-vector space is $n$ dimensional then the vector space of linear operators is 
-$n^2$ dimensional, and $\operatorname{ad}_X \cdotp$ by tensor extension can be 
-represented as an $n^2 \times n^2$ matrix. 
-
-Computational the powers of $\operatorname{ad}_X \cdotp$ can be calculated 
-through the Kronecker representation, which requires representing the matrices 
-as vectors. The vector representation of a matrix is achieved by the matrix 
-reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$, which forms a 
-vector $\vec{y}$ by concatenation of the columns of $Y$, called vectorization. 
-We denote the inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
-which reshapes a vector, $n^2$, into an $n \times n$ matrix.
+Computationally the powers of $\operatorname{ad}_X \cdotp$ can be calculated through a 
+Kronecker representation, which requires representing the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$
+as vectors. The vector representation of a matrix is achieved by the matrix reshaping 
+operator $\operatorname{vec}\left(Y\right) = \vec{y}$, which forms a vector $\vec{y}$ by 
+concatenation of the columns of $Y$, called the vectorization of the matrix. We denote the 
+inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
+which reshapes a vector, of $n^2$ entries, into an $n \times n$ matrix.
 
 After juggling the indexes of $\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)$, 
-the Kronecker representation follows as
-
+the Kronecker representation of $\operatorname{ad}_X \frac{\partial X}{\partial x}$ follows
+as
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X \frac{\partial X}{\partial x} 
 		& = & \operatorname{mat}\left( \left(I \otimes X - X^T \otimes I \right) \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
 
 Proceeding by induction we find that 
-
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X^n \frac{\partial X}{\partial x} 
 		& = & \operatorname{mat}\left(\left(I \otimes X - X^T \otimes I \right)^n\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
 
 It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
-
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
 		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^n \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
@@ -161,9 +144,6 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 % break the algorithm into two parts, Pade and perturbation
 % need table of [16/16] coefficients.
 
-% Consider parameterization sub-manifold in Lie algebra, algebraic closure
-% guareentees finite computations will be in Lie group. Furthermore because
-% polytope is in closure, limits will be proper row sum, but might lose invertibility
 
 \section{The Hessian}
 
@@ -261,7 +241,34 @@ Need preamble on combinatorics of powers of adjoint.
 	and the proof is found by carrying out induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
 
-\begin{figure}
+Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
+are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
+We can then compute the Hessian by symmetrizing the partial differential so that 
+antisymmetric terms cancel out.
+
+\begin{IEEEeqnarray*}{rCl}
+	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
+		& = & \frac{1}{2} \frac{\partial}{\partial x} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \frac{\partial}{\partial y} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		& = & \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
+		&   & \quad +\: \frac{1}{2} \left[ \frac{\partial}{\partial x} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y}\right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & \quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial y \partial x} \right) e^X\\
+		&   & \quad\quad +\: \frac{1}{2} \left[\frac{\partial}{\partial y} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x}\right) e^X\\
+		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
+		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
+		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
+\end{IEEEeqnarray*}
+
+The only terms requiring approximation are precisely the approximation we 
+derived in the previous section. Reusing the components in the algorithm in the
+previous section we can present an algorithm for the Hessian.
+
+\section{Figures and Illustrations}
+
+\begin{figure}[!hb]
 	\centering
 	\begin{tikzpicture}
 		\node[text=gray] at (   0,  0) {$ 0$};
@@ -314,28 +321,3 @@ Need preamble on combinatorics of powers of adjoint.
 	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 6 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
 	\label{fig:pascaldivergence}
 \end{figure}
-
-Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
-are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
-We can then compute the Hessian by symmetrizing the partial differential so that 
-antisymmetric terms cancel out.
-
-\begin{IEEEeqnarray*}{rCl}
-	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
-		& = & \frac{1}{2} \frac{\partial}{\partial x} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
-		&   & +\: \frac{1}{2} \frac{\partial}{\partial y} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
-		& = & \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
-		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
-		&   & \quad +\: \frac{1}{2} \left[ \frac{\partial}{\partial x} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y}\right) e^X\\
-		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
-		&   & \quad +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial y \partial x} \right) e^X\\
-		&   & \quad\quad +\: \frac{1}{2} \left[\frac{\partial}{\partial y} \sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x}\right) e^X\\
-		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right) e^X\\
-		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X\\
-		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
-		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
-\end{IEEEeqnarray*}
-
-The only terms requiring approximation are precisely the approximation we 
-derived in the previous section. Reusing the components in the algorithm in the
-previous section we can present an algorithm for the Hessian.
