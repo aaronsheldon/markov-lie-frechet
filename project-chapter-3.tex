@@ -110,15 +110,47 @@ belongs to the algebra of general linear operators $GL\left(\mathfrak{st}(\hat{\
 For a Pad\'{e} approximation with numerator polynomial $P\left(X\right)$ and denominator 
 polynomial $Q\left(X\right)$, that $\operatorname{ad}_X \cdotp \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$
 implies that $P\left(\operatorname{ad}_X \cdotp\right), Q\left(\operatorname{ad}_X \cdotp\right) \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$.
-It follows that when a solution $Y$ to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $ exists 
-it is guaranteed to belong to $\mathfrak{st}(\hat{\mathbbm{1}})$, because $\frac{\partial X}{\partial x} \in \mathfrak{st}(\hat{\mathbbm{1}})$.
+It follows that when a solution $Y$ to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $
+exists it is guaranteed to belong to $\mathfrak{st}(\hat{\mathbbm{1}})$, because $\frac{\partial X}{\partial x} \in \mathfrak{st}(\hat{\mathbbm{1}})$.
 
-Computationally the powers of $\operatorname{ad}_X \cdotp$ can be calculated through a 
-Kronecker representation, which requires representing the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$
-as vectors. The vector representation of a matrix is achieved by the matrix reshaping 
-operator $\operatorname{vec}\left(Y\right) = \vec{y}$, which forms a vector $\vec{y}$ by 
-concatenation of the columns of $Y$, called the vectorization of the matrix. We denote the 
-inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
+The remaining question is whether or not $Y$, a solution to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $,
+is an approximation of $\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$?
+Loosely, $\mathfrak{st}(\hat{\mathbbm{1}})$ is a normed vector space in the usual sense, so 
+the convergence of the Pad\'{e} approximations that apply in scalar spaces carry over. Thus given
+a sequence of Pad\'{e} approximations $Y_{mn}$ that solve $\left[P_n\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q_m\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y_{mn}\right) $,
+we will converge $Y_{mn} \rightarrow \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$.
+
+Recapitulating $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximations, we seek a 
+rational polynomial approximation to the Taylor series.
+\begin{IEEEeqnarray*}{rCl}
+	\frac{P_n\left(x\right)}{Q_m\left(x\right)}
+		& =       & \frac{p_0 + p_1 x + \cdots + p_n x^n}{1 + q_1 x + \cdots + q_m x^m}\\
+		& \approx & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!}x^n
+\end{IEEEeqnarray*}
+
+Such that the first $k \le n+m$ derivatives of the rational polynomial approximation evaluated at
+$x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
+\begin{IEEEeqnarray*}{rCl}
+	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
+		& = & \frac{1}{\left(k+2\right)!}
+\end{IEEEeqnarray*}
+
+The symbolic computation of the exact rational coefficients of the $\left[13/14\right]_f\left(x\right)$ 
+Pad\'{e} approximation was carried out in Julia programming language\cite{bezanson_julia:_2014}
+using big integer mathematics, and the Polynomials package. The results of the computation 
+are displayed in table \ref{tab:padecoefficients}. The order of the Pad\'{e} approximation 
+was chosen so that the largest denominator in the rational coefficients of the numerator
+polynomial $\left(7244400176133120000\right)$, and the largest denominator in the rational 
+coefficients of the denominator polynomial $\left(6761440164390912000\right)$ were the 
+largest integers less than the largest $64$ bit signed integer $\left(9223372036854775807\right)$.
+This choice of approximation will need further research to better optimize.
+
+To make use of the Pad\'{e} approximation we need to be able to compute powers of $\operatorname{ad}_X \cdotp$.
+This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$, 
+which requires representing the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$ as vectors. 
+The vector representation of a matrix is achieved by the matrix reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$, 
+which forms a vector $\vec{y}$ by concatenation of the columns of $Y$, called the 
+vectorization of the matrix. We denote the inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
 which reshapes a vector, of $n^2$ entries, into an $n \times n$ matrix.
 
 After juggling the indexes of $\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)$, 
@@ -141,6 +173,12 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^n \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
+And thus can be approximated by
+\begin{IEEEeqnarray*}{rCl}
+	\frac{\partial e^X}{\partial x}
+		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
+\end{IEEEeqnarray*}
+
 % break the algorithm into two parts, Pade and perturbation
 % need table of [16/16] coefficients.
 
@@ -148,9 +186,9 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 \section{The Hessian}
 
 Need preamble on combinatorics of powers of adjoint.
-
 \begin{lemma}
-	For any matrix $A$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, and integer $n \ge 0$
+	For any matrix $A$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, 
+	and integer $n \ge 0$
 	\begin{IEEEeqnarray*}{rCl}
 		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n\right]\left( A\right)
 			& = & \sum_{k=1}^n \left(\operatorname{ad}_X^{k-1} A \right)\left(\operatorname{ad}_{\frac{\partial X}{\partial x}} A\right)  \left(\operatorname{ad}_X^{n-k} A \right)
@@ -268,56 +306,108 @@ previous section we can present an algorithm for the Hessian.
 
 \section{Figures and Illustrations}
 
+\begin{longtable}{r r r}
+	\caption{Pad\'{e} Approximation Coefficients}
+	\label{tab:padecoefficients}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endfirsthead
+	\caption*{Continued from previous page.}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endhead
+	\caption*{Continued on next page.}
+	\endfoot
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 13/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$; symbolically computed.}
+	\endlastfoot
+	$x^{0}$ & $\frac{1}{2}$ & $\frac{1}{1}$\\
+	$x^{1}$ & $\frac{-13}{174}$ & $\frac{-14}{29}$\\
+	$x^{2}$ & $\frac{1}{58}$ & $\frac{13}{116}$\\
+	$x^{3}$ & $\frac{-11}{7830}$ & $\frac{-13}{783}$\\
+	$x^{4}$ & $\frac{11}{75168}$ & $\frac{11}{6264}$\\
+	$x^{5}$ & $\frac{-11}{1461600}$ & $\frac{-11}{78300}$\\
+	$x^{6}$ & $\frac{1}{2192400}$ & $\frac{11}{1252800}$\\
+	$x^{7}$ & $\frac{-1}{64832400}$ & $\frac{-11}{25212600}$\\
+	$x^{8}$ & $\frac{1}{1728864000}$ & $\frac{1}{57628800}$\\
+	$x^{9}$ & $\frac{-1}{79873516800}$ & $\frac{-1}{1815307200}$\\
+	$x^{10}$ & $\frac{1}{3594308256000}$ & $\frac{1}{72612288000}$\\
+	$x^{11}$ & $\frac{-1}{295931379744000}$ & $\frac{-1}{3793992048000}$\\
+	$x^{12}$ & $\frac{1}{28409412455424000}$ & $\frac{1}{273167427456000}$\\
+	$x^{13}$ & $\frac{-1}{7244400176133120000}$ & $\frac{-1}{30185000733888000}$\\
+	$x^{14}$ & & $\frac{1}{6761440164390912000}$
+\end{longtable}
+
 \begin{figure}[!hb]
 	\centering
 	\begin{tikzpicture}
-		\node[text=gray] at (   0,  0) {$ 0$};
-		
-		\node[text=gray] at (-1/2, -1) {$ 1$};
-		\node[text=gray] at ( 1/2, -1) {$-1$};
-		
-		\node[text=gray] at (  -1, -2) {$ 1$};
-		\node[font=\bf ] at (   0, -2) {$ 0$};
-		\node[text=gray] at (   1, -2) {$-1$};
-		
-		\node[text=gray] at (-3/2, -3) {$ 1$};
-		\node[font=\bf ] at (-1/2, -3) {$ 1$};
-		\node[font=\bf ] at ( 1/2, -3) {$-1$};
-		\node[text=gray] at ( 3/2, -3) {$-1$};
-		
-		\node[text=gray] at (  -2, -4) {$ 1$};
-		\node[font=\bf ] at (  -1, -4) {$ 2$};
-		\node[font=\bf ] at (   0, -4) {$ 0$};
-		\node[font=\bf ] at (   1, -4) {$-2$};
-		\node[text=gray] at (   2, -4) {$-1$};
-		
-		\node[text=gray] at (-5/2, -5) {$ 1$};
-		\node[font=\bf ] at (-3/2, -5) {$ 3$};
-		\node[font=\bf ] at (-1/2, -5) {$ 2$};
-		\node[font=\bf ] at ( 1/2, -5) {$-2$};
-		\node[font=\bf ] at ( 3/2, -5) {$-3$};
-		\node[text=gray] at ( 5/2, -5) {$-1$};
-		
-		\node[text=gray] at (  -3, -6) {$ 1$};
-		\node[font=\bf ] at (  -2, -6) {$ 4$};
-		\node[font=\bf ] at (  -1, -6) {$ 5$};
-		\node[font=\bf ] at (   0, -6) {$ 0$};
-		\node[font=\bf ] at (   1, -6) {$-5$};
-		\node[font=\bf ] at (   2, -6) {$-4$};
-		\node[text=gray] at (   3, -6) {$-1$};
-		
-		\node[text=gray] at (-7/2, -7) {$ 1$};
-		\node[font=\bf ] at (-5/2, -7) {$ 5$};
-		\node[font=\bf ] at (-3/2, -7) {$ 9$};
-		\node[font=\bf ] at (-1/2, -7) {$ 5$};
-		\node[font=\bf ] at ( 1/2, -7) {$-5$};
-		\node[font=\bf ] at ( 3/2, -7) {$-9$};
-		\node[font=\bf ] at ( 5/2, -7) {$-5$};
-		\node[text=gray] at ( 7/2, -7) {$-1$};
-		
-		\node[text=gray] at (  -4, -8) {$\left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right]$};
-		\node[text=gray] at (   4, -8) {$-\left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]$};
+		\node[text=gray] at (   0,   0) {$  0$};
+
+		\node[text=gray] at (-1/2,  -1) {$  1$};
+		\node[text=gray] at ( 1/2,  -1) {$ -1$};
+
+		\node[text=gray] at (  -1,  -2) {$  1$};
+		\node[font=\bf ] at (   0,  -2) {$  0$};
+		\node[text=gray] at (   1,  -2) {$ -1$};
+
+		\node[text=gray] at (-3/2,  -3) {$  1$};
+		\node[font=\bf ] at (-1/2,  -3) {$  1$};
+		\node[font=\bf ] at ( 1/2,  -3) {$ -1$};
+		\node[text=gray] at ( 3/2,  -3) {$ -1$};
+
+		\node[text=gray] at (  -2,  -4) {$  1$};
+		\node[font=\bf ] at (  -1,  -4) {$  2$};
+		\node[font=\bf ] at (   0,  -4) {$  0$};
+		\node[font=\bf ] at (   1,  -4) {$ -2$};
+		\node[text=gray] at (   2,  -4) {$ -1$};
+
+		\node[text=gray] at (-5/2,  -5) {$  1$};
+		\node[font=\bf ] at (-3/2,  -5) {$  3$};
+		\node[font=\bf ] at (-1/2,  -5) {$  2$};
+		\node[font=\bf ] at ( 1/2,  -5) {$ -2$};
+		\node[font=\bf ] at ( 3/2,  -5) {$ -3$};
+		\node[text=gray] at ( 5/2,  -5) {$ -1$};
+
+		\node[text=gray] at (  -3,  -6) {$  1$};
+		\node[font=\bf ] at (  -2,  -6) {$  4$};
+		\node[font=\bf ] at (  -1,  -6) {$  5$};
+		\node[font=\bf ] at (   0,  -6) {$  0$};
+		\node[font=\bf ] at (   1,  -6) {$ -5$};
+		\node[font=\bf ] at (   2,  -6) {$ -4$};
+		\node[text=gray] at (   3,  -6) {$ -1$};
+
+		\node[text=gray] at (-7/2,  -7) {$  1$};
+		\node[font=\bf ] at (-5/2,  -7) {$  5$};
+		\node[font=\bf ] at (-3/2,  -7) {$  9$};
+		\node[font=\bf ] at (-1/2,  -7) {$  5$};
+		\node[font=\bf ] at ( 1/2,  -7) {$ -5$};
+		\node[font=\bf ] at ( 3/2,  -7) {$ -9$};
+		\node[font=\bf ] at ( 5/2,  -7) {$ -5$};
+		\node[text=gray] at ( 7/2,  -7) {$ -1$};
+
+		\node[text=gray] at (  -4,  -8) {$  1$};
+		\node[font=\bf ] at (  -3,  -8) {$  6$};
+		\node[font=\bf ] at (  -2,  -8) {$ 14$};
+		\node[font=\bf ] at (  -1,  -8) {$ 14$};
+		\node[font=\bf ] at (   0,  -8) {$  0$};
+		\node[font=\bf ] at (   1,  -8) {$-14$};
+		\node[font=\bf ] at (   2,  -8) {$-14$};
+		\node[font=\bf ] at (   3,  -8) {$ -6$};
+		\node[text=gray] at (   4,  -8) {$ -1$};
+
+		\node[text=gray] at (-9/2,  -9) {$  1$};
+		\node[font=\bf ] at (-7/2,  -9) {$  7$};
+		\node[font=\bf ] at (-5/2,  -9) {$ 20$};
+		\node[font=\bf ] at (-3/2,  -9) {$ 28$};
+		\node[font=\bf ] at (-1/2,  -9) {$ 14$};
+		\node[font=\bf ] at ( 1/2,  -9) {$-14$};
+		\node[font=\bf ] at ( 3/2,  -9) {$-28$};
+		\node[font=\bf ] at ( 5/2,  -9) {$-20$};
+		\node[font=\bf ] at ( 7/2,  -9) {$ -7$};
+		\node[text=gray] at ( 9/2,  -9) {$ -1$};
+
+		\node[text=gray] at (  -5, -10) {$\left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right]$};
+		\node[text=gray] at (   5, -10) {$-\left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]$};
 	\end{tikzpicture}
-	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 6 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
+	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 8 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
 	\label{fig:pascaldivergence}
 \end{figure}
