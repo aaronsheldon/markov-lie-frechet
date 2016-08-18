@@ -9,6 +9,7 @@
 
 % External references
 \usepackage[letterpaper,top=1in, bottom= 1in, left= 1in, right= 1in]{geometry}
+\usepackage{longtable}
 \usepackage{hyperref}
 \usepackage[all]{hypcap}
 \usepackage{mathptmx}
@@ -23,10 +24,9 @@
 \usepackage{bbm}
 \usepackage{listings}
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{longtable}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage[section]{placeins}
+%\usepackage[section]{placeins}
 
 % Syntax highlighting for julia
 \include{project-julia}
@@ -69,6 +69,10 @@ Time Homogeneous Markov Processes from Stopped Random Variables}
 \renewcommand{\IEEEproofindentspace}{0em}
 \renewcommand{\IEEEQED}{\IEEEQEDopen}
 \interdisplaylinepenalty=0
+
+% Harpoon vectors
+\newcommand{\tightoverset}[2]{\mathop{#2}\limits^{\vbox to -.5ex{\kern-0.8ex\hbox{$#1$}\vss}}}
+\renewcommand{\vec}{\tightoverset{\rightharpoonup}}
 
 % Start of main
 \begin{document}

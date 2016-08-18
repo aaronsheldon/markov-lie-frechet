@@ -356,6 +356,10 @@ As in the previous section the algorithm we have developed for the Hessian of th
 exponential is merely a starting point for further optimizations. In particular the bilinear
 non-commutative perturbation needs attention to see if the Taylor series i susceptible to
 further efficiency gains. As well the Pad\'{e} approximation needs further refinement.
+Nevertheless both of the algorithms for the non-commutative perturbation and the bilinear
+non-commutative perturbation are stable with respect to the the stochastic contraction
+Lie algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$; in the sense that if $X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}, \frac{\partial^2 X}{\partial x \partial y} \in \mathfrak{st}^{+}(\hat{\mathbbm{1}})$,
+then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
 
 \clearpage
 \section{Figures and Illustrations}
@@ -391,7 +395,7 @@ further efficiency gains. As well the Pad\'{e} approximation needs further refin
 	$x^{14}$ & & $\frac{1}{6761440164390912000}$
 \end{longtable}
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\caption[Non-commutative Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:perturbation}
 	\begin{algorithmic}[1]
@@ -412,7 +416,7 @@ further efficiency gains. As well the Pad\'{e} approximation needs further refin
 	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\caption[Gradient of $e^X$]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:gradient}
 	\begin{algorithmic}[1]
@@ -424,7 +428,7 @@ further efficiency gains. As well the Pad\'{e} approximation needs further refin
 	\end{algorithmic}
 \end{algorithm}
 
-\begin{figure}
+\begin{figure}[!ht]
 	\centering
 	\begin{tikzpicture}
 		\node[text=gray] at (   0,   0) {$  0$};
@@ -530,7 +534,7 @@ further efficiency gains. As well the Pad\'{e} approximation needs further refin
 	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
 \end{longtable}
 
-\begin{algorithm}[!hb]
+\begin{algorithm}[!ht]
 	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:bilinear}
 	\begin{algorithmic}[1]
@@ -574,16 +578,16 @@ further efficiency gains. As well the Pad\'{e} approximation needs further refin
 	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[!hb]
+\begin{algorithm}[!ht]
 	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:hessian}
 	\begin{algorithmic}[1]
 		\Function{HEX}{$X$,$D_x$,$D_y$,$D_{xy}$}
-			\State $E \gets e^X$\Comment{Allocates memory}
-			\State $Z \gets D_{xy} + \operatorname{PER}\left(X,D_{xy}\right)$\Comment{Allocates memory}
-			\State $Z \gets Z + \frac{1}{2} \operatorname{BIL}\left(X,D_x,D_y\right)$\Comment{In place computation}
-			\State $P_x \gets D_x + \operatorname{PER}\left(X,D_x\right)$\Comment{Allocates memory}
-			\State $P_y \gets D_y + \operatorname{PER}\left(X,D_y\right)$\Comment{Allocates memory}
+			\State $E \gets e^X$\Comment{Call to matrix exponential}
+			\State $Z \gets D_{xy} + \operatorname{PER}\left(X,D_{xy}\right)$\Comment{Call to non-commutative perturbation}
+			\State $Z \gets Z + \frac{1}{2} \operatorname{BIL}\left(X,D_x,D_y\right)$\Comment{Call to bilinear perturbation}
+			\State $P_x \gets D_x + \operatorname{PER}\left(X,D_x\right)$\Comment{Call to non-commutative perturbation}
+			\State $P_y \gets D_y + \operatorname{PER}\left(X,D_y\right)$\Comment{Call to non-commutative perturbation}
 			\State $Z \gets Z + \frac{1}{2}\left(P_x P_y + P_y P_x\right)$\Comment{In place computation}
 			\State $Z \gets Z E$\Comment{In place computation}
 			\State \Return $Z$
