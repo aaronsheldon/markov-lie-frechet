@@ -1,15 +1,15 @@
 \chapter{Pad\'{e} Approximation of the Fr\'{e}chet Derivatives of the Exponential Map}
 \section{The Gradient}
 Moler and Van Loan seminally reviewed algorithms for calculating the matrix exponential in
-1978, and revisited that review in 2003\cite{moler_nineteen_1978,moler_nineteen_2003}. 
+1978, and revisited that review in 2003 \cite{moler_nineteen_1978,moler_nineteen_2003}. 
 Building on the discussions of Moler and Van Loan, Higham established the standard 
 implementation of the matrix exponential based on scaling and scaring and Pad\'{e} 
-approximation\cite{higham_scaling_2005,higham_functions_2008}. The Higham implementation was
-further optimized for $64$ bit architectures by Al-Mohy\cite{al-mohy_new_2009}. In the same
+approximation \cite{higham_scaling_2005,higham_functions_2008}. The Higham implementation was
+further optimized for $64$ bit architectures by Al-Mohy \cite{al-mohy_new_2009}. In the same
 work Al-Mohy developed an algorithm to approximate the derivative of the matrix exponential, 
 formulated by taking the derivative of the Pad\'{e} approximation of the matrix exponential, 
 and then working out a recursive calculation for the derivatives of matrix 
-powers\cite{al-mohy_computing_2009}.
+powers \cite{al-mohy_computing_2009}.
 
 While the derivative of the Pad\'{e} approximation of an analytic function will converge to 
 the derivative of the analytic function, it is not true that the derivative of the Pad\'{e} 
@@ -81,7 +81,7 @@ and then restating the sum in terms of a truncated exponential series.
 The non-commutative perturbation series is linear in $\frac{\partial X}{\partial x}$  and a 
 Taylor series in the powers of $\operatorname{ad}_X \cdotp$. Thus any computation of an 
 approximation will be in the powers of $\operatorname{ad}_X \cdotp$. As was discussed in the 
-Moler and Van Loan\cite{moler_nineteen_1978,moler_nineteen_2003}, naive computation of the 
+Moler and Van Loan \cite{moler_nineteen_1978,moler_nineteen_2003}, naive computation of the 
 Taylor series itself results in an approximation that will converge slowly, requiring a
 larger number of powers to be computed before the threshold of floating point error is 
 reached. Pad\'{e} approximation by rational functions remedy this problem, by offering 
@@ -136,7 +136,7 @@ $x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
 \end{IEEEeqnarray*}
 
 The symbolic computation of the exact rational coefficients of the $\left[13/14\right]_f\left(x\right)$ 
-Pad\'{e} approximation was carried out in Julia programming language\cite{bezanson_julia:_2014}
+Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
 using big integer mathematics, and the Polynomials package. The results of the computation 
 are displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation 
 was chosen so that the largest denominator in the rational coefficients of the numerator
@@ -179,14 +179,14 @@ And thus can be approximated by
 		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
-We can summarize this work in an algorithm to compute the non-commutative perturbation\ref{alg:perturbation}.
+We can summarize this work in an algorithm to compute the non-commutative perturbation \ref{alg:perturbation}.
 This algorithm servers as a sketch only, highlighting only the novel elements developed in
 this section. Many additional optimizations could be implemented including minimizing memory 
 assignments by carrying out in place computations, conditioning matrices to improve
 numerical stability, and using recursive squaring and summing methods to efficiently compute
 the matrix polynomials. A point of concern is the first assignment of the Kronecker product, 
 which results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
-compute the gradient of the matrix exponential can be formulated\ref{alg:gradient}.
+compute the gradient of the matrix exponential can be formulated \ref{alg:gradient}.
 
 \section{The Hessian}
 
@@ -296,11 +296,11 @@ Taylor series.
 		& = & \left(\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n\right)x
 \end{IEEEeqnarray*}
 
-Using the same criteria as in the previous section yields a $\left[a/b\right]_f\left(x\right)$
+Using the same criteria as in the previous section yields a $\left[12/14\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
-The coefficients of the Pad\'{e} approximation are summarized in table\ref{tab:bilinear}. 
+The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
 This approximation is then used in a pair of branches in the calculation of the bilinear 
-non-commutative perturbation to the Hessian\ref{alg:bilinear}.
+non-commutative perturbation to the Hessian of the matrix exponential \ref{alg:bilinear}.
 
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
@@ -323,8 +323,9 @@ antisymmetric terms cancel out.
 \end{IEEEeqnarray*}
 
 The bilinear non-commutative perturbation is then called in the calculation of the Hessian
-of the matrix exponential\ref{alg:hessian}.
+of the matrix exponential \ref{alg:hessian}.
 
+\clearpage
 \section{Figures and Illustrations}
 
 \begin{longtable}{r r r}
@@ -366,10 +367,10 @@ of the matrix exponential\ref{alg:hessian}.
 			\If{$\left[X,Dx\right] = 0$}
 				\State $Y \gets 0$\Comment{Short circuit commutative case}
 			\Else
-				\State $adX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 				\State $\vec{dx} \gets \operatorname{VEC}\left(Dx\right)$\Comment{Change of indexing}
-				\State $P \gets P_{13}\left(adX\right)$\Comment{Recursive squaring and summing}
-				\State $Q \gets Q_{14}\left(adX\right)$\Comment{Recursive squaring and summing}
+				\State $P \gets P_{13}\left(aX\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
 				\State Solve for $\vec{y}$: $P \vec{dx} = Q \vec{y}$\Comment{Call to linear solver}
 				\State $Y \gets \operatorname{MAT}\left(\vec{y}\right)$\Comment{Change of indexing}
 			\EndIf
@@ -477,9 +478,23 @@ of the matrix exponential\ref{alg:hessian}.
 	\endhead
 	\caption*{Continued on next page.}
 	\endfoot
-	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ a/b \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
 	\endlastfoot
-	$x^{0}$ & $\frac{1}{1}$ & $\frac{1}{1}$
+	$x^{0}$ & $\frac{1}{6}$ & $\frac{1}{1}$\\
+	$x^{1}$ & $\frac{-237571687770}{2235524846677109}$ & $\frac{-2238375706930349}{4471049693354218}$\\
+	$x^{2}$ & $\frac{75899205239671}{22355248466771090}$ & $\frac{7}{58}$\\
+	$x^{3}$ & $\frac{-6158055716087}{2897240201293533264}$ & $\frac{-172676164807703}{9286026286197222}$\\
+	$x^{4}$ & $\frac{14904653897243}{751136348483508624}$ & $\frac{989302956681193}{482873366882255544}$\\
+	$x^{5}$ & $\frac{-2677622343899}{225340904545052587200}$ & $\frac{-317642104732513}{1857205257239444400}$\\
+	$x^{6}$ & $\frac{15554305889797}{347668824155223991680}$ & $\frac{1079293136317583}{96574673376451108800}$\\
+	$x^{7}$ & $\frac{-1086326787569}{44424349753167510048000}$ & $\frac{-18091761597171823}{31097044827217257033600}$\\
+	$x^{8}$ & $\frac{23665068673453}{586401416741811132633600}$ & $\frac{215879922742633}{8884869950633502009600}$\\
+	$x^{9}$ & $\frac{-579062082583}{31665676504057801162214400}$ & $\frac{-129862571470787}{159927659111403036172800}$\\
+	$x^{10}$ & $\frac{1006334079353}{82096198343853558568704000}$ & $\frac{239909667097237}{11194936137798212532096000}$\\
+	$x^{11}$ & $\frac{-129504852863}{36499969783677292139645798400}$ & $\frac{-290350506989849}{668497615085664691202304000}$\\
+	$x^{12}$ & $\frac{18809879890171}{32849972805309562925681218560000}$ & $\frac{539968479224557}{84230699500793751091490304000}$\\
+	$x^{13}$ & & $\frac{-359560490231}{5809013758675431109757952000}$\\
+	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
 \end{longtable}
 
 \begin{algorithm}[!hb]
@@ -489,8 +504,26 @@ of the matrix exponential\ref{alg:hessian}.
 		\Function{BIL}{$X$,$Dx$,$Dy$,$\epsilon = \text{machine float precision}$}
 			\State $Ax \gets \left[X,Dx\right]$\Comment{Allocates memory}
 			\State $Ay \gets \left[X,Dy\right]$\Comment{Allocates memory}
-			\State $Z \gets 0$\Comment{Allocates memory}
-			\If{$Ax \ne 0$ \textbf{and} $Ay \ne 0$}
+			\If{$Ax = 0$ \textbf{and} $Ay = 0$}
+				\State $Z \gets 0$\Comment{Commutative short circuit}
+			\ElsIf{$Ax = 0$}			
+				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{ay} \gets \operatorname{VEC}\left(Ay\right)$\Comment{Change of indexing}
+				\State $P \gets P_{12}\left(aX\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{z}$: $P \vec{ay} = Q \vec{z}$\Comment{Call to linear solver}
+				\State $Z \gets \operatorname{MAT}\left(\vec{z}\right)$\Comment{Change of indexing}
+				\State $Z \gets \left[Dx, Z\right]$\Comment{In place computation}
+			\ElsIf{$Ay = 0$}
+				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{ax} \gets \operatorname{VEC}\left(Ax\right)$\Comment{Change of indexing}
+				\State $P \gets P_{12}\left(aX\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{z}$: $P \vec{ax} = Q \vec{z}$\Comment{Call to linear solver}
+				\State $Z \gets \operatorname{MAT}\left(\vec{z}\right)$\Comment{Change of indexing}
+				\State $Z \gets \left[Dy, Z\right]$\Comment{In place computation}
+			\Else
+				\State $Z \gets 0$\Comment{Allocates memory}
 				\State $F \gets \left[Dx, Ay\right] + \left[Dy,Ax\right]$\Comment{Allocates memory}
 				\State $m \gets 3$\Comment{Factorial scalars}
 				\State $n \gets 6$\Comment{Factorial scalars}
