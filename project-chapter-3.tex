@@ -118,7 +118,8 @@ is an approximation of $\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \o
 Loosely, $\mathfrak{st}(\hat{\mathbbm{1}})$ is a normed vector space in the usual sense, so 
 the convergence of the Pad\'{e} approximations that apply in scalar spaces carry over. Thus given
 a sequence of Pad\'{e} approximations $Y_{mn}$ that solve $\left[P_n\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q_m\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y_{mn}\right) $,
-we will converge $Y_{mn} \rightarrow \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$.
+convergence $Y_{mn} \rightarrow \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$
+is assured. 
 
 Recapitulating $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximations, we seek a 
 rational polynomial approximation to the Taylor series.
@@ -170,13 +171,13 @@ Proceeding by induction we find that
 It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^n \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
+		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^{n+1} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
 And thus can be approximated by
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
+		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \left(I \otimes X - X^T \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 
 We can summarize this work in an algorithm to compute the non-commutative perturbation \ref{alg:perturbation}.
@@ -190,9 +191,23 @@ compute the gradient of the matrix exponential can be formulated \ref{alg:gradie
 
 \section{The Hessian}
 
-Need preamble on combinatorics of powers of adjoint.
+Assuming $X$ parameterized by $x,y \in \mathbb{R}$ is analytic, or at least twice 
+differentiable the Hessian of $e^X$ exists and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,
+$\frac{\partial X}{\partial y}$, and $\frac{\partial^2 X}{\partial x \partial y}$. In 
+general none of these tangent matrices need commute with each other. Even the second 
+derivatives $\frac{\partial^2 X}{\partial x^2}$, will not generally commute with the first 
+derivate $\frac{\partial X}{\partial x}$. While the additional terms complicate the 
+computations, they do not lead to intractable results in the same way that finding a closed
+form for $e^X$ in dimensions greater than $4$ becomes intractable. Unfortunately in the most 
+general case when $X$ neither commutes with $\frac{\partial X}{\partial x}$, nor $\frac{\partial X}{\partial y}$ 
+we will find that we have to compute the Taylor expansion of a bilinear form, which is not 
+susceptible to Pad\'{e} approximation.
+
+To proceed we need a pair of results focused on the binomial combinatorics of adjoints. We
+will use these results in developing the bilinear non-commutative perturbation of the
+Hessian.
 \begin{lemma}
-	For any matrices $A,B$, differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, 
+	For differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, any matrices $A,B$,
 	and integer $n \ge 0$
 	\begin{IEEEeqnarray*}{rCl}
 		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n \cdot\right]\left( A\right)
@@ -322,8 +337,25 @@ antisymmetric terms cancel out.
 		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 \end{IEEEeqnarray*}
 
-The bilinear non-commutative perturbation is then called in the calculation of the Hessian
-of the matrix exponential \ref{alg:hessian}.
+To flush out the final algorithm for the Hessian lets consider each summand in the last 
+equality individually. The first term involving $\frac{\partial^2 X}{\partial x \partial y}$
+can be calculated using the non-commutative perturbation algorithm developed in the 
+preceding section
+\begin{IEEEeqnarray*}{rCl}
+	\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right)
+		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}
+\end{IEEEeqnarray*}
+
+The next two summands together are the Poisson bracket of the non-commutative perturbations
+the gradients $\frac{\partial e^X}{\partial x}$, and $\frac{\partial e^X}{\partial y}$. The
+final summand is the bilinear non-commutative perturbation. Taken together the algorithm for
+the Hessian is then a sequence of calls to the non-commutative perturbation and the bilinear
+non-commutative perturbation; as outlined in algorithm \ref{alg:hessian}.
+
+As in the previous section the algorithm we have developed for the Hessian of the matrix
+exponential is merely a starting point for further optimizations. In particular the bilinear
+non-commutative perturbation needs attention to see if the Taylor series i susceptible to
+further efficiency gains. As well the Pad\'{e} approximation needs further refinement.
 
 \clearpage
 \section{Figures and Illustrations}
@@ -363,15 +395,16 @@ of the matrix exponential \ref{alg:hessian}.
 	\caption[Non-commutative Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:perturbation}
 	\begin{algorithmic}[1]
-		\Function{PER}{$X$,$Dx$}
-			\If{$\left[X,Dx\right] = 0$}
+		\Function{PER}{$X$,$D_x$}
+			\If{$\left[X,D_x\right] = 0$}
 				\State $Y \gets 0$\Comment{Short circuit commutative case}
 			\Else
-				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{dx} \gets \operatorname{VEC}\left(Dx\right)$\Comment{Change of indexing}
-				\State $P \gets P_{13}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State Solve for $\vec{y}$: $P \vec{dx} = Q \vec{y}$\Comment{Call to linear solver}
+				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $A_x \gets [X, D_x]$\Comment{Allocates memory}
+				\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
+				\State $P \gets P_{13}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{y}$: $P \vec{a_x} = Q \vec{y}$\Comment{Call to linear solver}
 				\State $Y \gets \operatorname{MAT}\left(\vec{y}\right)$\Comment{Change of indexing}
 			\EndIf
 			\State \Return $Y$
@@ -383,10 +416,10 @@ of the matrix exponential \ref{alg:hessian}.
 	\caption[Gradient of $e^X$]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:gradient}
 	\begin{algorithmic}[1]
-		\Function{GEX}{$X$,$Dx$}
+		\Function{GEX}{$X$,$D_x$}
 			\State $E \gets e^X$\Comment{Call to matrix exponential}
-			\State $P \gets \operatorname{PER}\left(X,Dx\right)$\Comment{Call to non-commutative perturbation}
-			\State \Return $\left(P + Dx\right) E$
+			\State $P \gets \operatorname{PER}\left(X,D_x\right)$\Comment{Call to non-commutative perturbation}
+			\State \Return $\left(P + D_x\right) E$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
@@ -501,37 +534,37 @@ of the matrix exponential \ref{alg:hessian}.
 	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:bilinear}
 	\begin{algorithmic}[1]
-		\Function{BIL}{$X$,$Dx$,$Dy$,$\epsilon = \text{machine float precision}$}
-			\State $Ax \gets \left[X,Dx\right]$\Comment{Allocates memory}
-			\State $Ay \gets \left[X,Dy\right]$\Comment{Allocates memory}
-			\If{$Ax = 0$ \textbf{and} $Ay = 0$}
+		\Function{BIL}{$X$,$D_x$,$D_y$,$\epsilon = \text{machine float precision}$}
+			\State $A_x \gets \left[X,D_x\right]$\Comment{Allocates memory}
+			\State $A_y \gets \left[X,D_y\right]$\Comment{Allocates memory}
+			\If{$A_x = 0$ \textbf{and} $A_y = 0$}
 				\State $Z \gets 0$\Comment{Commutative short circuit}
-			\ElsIf{$Ax = 0$}			
-				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{ay} \gets \operatorname{VEC}\left(Ay\right)$\Comment{Change of indexing}
-				\State $P \gets P_{12}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State Solve for $\vec{z}$: $P \vec{ay} = Q \vec{z}$\Comment{Call to linear solver}
+			\ElsIf{$A_x = 0$}			
+				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{a_y} \gets \operatorname{VEC}\left(A_y\right)$\Comment{Change of indexing}
+				\State $P \gets P_{12}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{z}$: $P \vec{a_y} = Q \vec{z}$\Comment{Call to linear solver}
 				\State $Z \gets \operatorname{MAT}\left(\vec{z}\right)$\Comment{Change of indexing}
-				\State $Z \gets \left[Dx, Z\right]$\Comment{In place computation}
-			\ElsIf{$Ay = 0$}
-				\State $aX \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{ax} \gets \operatorname{VEC}\left(Ax\right)$\Comment{Change of indexing}
-				\State $P \gets P_{12}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State $Q \gets Q_{14}\left(aX\right)$\Comment{Recursive squaring and summing}
-				\State Solve for $\vec{z}$: $P \vec{ax} = Q \vec{z}$\Comment{Call to linear solver}
+				\State $Z \gets \left[D_x, Z\right]$\Comment{In place computation}
+			\ElsIf{$A_y = 0$}
+				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
+				\State $P \gets P_{12}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Recursive squaring and summing}
+				\State Solve for $\vec{z}$: $P \vec{a_x} = Q \vec{z}$\Comment{Call to linear solver}
 				\State $Z \gets \operatorname{MAT}\left(\vec{z}\right)$\Comment{Change of indexing}
-				\State $Z \gets \left[Dy, Z\right]$\Comment{In place computation}
+				\State $Z \gets \left[D_y, Z\right]$\Comment{In place computation}
 			\Else
 				\State $Z \gets 0$\Comment{Allocates memory}
-				\State $F \gets \left[Dx, Ay\right] + \left[Dy,Ax\right]$\Comment{Allocates memory}
+				\State $F \gets \left[D_x, A_y\right] + \left[D_y,A_x\right]$\Comment{Allocates memory}
 				\State $m \gets 3$\Comment{Factorial scalars}
 				\State $n \gets 6$\Comment{Factorial scalars}
 				\While{$ \left\| F \right\| > n\epsilon$}
 					\State $Z \gets Z + \frac{F}{n}$\Comment{In place computation}
-					\State $Ax \gets \left[X,Ax\right]$\Comment{In place computation}
-					\State $Ay \gets \left[X,Ay\right]$\Comment{In place computation}
-					\State $F \gets \left[Dx, Ay\right] + \left[X,F\right] + \left[Dx,Ax\right]$\Comment{In place computation}
+					\State $A_x \gets \left[X,A_x\right]$\Comment{In place computation}
+					\State $A_y \gets \left[X,A_y\right]$\Comment{In place computation}
+					\State $F \gets \left[D_x, A_y\right] + \left[X,F\right] + \left[D_x,A_x\right]$\Comment{In place computation}
 					\State $m \gets m+1$\Comment{Increment factorial}
 					\State $n \gets m n$\Comment{Increment factorial}
 				\EndWhile
@@ -545,7 +578,14 @@ of the matrix exponential \ref{alg:hessian}.
 	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:hessian}
 	\begin{algorithmic}[1]
-		\Function{HEX}{$X$,$Dx$,$Dy$}
+		\Function{HEX}{$X$,$D_x$,$D_y$,$D_{xy}$}
+			\State $E \gets e^X$\Comment{Allocates memory}
+			\State $Z \gets D_{xy} + \operatorname{PER}\left(X,D_{xy}\right)$\Comment{Allocates memory}
+			\State $Z \gets Z + \frac{1}{2} \operatorname{BIL}\left(X,D_x,D_y\right)$\Comment{In place computation}
+			\State $P_x \gets D_x + \operatorname{PER}\left(X,D_x\right)$\Comment{Allocates memory}
+			\State $P_y \gets D_y + \operatorname{PER}\left(X,D_y\right)$\Comment{Allocates memory}
+			\State $Z \gets Z + \frac{1}{2}\left(P_x P_y + P_y P_x\right)$\Comment{In place computation}
+			\State $Z \gets Z E$\Comment{In place computation}
 			\State \Return $Z$
 		\EndFunction
 	\end{algorithmic}

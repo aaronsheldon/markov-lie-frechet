@@ -1,5 +1,14 @@
 \chapter{Maximum Likelihood Estimation from First Hitting Times}
 \section{Distribution of First Hitting Times}
+Contemporary methods for fitting time homogeneous Markov processes on a finite 
+state space require directly parameterizing the transition probability matrix $\mathbb{P}\left[X_n = j \left\|X_0 = i \right.\right] = \hat{e}_i P^n \hat{e}_j$,
+as they depend on realizing the process through discrete time steps $n$. While this 
+formulation has many powerful applications, there are analyses where the parameterization of 
+the generator of the time homogeneous Markov process, $\mathbb{P}\left[X_t = j \left\|X_0 = i \right.\right] = \hat{e}_i \exp\left({tG}\right) \hat{e}_j$, 
+is of greater meaning, or importance. In particular when the observed process is, at least,
+in principle continuous, or when the desired parameterization is in units of rates per time
+parameterization of the generator is the more natural choice.
+
 %With total knowledge of all first hits p_ij=N_ij/T_ij
 %Prove its a stopped process where we take the product with the projection onto 
 %all the other transitative states. Essentially zero out the rows of the states
