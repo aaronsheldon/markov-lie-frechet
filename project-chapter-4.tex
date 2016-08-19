@@ -114,4 +114,38 @@ The generator is given by
 \end{IEEEeqnarray*}
 
 \section{Newton-Raphson Maximization}
+
+\clearpage
 \section{Figures and Illustrations}
+\begin{figure}[!ht]
+	\centering
+	\begin{tikzpicture}[->,thick,node distance=2cm]
+		\node[state, very thick, font=\bf] (healthy)                                        {$1$};
+		\node[state, draw=gray, text=gray] (healthy-improving) [right of=healthy]           {$2$};
+		\node[state, draw=gray, text=gray] (healthy-worsening) [right of=healthy-improving] {$3$};
+		\node[state, very thick, font=\bf] (treated)           [right of=healthy-worsening] {$4$};
+		\node[state, draw=gray, text=gray] (treated-improving) [right of=treated]           {$5$};
+		\node[state, draw=gray, text=gray] (treated-worsening) [right of=treated-improving] {$6$};
+		\node[state, very thick, font=\bf] (death)             [right of=treated-worsening] {$7$};
+		\path
+			(healthy)           edge [loop left, very thick, font=\bf]  node         {$-x_{12}$}                     (healthy)
+			(healthy)           edge [bend left, very thick, font=\bf]  node [above] {$x_{12}$}                      (healthy-improving)
+			(healthy-improving) edge [bend left, very thick, font=\bf]  node [below] {$x_{21}$}                      (healthy)
+			(healthy-improving) edge [loop below, draw=gray, text=gray] node         {$-\left(x_{21}+x_{23}\right)$} (healthy-improving)
+			(healthy-improving) edge [bend left, draw=gray, text=gray]  node [above] {$x_{23}$}                      (healthy-worsening)
+			(healthy-worsening) edge [bend left, draw=gray, text=gray]  node [below] {$x_{32}$}                      (healthy-improving)
+			(healthy-worsening) edge [loop above, draw=gray, text=gray] node         {$-\left(x_{32}+x_{34}\right)$} (healthy-worsening)
+			(healthy-worsening) edge [bend left, very thick, font=\bf]  node [above] {$x_{34}$}                      (treated)
+			(treated)           edge [bend left, very thick, font=\bf]  node [below] {$x_{43}$}                      (healthy-worsening)
+			(treated)           edge [loop below, very thick, font=\bf] node         {$-\left(x_{43}+x_{45}\right)$} (treated)
+			(treated)           edge [bend left, very thick, font=\bf]  node [above] {$x_{45}$}                      (treated-improving)
+			(treated-improving) edge [bend left, very thick, font=\bf]  node [below] {$x_{54}$}                      (treated)
+			(treated-improving) edge [loop above, draw=gray, text=gray] node         {$-\left(x_{54}+x_{56}\right)$} (treated-improving)
+			(treated-improving) edge [bend left, draw=gray, text=gray]  node [above] {$x_{56}$}                      (treated-worsening)
+			(treated-worsening) edge [bend left, draw=gray, text=gray]  node [below] {$x_{65}$}                      (treated-improving)
+			(treated-worsening) edge [loop below, draw=gray, text=gray] node         {$-\left(x_{65}+x_{67}\right)$} (treated-worsening)
+			(treated-worsening) edge [very thick, font=\bf]             node [above] {$x_{67}$} (death);
+	\end{tikzpicture}
+	\caption[$7$ State Aging Process]{A representation of an aging process by a reversible $7$ state birth-death process, with $3$ sentinel states: healthy ($1$), care placement ($4$), and death ($7$). Each pair of intermediate states represents either a state of improving ($2$, $5$) or worsening ($3$, $6$) health.}
+	\label{fig:agingprocess}
+\end{figure}
