@@ -32,30 +32,26 @@ results in the exercises of Rogers and Williams \cite{rogers_diffusions_2000}.
 	then
 	\begin{IEEEeqnarray*}{rCl}
 		\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]
-			& = & \hat{e}_i \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j
+			& = & 1 - \hat{e}_i \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j
 	\end{IEEEeqnarray*}
 \end{theorem}
 
 \begin{IEEEproof}
-	Let $\mathscr{F}_t$ be the standard filtration on $X_t$ a continuous time homogeneous 
-	Markov process on a finite state space.
-	\begin{enumerate}
-		\item Expand the probability $\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]$
-		as an expectation over conditional outcomes of $X_{s_1}=j$ and $X_{s_2} \ne j$ for $s_1 \le s_2$
-		\begin{IEEEeqnarray*}{rCl}
-				\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]
-					& = & \mathbb{E}_G\left[ \mathbb{P}_G\left[X_{s_1}=j,X_{s_2} \enskip s_1 \le t \wedge s_2 \left\| X_0=i \right.\right] \left\| \right. \mathscr{F}_{s_2} \right]\\
-					& = & \mathbb{E}_G\left[\mathbb{P}_G\left[X_{s_2} \enskip s_1 \le s_2 \left\| X_{s_1}=j \right.\right] \mathbb{P}_G\left[X_{s_1} = j \enskip s_1 \le t \left\|X_0=i \right.\right]  \left\| \right. \mathscr{F}_{s_2} \right]
-		\end{IEEEeqnarray*}
-		\item It follows that
-		\begin{IEEEeqnarray*}{+rCl+x*}
-			\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]
-				& = & \mathbb{P}_G\left[X_s: \exists u \le t \text{ where } \forall v \ge u \enskip X_v = j \left\| X_0=i \right. \right]\\
-				& = & \mathbb{P}_{\left(I-P_j\right)G}\left[X_s: \exists u \le t \text{ where } \forall v \ge u \enskip X_v = j \left\| X_0=i \right. \right]\\
-				& = & \mathbb{P}_{\left(I-P_j\right)G}\left[X_t = j \left\| X_0=i \right. \right]\\
-				& = & \hat{e}_i \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j & \IEEEQEDhere
-		\end{IEEEeqnarray*}
-	\end{enumerate}
+	The proof hinges on formalizing the intuition that once we know a continuous time 
+	homogeneous Markov process on a finite state space $X_t$ has first touched the state $j$ 
+	then we need no further information, and so we can work with the simpler process where $j$
+	is an absorbing state.
+	\begin{IEEEeqnarray*}{+rCl+x*}
+		\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]
+			& = & 1 - \mathbb{P}_G\left[T_j > t \left\| X_0=i \right.\right]\\
+			& = & 1 - \mathbb{P}_G\left[\forall s \le t \enskip X_s \ne j, \enskip \exists u > t \enskip X_u=j \left\| X_0=i \right.\right]\\
+			& = & 1 - \mathbb{P}_G\left[\forall s \le t \enskip X_s \ne j \left\| X_0=i \right.\right]\mathbb{P}_G\left[\exists u > t \enskip X_u=j \left\| \forall s \le t \enskip X_s \ne j \right.\right]\\
+			& = & 1 - \mathbb{P}_G\left[\forall s \le t \enskip X_s \ne j \left\| X_0=i \right.\right]\mathbb{P}_G\left[X_u = j, u > t \left\| X_t \ne j \right.\right]\\
+			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[\forall s \le t \enskip X_s \ne j \left\| X_0=i \right.\right]\mathbb{P}_{\left(I - P_j\right)G}\left[X_u = j, \enskip u > t \left\| X_t \ne j \right.\right]\\
+			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[\forall s \le t \enskip X_s \ne j, \enskip X_u = j, \enskip u > t  \left\| X_0=i \right.\right]\\
+			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[X_t = j \left\| X_0=i \right.\right]\\
+			& = & 1 - \hat{e}_i \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j & \IEEEQEDhere
+	\end{IEEEeqnarray*}
 \end{IEEEproof}
 
 This result generalizes in the obvious manner; where if we have a set of first hitting 
@@ -74,7 +70,7 @@ conditional distribution of $T_{i \rightarrow j}$ is
 \begin{IEEEeqnarray*}{rCl}
 	p\left(X_t=j \left\| X_0=i \right.\right)
 		& = & \frac{d}{dt} \mathbb{P}\left[X_T=j, T\le t \left\| X_0=i \right.\right]\\
-		& = & \frac{d}{dt} \hat{e_i} \exp\left(tP_iG\right) \hat{e}_j\\
+		& = & \frac{d}{dt} \left(1 - \hat{e_i} \exp\left(tP_iG\right) \hat{e}_j\right)\\
 		& = & \hat{e_i} P_iG \exp\left(tP_iG\right) \hat{e}_j\\
 		& = & \hat{e_i} \left(\sum_{l \ne i} x_{il} C_{il}\right) \exp\left(t\sum_{l \ne i} x_{il} C_{il}\right) \hat{e}_j\\
 		& = & \left(\sum_{l \ne i} x_{il}\left(\hat{e}_l  - \hat{e}_i\right) \right) \left(- e^{-tx_{ij}}\right) \hat{e}_i\\
@@ -95,16 +91,13 @@ initial state of the transition is known or can be inferred, but only a subset o
 states are observed. In this situation the projection operator $P_i$ onto a single
 dimensional subspace is replaced with a projection $I - P_A = P_{i_1} + P_{i_2} + \cdots$ 
 onto a multidimensional subspace; where $P_A$ is the projection onto the observed absorbing 
-states in set $A$.
+states in set $A$. Distribution density of the first hitting time statistic $T_A = \inf\left\lbrace t: X_t \in A \right\rbrace$
+is then $p\left(T_A \le t\right) = \left(1-P_A\right)\exp\left(t \left(1-P_A\right) G\right)$.
 
-
-
-%With total knowledge of all first hits p_ij=N_ij/T_ij
-%Prove its a stopped process where we take the product with the projection onto 
-%all the other transitative states. Essentially zero out the rows of the states
-%we observe first hitting on, turn them into absorbing states
-% Introduce simple linear parameterization of the vector space of the algebra
 \section{The Likelihood and Its Maximization}
-%Long formula basically
+With a density in hand we can proceed to formulate the likelihood of the for the first 
+hitting times. To do so we must carefully formulate the experimental design to which the
+likelihood will apply.
+
 \section{Newton-Raphson Maximization}
 \section{Figures and Illustrations}
