@@ -44,7 +44,6 @@ $y$.}
 		& = & \left[ \frac{e^{\operatorname{ad}_X \cdotp} - 1}{\operatorname{ad}_X \cdotp} \right] \left(\frac{\partial X}{\partial x}\right) e^X & \smash{\left. \IEEEstrut[4\jot] \right\rbrace} & \text{right recursive}\\
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X & &
 \end{IEEEeqnarray*}}
-
 The last equality demonstrates the non-commutative perturbation term most clearly; where the
 first multiplicative factor in the derivative accounts for the lack of commutativity between
 $X$ and $\frac{\partial X}{\partial x}$, and the last term resembles the derivative in the
@@ -63,7 +62,6 @@ that contains the commutative relationship for all $X$.
 		& = & \left[\frac{e^{\operatorname{ad}_X \cdotp} - 1 - \operatorname{ad}_X \cdotp }{\operatorname{ad}_X^2 \cdotp} \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) e^X + \frac{\partial X}{\partial x} e^X\\
 		& = & \underbrace{\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)}_{\text{non-commutative anomaly}} e^X + \underbrace{\frac{\partial X}{\partial x}}_{\text{invariant}} e^X
 \end{IEEEeqnarray*}
-
 Formally the infinite series in the non-commutative perturbation is related to the lower 
 incomplete gamma function $\gamma\left(n,x\right)$. This can be seen by considering the 
 general case when the offset of $2$ in the factorial is allowed to be any natural number $n$, 
@@ -77,7 +75,6 @@ and then restating the sum in terms of a truncated exponential series.
 		& = & \frac{e^x}{\left(n-1\right)! x^n} \int_0^x t^{n-1}e^{-t}dt\\
 		& = & \frac{e^x}{\left(n-1\right)! x^n} \gamma\left(n,x\right)
 \end{IEEEeqnarray*}
-
 The non-commutative perturbation series is linear in $\frac{\partial X}{\partial x}$  and a 
 Taylor series in the powers of $\operatorname{ad}_X \cdotp$. Thus any computation of an 
 approximation will be in the powers of $\operatorname{ad}_X \cdotp$. As was discussed in the 
@@ -128,14 +125,12 @@ rational polynomial approximation to the Taylor series.
 		& =       & \frac{p_0 + p_1 x + \cdots + p_n x^n}{1 + q_1 x + \cdots + q_m x^m}\\
 		& \approx & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!}x^n
 \end{IEEEeqnarray*}
-
 Such that the first $k \le n+m$ derivatives of the rational polynomial approximation evaluated at
 $x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
 \begin{IEEEeqnarray*}{rCl}
 	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
 		& = & \frac{1}{\left(k+2\right)!}
 \end{IEEEeqnarray*}
-
 The symbolic computation of the exact rational coefficients of the $\left[13/14\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
 using big integer mathematics, and the Polynomials package. The results of the computation 
@@ -159,27 +154,23 @@ the Kronecker representation of $\operatorname{ad}_X \frac{\partial X}{\partial 
 as
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X \frac{\partial X}{\partial x} 
-		& = & \operatorname{mat}\left( \left(I \otimes X - X^T \otimes I \right) \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
+		& = & \operatorname{mat}\left( \left(I \otimes X - X^\dagger \otimes I \right) \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
-
 Proceeding by induction we find that 
 \begin{IEEEeqnarray*}{rCl}
 	\operatorname{ad}_X^n \frac{\partial X}{\partial x} 
-		& = & \operatorname{mat}\left(\left(I \otimes X - X^T \otimes I \right)^n\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
+		& = & \operatorname{mat}\left(\left(I \otimes X - X^\dagger \otimes I \right)^n\operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right)
 \end{IEEEeqnarray*}
-
 It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^T \otimes I \right)^{n+1} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
+		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^\dagger \otimes I \right)^{n+1} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
-
 And thus can be approximated by
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^T \otimes I\right)}{Q_m \left(I \otimes X - X^T \otimes I\right)} \left(I \otimes X - X^T \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
+		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^\dagger \otimes I\right)}{Q_m \left(I \otimes X - X^\dagger \otimes I\right)} \left(I \otimes X - X^\dagger \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
-
 We can summarize this work in an algorithm to compute the non-commutative perturbation \ref{alg:perturbation}.
 This algorithm servers as a sketch only, highlighting only the novel elements developed in
 this section. Many additional optimizations could be implemented including minimizing memory 
@@ -188,7 +179,6 @@ numerical stability, and using recursive squaring and summing methods to efficie
 the matrix polynomials. A point of concern is the first assignment of the Kronecker product, 
 which results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
 compute the gradient of the matrix exponential can be formulated \ref{alg:gradient}.
-
 \section{The Hessian}
 Assuming $X$ parameterized by $x,y \in \mathbb{R}$ is analytic, or at least twice 
 differentiable the Hessian of $e^X$ exists and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,
@@ -217,7 +207,6 @@ Hessian.
 			& = & \sum_{k=0}^n \binom{n}{k} \left[\operatorname{ad}_X^k A , \operatorname{ad}_X^{n-k} B \right]
 	\end{IEEEeqnarray*}
 \end{lemma}
-
 \begin{IEEEproof}
 	For each of the equalities we have:
 	\begin{enumerate}
@@ -226,7 +215,6 @@ Hessian.
 		\item Take the antisymmetric difference of previous equality.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
-
 We will also find use of the following corollary to the binomial theorem.
 \begin{corollary}
 	For any $n,m \ge 0$
@@ -235,11 +223,9 @@ We will also find use of the following corollary to the binomial theorem.
 			& = & \binom{n+m+1}{n}
 	\end{IEEEeqnarray*}
 \end{corollary}
-
 \begin{IEEEproof}
 	Proceed by induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
-
 In the next step of developing the Hessian we derive the Taylor series for the bilinear 
 non-commutative perturbation. Unfortunately because this form is a bilinear map it does
 not admit the formulation of Pad\'{e} approximation.
@@ -254,7 +240,6 @@ not admit the formulation of Pad\'{e} approximation.
 			& = & \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 	\end{IEEEeqnarray*}
 \end{corollary}
-
 \begin{IEEEproof}
 	Apply the previous results in the order they were stated to the symmetric sum of the two
 	terms.
@@ -286,7 +271,6 @@ not admit the formulation of Pad\'{e} approximation.
 	This recursive calculation is illustrate in figure \ref{fig:pascaldivergence}. The proof 
 	of which is found by carrying out induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
-
 There are three special cases that simplify the calculation of Taylor series considerably.
 \begin{IEEEeqnarray*}{rCl}
 	\sum_{n=0}^\infty \frac{ F_n}{\left(n+2\right)!}
@@ -300,7 +284,6 @@ There are three special cases that simplify the calculation of Taylor series con
 				& \operatorname{ad}_X  \frac{\partial X}{\partial y} = 0
 		\end{cases}
 \end{IEEEeqnarray*}
-
 The Taylor series in the last two cases does admit a Pad\'{e} approximation, by the same
 reasoning as presented in the previous section. In particular we can further reduce the
 Taylor series.
@@ -309,7 +292,6 @@ Taylor series.
 		& = & \sum_{n=1}^\infty \frac{n}{\left(n+2\right)!} x^n\\
 		& = & \left(\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n\right)x
 \end{IEEEeqnarray*}
-
 Using the same criteria as in the previous section yields a $\left[12/14\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
 The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
@@ -335,7 +317,6 @@ antisymmetric terms cancel out.
 		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
 		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 \end{IEEEeqnarray*}
-
 To flush out the final algorithm for the Hessian lets consider each summand in the last 
 equality individually. The first term involving $\frac{\partial^2 X}{\partial x \partial y}$
 can be calculated using the non-commutative perturbation algorithm developed in the 
@@ -344,7 +325,6 @@ preceding section
 	\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right)
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}
 \end{IEEEeqnarray*}
-
 The next two summands together are the Poisson bracket of the non-commutative perturbations
 the gradients $\frac{\partial e^X}{\partial x}$, and $\frac{\partial e^X}{\partial y}$. The
 final summand is the bilinear non-commutative perturbation. Taken together the algorithm for
@@ -359,7 +339,6 @@ Nevertheless both of the algorithms for the non-commutative perturbation and the
 non-commutative perturbation are stable with respect to the the stochastic contraction
 Lie algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$; in the sense that if $X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}, \frac{\partial^2 X}{\partial x \partial y} \in \mathfrak{st}^{+}(\hat{\mathbbm{1}})$,
 then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
-
 \clearpage
 \section{Figures and Illustrations}
 \begin{longtable}{r r r}
@@ -392,7 +371,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	$x^{13}$ & $\frac{-1}{7244400176133120000}$ & $\frac{-1}{30185000733888000}$\\
 	$x^{14}$ & & $\frac{1}{6761440164390912000}$
 \end{longtable}
-
 \begin{algorithm}[!ht]
 	\caption[Non-commutative Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:perturbation}
@@ -401,7 +379,7 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 			\If{$\left[X,D_x\right] = 0$}
 				\State $Y \gets 0$\Comment{Short circuit commutative case}
 			\Else
-				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 				\State $A_x \gets [X, D_x]$\Comment{Allocates memory}
 				\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
 				\State $P \gets P_{13}\left(A_X\right)$\Comment{Recursive squaring and summing}
@@ -413,7 +391,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
-
 \begin{algorithm}[!ht]
 	\caption[Gradient of $e^X$]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:gradient}
@@ -425,7 +402,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
-
 \begin{figure}[!ht]
 	\centering
 	\begin{tikzpicture}
@@ -500,7 +476,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 8 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
 	\label{fig:pascaldivergence}
 \end{figure}
-
 \begin{longtable}{r r r}
 	\caption{Pad\'{e} Approximation of $\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$}
 	\label{tab:bilinear}\\
@@ -531,7 +506,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	$x^{13}$ & & $\frac{-359560490231}{5809013758675431109757952000}$\\
 	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
 \end{longtable}
-
 \begin{algorithm}[!ht]
 	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:bilinear}
@@ -542,7 +516,7 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 			\If{$A_x = 0$ \textbf{and} $A_y = 0$}
 				\State $Z \gets 0$\Comment{Commutative short circuit}
 			\ElsIf{$A_x = 0$}			
-				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 				\State $\vec{a_y} \gets \operatorname{VEC}\left(A_y\right)$\Comment{Change of indexing}
 				\State $P \gets P_{12}\left(A_X\right)$\Comment{Recursive squaring and summing}
 				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Recursive squaring and summing}
@@ -550,7 +524,7 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 				\State $Z \gets \operatorname{MAT}\left(\vec{z}\right)$\Comment{Change of indexing}
 				\State $Z \gets \left[D_x, Z\right]$\Comment{In place computation}
 			\ElsIf{$A_y = 0$}
-				\State $A_X \gets I \otimes X - X^T \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+				\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 				\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
 				\State $P \gets P_{12}\left(A_X\right)$\Comment{Recursive squaring and summing}
 				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Recursive squaring and summing}
@@ -575,7 +549,6 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
-
 \begin{algorithm}[!ht]
 	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:hessian}

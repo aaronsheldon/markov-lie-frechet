@@ -1,17 +1,17 @@
 \chapter{Maximum Likelihood Estimation from First Hitting Times}
 \section{Distribution of First Hitting Times}
 Contemporary methods for fitting time homogeneous Markov processes on a finite 
-state space require directly parameterizing the transition probability matrix $\mathbb{P}\left[X_n = j \left\|X_0 = i \right.\right] = \hat{e}_i^T P^n \hat{e}_j$,
+state space require directly parameterizing the transition probability matrix $\mathbb{P}\left[X_n = j \left\|X_0 = i \right.\right] = \left\langle \hat{e}_i, P^n \hat{e}_j \right\rangle$,
 as they depend on realizing the process through discrete time steps $n$. While this 
 formulation has many powerful applications, there are analyses where the parameterization of 
-the generator of the time homogeneous Markov process, $\mathbb{P}\left[X_t = j \left\|X_0 = i \right.\right] = \hat{e}_i^T \exp\left({tG}\right) \hat{e}_j$, 
-is of greater meaning, or importance. In particular when the observed process is, at least,
+the generator of the time homogeneous Markov process, $\mathbb{P}\left[X_t = j \left\|X_0 = i \right.\right] = \left\langle \hat{e}_i, \exp\left({tG}\right) \hat{e}_j \right\rangle$, 
+is of greater meaning, or importance. In particular when the observed process is, at least
 in principle continuous, or when the desired parameterization is in units of rates per time
 parameterization of the generator is the more natural choice.
 
 The natural experimental design for continuous time homogeneous Markov process on a finite
-state space is the observation of a stopped process, such as the first hitting time to a
-state statistic, or the first exit time from a state statistic. Surprisingly it is possible
+state space is the observation of a stopped process, such as the statistic of first hitting 
+time of a state, or the first exit time from a state statistic. Surprisingly it is possible
 to explicitly formulate the distribution of these two statistics in terms of the generator
 of the process.
 
@@ -32,10 +32,9 @@ results in the exercises of Rogers and Williams \cite{rogers_diffusions_2000}.
 	then
 	\begin{IEEEeqnarray*}{rCl}
 		\mathbb{P}_G\left[T_j \le t \left\| X_0=i \right.\right]
-			& = & 1 - \hat{e}_i^T \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j
+			& = & 1 - \left\langle \hat{e}_i, \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j \right\rangle
 	\end{IEEEeqnarray*}
 \end{theorem}
-
 \begin{IEEEproof}
 	The proof hinges on formalizing the intuition that once we know a continuous time 
 	homogeneous Markov process on a finite state space $X_t$ has first touched the state $j$ 
@@ -50,10 +49,9 @@ results in the exercises of Rogers and Williams \cite{rogers_diffusions_2000}.
 			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[\forall s \le t \enskip X_s \ne j \left\| X_0=i \right.\right]\mathbb{P}_{\left(I - P_j\right)G}\left[X_u = j, \enskip u > t \left\| X_t \ne j \right.\right]\\
 			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[\forall s \le t \enskip X_s \ne j, \enskip X_u = j, \enskip u > t  \left\| X_0=i \right.\right]\\
 			& = & 1 - \mathbb{P}_{\left(I - P_j\right)G}\left[X_t = j \left\| X_0=i \right.\right]\\
-			& = & 1 - \hat{e}_i^T \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j & \IEEEQEDhere
+			& = & 1 - \left\langle \hat{e}_i, \exp\left(t\left(I - P_j\right) G\right) \hat{e}_j \right\rangle & \IEEEQEDhere
 	\end{IEEEeqnarray*}
 \end{IEEEproof}
-
 This result generalizes in the obvious manner; where if we have a set of first hitting 
 states $J$ then the transition probabilities of the process $\left(I - P_J\right) G$ gives
 the cumulative distributions of the hitting times; where $P_J = P_{j_1} + P_{j_2} + \cdots$.
@@ -71,13 +69,12 @@ distribution of $T_{i \rightarrow j}$ is
 	p_G\left(T_{i \rightarrow j}=t \left\| X_0=i \right.\right)
 		& = & \frac{d}{dt} \mathbb{P}_G\left[ T_j\le t \left\| X_0=i \right.\right]\\
 		& = & \frac{d}{dt} \mathbb{P}_{P_i G}\left[ T_j\le t \left\| X_0=i \right.\right]\\
-		& = & \frac{d}{dt} \left(1 - \hat{e}_i^T \exp\left(tP_iG\right) \hat{e}_j\right)\\
-		& = & \frac{d}{dt} \left(1 - \hat{e}_i^T \exp\left(t\sum_{l \ne i} x_{il} C_{il}\right) \hat{e}_j\right)\\
-		& = & \frac{d}{dt} \left(1 - \hat{e}_i^T e^{-tx_{ij}} \hat{e}_i\right)\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(tP_iG\right) \hat{e}_j\right) \right\rangle\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(t\sum_{l \ne i} x_{il} C_{il}\right) \hat{e}_j\right) \right\rangle\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, e^{-tx_{ij}} \hat{e}_i\right) \right\rangle\\
 		& = & \frac{d}{dt} \left(1 - e^{-tx_{ij}}\right)\\
 		& = & x_{ij} e^{-tx_{ij}}
 \end{IEEEeqnarray*}
-
 Intuitively if we design our experiment to observer the durations $t_n = T_{i \rightarrow j}$
 between $N_{ij}$ replicated transitions $i \rightarrow j$, the maximum likelihood estimate of
 each rate $x_{ij}$ is then the simple average
@@ -85,7 +82,6 @@ each rate $x_{ij}$ is then the simple average
 	\tilde{x}_{ij}
 		& = & \frac{N_{ij}}{\sum_{n=1}^{N_{ij}} t_n}
 \end{IEEEeqnarray*}
-
 However for experiments that involve opportunistic sampling, surveys, or population
 monitoring it is generally not possible to observe every distinct transition. Typically the
 initial state of the transition is known or can be inferred, but only a subset of exit
@@ -93,28 +89,76 @@ states are observed. In this situation the projection operator $P_i$ onto a sing
 dimensional subspace is replaced with a projection $I - P_A = P_{i_1} + P_{i_2} + \cdots$ 
 onto a multidimensional subspace; where $P_A$ is the projection onto the observed absorbing 
 states in set $A$.
-
 \section{The Likelihood and Its Maximization}
 With a method to derive the density in hand we can proceed to formulate the log-likelihood
 of the first hitting times. To do so we must carefully formulate the experimental design to 
-which the log-likelihood will apply.
+which the log-likelihood will apply. Rather than attempt to formulate the most general
+likelihood model possible, which would be notationally laborious given the infinite
+permutations and combinations of models available, we will illustrate the formulation of
+the likelihood through a specific application to an aging process.
 
-% fill in the blanks
+An aging process is a continuous time homogeneous finite birth death-process, where all the
+sequential transitions between states are reversible except for transitions to the final
+state, which is an absorbing state representing death. In the context first hitting time
+statistics, a finite subset of the states act as sentinel states, where the first hitting
+time statistic for the transition between any pair of, possible non-adjacent, sentinel 
+states is observed. An example of this process is illustrated in figure \ref{fig:agingprocess},
+which displays a seven state aging process, with three sentinel states. The transitions
+between states that are not sentinel are not directly observed; but rather acts as a type
+of memory register that broadens the centrality of the distribution of first hitting times.
 
-The log-likelihood is given by
+Given an $U$ state aging process, the generator takes on the simple sequential form:
+\begin{IEEEeqnarray*}{rCl}
+	G 
+		& = & \sum_{i=1}^{U-1} x_{i\left(i+1\right)}C_{n\left(i+1\right)}\\
+		& = & \sum_{i=1}^{U-1} x_{i\left(i+1\right)}\left(\hat{e}_{i} \otimes \hat{e}_{i+1} - \hat{e}_i \otimes \hat{e}_i\right)
+\end{IEEEeqnarray*}
+The $U$ state aging process as $2U-3$ unknown parameters, $x_{i\left( i+1\right)}$ for $1 \le i \le U-1$
+and $x_{i\left( i-1\right)}$ for $2 \le i \le U-1$, to be fitted by likelihood maximization.
+Of the $U$ states, a subset of $V \le U$ states are sentinel states, $1 \le i_1 < \cdots i_V \le U$,
+for which we observe the first hitting time statistics for the transitions between the
+sentinel states.
+
+Generalizing the theorem in the previous section, the distribution of the first hitting time
+statistic, $T_{i_v \rightarrow i_{v\pm1}}$, for the observed time to transition from either
+sentinel states $i_v < i_{v+1}$, or $i_{v-1} < i_v$ is then
+\begin{IEEEeqnarray*}{rCl}
+	p_G\left(T_{i_v \rightarrow i_{v \pm 1}} = t\right)
+		& = & \left\langle \hat{e}_{i_v}, \sum_{j=i_v}^{i_{v \pm 1} \mp 1}P_jG \exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}P_jG\right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
+		& = & \left\langle \hat{e}_{i_v}, \left(x_{i_v\left(i_v - 1\right)} C_{i_v\left(i_v - 1\right)} + x_{i_v\left(i_v + 1\right)} C_{i_v\left(i_v + 1\right)} \right)\exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}\right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
+		& = & \left\langle x_{i_v \left(i_v \pm 1\right)} \hat{e}_{i_v \pm 1} - \hat{e}_{i_v} \left(x_{i_v \left(i_v - 1\right)} + x_{i_v \left(i_v + 1\right)}\right),  \exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}\right) \hat{e}_{i_{v \pm 1}} \right\rangle 
+\end{IEEEeqnarray*}
+The next step is to formulate the log-likelihood. This requires establishing the observed
+data. Consider $N$ observations of the durations $t_n$ between sentinel states $i_{v_n}$ and
+$i_{v_n \pm 1}$, where $1 \le n \le N$. Defining the per observation generator $G_n$ as
+\begin{IEEEeqnarray*}{rCl}
+	G_n
+		& = & \sum_{j=i_{v_n}}^{i_{v_n \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}
+\end{IEEEeqnarray*}
+and the per observation rate difference vector $\vec{e}_n$
+\begin{IEEEeqnarray*}{rCl}
+	\vec{e}_n
+		& = & x_{i_v \left(i_{v_n} \pm 1\right)} \hat{e}_{i_{v_n} \pm 1} - \hat{e}_{i_{v_n}} \left(x_{i_{v_n} \left(i_{v_n} - 1\right)} + x_{i_{v_n} \left(i_{v_n} + 1\right)}\right)
+\end{IEEEeqnarray*}
+the log-likelihood follows as
 \begin{IEEEeqnarray*}{rCl}
 	\Lambda
-		& = & \sum_{n=1}^N \ln\left(\hat{e}_{i_n}^T \left(I-P_{j_n}\right)G\exp\left(\left(I-P_n\right)G\right) \hat{e}_{j_n}\right)
+		& = & \sum_{n=1}^N \ln p_G\left(T_{i_{v_n} \rightarrow i_{v_n \pm 1}} = t_n\right)\\
+		& = & \sum_{n=1}^N \ln \left(\left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle \right)
 \end{IEEEeqnarray*}
-
-The generator is given by
+Maximization requires differentiation by the $2U-3$ parameters $x_{i\left(i \pm 1\right)}$.
+By the linearity of the generator this will result in algebraically replacing the $x_{i\left(i \pm 1\right)}$
+with indicator functions of the form $\mathbb{I}\left[i_{v_n} = k \right]$, and $\mathbb{I}\left[k \in i_{v_n}, \dots, i_{v_n \pm 1} \mp 1 \right]$, 
+where $k$ is the index of partial differentiation.
 \begin{IEEEeqnarray*}{rCl}
-	\left(I-P_n\right)G
-		& = & \sum_{k \ne j_n, l} x_{kl} C_{kl}
+	\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}
+		& = & \sum_{n=1}^N \mathbb{I}\left[i_{v_n} = k\right] \frac{\left\langle \hat{e}_{k \pm 1} - \hat{e}_k, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle}{ \left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle }\\[2ex]
+		&   & \:+ t_n \mathbb{I}\left[k \in i_{v_n}, \dots, i_{v_n \pm 1} \mp 1 \right] \frac{\left\langle \vec{e}_n, \left[ \frac{e^{\operatorname{ad}_{t_nG_n} \cdot} -1}{\operatorname{ad}_{t_nG_n} \cdot } \right]\left(C_{k\left(k \pm 1 \right)}\right) \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle}{ \left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle }\\[2ex]
+		& = & 0
 \end{IEEEeqnarray*}
-
-\section{Newton-Raphson Maximization}
-
+Extracting the vector differences in the previous partial differential equation to either
+side of the equality yields an pseudo-linear equation that can be used to generate a 
+recursive solver for the parameters $x_{i\left(i \pm 1\right)}$.
 \clearpage
 \section{Figures and Illustrations}
 \begin{figure}[!ht]
