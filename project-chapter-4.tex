@@ -119,46 +119,58 @@ Of the $U$ states, a subset of $V \le U$ states are sentinel states, $1 \le i_1 
 for which we observe the first hitting time statistics for the transitions between the
 sentinel states.
 
-Generalizing the theorem in the previous section, the distribution of the first hitting time
-statistic, $T_{i_v \rightarrow i_{v\pm1}}$, for the observed time to transition from either
-sentinel states $i_v < i_{v+1}$, or $i_{v-1} < i_v$ is then
+Generalizing the theorem in the previous section the generators $G_v^\pm$ for the observed first
+hitting time statistics, $T_{i_v \rightarrow i_{v \pm 1}}$, are given by
+\begin{IEEEeqnarray*}{rCl}
+	G_v^\pm
+		& = & \sum_{j=i_{v}}^{i_{v \pm 1} \mp 1} P_j G\\
+		& = & \sum_{j=i_{v}}^{i_{v \pm 1} \mp 1} x_{j \left(j-1\right)}C_{j \left(j-1\right)} + x_{j \left(j+1\right)}C_{j \left(j+1\right)}
+\end{IEEEeqnarray*}
+The distribution density of $T_{i_v \rightarrow i_{v \pm 1}}$ can be concisely stated as
 \begin{IEEEeqnarray*}{rCl}
 	p_G\left(T_{i_v \rightarrow i_{v \pm 1}} = t\right)
-		& = & \left\langle \hat{e}_{i_v}, \sum_{j=i_v}^{i_{v \pm 1} \mp 1}P_jG \exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}P_jG\right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
-		& = & \left\langle \hat{e}_{i_v}, \left(x_{i_v\left(i_v - 1\right)} C_{i_v\left(i_v - 1\right)} + x_{i_v\left(i_v + 1\right)} C_{i_v\left(i_v + 1\right)} \right)\exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}\right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
-		& = & \left\langle x_{i_v \left(i_v \pm 1\right)} \hat{e}_{i_v \pm 1} - \hat{e}_{i_v} \left(x_{i_v \left(i_v - 1\right)} + x_{i_v \left(i_v + 1\right)}\right),  \exp\left(t\sum_{j=i_v}^{i_{v \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}\right) \hat{e}_{i_{v \pm 1}} \right\rangle 
+		& = & \left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle
 \end{IEEEeqnarray*}
 The next step is to formulate the log-likelihood. This requires establishing the observed
-data. Consider $N$ observations of the durations $t_n$ between sentinel states $i_{v_n}$ and
-$i_{v_n \pm 1}$, where $1 \le n \le N$. Defining the per observation generator $G_n$ as
-\begin{IEEEeqnarray*}{rCl}
-	G_n
-		& = & \sum_{j=i_{v_n}}^{i_{v_n \pm 1} \mp 1}x_{j\left(j \pm 1\right)}C_{j\left(j \pm 1\right)}
-\end{IEEEeqnarray*}
-and the per observation rate difference vector $\vec{e}_n$
-\begin{IEEEeqnarray*}{rCl}
-	\vec{e}_n
-		& = & x_{i_v \left(i_{v_n} \pm 1\right)} \hat{e}_{i_{v_n} \pm 1} - \hat{e}_{i_{v_n}} \left(x_{i_{v_n} \left(i_{v_n} - 1\right)} + x_{i_{v_n} \left(i_{v_n} + 1\right)}\right)
-\end{IEEEeqnarray*}
+data. For each of the first hitting time statistics $T_{i_v \rightarrow i_{v \pm 1}}$ we 
+observe $N_v^\pm$ replications of durations $t_v^{\pm\left(n\right)}$, enumerated by $1 \le n \le N_v^\pm$.
+Using the convention that summing to $N_v^\pm$ means a sum to $N_v^{+}$ and a sum to $N_v^{-}$ 
 the log-likelihood follows as
 \begin{IEEEeqnarray*}{rCl}
 	\Lambda
-		& = & \sum_{n=1}^N \ln p_G\left(T_{i_{v_n} \rightarrow i_{v_n \pm 1}} = t_n\right)\\
-		& = & \sum_{n=1}^N \ln \left(\left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle \right)
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln p_G\left(T_{i_v \rightarrow i_{v \pm 1}} = t_v^{\pm\left(n\right)}\right)\\
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln \left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln \left\langle \hat{e}_{i_v}, x_{i_v\left(i_v \pm 1\right)} C_{i_v\left(i_v \pm 1\right)} \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle
 \end{IEEEeqnarray*}
-Maximization requires differentiation by the $2U-3$ parameters $x_{i\left(i \pm 1\right)}$.
-By the linearity of the generator this will result in algebraically replacing the $x_{i\left(i \pm 1\right)}$
-with indicator functions of the form $\mathbb{I}\left[i_{v_n} = k \right]$, and $\mathbb{I}\left[k \in i_{v_n}, \dots, i_{v_n \pm 1} \mp 1 \right]$, 
+Maximization requires differentiation by the $2U-3$ parameters $x_{k\left(k \pm 1\right)}$.
+By the linearity of the generator this will result in algebraically replacing the $x_{k\left(k \pm 1\right)}$
+with indicator functions of the form $\mathbb{I}\left[i_v = k \right]$, and $\mathbb{I}\left[k \in i_v, \dots, i_{v \pm 1} \mp 1 \right]$, 
 where $k$ is the index of partial differentiation.
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}
-		& = & \sum_{n=1}^N \mathbb{I}\left[i_{v_n} = k\right] \frac{\left\langle \hat{e}_{k \pm 1} - \hat{e}_k, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle}{ \left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle }\\[2ex]
-		&   & \:+ t_n \mathbb{I}\left[k \in i_{v_n}, \dots, i_{v_n \pm 1} \mp 1 \right] \frac{\left\langle \vec{e}_n, \left[ \frac{e^{\operatorname{ad}_{t_nG_n} \cdot} -1}{\operatorname{ad}_{t_nG_n} \cdot } \right]\left(C_{k\left(k \pm 1 \right)}\right) \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle}{ \left\langle \vec{e}_n, \exp\left(t_n G_n\right) \hat{e}_{i_{v_n \pm 1}} \right\rangle }\\[2ex]
+		& = & \sum_{n=1}^{N_v^\pm} \frac{1}{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle}
+			\left\langle \hat{e}_{i_v}, \Bigg( \mathbb{I}\left[i_v = k \right] C_{i_v \left(i_v \pm 1\right)} + t_v^{\pm \left(n\right)} x_{i_v \left(i_v \pm 1\right)}  C_{i_v \left(i_v \pm 1\right)}^\pm \right.\\
+		&   & \left. \cdot \left[ \frac{\exp\left(\operatorname{ad}_{t_v^{\pm\left(n\right)} G_v^\pm} \cdot\right) - 1}{\operatorname{ad}_{t_v^{\pm\left(n\right)} G_v^\pm} \cdot} \right]\left( \mathbb{I}\left[k \in i_v, \dots, i_{v \pm 1} \mp 1 \right] C_{k\left(k \pm 1\right)}\right)\Bigg) \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
 		& = & 0
 \end{IEEEeqnarray*}
-Extracting the vector differences in the previous partial differential equation to either
-side of the equality yields an pseudo-linear equation that can be used to generate a 
-recursive solver for the parameters $x_{i\left(i \pm 1\right)}$.
+Factoring the summands by both the transition between sentinel states and the observations
+makes the algorithm to calculate the terms of the partial differential equation more
+transparent \ref{alg:singlesummand}. For a given generator $G$ and differential parameter $x_{k\left(k \pm 1\right)}$
+we first determine the canonical generator $C_{k\left(k+1\right)}$ and sub-generator $G_v$.
+After that one time computation the data $t_v^{\pm \left(n\right)}$ is looped through to
+produce the full partial derivative of the log-likelihood.
+
+While the gradient alone is sufficient for gradient decent searches for local maximum, 
+maximization of the log-likelihood by the Newton-Raphson method requires calculation of the
+Hessian of the log-likelihood. By necessity the Hessian of the log-likelihood will be 
+complicated. However in this example we have one simplification at our disposal. The partial
+derivative by the transition rates $x_{l\left(l \pm 1\right)}$ and $x_{k\left(k \pm 1\right)}$
+will only be non-trivial when the states fall between the same sentinel states.
+
+A full implementation of both the Hessian of the log-likelihood and the Newton-Raphson 
+method for likelihood maximization is complex undertaking, but fundamentally not
+intractable. For the most part, successful implementation requires patience and diligence on
+the part of the developer.
 \clearpage
 \section{Figures and Illustrations}
 \begin{figure}[!ht]
@@ -193,3 +205,26 @@ recursive solver for the parameters $x_{i\left(i \pm 1\right)}$.
 	\caption[$7$ State Aging Process]{A representation of an aging process by a reversible $7$ state birth-death process, with $3$ sentinel states: healthy ($1$), care placement ($4$), and death ($7$). Each pair of intermediate states represents either a state of improving ($2$, $5$) or worsening ($3$, $6$) health.}
 	\label{fig:agingprocess}
 \end{figure}
+\begin{algorithm}[!ht]
+	\caption[Single summand of $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$]{Numerical calculation of a single summand in the gradient of the log-likelihood $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$.}
+	\label{alg:singlesummand}
+	\begin{algorithmic}[1]
+		\Function{SGL}{$G$,$t$,$i$,$j$,$k$,$\pm1$}
+			\If{$k = i \wedge j$ \textbf{or} $k = i \vee j$}
+				\State $d \gets 1$\Comment{Partial on sentinel state}
+			\ElsIf{$i \wedge j < k < i \vee j$}
+				\State $d \gets 0$\Comment{Partial on intermediate state}
+			\Else
+				\State \Return $0$\Comment{Partial outside of transition}
+			\EndIf
+			\State $x \gets G_{k\left(k \pm 1\right)}$\Comment{Get parameter from generator}
+			\State $C \gets \hat{e}_k \otimes \hat{e}_{k \pm 1} - \hat{e}_k \otimes \hat{e}_k$\Comment{Canonical generator}
+			\State $E \gets \exp\left(t G\right)$\Comment{Call to matrix exponential}
+			\State $D \gets \left(\operatorname{PER}\left(tG, C\right) + C\right)E$\Comment{Call to gradient perturbation}
+			\State $D \gets C\left(d + txD\right)$\Comment{Numerator derivative of generators}
+			\State $d \gets D_{ij}$\Comment{Numerator derivative of probability}
+			\State $p \gets \left(GE\right)_{ij}$\Comment{Denominator probability}
+			\State \Return $\frac{d}{p}$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}

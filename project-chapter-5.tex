@@ -1,25 +1,45 @@
 \chapter{Conclusion}
 \section{Summary of Results}
-In chapter two we reversed the normal development of stochastic matrices; which
-usually starts with characterizing matrices as having non-negative entries with
-fixed row sums in a standard orthonormal basis $\hat{e}_i$. The line of typical
-development then notices that the vector $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$
-is an Eigenvector. Instead we began by characterizing all invertible matrices $A$ 
-such that $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ with respect to a fixed unit 
-vector $\hat{\mathbbm{1}}$. We showed that there is always a basis $\hat{e}_i$ 
-such that $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ can be interpreted as 
-the row sum vector, and found that this allowed us to characterize both the Lie 
-group in which the matrices $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ reside, 
-and the Lie algebra tangent to the Lie group. We denoted these the $St(\hat{\mathbbm{1}})$ 
-stochastic Lie group with respect to $\hat{\mathbbm{1}}$ and $\mathfrak{st}(\hat{\mathbbm{1}})$ 
-the stochastic Lie group with respect to $\hat{\mathbbm{1}}$. We further 
-characterized the doubly stochastic Lie group and algebra with respect to $\hat{\mathbbm{1}}$, 
+In chapter two we reversed the normal development of stochastic matrices; which usually
+starts with characterizing matrices as having non-negative entries with fixed row sums in a
+standard orthonormal basis $\hat{e}_i$. The line of typical development then notices that
+the vector $\vec{\mathbbm{1}} = \sum_{i=1}^n \hat{e}_i$ is an Eigenvector. Instead we began
+by characterizing all invertible matrices $A$ such that $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
+with respect to a fixed unit vector $\hat{\mathbbm{1}}$. We showed that there is always a 
+basis $\hat{e}_i$ such that $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ can be
+interpreted as the row sum vector, and found that this allowed us to characterize both the Lie 
+group in which the matrices $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ reside, and the Lie
+algebra of tangents to the Lie group. We denoted the $St(\hat{\mathbbm{1}})$ stochastic Lie
+group with respect to $\hat{\mathbbm{1}}$, and $\mathfrak{st}(\hat{\mathbbm{1}})$ the
+stochastic Lie algebra with respect to $\hat{\mathbbm{1}}$. We further characterized the
+doubly stochastic Lie group and algebra with respect to $\hat{\mathbbm{1}}$, respectively 
 denoted $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ and $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$,
-of invertible matrices of fixed row and column sums with respect to $\hat{\mathbbm{1}}$,
-by generalizing the stochastic Lie group and algebra to the dual stochastic Lie
-group and algebra, $St^T(\hat{\mathbbm{1}})$ and $\mathfrak{st}^T(\hat{\mathbbm{1}})$, 
-of invertible matrices such that $A^T \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
+of invertible matrices of fixed row and column sums with respect to $\hat{\mathbbm{1}}$. 
+This accomplished by generalizing the stochastic Lie group and algebra to the dual
+stochastic Lie group and algebra, $St^\dagger(\hat{\mathbbm{1}})$ and $\mathfrak{st}^dagger(\hat{\mathbbm{1}})$, 
+of invertible matrices such that $A^\dagger \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
+
+In chapter three we used analytic and closure properties of the stochastic Lie algebras to
+argue that the algorithms developed for calculating the gradient and Hessian of the matrix
+exponential will result in matrices that belong to the stochastic Lie algebra. An initial
+computation of the coefficients for a Pad\'{e} approximation was presented, and an sketch
+of algorithms to calculate the gradient and the Hessian were outlined.
+
+In chapter four we combined the results of the previous two chapters, illustrated through
+the example of the aging process. The algorithms to calculate the log-likelihood, its
+gradient, and Hessian were developed. Finally the Newton-Raphson maximization was briefly
+introduced.
 \section{Discussion}
+Any attempt to fit the generator of a Markov process to observations is in essence an 
+exercise in calculating the logarithm of a matrix. Like the scalar complex logarithm the
+matrix logarithm is not unique, and has many branches. To demonstrate this point in chapter
+two a calculation of one of the branches of the logarithm of permutations was developed, in
+the context of the stochastic Lie algebra. However, much as there is a unique real logarithm
+of a positive real number, working within the normal subgroup, and real the sub-algebra, of
+the stochastic Lie group does provide for certain guarantees of algebraic and analytic
+closure.
+
+
 Application of Lie Theory to the embedding problem for first hitting times...
 Differentiate between problem of choosing a branch of the matrix logarithm
 and multiple Markov models having the same first hitting time distribution.
