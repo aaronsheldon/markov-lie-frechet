@@ -1,31 +1,98 @@
 \chapter{Julia Implementations}
-Basic implementations of the presented algorithms.
+Proof of concept implementations of the numerical calculations and algorithms presented in 
+the Julia scientific computing language. All the algorithms will need carefully 
+optimization, debugging, unit testing, error catching and documentation before they can be 
+released on a production scale.
 
-\begin{lstlisting}[language=Julia,caption=Poor man's symbolic computation of the Pade coefficients of the generalized hyperbolic functions in Julia]
-# The polynomials package provides both the polynomial type and
-# the Pade approximation algorithm. If it is not installed 
-# uncomment the next line
-# Pkg.add('Polynomials')
-using('Polynomials')
+The symbolic computation of the $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximation of
+the inverse arithmetic coefficient Taylor series
+\begin{IEEEeqnarray*}{rCl}
+	f\left(x\right)
+		& = & \sum_{n=0}^\infty \frac{cn+d}{\left(an+d\right)!}x^n
+\end{IEEEeqnarray*}
+carried out in Julia using polynomials over arbitrary precision integers is presented in 
+listing \ref{lst:padeprogression}.
 
-# General function to compute the [n/m] approximation of
-# 1 / (a k + b)!
-f(n,m,a,b) = Pade
-(
-	Poly
-	(
-		[Rational(1,factorial(BigInt(a*k+b))) for k=0:(n+m+1)]
-	),
-	n,
-	m
+The numerical computation of the Pythagorean coefficients
+\begin{IEEEeqnarray*}{rCl}
+	\alpha_n 
+		& = & 
+		\begin{cases}
+			\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right)e^{\mathrm{i}\frac{n\pi}{p}} & p \text{ even}\\
+			\left(-1\right)^{n+1}\frac{\pi}{p}\csc\left(\frac{n\pi}{p}\right) & p \text{ odd}
+		\end{cases}
+\end{IEEEeqnarray*}
+of the permutation matrix of period $p$ is presented in listing \ref{lst:pythagoreancoefficients}.
+The function returns a vector containing all the Pythagorean coefficients for a given 
+period $p$. It is further overloaded to compute in multiple types, and as listed denotes the
+period of the permutation as $n$.
+\begin{lstlisting}[language=Julia,label={lst:padeprogression},caption={Poor man's symbolic computation of the Pad\'{e} coefficients of the the Taylor series with coefficients given by inverse of the factorial of the arithmetic progression. This function requires the Polynomials package.}]
+function padeprogression(
+	n::Int64, 
+	m::Int64, 
+	a::Int64, 
+	b::Int64, 
+	c::Int64, 
+	d::Int64
 )
-
-# Compute the desired coefficients
-c = f(16,16,1,2)
-
-# Print the numerator coefficients
-c.p.a
-
-# Print the denominator coefficients
-c.q.a
+	if n < 1 || m < 1 || a < 1 || b < 0
+		error("Arguments out of range")
+	end
+	l = n + m + 1
+	u = Poly(ones(Rational{BigInt}, l))
+	aB = convert(BigInt, a)
+	cB = convert(BigInt, c)
+	dB = convert(BigInt, b - a)
+	nB = convert(BigInt, d - c)
+	for k = 1:l
+		nB += cB
+		dB += aB
+		@inbounds u.a[k] = Rational{BigInt}(
+			nB, 
+			factorial(dB)
+		)
+	end
+	Pade(u, n, m)
+end
 \end{lstlisting}
+\begin{lstlisting}[language=Julia,label={lst:pythagoreancoefficients},caption={Computation of the Pythagorean coefficients of the logarithm of the permutation matrix of period $n$.}]
+function pythagoreancoefficients{S<:Integer, T<:Real}(
+	::Type{T},
+	n::S
+)
+	if n < 2
+		error("Arguments out of range")
+	end
+	u = Vector{Complex{T}}(n - 1)
+	nT = convert(T, n)
+	piT = convert(T, pi)
+	oT = convert(T, 1)
+	noT = convert(T, -1)
+	zT = convert(T, 0)
+	sT = noT
+	aT = zT
+	if n % 2 == 0
+		for m = 1:(n - 1)
+			sT *= noT
+			aT += oT
+			@inbounds u[m] = complex(
+				sT * piT / (nT * tan(piT * (aT / nT))), 
+				sT * piT / nT
+			)
+		end
+	else
+			for m = 1:(n - 1)
+			sT *= noT
+			aT += oT
+			@inbounds u[m] = complex(
+				sT * piT / (nT * sin(piT * (aT / nT))),
+				zT
+			)
+		end
+	end
+	return u
+end
+pythagoreancoefficients{S<:Integer}(n::S) = 
+	pythagoreancoefficients(Float64, n::S)
+\end{lstlisting}
+
