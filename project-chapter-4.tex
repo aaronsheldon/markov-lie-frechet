@@ -110,8 +110,10 @@ of memory register that broadens the centrality of the distribution of first hit
 Given an $U$ state aging process, the generator takes on the simple sequential form:
 \begin{IEEEeqnarray*}{rCl}
 	G 
-		& = & \sum_{i=1}^{U-1} x_{i\left(i+1\right)}C_{n\left(i+1\right)}\\
+		& = & \sum_{i=1}^{U-1} x_{i\left(i+1\right)}C_{i\left(i+1\right)} 
+			+ \sum_{i=2}^{U-1} x_{i\left(i-1\right)}C_{i\left(i-1\right)} \\
 		& = & \sum_{i=1}^{U-1} x_{i\left(i+1\right)}\left(\hat{e}_{i} \otimes \hat{e}_{i+1} - \hat{e}_i \otimes \hat{e}_i\right)
+			+ \sum_{i=2}^{U-1} x_{i\left(i-1\right)}\left(\hat{e}_{i} \otimes \hat{e}_{i-1} - \hat{e}_i \otimes \hat{e}_i\right)
 \end{IEEEeqnarray*}
 The $U$ state aging process as $2U-3$ unknown parameters, $x_{i\left( i+1\right)}$ for $1 \le i \le U-1$
 and $x_{i\left( i-1\right)}$ for $2 \le i \le U-1$, to be fitted by likelihood maximization.
@@ -134,56 +136,69 @@ The distribution density of $T_{i_v \rightarrow i_{v \pm 1}}$ can be concisely s
 The next step is to formulate the log-likelihood. This requires establishing the observed
 data. For each of the first hitting time statistics $T_{i_v \rightarrow i_{v \pm 1}}$ we 
 observe $N_v^\pm$ replications of durations $t_v^{\pm\left(n\right)}$, enumerated by $1 \le n \le N_v^\pm$.
-Using the convention that summing to $N_v^\pm$ means a sum to $N_v^{+}$ and a sum to $N_v^{-}$ 
-the log-likelihood follows as
 \begin{IEEEeqnarray*}{rCl}
 	\Lambda
-		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln p_G\left(T_{i_v \rightarrow i_{v \pm 1}} = t_v^{\pm\left(n\right)}\right)\\
-		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln \left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle\\
-		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^\pm} \ln \left\langle x_{i_v\left(i_v + 1\right)} \hat{e}_{i_v + 1} + x_{i_v\left(i_v - 1\right)} \hat{e}_{i_v - 1} - \left(x_{i_v\left(i_v + 1\right)} + x_{i_v\left(i_v - 1\right)}\right) \hat{e}_{i_v}, \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^{+}} \ln p_G\left(T_{i_v \rightarrow i_{v + 1}} = t_v^{+\left(n\right)}\right)
+			\:+ \sum_{v=1}^V \sum_{n=1}^{N_v^{-}} \ln p_G\left(T_{i_v \rightarrow i_{v - 1}} = t_v^{-\left(n\right)}\right)\\
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^{+}} \ln \left\langle \hat{e}_{i_v}, G_v^{+} \exp\left(t_v^{+\left(n\right)} G_v^{+} \right) \hat{e}_{i_{v + 1}} \right\rangle
+			\:+ \sum_{v=1}^V \sum_{n=1}^{N_v^{-}} \ln \left\langle \hat{e}_{i_v}, G_v^{-} \exp\left(t_v^{-\left(n\right)} G_v^{-} \right) \hat{e}_{i_{v - 1}} \right\rangle\\
+		& = & \sum_{v=1}^V \sum_{n=1}^{N_v^{+}} \ln \left\langle x_{i_v\left(i_v + 1\right)} \hat{e}_{i_v + 1} + x_{i_v\left(i_v - 1\right)} \hat{e}_{i_v - 1} - \left(x_{i_v\left(i_v + 1\right)} + x_{i_v\left(i_v - 1\right)}\right) \hat{e}_{i_v}, \exp\left(t_v^{+\left(n\right)} G_v^{+} \right) \hat{e}_{i_{v + 1}} \right\rangle\\
+		&   & \:+ \sum_{v=1}^V \sum_{n=1}^{N_v^{+}} \ln \left\langle x_{i_v\left(i_v + 1\right)} \hat{e}_{i_v + 1} + x_{i_v\left(i_v - 1\right)} \hat{e}_{i_v - 1} - \left(x_{i_v\left(i_v + 1\right)} + x_{i_v\left(i_v - 1\right)}\right) \hat{e}_{i_v}, \exp\left(t_v^{-\left(n\right)} G_v^{-} \right) \hat{e}_{i_{v - 1}} \right\rangle
 \end{IEEEeqnarray*}
-Maximization requires differentiation by the $2U-3$ parameters $x_{k\left(k \pm 1\right)}$.
-By the linearity of the generator this will result in algebraically replacing the $x_{k\left(k \pm 1\right)}$
+Maximization requires differentiation by the $2U-3$ parameters $x_{k \Delta_k}$, with $\Delta _k = k \pm 1$.
+By the linearity of the generator this will result in algebraically replacing the $x_{k \Delta_k}$
 with indicator functions of the form $\mathbb{I}\left[i_v = k \right]$, and $\mathbb{I}\left[k \in i_v, \dots, i_{v \pm 1} \mp 1 \right]$, 
-where $k$ is the index of partial differentiation. To simplify the notation let $\mathbb{I}_v\left[k\right] = \mathbb{I}\left[i_v = k \right]$,
-$\mathbb{I}_v^{+}\left[k\right] = \mathbb{I}\left[i_v \le k \le i_{v + 1} - 1 \right]$, and
-$\mathbb{I}_v^{-}\left[k\right] = \mathbb{I}\left[i_{v - 1} + 1 \le k \le i_v \right]$
+where $k$ is the index of partial differentiation. To simplify the notation of the indicator
+functions let $\mathbb{I}_v^{+}\left[k, \Delta_k \right] = \mathbb{I}\left[i_v = k \right]\mathbb{I}\left[k < \Delta_k \right]$,
+$\mathbb{I}_v^{-}\left[k, \Delta_k \right] = \mathbb{I}\left[i_v = k \right]\mathbb{I}\left[k > \Delta_k \right]$,
+$\mathbb{I}_v^{+}\left[k\right] = \mathbb{I}\left[i_v \le k \le i_{v + 1} - 1 \right]$, 
+and $\mathbb{I}_v^{-}\left[k\right] = \mathbb{I}\left[i_{v - 1} + 1 \le k \le i_v \right]$
 \begin{IEEEeqnarray*}{rCl}
-	\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}
-		& = & \sum_{v=1}^V \mathbb{I}_v\left[k\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v \pm 1} - \hat{e}_{i_v} , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle}\\[2ex]
-		&   & \:+ \sum_{v=1}^V \mathbb{I}_v^{+}\left[k\right] \sum_{n=1}^{N_v^{+}} \frac{\left\langle \hat{e}_{i_v}, G_v^{+} \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{k\left(k \pm 1\right)}} \hat{e}_{i_{v + 1}} \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^{+} \exp\left(t_v^{+\left(n\right)} G_v^{+} \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
-		&   & \:+ \sum_{v=1}^V \mathbb{I}_v^{-}\left[k\right] \sum_{n=1}^{N_v^{-}} \frac{\left\langle \hat{e}_{i_v}, G_v^{-} \frac{\partial \exp\left(t_v^{-\left(n\right)} G_v^{-} \right)}{\partial x_{k\left(k \pm 1\right)}} \hat{e}_{i_{v - 1}} \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^{-} \exp\left(t_v^{-\left(n\right)} G_v^{-} \right) \hat{e}_{i_{v - 1}} \right\rangle}\\[2ex]
-		& = & \sum_{v=1}^V \mathbb{I}_v\left[k\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v \pm 1} - \hat{e}_{i_v} , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v \pm 1}} \right\rangle}\\[2ex]
-		&   & \:+ \sum_{v=1}^V \mathbb{I}_v^{+}\left[k\right] \sum_{n=1}^{N_v^{+}}  t_v^{+\left(n\right)} \frac{\left\langle \hat{e}_{i_v}, G_v^{+} \operatorname{DEX}\left(t_v^{+\left(n\right)} G_v^{+}, C_{k\left(k \pm 1\right)} \right) \hat{e}_{i_{v + 1}} \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^{+} \exp\left(t_v^{+\left(n\right)} G_v^{+} \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
-		&   & \:+ \sum_{v=1}^V \mathbb{I}_v^{-}\left[k\right] \sum_{n=1}^{N_v^{-}} t_v^{-\left(n\right)} \frac{\left\langle \hat{e}_{i_v}, G_v^{-} \operatorname{DEX}\left(t_v^{-\left(n\right)} G_v^{-}, C_{k\left(k \pm 1\right)} \right) \hat{e}_{i_{v - 1}} \right\rangle}
-			{\left\langle \hat{e}_{i_v}, G_v^{-} \exp\left(t_v^{-\left(n\right)} G_v^{-} \right) \hat{e}_{i_{v - 1}} \right\rangle}\\[2ex]
-		& = & 0
+	\frac{\partial \Lambda}{\partial x_{k \Delta_k}}
+		& = & \mathbb{I}_v^\pm \left[k, \Delta_k \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_k} - \hat{e}_k , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		&   & \:+ \mathbb{I}_v^\pm \left[k\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{k \Delta_k}} \hat{e}_{i_{v + 1}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		& = & \mathbb{I}_v^\pm \left[k, \Delta_k \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_k} - \hat{e}_k , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		&   & \:+ \mathbb{I}_v^\pm \left[k\right] \sum_{n=1}^{N_v^\pm}  t_v^{\pm\left(n\right)} \frac{\left\langle \hat{e}_{i_v}, G_v^\pm \operatorname{GEX}\left(t_v^{+\left(n\right)} G_v^{+}, C_{k \Delta_k} \right) \hat{e}_{i_{v + 1}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}
 \end{IEEEeqnarray*}
 Factoring the summands by both the transition between sentinel states and the observations
 makes the algorithm to calculate the terms of the partial differential equation more
-transparent \ref{alg:singlesummand}. For a given generator $G$ and differential parameter $x_{k\left(k \pm 1\right)}$
-we first determine the canonical generator $C_{k\left(k+1\right)}$ and sub-generator $G_v$.
+transparent \ref{alg:singlesummand}. For a given generator $G$ and differential parameter $x_{k \Delta_k}$
+we first determine the canonical generator $C_{k \Delta_k}$ and sub-generator $G_v$.
 After that one time computation, the data $t_v^{\pm \left(n\right)}$ is looped through to
-produce the full partial derivative of the log-likelihood\ref{alg:completesum}.
+produce the full partial derivative of the log-likelihood \ref{alg:completesum}. In the case
+of calculating all the partial derivatives of the log-likelihood for large data sets it
+is more efficient to loop through the data once, calculating all the partial derivatives at
+each data point, and then producing the sum of the derivatives \ref{alg:allpartials}. 
 
 While the gradient alone is sufficient for gradient decent searches for local maximum, 
 maximization of the log-likelihood by the Newton-Raphson method requires calculation of the
 Hessian of the log-likelihood. By necessity the Hessian of the log-likelihood will be 
 complicated. However in this example we have two simplifications at our disposal. First, the
 generator $G$ is linear in $x_{ij}$ and so the second derivatives vanish. Second, the partial
-derivative by the transition rates $x_{l\left(l \pm 1\right)}$ and $x_{k\left(k \pm 1\right)}$
-will only be non-trivial when the states fall between the same sentinel states.
+derivative by the transition rates $x_{k \Delta_k }$ and $x_{l \Delta _l }$ will only be 
+non-trivial when the states fall between the same sentinel states.
 \begin{IEEEeqnarray*}{rCl}
-	\frac{\partial^2 \Lambda}{\partial x_{k\left(k \pm 1\right)} \partial x_{l\left(l \pm 1\right)}}
-		& = & 0
+	\frac{\partial^2 \Lambda}{\partial x_{k \Delta_k} \partial x_{l \Delta_l}}
+		& = & \mathbb{I}_v^\pm \left[k, \Delta_k \right] \mathbb{I}_v^\pm \left[l \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_k} - \hat{e}_k , \frac{\partial \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right)}{\partial x_{l \Delta_l}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		&   & \:+ \mathbb{I}_v^\pm \left[k\right] \mathbb{I}_v^\pm \left[l, \Delta_l \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_l} - \hat{e}_l , \frac{\partial \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right)}{\partial x_{k \Delta_k}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		&   & \:+ \mathbb{I}_v^\pm \left[k\right] \mathbb{I}_v^\pm \left[l\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial^2 \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{k \Delta_k} \partial x_{l \Delta_l}} \hat{e}_{i_{v + 1}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle}\\[2ex]
+		&   & \:- \mathbb{I}_v^\pm \left[k, \Delta_k \right] \mathbb{I}_v^\pm \left[l, \Delta_l \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_k} - \hat{e}_k , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle \left\langle \hat{e}_{\Delta_l} - \hat{e}_l , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle^2}\\[2ex]
+		&   & \:- \mathbb{I}_v^\pm \left[k, \Delta_k \right] \mathbb{I}_v^\pm \left[l\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{\Delta_k} - \hat{e}_k , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle \left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{l \Delta_l}} \hat{e}_{i_{v + 1}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle^2}\\[2ex]
+		&   & \:- \mathbb{I}_v^\pm \left[k\right] \mathbb{I}_v^\pm \left[l, \Delta_l \right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{k \Delta_k}} \hat{e}_{i_{v + 1}} \right\rangle \left\langle \hat{e}_{\Delta_l} - \hat{e}_l , \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle^2}\\[2ex]
+		&   & \:- \mathbb{I}_v^\pm \left[k\right] \mathbb{I}_v^\pm \left[l\right] \sum_{n=1}^{N_v^\pm} \frac{\left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{k \Delta_k}} \hat{e}_{i_{v + 1}} \right\rangle \left\langle \hat{e}_{i_v}, G_v^\pm \frac{\partial \exp\left(t_v^{+\left(n\right)} G_v^{+} \right)}{\partial x_{l \Delta_l}} \hat{e}_{i_{v + 1}} \right\rangle}
+			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle^2}
 \end{IEEEeqnarray*}
-
-A full implementation of both the Hessian of the log-likelihood and the Newton-Raphson 
+A full implementation of both the Hessian of the log-likelihood, and the Newton-Raphson 
 method for likelihood maximization is complex undertaking, but fundamentally is not
 intractable. For the most part, successful implementation requires patience and diligence on
 the part of the developer.
@@ -222,11 +237,11 @@ the part of the developer.
 	\label{fig:agingprocess}
 \end{figure}
 \begin{algorithm}[!ht]
-	\caption[Single summand of $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$]{Numerical calculation of a single summand in the gradient of the log-likelihood $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$. The inner products do not need full evaluation, rather by definition of the basis $\hat{e}_i$ they select entries from the matrix by index.}
+	\caption[Single summand of $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$]{Numerical calculation of a single summand in the gradient of the log-likelihood $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$ of the first hitting time statistic of an aging process. The inner products do not need full evaluation, rather by definition of the basis $\hat{e}_i$ the inner products select entries from the matrix by index.}
 	\label{alg:singlesummand}
 	\begin{algorithmic}[1]
-		\Function{GLL}{$G$, $t$, $i$, $j$, $k$, $l$}
-			\If{$i = j$ \textbf{and not} $i \wedge j+1 \le k \le i \vee j-1$}
+		\Function{PLL}{$G$, $t$, $i$, $j$, $k$, $l$}
+			\If{$\left|k - l\right| \ne 1$}
 				\State \Return 0
 			\EndIf
 			\State $E \gets \operatorname{EXP}\left(t G\right)$\Comment{Call to matrix exponential}
@@ -234,35 +249,54 @@ the part of the developer.
 			\State $D \gets \left(C + \operatorname{PER}\left(t G, C\right)\right)E$\Comment{Call to gradient perturbation}
 			\State $x_{+} \gets \left\langle \hat{e}_i , G \hat{e}_{i+1} \right\rangle$\Comment{Right transition rate}
 			\State $x_{-} \gets \left\langle \hat{e}_i , G \hat{e}_{i-1} \right\rangle$\Comment{Left transition rate}
+			\State $x_0 \gets -\left(x_{+} + x_{-}\right)$\Comment{Central transition rate}
 			\If{$k = i$}
 				\State $e_{+} \gets \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle$\Comment{Right probability}
 				\State $e_0 \gets \left\langle \hat{e}_i, E \hat{e}_j \right\rangle$\Comment{Central probability}
 				\State $e_{-} \gets \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle$\Comment{Left probability}
-				\State \Return $\frac{e_\pm - e_0 + t \left(x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle - \left(x_{+} + x_{-} \right) \left\langle \hat{e}_i, D \hat{e}_j \right\rangle\right)}{x_{+} e_{+} + x_{-}e_{-} - \left(x_{+} + x_{-} \right) e_0}$
+				\State \Return $\frac{e_\pm - e_0 + t \left(x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, D \hat{e}_j \right\rangle\right)}{x_{+} e_{+} + x_{-}e_{-} + x_0 e_0}$
 			\EndIf
-			\State \Return $t \frac{ x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle - \left(x_{+} + x_{-} \right) \left\langle \hat{e}_i, D \hat{e}_j \right\rangle}{x_{+} \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle - \left(x_{+} + x_{-} \right) \left\langle \hat{e}_i, E \hat{e}_j \right\rangle}$
+			\State \Return $t \frac{ x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, D \hat{e}_j \right\rangle}{x_{+} \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, E \hat{e}_j \right\rangle}$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[!ht]
-	\caption[Complete sum of $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$]{Numerical calculation of the gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{k\left(k \pm 1\right)}}$. Implemented as a straight forward single instruction, multiple data loop (SIMD).}
+	\caption[Complete sum of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of first hitting time statistics, for any  generator $G$. Implemented as a straight forward single instruction, multiple data loop (SIMD). The Kronecker product does not need to be computed as it represents matrix element assignment by index.}
 	\label{alg:completesum}
 	\begin{algorithmic}[1]
-		\Function{GCL}{$G$, $\left\lbrace \left(t, i, j \right) , \dots \right\rbrace$, $k$, $l$}
-			\If{$\left|k - l\right| \ne 1$}
-				\State \Return 0
-			\EndIf
+		\Function{CLL}{$G$, $\left\lbrace \left(t, i, j \right)_1 , \dots , \left(t, i, j \right)_n \right\rbrace$, $k$, $l$}
 			\State $r \gets 0$\Comment{Loop initialization}
-			\ForAll{$t,i,j \in \left\lbrace \left(t , i, j \right) , \dots \right\rbrace$}
-				\If{$i < j$}
+			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j \right)_1 , \dots , \left(t, i, j \right)_n \right\rbrace$}
+				\If{$i \le k \le  j - 1$}
 					\State $G_v \gets \left(\sum_{n= i}^{j-1} \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
-					\State $r \gets r + \operatorname{GLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
-				\ElsIf{$j < i$}
+					\State $r \gets r + \operatorname{PLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
+					\State \textbf{continue}
+				\EndIf
+				\If{$j+1 \le k \le i$}
 					\State $G_v \gets \left(\sum_{n= j+1}^i \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
-					\State $r \gets r + \operatorname{GLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
+					\State $r \gets r + \operatorname{PLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
+					\State \textbf{continue}
 				\EndIf
 			\EndFor
 			\State \Return $r$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[!ht]
+	\caption[All partial derivatives of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the every partial derivative of the  gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of first hitting time statistics, for any  generator $G$. Implemented as an iteration over the partial derivatives within a SIMD loop over the data. The Kronecker product does not need to be computed as it represents matrix element assignment by index.}
+	\label{alg:allpartials}
+	\begin{algorithmic}[1]
+		\Function{GLL}{$G$, $\left\lbrace \left(t, i, j \right)_1 , \dots , \left(t, i, j \right)_n \right\rbrace$}
+			\State $R \gets 0$\Comment{Loop initialization}
+			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j \right)_1 , \dots , \left(t, i, j \right)_n \right\rbrace$}
+				\State $G_v \gets \left(\sum_{n= i}^{j-1} \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
+				\ForAll{$ k \in \left\lbrace i \wedge j+1, \dots , i \vee j-1 \right\rbrace $}
+					\ForAll{$l \in \left\lbrace 1, \dots, N \right\rbrace$}
+						\State $R \gets R + \operatorname{PLL}\left(G_v, t, i, j, k, l\right) \left(\hat{e}_k \otimes \hat{e}_l\right)$\Comment{SIMD computation}
+					\EndFor
+				\EndFor
+			\EndFor
+			\State \Return $R$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
