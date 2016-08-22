@@ -71,7 +71,7 @@ function pythagoreancoefficients{S<:Integer, T<:Real}(
 	zT = convert(T, 0)
 	sT = noT
 	aT = zT
-	if n % 2 == 0
+	if iseven(n)
 		for m = 1:(n - 1)
 			sT *= noT
 			aT += oT
@@ -82,12 +82,12 @@ function pythagoreancoefficients{S<:Integer, T<:Real}(
 		end
 	else
 			for m = 1:(n - 1)
-			sT *= noT
-			aT += oT
-			@inbounds u[m] = complex(
-				sT * piT / (nT * sin(piT * (aT / nT))),
-				zT
-			)
+				sT *= noT
+				aT += oT
+				@inbounds u[m] = complex(
+					sT * piT / (nT * sin(piT * (aT / nT))),
+					zT
+				)
 		end
 	end
 	return u

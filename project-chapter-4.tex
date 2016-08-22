@@ -199,10 +199,10 @@ non-trivial when the states fall between the same sentinel states.
 			{\left\langle \hat{e}_{i_v}, G_v^\pm \exp\left(t_v^{\pm\left(n\right)} G_v^\pm \right) \hat{e}_{i_{v + 1}} \right\rangle^2}
 \end{IEEEeqnarray*}
 A full implementation of both the Hessian of the log-likelihood, and the Newton-Raphson 
-method for likelihood maximization is complex undertaking, but fundamentally is not
-intractable. For the most part, successful implementation requires patience and diligence on
-the part of the developer, along with rigorous unit testing against known closed form
-solutions for the gradient and Hessian of the matrix exponential.
+method for likelihood maximization is complex undertaking \ref{alg:secondpartial}, but 
+fundamentally is not intractable. For the most part, successful implementation requires 
+patience and diligence on the part of the developer, along with rigorous unit testing 
+against known closed form solutions for the gradient and Hessian of the matrix exponential.
 \clearpage
 \section{Figures and Illustrations}
 \begin{figure}[!ht]
@@ -247,7 +247,7 @@ solutions for the gradient and Hessian of the matrix exponential.
 			\EndIf
 			\State $E \gets \operatorname{EXP}\left(t G\right)$\Comment{Call to matrix exponential}
 			\State $C \gets \hat{e}_k \otimes \hat{e}_l - \hat{e}_k \otimes \hat{e}_k$\Comment{Canonical generator}
-			\State $D \gets \left(C + \operatorname{PER}\left(t G, C\right)\right)E$\Comment{Call to gradient perturbation}
+			\State $D \gets \left(C + \operatorname{PEX}\left(G, C\right)\right)E$\Comment{Call to gradient perturbation}
 			\State $x_{+} \gets \left\langle \hat{e}_i , G \hat{e}_{i+1} \right\rangle$\Comment{Right transition rate}
 			\State $x_{-} \gets \left\langle \hat{e}_i , G \hat{e}_{i-1} \right\rangle$\Comment{Left transition rate}
 			\State $x_0 \gets -\left(x_{+} + x_{-}\right)$\Comment{Central transition rate}
@@ -255,7 +255,7 @@ solutions for the gradient and Hessian of the matrix exponential.
 				\State $e_{+} \gets \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle$\Comment{Right probability}
 				\State $e_0 \gets \left\langle \hat{e}_i, E \hat{e}_j \right\rangle$\Comment{Central probability}
 				\State $e_{-} \gets \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle$\Comment{Left probability}
-				\State \Return $\frac{e_\pm - e_0 + t \left(x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, D \hat{e}_j \right\rangle\right)}{x_{+} e_{+} + x_{-}e_{-} + x_0 e_0}$
+				\State \Return $\frac{e_{l-k} - e_0 + t \left(x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, D \hat{e}_j \right\rangle\right)}{x_{+} e_{+} + x_{-}e_{-} + x_0 e_0}$
 			\EndIf
 			\State \Return $t \frac{ x_{+} \left\langle \hat{e}_{i+1}, D \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, D \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, D \hat{e}_j \right\rangle}{x_{+} \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, E \hat{e}_j \right\rangle}$
 		\EndFunction
@@ -289,6 +289,42 @@ solutions for the gradient and Hessian of the matrix exponential.
 				\EndFor
 			\EndFor
 			\State \Return $R$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[!ht]
+	\caption[Single summand in $\frac{\partial^2 \Lambda}{\partial x_{k \Delta_k} \partial x_{l \Delta_l}}$]{Numerical calculation of a single summand in the Hessian of the log-likelihood $\frac{\partial^2 \Lambda}{\partial x_{k \Delta_k} \partial x_{l \Delta_l}}$ of a first hitting time statistics. The inner products do not need full evaluation, rather by definition of the basis $\hat{e}_i$ the inner products select entries from the matrix by index.}
+	\label{alg:secondpartial}
+	\begin{algorithmic}[1]
+		\Function{PPL}{$G$, $t$, $i$, $j$, $k$, $\Delta_k$, $l$, $\Delta_l$}
+			\State $E \gets \operatorname{EXP}\left(tG\right)$\Comment{Call to matrix exponential}
+			\State $C_k \gets \hat{e}_k \otimes \hat{e}_{\Delta_k} - \hat{e}_k \otimes \hat{e}_k$\Comment{Canonical generator}
+			\State $C_k \gets \hat{e}_l \otimes \hat{e}_{\Delta_l} - \hat{e}_l \otimes \hat{e}_l$\Comment{Canonical generator}
+			\State $P_k \gets \left(C_k + \operatorname{PEX}\left(G,C_k\right)\right)$\Comment{Call to gradient perturbation}
+			\State $P_l \gets \left(C_l + \operatorname{PEX}\left(G,C_l\right)\right)$\Comment{Call gradient perturbation}
+			\State $x_{+} \gets \left\langle \hat{e}_i , G \hat{e}_{i+1} \right\rangle$\Comment{Right transition rate}
+			\State $x_{-} \gets \left\langle \hat{e}_i , G \hat{e}_{i-1} \right\rangle$\Comment{Left transition rate}
+			\State $x_0 \gets -\left(x_{+} + x_{-}\right)$\Comment{Central transition rate}
+			\If{$k=i$}
+				\State $e_{+} \gets \left\langle \hat{e}_{i+1}, t P_k E \hat{e}_j \right\rangle$\Comment{Right probability}
+				\State $e_0 \gets \left\langle \hat{e}_i, t P_k E \hat{e}_j \right\rangle$\Comment{Central probability}
+				\State $e_{-} \gets \left\langle \hat{e}_{i-1}, t P_k E \hat{e}_j \right\rangle$\Comment{Left probability}
+				\State $e_k \gets e_{\Delta_k - k} - e_0 $
+			\Else
+				\State $e_k \gets 0$
+			\EndIf
+			\If{$l=i$}
+				\State $e_{+} \gets \left\langle \hat{e}_{i+1}, t P_l E \hat{e}_j \right\rangle$\Comment{Right probability}
+				\State $e_0 \gets \left\langle \hat{e}_i, t P_l E \hat{e}_j \right\rangle$\Comment{Central probability}
+				\State $e_{-} \gets \left\langle \hat{e}_{i-1}, t P_l E \hat{e}_j \right\rangle$\Comment{Left probability}
+				\State $e_l \gets e_{\Delta_l - l} - e_0$
+			\Else
+				\State $e_l \gets 0$
+			\EndIf
+			\State $p_{kl} \gets \left\langle \hat{e}_i, \frac{1}{2}\left(t \operatorname{BEX}\left(G,C_k,C_l\right) +  t^2 \left(P_k P_l + P_l P_k\right)\right) E \hat{e}_j \right\rangle$
+			\State $p_k \gets PLL\left(G,t,i,j,k,\Delta_k\right)$\Comment{Call to single summand partial}
+			\State $p_l \gets PLL\left(G,t,i,j,l,\Delta_l\right)$\Comment{Call to single summand partial}
+			\State \Return $\frac{e_k+e_l+p_{kl}}{x_{+} \left\langle \hat{e}_{i+1}, E \hat{e}_j \right\rangle + x_{-} \left\langle \hat{e}_{i-1}, E \hat{e}_j \right\rangle + x_0 \left\langle \hat{e}_i, E \hat{e}_j \right\rangle}-p_k p_l$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
