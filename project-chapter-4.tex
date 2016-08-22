@@ -262,35 +262,26 @@ solutions for the gradient and Hessian of the matrix exponential.
 	\end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[!ht]
-	\caption[Complete sum of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of $M$ first hitting time statistics, for any  generator $G$. Implemented as a straight forward single instruction, multiple data loop (SIMD). The Kronecker product does not need to be computed as it represents matrix element assignment by index.}
+	\caption[Complete sum of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of $M$ first hitting time statistics, for any  generator $G$. Implemented as a straight forward single instruction, multiple data loop (SIMD). The Kronecker product does not need to be computed as it represents matrix element assignment by index.  The supplied data includes the projection matrix $P$ that defines the states allowed along the path of transition. In the context of an aging process the projection is given by $P = \sum_{n=i \wedge j+1}^{i \vee j-1} \hat{e}_n \otimes \hat{e}_n$.}
 	\label{alg:completesum}
 	\begin{algorithmic}[1]
-		\Function{CLL}{$G$, $\left\lbrace \left(t, i, j \right)_1 , \dots , \left(t, i, j \right)_M \right\rbrace$, $k$, $l$}
+		\Function{CLL}{$G$, $\left\lbrace \left(t, i, j, P \right)_1 , \dots , \left(t, i, j, P \right)_M \right\rbrace$, $k$, $l$}
 			\State $r \gets 0$\Comment{Loop initialization}
-			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j \right)_1 , \dots , \left(t, i, j \right)_M \right\rbrace$}
-				\If{$i \le k \le  j - 1$}
-					\State $G_v \gets \left(\sum_{n= i}^{j-1} \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
-					\State $r \gets r + \operatorname{PLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
-					\State \textbf{continue}
-				\EndIf
-				\If{$j+1 \le k \le i$}
-					\State $G_v \gets \left(\sum_{n= j+1}^i \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
-					\State $r \gets r + \operatorname{PLL}\left(G_v, t, i, j, k, l\right)$ \Comment{SIMD computation}
-					\State \textbf{continue}
-				\EndIf
+			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j, P \right)_1 , \dots , \left(t, i, j, P \right)_M \right\rbrace$}
+				\State $r \gets r + \operatorname{PLL}\left(PG, t, i, j, k, l\right)$ \Comment{SIMD computation}
 			\EndFor
 			\State \Return $r$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[!ht]
-	\caption[All partial derivatives of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the every partial derivative of the  gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of $M$ first hitting time statistics, for any $N \times N$ generator $G$. Implemented as an iteration over the partial derivatives within a SIMD loop over the data. The Kronecker product does not need to be computed as it represents matrix element assignment by index.}
+	\caption[All partial derivatives of $\frac{\partial \Lambda}{\partial x_{kl}}$]{Numerical calculation of the every partial derivative of the  gradient of the complete sum log-likelihood $\frac{\partial \Lambda}{\partial x_{kl}}$ of $M$ first hitting time statistics, for any $N \times N$ generator $G$. Implemented as an iteration over the partial derivatives within a SIMD loop over the data. The Kronecker product does not need to be computed as it represents matrix element assignment by index. The supplied data includes the projection matrix $P$ that defines the states allowed along the path of transition. In the context of an aging process the projection is given by $P = \sum_{n=i \wedge j+1}^{i \vee j-1} \hat{e}_n \otimes \hat{e}_n$.}
 	\label{alg:allpartials}
 	\begin{algorithmic}[1]
-		\Function{GLL}{$G$, $\left\lbrace \left(t, i, j \right)_1 , \dots , \left(t, i, j \right)_M \right\rbrace$}
+		\Function{GLL}{$G$, $\left\lbrace \left(t, i, j, P \right)_1 , \dots , \left(t, i, j, P \right)_M \right\rbrace$}
 			\State $R \gets 0$\Comment{Loop initialization}
-			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j \right)_1 , \dots , \left(t, i, j \right)_M \right\rbrace$}
-				\State $G_v \gets \left(\sum_{n= i}^{j-1} \hat{e}_n \otimes \hat{e}_n \right) G$\Comment{First hitting time generator}
+			\ForAll{$\left(t,i,j\right) \in \left\lbrace \left(t , i, j, P \right)_1 , \dots , \left(t, i, j, P \right)_M \right\rbrace$}
+				\State $G_v \gets PG$\Comment{First hitting time generator}
 				\ForAll{$ k \in \left\lbrace i \wedge j+1, \dots , i \vee j-1 \right\rbrace $}
 					\ForAll{$l \in \left\lbrace 1, \dots, N \right\rbrace$}
 						\State $R \gets R + \operatorname{PLL}\left(G_v, t, i, j, k, l\right) \left(\hat{e}_k \otimes \hat{e}_l\right)$\Comment{SIMD computation}
