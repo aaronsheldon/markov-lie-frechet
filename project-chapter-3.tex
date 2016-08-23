@@ -298,8 +298,8 @@ Taylor series.
 Using the same criteria as in the previous section yields a $\left[12/14\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
 The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
-This approximation is then used in a pair of branches in the calculation of the bilinear 
-non-commutative perturbation to the Hessian of the matrix exponential \ref{alg:bilinear}.
+This approximation is then used in a pair of branches \ref{alg:linear} \ref{alg:bilinear} \ref{alg:second}
+in the calculation of the perturbation to the Hessian of the matrix exponential.
 
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
@@ -375,29 +375,71 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	$x^{14}$ & & $\frac{1}{6761440164390912000}$
 \end{longtable}
 \begin{algorithm}[!ht]
-	\caption[Non-commutative Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation of the non-commutative perturbation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$, using the $\left[ 13/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$}
+	\caption[Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation of the perturbation of the first partial derivative of the matrix exponential, $\frac{\partial e^X}{\partial x}$, using the $\left[ 13/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$}
 	\label{alg:perturbation}
 	\begin{algorithmic}[1]
-		\Function{PEX}{$X$, $\frac{\partial X}{\partial x}$}
+		\Function{FRSTPRTB}{$X$, $\frac{\partial X}{\partial x}$}
 			\State $A_x \gets \left[X, \frac{\partial X}{\partial x}\right]$\Comment{Allocates memory}
-			\If{$A_x = 0$}
-				\State \Return $0$
-			\EndIf
 			\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 			\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
 			\State $P \gets P_{13}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
 			\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
-			\State Solve for $\vec{y}$: $P \vec{a_x} = Q \vec{y}$\Comment{Call to linear solver}
-			\State \Return $\operatorname{MAT}\left(\vec{y}\right)$
+			\State Solve for $\vec{r}$: $P \vec{a_x} = Q \vec{r}$\Comment{Call to linear solver}
+			\State \Return $\frac{\partial X}{\partial x} + \operatorname{MAT}\left(\vec{r}\right)$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[!ht]
-	\caption[Gradient of $e^X$]{Numerical calculation of the gradient of the matrix exponential $\frac{\partial e^X}{\partial x}$.}
+	\caption[Gradient $\frac{\partial e^X}{\partial x}$]{Numerical calculation of the gradient of the matrix exponential, $\frac{\partial e^X}{\partial x}$.}
 	\label{alg:gradient}
 	\begin{algorithmic}[1]
-		\Function{GEX}{$X$, $\frac{\partial X}{\partial x}$}
-			\State \Return $\left(\frac{\partial X}{\partial x} + \operatorname{PEX}\left(X,\frac{\partial X}{\partial x}\right)\right) \operatorname{EXP}\left(X\right)$
+		\Function{GRAD}{$X$, $\frac{\partial X}{\partial x}$}
+			\State \Return $\operatorname{FRSTPRTB}\left(X, \frac{\partial X}{\partial x}\right) \operatorname{EXPM}\left(X\right)$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\begin{longtable}{r r r}
+	\caption{Pad\'{e} Approximation of $\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$}
+	\label{tab:bilinear}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endfirsthead
+	\caption*{Continued from previous page.}\\
+	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
+	\hline
+	\endhead
+	\caption*{Continued on next page.}
+	\endfoot
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
+	\endlastfoot
+	$x^{0}$ & $\frac{1}{6}$ & $\frac{1}{1}$\\
+	$x^{1}$ & $\frac{-237571687770}{2235524846677109}$ & $\frac{-2238375706930349}{4471049693354218}$\\
+	$x^{2}$ & $\frac{75899205239671}{22355248466771090}$ & $\frac{7}{58}$\\
+	$x^{3}$ & $\frac{-6158055716087}{2897240201293533264}$ & $\frac{-172676164807703}{9286026286197222}$\\
+	$x^{4}$ & $\frac{14904653897243}{751136348483508624}$ & $\frac{989302956681193}{482873366882255544}$\\
+	$x^{5}$ & $\frac{-2677622343899}{225340904545052587200}$ & $\frac{-317642104732513}{1857205257239444400}$\\
+	$x^{6}$ & $\frac{15554305889797}{347668824155223991680}$ & $\frac{1079293136317583}{96574673376451108800}$\\
+	$x^{7}$ & $\frac{-1086326787569}{44424349753167510048000}$ & $\frac{-18091761597171823}{31097044827217257033600}$\\
+	$x^{8}$ & $\frac{23665068673453}{586401416741811132633600}$ & $\frac{215879922742633}{8884869950633502009600}$\\
+	$x^{9}$ & $\frac{-579062082583}{31665676504057801162214400}$ & $\frac{-129862571470787}{159927659111403036172800}$\\
+	$x^{10}$ & $\frac{1006334079353}{82096198343853558568704000}$ & $\frac{239909667097237}{11194936137798212532096000}$\\
+	$x^{11}$ & $\frac{-129504852863}{36499969783677292139645798400}$ & $\frac{-290350506989849}{668497615085664691202304000}$\\
+	$x^{12}$ & $\frac{18809879890171}{32849972805309562925681218560000}$ & $\frac{539968479224557}{84230699500793751091490304000}$\\
+	$x^{13}$ & & $\frac{-359560490231}{5809013758675431109757952000}$\\
+	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
+\end{longtable}
+\begin{algorithm}[!ht]
+	\caption[Linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\label{alg:linear}
+	\begin{algorithmic}[1]
+		\Function{SCNDLINR}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$}
+			\State $A_y \gets \left[X, \frac{\partial X}{\partial y}\right]$\Comment{Allocates memory}
+			\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
+			\State $\vec{a_y} \gets \operatorname{VEC}\left(A_y\right)$\Comment{Change of indexing}
+			\State $P \gets P_{12}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
+			\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
+			\State Solve for $\vec{r}$: $P \vec{a_x} = Q \vec{r}$\Comment{Call to linear solver}
+			\State \Return $\left[\frac{\partial X}{\partial x}, \operatorname{MAT}\left(\vec{r}\right) A_y\right]$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
@@ -475,62 +517,13 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\caption[Pascal's triangle divergence]{Illustration of the calculation of the first 8 rows of coefficients of the divergence of Pascal's triangle; emphasizing the coefficients in $F_n$.}
 	\label{fig:pascaldivergence}
 \end{figure}
-\begin{longtable}{r r r}
-	\caption{Pad\'{e} Approximation of $\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$}
-	\label{tab:bilinear}\\
-	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
-	\hline
-	\endfirsthead
-	\caption*{Continued from previous page.}\\
-	\multicolumn{1}{l}{Degree} & \multicolumn{1}{l}{Numerator} & \multicolumn{1}{l}{Denominator}\\
-	\hline
-	\endhead
-	\caption*{Continued on next page.}
-	\endfoot
-	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
-	\endlastfoot
-	$x^{0}$ & $\frac{1}{6}$ & $\frac{1}{1}$\\
-	$x^{1}$ & $\frac{-237571687770}{2235524846677109}$ & $\frac{-2238375706930349}{4471049693354218}$\\
-	$x^{2}$ & $\frac{75899205239671}{22355248466771090}$ & $\frac{7}{58}$\\
-	$x^{3}$ & $\frac{-6158055716087}{2897240201293533264}$ & $\frac{-172676164807703}{9286026286197222}$\\
-	$x^{4}$ & $\frac{14904653897243}{751136348483508624}$ & $\frac{989302956681193}{482873366882255544}$\\
-	$x^{5}$ & $\frac{-2677622343899}{225340904545052587200}$ & $\frac{-317642104732513}{1857205257239444400}$\\
-	$x^{6}$ & $\frac{15554305889797}{347668824155223991680}$ & $\frac{1079293136317583}{96574673376451108800}$\\
-	$x^{7}$ & $\frac{-1086326787569}{44424349753167510048000}$ & $\frac{-18091761597171823}{31097044827217257033600}$\\
-	$x^{8}$ & $\frac{23665068673453}{586401416741811132633600}$ & $\frac{215879922742633}{8884869950633502009600}$\\
-	$x^{9}$ & $\frac{-579062082583}{31665676504057801162214400}$ & $\frac{-129862571470787}{159927659111403036172800}$\\
-	$x^{10}$ & $\frac{1006334079353}{82096198343853558568704000}$ & $\frac{239909667097237}{11194936137798212532096000}$\\
-	$x^{11}$ & $\frac{-129504852863}{36499969783677292139645798400}$ & $\frac{-290350506989849}{668497615085664691202304000}$\\
-	$x^{12}$ & $\frac{18809879890171}{32849972805309562925681218560000}$ & $\frac{539968479224557}{84230699500793751091490304000}$\\
-	$x^{13}$ & & $\frac{-359560490231}{5809013758675431109757952000}$\\
-	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
-\end{longtable}
 \begin{algorithm}[!ht]
-	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$, using the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.}
+	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the $\frac{\partial^2 e^X}{\partial x \partial y}$, using the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.}
 	\label{alg:bilinear}
 	\begin{algorithmic}[1]
-		\Function{BEX}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\epsilon = \text{machine float precision}$}
+		\Function{SCNDBILN}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\epsilon = \text{machine float precision}$}
 			\State $A_x \gets \left[X,\frac{\partial X}{\partial x}\right]$\Comment{Allocates memory}
 			\State $A_y \gets \left[X,\frac{\partial X}{\partial y}\right]$\Comment{Allocates memory}
-			\If{$A_x = 0$ \textbf{and} $A_y = 0$}
-				\State \Return 0
-			\EndIf
-			\If{$A_x = 0$}
-				\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{a_y} \gets \operatorname{VEC}\left(A_y\right)$\Comment{Change of indexing}
-				\State $P \gets P_{12}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
-				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
-				\State Solve for $\vec{z}$: $P \vec{a_y} = Q \vec{z}$\Comment{Call to linear solver}
-				\State \Return $\left[\frac{\partial X}{\partial x}, \operatorname{MAT}\left(\vec{z}\right)\right]$
-			\EndIf
-			\If{$A_y = 0$}
-				\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
-				\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
-				\State $P \gets P_{12}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
-				\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
-				\State Solve for $\vec{z}$: $P \vec{a_x} = Q \vec{z}$\Comment{Call to linear solver}
-				\State \Return $\left[\frac{\partial X}{\partial y}, \operatorname{MAT}\left(\vec{z}\right)\right]$
-			\EndIf
 			\State $R \gets 0$\Comment{Allocates memory}
 			\State $F \gets \left[\frac{\partial X}{\partial x}, A_y\right] + \left[\frac{\partial X}{\partial y},A_x\right]$\Comment{Allocates memory}
 			\State $m \gets 3$\Comment{Factorial scalars}
@@ -548,13 +541,31 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[!ht]
-	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\caption[Perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\label{alg:second}
+	\begin{algorithmic}[1]
+		\Function{SCNDPRTB}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\frac{\partial^2 X}{\partial x \partial y}$}
+			\If{$\left[X, \frac{\partial X}{\partial x}\right] = 0$ \textbf{and} $\left[X, \frac{\partial X}{\partial y}\right] = 0$}
+				\State $B \gets 0$\Comment{No other perturbations}
+			\ElsIf{$\left[X, \frac{\partial X}{\partial x}\right] = 0$}
+				\State $B \gets \operatorname{SCNDLINR}\left(X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}\right)$\Comment{Linear second perturbation}
+			\ElsIf{$\left[X, \frac{\partial X}{\partial y}\right] = 0$}
+				\State $B \gets \operatorname{SCNDLINR}\left(X, \frac{\partial X}{\partial y}, \frac{\partial X}{\partial x}\right)$\Comment{Linear second perturbation}
+			\Else
+				\State $B \gets \operatorname{SCNDBILN}\left(X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}\right)$\Comment{Bilinear second perturbation}
+			\EndIf
+			\State $P_x \gets \operatorname{FIRSTPRTB}\left(X,\frac{\partial X}{\partial x}\right)$\Comment{Call to first perturbation}
+			\State $P_y \gets \operatorname{FIRSTPRTB}\left(X,\frac{\partial X}{\partial y}\right)$\Comment{Call to first perturbation}
+			\State \Return $\operatorname{FIRSTPRTB}\left(X,\frac{\partial^2 X}{\partial x \partial y}\right) + \frac{1}{2} B +  \frac{1}{2}\left(P_x P_y + P_y P_x\right)$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[!ht]
+	\caption[Hessian of $e^X$]{Numerical calculation of the Hessian of the matrix exponential, $\frac{\partial^2 e^X}{\partial x \partial y}$.}
 	\label{alg:hessian}
 	\begin{algorithmic}[1]
-		\Function{HEX}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\frac{\partial^2 X}{\partial x \partial y}$}
-			\State $P_x \gets \frac{\partial X}{\partial x} + \operatorname{PEX}\left(X,\frac{\partial X}{\partial x}\right)$\Comment{Call to non-commutative perturbation}
-			\State $P_y \gets \frac{\partial X}{\partial y} + \operatorname{PEX}\left(X,\frac{\partial X}{\partial y}\right)$\Comment{Call to non-commutative perturbation}
-			\State \Return $\left(\frac{\partial^2 X}{\partial x \partial y} + \operatorname{PEX}\left(X,\frac{\partial^2 X}{\partial x \partial y}\right) + \frac{1}{2} \operatorname{BEX}\left(X,\frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right) +  \frac{1}{2}\left(P_x P_y + P_y P_x\right)\right) \operatorname{EXP}\left(X\right)$
+		\Function{HESS}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\frac{\partial^2 X}{\partial x \partial y}$}
+			\State \Return $\operatorname{SCNDPRTB}\left(X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}, \frac{\partial^2 X}{\partial x \partial y}\right) \operatorname{EXPM}\left(X\right)$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
