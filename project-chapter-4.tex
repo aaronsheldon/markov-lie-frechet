@@ -192,15 +192,21 @@ signs carefully)
 		&   & \:+ \frac{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 \end{IEEEeqnarray*}
-Factoring the summands by both the transition between sentinel states and the observations
-makes the algorithm to calculate the terms of the partial differential equation more
-transparent \ref{alg:singlesummand}. For a given generator $G$ and differential parameter $x_{k \Delta_k}$
-we first determine the canonical generator $C_{k \Delta_k}$ and sub-generator $G_v$.
-After that one time computation, the data $t_v^{\pm \left(n\right)}$ is looped through to
-produce the full partial derivative of the log-likelihood \ref{alg:completesum}. In the case
-of calculating all the partial derivatives of the log-likelihood for large data sets it
-is more efficient to loop through the data once, calculating all the partial derivatives at
-each data point, and then producing the sum of the derivatives \ref{alg:allpartials}. 
+Eliding the state enumerating indexes $i,j$ into the data enumerating index $n$ clarifies
+the distinction between provided data, and parameters requiring estimation. Each individual
+summand in the first partial derivative of the log-likelihood requires the data $t^{\left(n\right)}$ the
+observed time $hat{u}^{\left(n\right)}$ the observed initial state, $\hat{v}^{\left(n\right)}$ the observed final state, and
+$P^{\left(n\right)}$ the allowed intermediate states, including $\hat{u}^{\left(n\right)}$, as a parameter the partial
+derivative requires $G$ the generator of the process\ref{alg:singlesummand}.
+
+For the aging process, given differential parameter $x_{k \Delta_k}$ we determine the 
+canonical generator $C_{k \Delta_k}$ and then loop through the data computing the 
+sub-generator $G_v^\pm$, which is supplied to the algorithm to
+compute the partial derivative of the matrix exponential. The terms are summed to produce 
+the full partial derivative of the log-likelihood with respect to $x_{k \Delta_k}$ \ref{alg:completesum}.
+In the case of calculating all the partial derivatives of the log-likelihood for large data 
+sets it is more efficient to loop through the data once, calculating all the partial 
+derivatives at each data point, and then producing the sum of the derivatives \ref{alg:allpartials}. 
 
 While the gradient alone is sufficient for gradient decent searches for local maximum, 
 maximization of the log-likelihood by the Newton-Raphson method requires calculation of the
