@@ -171,14 +171,17 @@ And thus can be approximated by
 	\frac{\partial e^X}{\partial x}
 		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^\dagger \otimes I\right)}{Q_m \left(I \otimes X - X^\dagger \otimes I\right)} \left(I \otimes X - X^\dagger \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
+By application of the chain rule this computational method is sufficient to calculate the
+derivative of any parameterization $X$ in the matrix exponential $e^X$.
+
 We can summarize this work in an algorithm to compute the non-commutative perturbation \ref{alg:perturbation}.
 This algorithm servers as a sketch only, highlighting only the novel elements developed in
 this section. Many additional optimizations could be implemented including minimizing memory 
 assignments by carrying out in place computations, conditioning matrices to improve
 numerical stability, and using recursive squaring and summing methods to efficiently compute
-the matrix polynomials. A point of concern is the first assignment of the Kronecker product, 
-which results in a quadratic increase in the amount of memory used. Finally, an algorithm to 
-compute the gradient of the matrix exponential can be formulated \ref{alg:gradient}.
+the matrix polynomials. The first assignment of the Kronecker product is a point of concern
+around performance, because it results in a quadratic increase in the amount of memory used. 
+Finally, an algorithm to compute the gradient of the matrix exponential can be formulated \ref{alg:gradient}.
 \section{The Hessian}
 Assuming $X$ parameterized by $x,y \in \mathbb{R}$ is analytic, or at least twice 
 differentiable the Hessian of $e^X$ exists and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,

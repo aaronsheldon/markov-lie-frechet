@@ -48,14 +48,22 @@ an alternate direct computation of the gradient of the matrix exponential.
 Throughout this work we will attempt to conform to a simplified version of Lamport's guide
 to structuring, and presenting proofs\cite{lamport_how_2012}.
 \section{Overview}
+The Chapman-Kolmogorov equation asserts that every Markov transition can be represented by 
+a suitable choice of invertible bounded linear operator with at least one Eigen vector with 
+a unit Eigen value; and conversely any choice of invertible bounded linear operator with at
+least one Eigen vector with a unit Eigen value generates a Markov transition \cite{rogers_diffusions_2000}.
+The for a particular Markov process these transitions will form a path through a semi-group.
+This semi-group always resides within a Lie group, and thus the generators of the semi-group
+reside in the associated Lie algebra. This knowledge provides concrete, and exploitable 
+guarantees on the analytic and algebraic properties of the semi-group.
+
 From the perspective of Lie theory, classical parameter estimation of Markov processes has
 been a manifold first approach; starting with an explicit construction of an extrinsic
 smooth coordinate chart (parameterization) on a neighborhood of the sub-manifold to which
 the generators belong, and only then looking for computational simplifications and
 solutions. As hinted to in the previous section, we will proceed with an algebra first
 approach; developing the intrinsic algebraic structure of the generators of the Lie algebra,
-and then exploiting the implicit function theorem to carry out computations in specific 
-parameterizations.
+and then exploiting the chain rule to carry out computations in specific parameterizations.
 
 The second chapter establishes the algebraic and analytic closure properties necessary for 
 chapter three, and establishes notation used throughout all the following chapters. Chapter
