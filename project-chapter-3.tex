@@ -380,6 +380,9 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\begin{algorithmic}[1]
 		\Function{FRSTPRTB}{$X$, $\frac{\partial X}{\partial x}$}
 			\State $A_x \gets \left[X, \frac{\partial X}{\partial x}\right]$\Comment{Allocates memory}
+			\If{$A_x = 0$}
+				\State \Return $\frac{\partial X}{\partial x}$
+			\EndIf
 			\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 			\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
 			\State $P \gets P_{13}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
