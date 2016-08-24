@@ -138,8 +138,8 @@ for which we observe the first hitting time statistics for the transitions to th
 states.
 
 Using the generalization of the theorem in the previous section the generators $G_v^\pm$ for
-the observed first hitting time statistics, $T_{u_{v \pm 1}}$, are given by (noting the careful
-application of signs)
+the observed first hitting time statistics, $T_{u_{v \pm 1}}$, are given by 
+\footnote{Note the careful application of signs $\pm$ whose order must correspond on both sides of the equation.}
 \begin{IEEEeqnarray*}{rCl}
 	G_v^\pm
 		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} P_u G\\
@@ -149,7 +149,9 @@ application of signs)
 The distribution density of $T_{u_{v \pm 1}}$ can be concisely stated as
 \begin{IEEEeqnarray*}{rCl}
 	p_G\left[T_{u_{v \pm 1}} = t \left\| X_0 = u_v \right.\right]
-		& = & \left\langle \hat{e}_{u_v}, G_v^\pm \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle
+		& = & \left\langle \hat{e}_{u_v}, G_v^\pm \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle\\
+		& = & \left\langle x_{u_v\left(u_v+1\right)}\hat{e}_{u_v+1} + x_{u_v\left(u_v-1\right)}\hat{e}_{{u_v}-1}, \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle\\
+		&   & \:- \left\langle \left(x_{u_v\left(u_v+1\right)}+x_{u_v\left(u_v-1\right)}\right)\hat{e}_{u_v}, \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle
 \end{IEEEeqnarray*}
 The next step is to formulate the log-likelihood. This requires establishing the observed
 data, to do so we will again elide the explicit enumeration of the states so that we can
@@ -183,11 +185,12 @@ generator so that $C_x = C_{ij}$. Partial differentiation of the log-likelihood 
 			{\left\langle \hat{u}^{\left(n\right)}, G \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 \end{IEEEeqnarray*}
 In the aging process $x$ can be one of $2U-3$ parameters $x_{k \Delta_k}$, with $\Delta _k = k \pm 1$.
-Using the same notation as for the log-likelihood the partial derivative is (noting the 
-signs carefully)
+Using the same notation as for the log-likelihood the partial derivative is
+\footnote{Note the careful application of signs $\pm$ whose order must correspond on both sides of the equation.}
+\footnote{Note that the indicator function $\mathbb{I}$ is with respect to the equivalence $\equiv$ and not equality $=$. The equivalence relation checks that the variable $x_\pm^{\left(n\right)}$ is the same one as the partial differential variable $x$.}
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial \Lambda}{\partial x}
-		& = & \sum_{n=1}^N  \frac{\mathbb{I}\left[x = x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
+		& = & \sum_{n=1}^N  \frac{\mathbb{I}\left[x \equiv x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\\
 		&   & \:+ \frac{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
@@ -195,7 +198,7 @@ signs carefully)
 Eliding the state enumerating indexes $i,j$ into the data enumerating index $n$ clarifies
 the distinction between provided data, and parameters requiring estimation. Each individual
 summand in the first partial derivative of the log-likelihood requires the data $t^{\left(n\right)}$ the
-observed time $hat{u}^{\left(n\right)}$ the observed initial state, $\hat{v}^{\left(n\right)}$ the observed final state, and
+observed time $\hat{u}^{\left(n\right)}$ the observed initial state, $\hat{v}^{\left(n\right)}$ the observed final state, and
 $P^{\left(n\right)}$ the allowed intermediate states, including $\hat{u}^{\left(n\right)}$, as a parameter the partial
 derivative requires $G$ the generator of the process\ref{alg:singlesummand}.
 
@@ -225,22 +228,22 @@ even possibly $x = y$, with $C_y$ elided equivalently; the second partial deriva
 In our running example of the aging process we have two simplifications at our disposal.
 First, the generator $G$ is linear in $x_{ij}$ and so the second derivatives vanish. Second,
 the partial derivative by the transition rates $x_{k \Delta_k }$ and $x_{l \Delta _l }$ will
-only be non-trivial when the states fall between the same sentinel states (carefully noting
-that the signs in the indicator functions only apply to the fraction on which the indicator
-function resides)
+only be non-trivial when the states fall between the same sentinel states
+\footnote{Note the careful application of signs $\pm$ whose order must correspond on both sides of the equation.}
+\footnote{Note that the indicator function $\mathbb{I}$ is with respect to the equivalence $\equiv$ and not equality $=$. The equivalence relation checks that the variable $x_\pm^{\left(n\right)}$ is the same one as the partial differential variables $x, y$.}
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial^2 \Lambda}{\partial x \partial y}
-		& = & \sum_{n=1}^N \frac{\mathbb{I}\left[x = x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)}, \frac{\partial}{\partial y} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
+		& = & \sum_{n=1}^N \frac{\mathbb{I}\left[x \equiv x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)}, \frac{\partial}{\partial y} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\\[2ex]
-		&   & \:+ \frac{\mathbb{I}\left[y = x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)}, \frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
+		&   & \:+ \frac{\mathbb{I}\left[y \equiv x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)}, \frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\\[2ex]
 		&   & \:+ \frac{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\frac{\partial^2}{\partial x \partial y} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\\[2ex]
-		&   & \:- \left(\frac{\mathbb{I}\left[x = x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
+		&   & \:- \left(\frac{\mathbb{I}\left[x \equiv x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\right.\\[2ex]
 		&   & \:+ \left. \frac{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\right)\\[2ex]
-		&   & \cdot \left(\frac{\mathbb{I}\left[y = x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
+		&   & \cdot \left(\frac{\mathbb{I}\left[y \equiv x^{\left(n\right)}_\pm \right] \left\langle \hat{u}_{\pm}^{\left(n\right)} - \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\right.\\[2ex]
 		&   & \:+ \left. \frac{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\frac{\partial}{\partial y} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}\right)

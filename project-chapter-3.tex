@@ -432,7 +432,7 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
 \end{longtable}
 \begin{algorithm}[!ht]
-	\caption[Linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$.}
+	\caption[Linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$, using the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.}
 	\label{alg:linear}
 	\begin{algorithmic}[1]
 		\Function{SCNDLINR}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$}
@@ -521,7 +521,7 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\label{fig:pascaldivergence}
 \end{figure}
 \begin{algorithm}[!ht]
-	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the $\frac{\partial^2 e^X}{\partial x \partial y}$, using the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.}
+	\caption[Bilinear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the bilinear perturbation of the $\frac{\partial^2 e^X}{\partial x \partial y}$, using the divergence of Pascal's triangle.}
 	\label{alg:bilinear}
 	\begin{algorithmic}[1]
 		\Function{SCNDBILN}{$X$, $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, $\epsilon = \text{machine float precision}$}

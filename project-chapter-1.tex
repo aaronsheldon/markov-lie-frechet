@@ -54,8 +54,31 @@ a unit Eigen value; and conversely any choice of invertible bounded linear opera
 least one Eigen vector with a unit Eigen value generates a Markov transition \cite{rogers_diffusions_2000}.
 The for a particular Markov process these transitions will form a path through a semi-group.
 This semi-group always resides within a Lie group, and thus the generators of the semi-group
-reside in the associated Lie algebra. This knowledge provides concrete, and exploitable 
-guarantees on the analytic and algebraic properties of the semi-group.
+reside in the associated Lie algebra. 
+
+Knowledge of the stochastic Lie group and algebra provides concrete, and exploitable 
+guarantees on the analytic and algebraic properties of the semi-group. For example the
+following matrix parameterization
+\begin{IEEEeqnarray*}{rCl}
+	M^{\left(t\right)}
+		& = & \begin{bmatrix}
+			e^{-t} & 1 - e^{-t} \\
+			1 - e^{-t} & e^{-t}
+		\end{bmatrix}
+\end{IEEEeqnarray*}
+is a valid stochastic matrix, as $M^{\left(t\right)} \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$
+for all $t \ge 1$. But it is not a Markov process because at $t = \ln 2$ the $\det M^{\left(t\right)} = 0$,
+so that the dual vector $\left[-1,1\right]$ representing the parity statistic vanishes
+\begin{IEEEeqnarray*}{rCl}
+	\left[-1,1\right] M^{\left(t\right)}
+		& = & \left[-1,1\right]
+			\begin{bmatrix}
+				e^{-t} & 1 - e^{-t} \\
+				1 - e^{-t} & e^{-t}
+			\end{bmatrix}\\
+		& = & 0
+\end{IEEEeqnarray*}
+In the context of Lie theory, the path $t$ is not closed in the Lie algebra.
 
 From the perspective of Lie theory, classical parameter estimation of Markov processes has
 been a manifold first approach; starting with an explicit construction of an extrinsic
