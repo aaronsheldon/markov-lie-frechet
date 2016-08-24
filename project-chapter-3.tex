@@ -131,15 +131,16 @@ $x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
 	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
 		& = & \frac{1}{\left(k+2\right)!}
 \end{IEEEeqnarray*}
-The symbolic computation of the exact rational coefficients of the $\left[13/14\right]_f\left(x\right)$ 
+The symbolic computation of the exact rational coefficients of the $\left[11/12\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
 using big integer mathematics, and the Polynomials package. The results of the computation 
 are displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation 
 was chosen so that the largest denominator in the rational coefficients of the numerator
-polynomial $\left(7244400176133120000\right)$, and the largest denominator in the rational 
-coefficients of the denominator polynomial $\left(6761440164390912000\right)$ were the 
-largest integers less than the largest $64$ bit signed integer $\left(9223372036854775807\right)$.
-This choice of approximation will need further research to better optimize.
+polynomial $\left(2698531355520000\right)$, and the largest denominator in the rational 
+coefficients of the denominator polynomial $\left(2490952020480000\right)$ were the 
+largest integers less than the largest $64$ bit signed float that has no loss of integer
+precision $\left(2^{53} = 9007199254740992\right)$. This choice of approximation will need
+further research to better optimize.
 
 To make use of the Pad\'{e} approximation we need to be able to compute powers of $\operatorname{ad}_X \cdotp$.
 This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$, 
@@ -295,7 +296,7 @@ Taylor series.
 		& = & \sum_{n=1}^\infty \frac{n}{\left(n+2\right)!} x^n\\
 		& = & \left(\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n\right)x
 \end{IEEEeqnarray*}
-Using the same criteria as in the previous section yields a $\left[12/14\right]_f\left(x\right)$
+Using the same criteria as in the previous section yields a $\left[10/12\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
 The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
 This approximation is then used in a pair of branches \ref{alg:linear} \ref{alg:bilinear} \ref{alg:second}
@@ -356,23 +357,21 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\endhead
 	\caption*{Continued on next page.}
 	\endfoot
-	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 13/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$; symbolically computed.}
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 11/12 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$; symbolically computed.}
 	\endlastfoot
 	$x^{0}$ & $\frac{1}{2}$ & $\frac{1}{1}$\\
-	$x^{1}$ & $\frac{-13}{174}$ & $\frac{-14}{29}$\\
-	$x^{2}$ & $\frac{1}{58}$ & $\frac{13}{116}$\\
-	$x^{3}$ & $\frac{-11}{7830}$ & $\frac{-13}{783}$\\
-	$x^{4}$ & $\frac{11}{75168}$ & $\frac{11}{6264}$\\
-	$x^{5}$ & $\frac{-11}{1461600}$ & $\frac{-11}{78300}$\\
-	$x^{6}$ & $\frac{1}{2192400}$ & $\frac{11}{1252800}$\\
-	$x^{7}$ & $\frac{-1}{64832400}$ & $\frac{-11}{25212600}$\\
-	$x^{8}$ & $\frac{1}{1728864000}$ & $\frac{1}{57628800}$\\
-	$x^{9}$ & $\frac{-1}{79873516800}$ & $\frac{-1}{1815307200}$\\
-	$x^{10}$ & $\frac{1}{3594308256000}$ & $\frac{1}{72612288000}$\\
-	$x^{11}$ & $\frac{-1}{295931379744000}$ & $\frac{-1}{3793992048000}$\\
-	$x^{12}$ & $\frac{1}{28409412455424000}$ & $\frac{1}{273167427456000}$\\
-	$x^{13}$ & $\frac{-1}{7244400176133120000}$ & $\frac{-1}{30185000733888000}$\\
-	$x^{14}$ & & $\frac{1}{6761440164390912000}$
+	$x^{1}$ & $\frac{-11}{150}$ & $\frac{-12}{25}$\\
+	$x^{2}$ & $\frac{1}{60}$ & $\frac{11}{100}$\\
+	$x^{3}$ & $\frac{-3}{2300}$ & $\frac{-11}{690}$\\
+	$x^{4}$ & $\frac{3}{23000}$ & $\frac{3}{1840}$\\
+	$x^{5}$ & $\frac{-1}{161000}$ & $\frac{-1}{8050}$\\
+	$x^{6}$ & $\frac{1}{2898000}$ & $\frac{1}{138000}$\\
+	$x^{7}$ & $\frac{-1}{99111600}$ & $\frac{-1}{3059000}$\\
+	$x^{8}$ & $\frac{1}{3171571200}$ & $\frac{1}{88099200}$\\
+	$x^{9}$ & $\frac{-1}{197694604800}$ & $\frac{-1}{3369794400}$\\
+	$x^{10}$ & $\frac{1}{13838622336000}$ & $\frac{1}{179722368000}$\\
+	$x^{11}$ & $\frac{-1}{2698531355520000}$ & $\frac{-1}{14827095360000}$\\
+	$x^{12}$ & & $\frac{1}{2490952020480000}$
 \end{longtable}
 \begin{algorithm}[!ht]
 	\caption[Perturbation of $\frac{\partial e^X}{\partial x}$]{Numerical calculation of the perturbation of the first partial derivative of the matrix exponential, $\frac{\partial e^X}{\partial x}$, using the $\left[ 13/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} x^n$}
@@ -385,8 +384,8 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 			\EndIf
 			\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 			\State $\vec{a_x} \gets \operatorname{VEC}\left(A_x\right)$\Comment{Change of indexing}
-			\State $P \gets P_{13}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
-			\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
+			\State $P \gets P_{10}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
+			\State $Q \gets Q_{11}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
 			\State Solve for $\vec{r}$: $P \vec{a_x} = Q \vec{r}$\Comment{Call to linear solver}
 			\State \Return $\frac{\partial X}{\partial x} + \operatorname{MAT}\left(\vec{r}\right)$
 		\EndFunction
@@ -413,23 +412,21 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 	\endhead
 	\caption*{Continued on next page.}
 	\endfoot
-	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
+	\caption*{The exact rational coefficients of the numerator and denominator polynomials of the $\left[ 10/12 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$; symbolically computed.}
 	\endlastfoot
 	$x^{0}$ & $\frac{1}{6}$ & $\frac{1}{1}$\\
-	$x^{1}$ & $\frac{-237571687770}{2235524846677109}$ & $\frac{-2238375706930349}{4471049693354218}$\\
-	$x^{2}$ & $\frac{75899205239671}{22355248466771090}$ & $\frac{7}{58}$\\
-	$x^{3}$ & $\frac{-6158055716087}{2897240201293533264}$ & $\frac{-172676164807703}{9286026286197222}$\\
-	$x^{4}$ & $\frac{14904653897243}{751136348483508624}$ & $\frac{989302956681193}{482873366882255544}$\\
-	$x^{5}$ & $\frac{-2677622343899}{225340904545052587200}$ & $\frac{-317642104732513}{1857205257239444400}$\\
-	$x^{6}$ & $\frac{15554305889797}{347668824155223991680}$ & $\frac{1079293136317583}{96574673376451108800}$\\
-	$x^{7}$ & $\frac{-1086326787569}{44424349753167510048000}$ & $\frac{-18091761597171823}{31097044827217257033600}$\\
-	$x^{8}$ & $\frac{23665068673453}{586401416741811132633600}$ & $\frac{215879922742633}{8884869950633502009600}$\\
-	$x^{9}$ & $\frac{-579062082583}{31665676504057801162214400}$ & $\frac{-129862571470787}{159927659111403036172800}$\\
-	$x^{10}$ & $\frac{1006334079353}{82096198343853558568704000}$ & $\frac{239909667097237}{11194936137798212532096000}$\\
-	$x^{11}$ & $\frac{-129504852863}{36499969783677292139645798400}$ & $\frac{-290350506989849}{668497615085664691202304000}$\\
-	$x^{12}$ & $\frac{18809879890171}{32849972805309562925681218560000}$ & $\frac{539968479224557}{84230699500793751091490304000}$\\
-	$x^{13}$ & & $\frac{-359560490231}{5809013758675431109757952000}$\\
-	$x^{14}$ & & $\frac{77182092353629}{260609784255455865877071000576000}$
+	$x^{1}$ & $\frac{-987845443}{6830210462460}$ & $\frac{-285086025324}{569184205205}$\\
+	$x^{2}$ & $\frac{74244818289}{22767368208200}$ & $\frac{3}{25}$\\
+	$x^{3}$ & $\frac{-2885331297}{1047298937577200}$ & $\frac{-520403722879}{28562698297560}$\\
+	$x^{4}$ & $\frac{180722213871}{10472989375772000}$ & $\frac{204914134377}{104729893757720}$\\
+	$x^{5}$ & $\frac{-1993504343}{146621851260808000}$ & $\frac{-209171411061}{1332925920552800}$\\
+	$x^{6}$ & $\frac{149844175309}{4750547980850179200}$ & $\frac{121443253013}{12567587250926400}$\\
+	$x^{7}$ & $\frac{-347356579}{16410983933846073600}$ & $\frac{-52489277253}{113706741794096000}$\\
+	$x^{8}$ & $\frac{1087980227}{60173607757435603200}$ & $\frac{37959419913}{2228652139164281600}$\\
+	$x^{9}$ & $\frac{-1264009477}{157534505108966409177600}$ & $\frac{-416545133359}{876815427322633075200}$\\
+	$x^{10}$ & $\frac{7919056259}{5119871416041408298272000}$ & $\frac{5918346737}{619970504167518336000}$\\
+	$x^{11}$ & & $\frac{-2550355813}{20459026637528105088000}$\\
+	$x^{12}$ & & $\frac{228053622637}{283562109196139536519680000}$
 \end{longtable}
 \begin{algorithm}[!ht]
 	\caption[Linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$]{Numerical calculation of the linear perturbation of $\frac{\partial^2 e^X}{\partial x \partial y}$, using the $\left[ 12/14 \right]_f\left(x\right)$ Pad\'{e} approximation of $f\left(x\right)=\sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.}
@@ -439,8 +436,8 @@ then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}
 			\State $A_y \gets \left[X, \frac{\partial X}{\partial y}\right]$\Comment{Allocates memory}
 			\State $A_X \gets I \otimes X - X^\dagger \otimes I$\Comment{if $X$ is $n \times n$ the result is $n^2 \times n^2$}
 			\State $\vec{a_y} \gets \operatorname{VEC}\left(A_y\right)$\Comment{Change of indexing}
-			\State $P \gets P_{12}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
-			\State $Q \gets Q_{14}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
+			\State $P \gets P_{10}\left(A_X\right)$\Comment{Pad\'{e} numerator by recursive summing and squaring}
+			\State $Q \gets Q_{12}\left(A_X\right)$\Comment{Pad\'{e} denominator by recursive summing and squaring}
 			\State Solve for $\vec{r}$: $P \vec{a_x} = Q \vec{r}$\Comment{Call to linear solver}
 			\State \Return $\left[\frac{\partial X}{\partial x}, \operatorname{MAT}\left(\vec{r}\right) A_y\right]$
 		\EndFunction
