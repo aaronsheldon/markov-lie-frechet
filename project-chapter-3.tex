@@ -3,7 +3,7 @@
 Moler and Van Loan seminally reviewed algorithms for calculating the matrix exponential in
 1978, and revisited that review in 2003 \cite{moler_nineteen_1978,moler_nineteen_2003}. 
 Building on the discussions of Moler and Van Loan, Higham established the standard 
-implementation of the matrix exponential based on scaling and scaring and Pad\'{e} 
+implementation of the matrix exponential based on scaling and scaring, and Pad\'{e} 
 approximation \cite{higham_scaling_2005,higham_functions_2008}. The Higham implementation was
 further optimized for $64$ bit architectures by Al-Mohy \cite{al-mohy_new_2009}. In the same
 work Al-Mohy developed an algorithm to approximate the derivative of the matrix exponential, 
@@ -18,20 +18,26 @@ analytic function. In the sense that Pad\'{e} approximations of analytic functio
 optimal series of algebraic approximations the 2009 method proposed by Al-Mohy is not 
 optimal.
 
+We can further flush out the difficulties with using the derivative of the Pad\'{e} 
+approximation of a function to approximate the derivative of the function. By definition
+a Pad\'{e} approximation is the ratio of two polynomials, and so has $m$ roots and $n$ 
+poles. The $k$ derivative then has $m \times \left(n-1\right)^k$ roots, and $n$ poles. If 
+any of the roots of the $k+1$ derivative occur on a particular domain, then the $k$ 
+derivative can become arbitrarily large, even if the Pad\'{e} approximation is within $\pm\epsilon$ 
+of the actual function, on the domain. This follows from the mean value theorem, which 
+asserts that if the function has a particular average slope on a domain, the upper limit of 
+the slope is inversely proportional to the lower limit of the slope. In essence, the 
+Pad\'{e} approximation can oscillate on a particular domain within the $\pm\epsilon$ error 
+bounds.
+
 In this chapter we will develop an approximation for the first, and second order Fr\'{e}chet
 derivatives of the matrix exponential, by decomposing the derivatives into components that
 hold for the commutative condition, and components containing the perturbation due to 
 non-commutativity. We will then derive the Pad\'{e} approximation for the non-commutative 
-perturbation. We begin by listing the eight forms of the Fr\'{e}chet derivative of 
-exponential map, in the direction $\frac{\partial X}{\partial x}$ at the point $X$ in the 
-Lie algebra.
-\footnote{We have abused and confounded the notations for directional derivatives and 
-partial derivatives here by assuming that $X$ is parameterized by $x$ so that $\frac{\partial e^X}{\partial x}$
-is the derivative in the direction of change of $x$.}
-\footnote{With respect to the adjoint operator, we are using the currying partial 
-application notation of $\left[L f\left(\cdotp\right)\right]\left(y\right)$ to indicate the 
-application of the operator $L$ to $f\left(x\right)$ followed by evaluation of the result at
-$y$.}
+perturbation.
+
+We begin by listing the eight forms of the Fr\'{e}chet derivative of exponential map, in the
+tangent direction $\frac{\partial X}{\partial x}$ at the point $X$ in the Lie algebra.
 {\setlength{\IEEEnormaljot}{18pt}
 \begin{IEEEeqnarray*}{rClls}
 	\frac{\partial e^X}{\partial x}
@@ -44,11 +50,18 @@ $y$.}
 		& = & \left[ \frac{e^{\operatorname{ad}_X \cdotp} - 1}{\operatorname{ad}_X \cdotp} \right] \left(\frac{\partial X}{\partial x}\right) e^X & \smash{\left. \IEEEstrut[4\jot] \right\rbrace} & \text{right recursive}\\
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X & &
 \end{IEEEeqnarray*}}
-The last equality demonstrates the non-commutative perturbation term most clearly; where the
-first multiplicative factor in the derivative accounts for the lack of commutativity between
-$X$ and $\frac{\partial X}{\partial x}$, and the last term resembles the derivative in the
-commutative case. This can be seen clearly when considering the condition $\left[X,\frac{\partial X}{\partial x}\right]=0$ 
+The last equality demonstrates the non-commutative perturbation term most clearly. The first
+multiplicative factor in the derivative accounts for the lack of commutativity between $X$ 
+and $\frac{\partial X}{\partial x}$, and the last term resembles the derivative in the
+commutative case. This can be seen when considering the condition $\left[X,\frac{\partial X}{\partial x}\right]=0$,
 in which case $\frac{\partial e^X}{\partial x} = \frac{\partial X}{\partial x} e^X$. 
+\footnote{We have abused and confounded the notations for directional derivatives and 
+partial derivatives here by assuming that $X$ is parameterized by $x$ so that $\frac{\partial e^X}{\partial x}$
+is the derivative in the direction of change of $x$.}
+\footnote{With respect to the adjoint operator, we are using the currying partial 
+application notation of $\left[L f\left(\cdotp\right)\right]\left(y\right)$ to indicate the 
+application of the operator $L$ to $f\left(x\right)$ followed by evaluation of the result at
+$y$.}
 
 Even though the multiplicative factorization provides a transparent representation of the 
 computational terms it is still far from optimal; because, when compared to matrix addition, 
@@ -77,12 +90,13 @@ and then restating the sum in terms of a truncated exponential series.
 \end{IEEEeqnarray*}
 The non-commutative perturbation series is linear in $\frac{\partial X}{\partial x}$  and a 
 Taylor series in the powers of $\operatorname{ad}_X \cdotp$. Thus any computation of an 
-approximation will be in the powers of $\operatorname{ad}_X \cdotp$. As was discussed in the 
-Moler and Van Loan \cite{moler_nineteen_1978,moler_nineteen_2003}, naive computation of the 
-Taylor series itself results in an approximation that will converge slowly, requiring a
-larger number of powers to be computed before the threshold of floating point error is 
-reached. Pad\'{e} approximation by rational functions remedy this problem, by offering 
-convergence to the threshold of floating point error in smaller powers, and fewer 
+approximation will be in the powers of $\operatorname{ad}_X \cdotp$.
+
+As was discussed in the Moler and Van Loan \cite{moler_nineteen_1978,moler_nineteen_2003}, 
+naive computation of the Taylor series itself results in an approximation that will converge 
+slowly, requiring a larger number of powers to be computed before the threshold of floating 
+point error is reached. Pad\'{e} approximation by rational functions remedy this problem, by
+offering convergence to the threshold of floating point error in smaller powers, and fewer 
 computational steps.
 
 However the question remains, given that $\frac{e^{x} -1 - x}{x^2}$ is a rational 
@@ -92,8 +106,8 @@ non-commutative perturbation Taylor series. This method has two shortcomings: fi
 approximation found in this manner is not itself a Pad\'{e} approximation of the anomaly 
 Taylor series, and so is not bound by the same theoretical asymptotic results as Pad\'{e} 
 approximations; second, computation by $\frac{e^{x} - 1 - x}{x^2}$ suffers from the same 
-floating point errors near $0$ as naive computation of $e^x - 1$ by first computing $e^x$ 
-and then subtracting $1$.
+floating point errors near $0$ as naive computation of $e^x - 1$ by first computing the
+approximation of $e^x$ and then subtracting $1$.
 
 While it is clear that $\frac{e^x}{x^2}\gamma\left(2,x\right) : x \mapsto \frac{e^{x} -1 - x}{x^2}$ 
 is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be approximated by a 
@@ -108,7 +122,7 @@ For a Pad\'{e} approximation with numerator polynomial $P\left(X\right)$ and den
 polynomial $Q\left(X\right)$, that $\operatorname{ad}_X \cdotp \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$
 implies that $P\left(\operatorname{ad}_X \cdotp\right), Q\left(\operatorname{ad}_X \cdotp\right) \in GL\left(\mathfrak{st}(\hat{\mathbbm{1}})\right)$.
 It follows that when a solution $Y$ to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $
-exists it is guaranteed to belong to $\mathfrak{st}(\hat{\mathbbm{1}})$, because $\frac{\partial X}{\partial x} \in \mathfrak{st}(\hat{\mathbbm{1}})$.
+exists, it is guaranteed to belong to $\mathfrak{st}(\hat{\mathbbm{1}})$, because $\frac{\partial X}{\partial x} \in \mathfrak{st}(\hat{\mathbbm{1}})$.
 
 The remaining question is whether or not $Y$, a solution to $\left[P\left(\operatorname{ad}_X \cdotp\right)\right] \left(\frac{\partial X}{\partial x}\right) = \left[Q\left(\operatorname{ad}_X \cdotp\right)\right] \left(Y\right) $,
 is an approximation of $\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$?
@@ -118,34 +132,34 @@ a sequence of Pad\'{e} approximations $Y_{mn}$ that solve $\left[P_n\left(\opera
 convergence $Y_{mn} \rightarrow \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right)$
 is assured. 
 
-Recapitulating $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximations, we seek a 
-rational polynomial approximation to the Taylor series.
+Recapitulating the definition of the $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximations, 
+we seek a rational polynomial approximation to the Taylor series.
 \begin{IEEEeqnarray*}{rCl}
 	\frac{P_n\left(x\right)}{Q_m\left(x\right)}
 		& =       & \frac{p_0 + p_1 x + \cdots + p_n x^n}{1 + q_1 x + \cdots + q_m x^m}\\
 		& \approx & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!}x^n
 \end{IEEEeqnarray*}
-Such that the first $k \le n+m$ derivatives of the rational polynomial approximation evaluated at
-$x=0$ equal the first $k \le n+m$ coefficients of the Taylor series.
+Such that the first $n+m$ derivatives, $k$, of the rational polynomial approximation 
+evaluated at $x=0$ equal the first $n+m$ coefficients, $k$, of the Taylor series.
 \begin{IEEEeqnarray*}{rCl}
 	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
 		& = & \frac{1}{\left(k+2\right)!}
 \end{IEEEeqnarray*}
 The symbolic computation of the exact rational coefficients of the $\left[11/12\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
-using big integer mathematics, and the Polynomials package. The results of the computation 
-are displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation 
-was chosen so that the largest denominator in the rational coefficients of the numerator
+using big integer methods, and the Polynomials package. The results of the computation are 
+displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation was 
+chosen so that the largest denominator in the rational coefficients of the numerator
 polynomial $\left(2698531355520000\right)$, and the largest denominator in the rational 
 coefficients of the denominator polynomial $\left(2490952020480000\right)$ were the 
-largest integers less than the largest $64$ bit signed float that has no loss of integer
+largest integers less than the largest $64$ bit signed float, that has no loss of integer
 precision $\left(2^{53} = 9007199254740992\right)$. This choice of approximation will need
-further research to better optimize.
+further research to be better optimized.
 
 To make use of the Pad\'{e} approximation we need to be able to compute powers of $\operatorname{ad}_X \cdotp$.
 This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$, 
 which requires representing the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$ as vectors. 
-The vector representation of a matrix is achieved by the matrix reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$, 
+The vector representation of a matrix is achieved by the matrix reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$; 
 which forms a vector $\vec{y}$ by concatenation of the columns of $Y$, called the 
 vectorization of the matrix. We denote the inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
 which reshapes a vector, of $n^2$ entries, into an $n \times n$ matrix.
@@ -173,27 +187,27 @@ And thus can be approximated by
 		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^\dagger \otimes I\right)}{Q_m \left(I \otimes X - X^\dagger \otimes I\right)} \left(I \otimes X - X^\dagger \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
 By application of the chain rule this computational method is sufficient to calculate the
-derivative of any parameterization $X$ in the matrix exponential $e^X$.
+derivative of any parameterization of $X$ in the matrix exponential $e^X$.
 
-We can summarize this work in an algorithm to compute the non-commutative perturbation \ref{alg:perturbation}.
-This algorithm servers as a sketch only, highlighting only the novel elements developed in
-this section. Many additional optimizations could be implemented including minimizing memory 
-assignments by carrying out in place computations, conditioning matrices to improve
-numerical stability, and using recursive squaring and summing methods to efficiently compute
-the matrix polynomials. The first assignment of the Kronecker product is a point of concern
-around performance, because it results in a quadratic increase in the amount of memory used. 
-Finally, an algorithm to compute the gradient of the matrix exponential can be formulated \ref{alg:gradient}.
+We can summarize this work in an algorithm to compute the perturbation \ref{alg:perturbation},
+and matrix exponential \ref{alg:gradient}. This algorithm serves as a sketch only; 
+highlighting the novel elements developed in this section. Many additional optimizations 
+could be implemented including minimizing memory assignments by carrying out in place 
+computations, conditioning matrices to improve numerical stability, and using recursive 
+squaring and summing methods to efficiently compute the matrix polynomials. The first 
+assignment of the Kronecker product is a point of concern about performance, because it 
+results in a quadratic increase in the amount of memory used. 
 \section{The Hessian}
-Assuming $X$ parameterized by $x,y \in \mathbb{R}$ is analytic, or at least twice 
-differentiable the Hessian of $e^X$ exists and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,
+Assuming parameterization of $X$ by $x,y \in \mathbb{R}$ is analytic, or at least twice 
+differentiable the Hessian of $e^X$ exists, and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,
 $\frac{\partial X}{\partial y}$, and $\frac{\partial^2 X}{\partial x \partial y}$. In 
-general none of these tangent matrices need commute with each other. Even the second 
+general, none of these tangent matrices need commute with each other. Even the second 
 derivatives $\frac{\partial^2 X}{\partial x^2}$, will not generally commute with the first 
 derivate $\frac{\partial X}{\partial x}$. While the additional terms complicate the 
 computations, they do not lead to intractable results in the same way that finding a closed
-form for $e^X$ in dimensions greater than $4$ becomes intractable. Unfortunately in the most 
-general case when $X$ neither commutes with $\frac{\partial X}{\partial x}$, nor $\frac{\partial X}{\partial y}$ 
-we will find that we have to compute the Taylor expansion of a bilinear form, which is not 
+form for $e^X$ in dimensions greater than four becomes intractable. Unfortunately in the 
+most general case when $X$ neither commutes with $\frac{\partial X}{\partial x}$, nor $\frac{\partial X}{\partial y}$ 
+we will find that we have to compute the Taylor series of bilinear operators, which is not 
 susceptible to Pad\'{e} approximation.
 
 To proceed we need a pair of results focused on the binomial combinatorics of adjoints. We
@@ -231,8 +245,8 @@ We will also find use of the following corollary to the binomial theorem.
 	Proceed by induction on $n$.\hfill\IEEEQEDhere
 \end{IEEEproof}
 In the next step of developing the Hessian we derive the Taylor series for the bilinear 
-non-commutative perturbation. Unfortunately because this form is a bilinear map it does
-not admit the formulation of Pad\'{e} approximation.
+non-commutative perturbation. Only in two particular case does this bilinear map admit the 
+formulation of Pad\'{e} approximation.
 \begin{corollary}
 	For any differentiable matrix function $X$ parameterized by $x,y \in \mathbb{R}$
 	\begin{IEEEeqnarray*}{rCl}
@@ -299,8 +313,9 @@ Taylor series.
 Using the same criteria as in the previous section yields a $\left[10/12\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
 The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
-This approximation is then used in a pair of branches \ref{alg:linear} \ref{alg:bilinear} \ref{alg:second}
-in the calculation of the perturbation to the Hessian of the matrix exponential.
+This approximation is then used in a pair of branches, one for the linear case \ref{alg:linear},
+the other for the bilinear case \ref{alg:bilinear}, in the calculation of the perturbation 
+to the Hessian of the matrix exponential \ref{alg:second}.
 
 Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
 are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
@@ -330,18 +345,19 @@ preceding section
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}
 \end{IEEEeqnarray*}
 The next two summands together are the Poisson bracket of the non-commutative perturbations
-the gradients $\frac{\partial e^X}{\partial x}$, and $\frac{\partial e^X}{\partial y}$. The
-final summand is the bilinear non-commutative perturbation. Taken together the algorithm for
-the Hessian is then a sequence of calls to the non-commutative perturbation and the bilinear
-non-commutative perturbation; as outlined in algorithm \ref{alg:hessian}.
+of the gradients $\frac{\partial e^X}{\partial x}$, and $\frac{\partial e^X}{\partial y}$. 
+The final summand is the bilinear non-commutative perturbation. Taken together the algorithm 
+for the Hessian is then a sequence of calls to the non-commutative perturbation and the 
+bilinear non-commutative perturbation; as outlined in algorithm \ref{alg:hessian}.
 
-As in the previous section the algorithm we have developed for the Hessian of the matrix
+As in the previous section, the algorithm we have developed for the Hessian of the matrix
 exponential is merely a starting point for further optimizations. In particular the bilinear
-non-commutative perturbation needs attention to see if the Taylor series i susceptible to
-further efficiency gains. As well the Pad\'{e} approximation needs further refinement.
-Nevertheless both of the algorithms for the non-commutative perturbation and the bilinear
-non-commutative perturbation are stable with respect to the the stochastic contraction
-Lie algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$; in the sense that if $X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}, \frac{\partial^2 X}{\partial x \partial y} \in \mathfrak{st}^{+}(\hat{\mathbbm{1}})$,
+non-commutative perturbation needs attention to see if the Taylor series is susceptible to
+further optimizations. As well, the Pad\'{e} approximation in the bilinear non-commutative 
+perturbation needs further refinement. Nevertheless both of the algorithms for the 
+non-commutative perturbation and the bilinear non-commutative perturbation are stable with 
+respect to the the stochastic contraction Lie algebra $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$; 
+in the sense that if $X, \frac{\partial X}{\partial x}, \frac{\partial X}{\partial y}, \frac{\partial^2 X}{\partial x \partial y} \in \mathfrak{st}^{+}(\hat{\mathbbm{1}})$,
 then the result of the algorithms will be in $\mathfrak{st}^{+}(\hat{\mathbbm{1}})$.
 \clearpage
 \section{Figures and Illustrations}

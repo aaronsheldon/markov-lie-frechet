@@ -9,66 +9,67 @@ with respect to a fixed unit vector $\hat{\mathbbm{1}}$. We showed that there is
 basis $\hat{e}_i$ such that $\vec{\mathbbm{1}} = \sqrt{n} \hat{\mathbbm{1}}$ can be
 interpreted as the row sum vector, and found that this allowed us to characterize both the Lie 
 group in which the matrices $A \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$ reside, and the Lie
-algebra of tangents to the Lie group. We denoted the $St(\hat{\mathbbm{1}})$ stochastic Lie
+algebra of tangents to the Lie group. We denoted $St(\hat{\mathbbm{1}})$ the stochastic Lie
 group with respect to $\hat{\mathbbm{1}}$, and $\mathfrak{st}(\hat{\mathbbm{1}})$ the
 stochastic Lie algebra with respect to $\hat{\mathbbm{1}}$. We further characterized the
 doubly stochastic Lie group and algebra with respect to $\hat{\mathbbm{1}}$, respectively 
 denoted $St(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$ and $\mathfrak{st}(\hat{\mathbbm{1}}, \hat{\mathbbm{1}})$,
 of invertible matrices of fixed row and column sums with respect to $\hat{\mathbbm{1}}$. 
-This accomplished by generalizing the stochastic Lie group and algebra to the dual
+This was accomplished by generalizing the stochastic Lie group and algebra to the dual
 stochastic Lie group and algebra, $St^\dagger(\hat{\mathbbm{1}})$ and $\mathfrak{st}^\dagger(\hat{\mathbbm{1}})$, 
 of invertible matrices such that $A^\dagger \hat{\mathbbm{1}} = \hat{\mathbbm{1}}$.
 
 In chapter three we used analytic and closure properties of the stochastic Lie algebras to
 argue that the algorithms developed for calculating the gradient and Hessian of the matrix
 exponential will result in matrices that belong to the stochastic Lie algebra. An initial
-computation of the coefficients for a Pad\'{e} approximation was presented, and an sketch
-of algorithms to calculate the gradient and the Hessian were outlined.
+computation of the coefficients for the Pad\'{e} approximations was presented, and a sketch
+of algorithms to calculate the gradient and the Hessian of the matrix exponential were 
+outlined.
 
 In chapter four we combined the results of the previous two chapters, illustrated through
 the example of the aging process. The algorithms to calculate the log-likelihood, its
-gradient, and Hessian were developed. Finally the Newton-Raphson maximization was briefly
-introduced.
+gradient, and Hessian were developed. Finally Newton-Raphson maximization of the 
+log-likelihood was briefly introduced.
 \section{Discussion}
-Any attempt to fit the generator of a Markov process to observations is in essence an 
-exercise in calculating the logarithm of a matrix. Like the scalar complex logarithm the
-matrix logarithm is not unique, and has many branches. To demonstrate this point, in chapter
-two a calculation of one of the branches of the logarithm of permutations was developed, in
-the context of the stochastic Lie algebra. However, much as there is a unique real logarithm
-of a positive real number, working within the normal subgroup, and real the sub-algebra, of
-the stochastic Lie group does provide for certain guarantees of algebraic and analytic
-closure. Furthermore any time homogeneous Markov process can never escape the normal
-subgroup because the identity element is a member of the normal subgroup of matrices with
-positive determinant.
+Any attempt to estimate the generator of a Markov process from observations is in essence an 
+exercise in calculating the logarithm of a matrix. As in the scalar complex case the matrix 
+logarithm is not unique, and has many branches. To demonstrate this point, in chapter two, 
+a calculation of one of the branches of the logarithm of permutations was developed, in the
+context of the stochastic Lie algebra. However, much as there is a unique real logarithm of 
+a positive real number, working within the normal subgroup, and real the sub-algebra, of the 
+stochastic Lie group does provide for certain guarantees of algebraic and analytic closure. 
+Furthermore no time homogeneous Markov process can ever escape the normal subgroup because 
+the identity element is a member of the normal subgroup of matrices with positive 
+determinant.
 
 The fitting of generators of Markov processes to observations is bedeviled by a second
-source degeneracy beyond branches of the matrix logarithm. As reviewed in the beginning of
-chapter four, unless the experiment can be designed to observe every possible transition
-between states there will always be indeterminacy in the model. In particular when in 
-complete number of stopping statistics are used many Markov models will generate the exact
-same distributions for the stopping statistics. For example one could always add ghost
-states and transitions between them that are never observed. This is were the intuition of
-the scientist is of critical importance. Where in they apply Occam's razor to select the
-most parsimonious explanation for the observations. Even an application of the likelihood
-ratio test or the Akiake information criteria \cite{akaike_new_1974} will not be of 
-assistance as the extra parameters washout when the distribution of specific stopped
-statistics are formulated. A full resolution of this indeterminacy waits a comprehensive
+source of degeneracy, beyond the branches of the matrix logarithm. As reviewed in the 
+beginning of chapter four, unless the experiment can be designed to observe every possible 
+transition between states there will always be indeterminacy in the model. In particular 
+when an incomplete number of stopping statistics are used many Markov models will generate 
+the exact same distributions for the stopping statistics. For example, one could always add 
+ghost states, and transitions between them, that are never observed. This is when the 
+intuition of the scientist is of critical importance. Wherein they apply Occam's razor to 
+select the most parsimonious explanation for the observations. Even an application of the 
+likelihood ratio test or the Akiake information criteria \cite{akaike_new_1974} will not be 
+of assistance as the extra parameters washout when the distribution of specific stopped
+statistics are formulated. A full resolution of this indeterminacy awaits a comprehensive
 classification of the generators of continuous time homogeneous Markov processes on discrete
 state spaces by the distributions of their stopped statistics. This undertaking should be
-well within the reach of contemporary techniques.
+well within the reach of contemporary mathematical technology.
 
-This should be of no discouragement however as there is much fertile ground that still needs
-covering. The Pad\'{e} approximation presented were only the first pass are derivation, and
+This should be of no discouragement as there is much fertile ground that still needs
+covering. The Pad\'{e} approximations presented are only the first pass derivation, and
 much work remains to be done in numerically optimizing the choice of approximation orders
-for various implementations are architectures. Furthermore the calculation of the adjoint
+for various implementations, and architectures. Furthermore, the calculation of the adjoint
 through the Kronecker products will present a serious bottleneck to scaling the current
-algorithms up to the terabyte and pentabyte scales data of numerical fitting. As well the 
-branch of the bilinear non-commutative perturbation that calculates using a recursive Taylor
-series approximation needs deep investigation to determine if there are additional
-factorizations that can numerically stabilize the loop and speed up the computation. On top
-of that the algorithms presented are merely sketches for the actual implementation, which
-when done will need carefully consideration of memory management, assignment, logic 
-branching, and in-lining of subroutines. Finally the propositions in chapter two deserve to 
-be give proper treatment and have the proofs of the claims completed. Finally all the 
-standard generalizations of the algorithms presented herein to handle incomplete data using 
-expectation maximization deserve a thorough treatment.
+algorithms up to terabytes and pentabytes of data. As well, the branch of the bilinear 
+non-commutative perturbation that is calculated using a recursive Taylor series 
+approximation needs deep investigation to determine if there are additional factorizations 
+that can numerically stabilize the loop, and speed up the computation. On top of that, the 
+algorithms presented are merely sketches for the actual implementation, which when done will 
+need careful consideration of memory management, assignment, logic branching, and in-lining 
+of subroutines. Finally the propositions in chapter two deserve to be give proper treatment 
+and have the proofs of the claims completed. Finally, the algorithms presented herein 
+deserve thorough generalizations to handle incomplete data using the standard expectation 
+maximization techniques.
