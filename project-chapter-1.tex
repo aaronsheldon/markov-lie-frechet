@@ -59,19 +59,19 @@ For a particular Markov process these transitions will form a path through a sem
 This semi-group always resides within a Lie group, and thus the generators of the semi-group
 reside in the associated Lie algebra. In contrast to the usual analysis of Markov transition
 probabilities using resolvents, in the Lie theoretic approach the most general formulation
-begins with a closed connected path $G_t$ through a Lie algebra on a space of bounded linear
-operators. The Markov transition probabilities the arise from the exponential map of the Lie
-algebra to the Lie group. 
-\footnote{Usually the linear operators are over some form of $\mathscr{L}^1 \bigcap \mathscr{L}^2$ space of distributions}
+begins with a continuous path $G_t$ through a Lie algebra on a space of bounded linear
+operators. The Markov transition probabilities then arise from the exponential map of the 
+Lie algebra to the Lie group. 
+\footnote{Usually the linear operators are over some form of $\mathscr{L}^1 \bigcap \mathscr{L}^2$ space of distributions.}
 \begin{IEEEeqnarray*}{rCl}
-	\mathbb{E}\left[X_{t+\Delta t} = \vec{u} \left\| X_{t}=\vec{v} \right.\right]
-		& = & \left\langle \vec{u}, \exp\left(\int_t^{t+\Delta t} G_s ds \right) \vec{v} \right\rangle
+	\mathbb{E}\left[X_{t+\Delta t} \left\| X_{t} \right.\right]
+		& = & \left\langle X_{t}, \exp\left(\int_t^{t+\Delta t} G_s ds \right) X_{t+\Delta t} \right\rangle
 \end{IEEEeqnarray*}
 Knowledge of the stochastic Lie group and algebra provides concrete, and exploitable 
 guarantees on the analytic and algebraic properties of the semi-group. For example the
 following matrix parameterization
 \begin{IEEEeqnarray*}{rCl}
-	M_s
+	M_t
 		& = & \begin{bmatrix}
 			e^{-t} & 1 - e^{-t} \\
 			1 - e^{-t} & e^{-t}
@@ -90,8 +90,7 @@ process vanishes
 			\end{bmatrix}\\
 		& = & 0
 \end{IEEEeqnarray*}
-In the context of Lie theory, the path $t$ is neither connected nor closed in the Lie
-algebra.
+In the context of Lie theory, the path $t$ is not continuous in the Lie algebra.
 
 From the perspective of Lie theory, classical parameter estimation of Markov processes has
 been a manifold first approach; starting with an explicit construction of an extrinsic

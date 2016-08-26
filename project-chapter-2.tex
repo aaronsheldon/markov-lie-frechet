@@ -3,11 +3,11 @@
 \subsection{Preliminaries}
 The classical Lie algebras of physics, like the infinitesimal symmetries of the special
 unitary algebra $\mathfrak{su}(n)$, are defined with respect to invariants of a Banach
-algebra, such as the matrix invariants of the determinant, trace, or norm. In contrast
+algebra, such as the matrix invariants of the determinant, trace, or norm. In contrast,
 stochastic matrices are always characterized with respect to a specific unit vector, which
 we will denote by $\hat{\mathbbm{1}}$, for reasons that will become clear later. In the next
-two sections we provide an explicit construction and characterization of the Lie algebra of
-stochastic matrices, building on the original the work of Johnson \cite{johnson_markov-type_1985},
+two sections we will provide an explicit construction and characterization of the Lie 
+algebra of stochastic matrices, building on the original the work of Johnson \cite{johnson_markov-type_1985},
 and distilling the recent works of Sumner et al. \cite{sumner_lie_2012,fernandez-sanchez_lie_2012}, 
 Mourad \cite{mourad_lie-theoretic_2004}, and Chruściński et al. \cite{chruscinski_pseudo-stochastic_2015}.
 
@@ -110,7 +110,7 @@ is in the kernel of each operator.
 \end{IEEEproof}
 The following chapter will hinge on taking the derivatives of smooth parameterizations $X : \mathbb{R}^k \mapsto \mathfrak{st}(\hat{\mathbbm{1}})$. 
 The principle role of this chapter is to assure ourselves that we will not differentiate
-ourselves out of $\mathfrak{st}(\hat{\mathbbm{1}}$. The next corollary nicely provides just
+ourselves out of $\mathfrak{st}(\hat{\mathbbm{1}})$. The next corollary nicely provides just
 such an assurance:
 \begin{corollary}
 	The tangent space $T\mathfrak{st}(\hat{\mathbbm{1}}) = \mathfrak{st}(\hat{\mathbbm{1}})$
@@ -186,12 +186,12 @@ As a direct result of the construction of the basis vectors $\hat{e}_i$ we see t
 Thus $\vec{\mathbbm{1}}$ can be interpreted as the row sum vector in basis $\hat{e}_i$.
 
 The constructed basis leads naturally to considering the minimal non-trivial matrices $C_{ij} = \hat{e}_i \otimes \left( \hat{e}_j - \hat{e}_i \right)$,
-with state transitions illustrated in figure \ref{fig:singlestochastic}, as holding
-significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$. In fact this will be
-the central result of this chapter: that the algebraic closure of the matrices $C_{ij}$ is
-the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. To establish this result we
-need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$ are
-linear combinations of matrices $C_{ij}$.
+as holding significance in the structure of $\mathfrak{st}(\hat{\mathbbm{1}})$. These 
+matrices are illustrated as state transitions in figure \ref{fig:singlestochastic}. In fact 
+this will be the central result of this chapter: that the algebraic closure of the matrices 
+$C_{ij}$ is the stochastic Lie algebra $\mathfrak{st}(\hat{\mathbbm{1}})$. To establish this 
+result we need a preliminary result that proves the commutators $\left[C_{ij},C_{kl}\right]$ 
+are linear combinations of matrices $C_{ij}$.
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
 		C_{ij}C_{kl} & = &
@@ -314,7 +314,7 @@ We can now proceed with the central result that motivates this chapter.
 The previous theorem serves as the definition of a set of canonical generators of $\mathfrak{st}(\hat{\mathbbm{1}})$.
 It is  important to note that neither the basis $\hat{e}_i$ nor the canonical generators $C_{ij}$
 are unique. They are defined only up to rotations orthogonal to the vector $\hat{\mathbbm{1}}$.
-Regardless of the choice of basis $\hat{e}_i$ Jacobi's formula implies that if $G = \sum_{i,j} \alpha_{ij} C_{ij}$
+Regardless of the choice of basis $\hat{e}_i$, Jacobi's formula implies that if $G = \sum_{i,j} \alpha_{ij} C_{ij}$
 then $\det G = \exp\left( \sum_{i,j} \alpha_{ij} \right)$.
 \subsection{Vertex Logarithms}
 Geometrically fixing a basis $\hat{e}_i$ defines the convex polytope of all matrices, $M$,
@@ -352,9 +352,9 @@ For now we need to establish the claim implicit in the definition of the vertex 
 		\item It follows that any convex sum of the vertexes $V_{j\left(\cdot\right)}$ also 
 		belongs to the convex polytope of singly stochastic matrices.
 		\item In the reverse inclusion, we work analogously to the Birkhoff-von Neumann theorem;
-		where starting with an $M$ in the convex polytope of singly stochastic matrices we 
+		where starting with a matrix $M$ in the convex polytope of singly stochastic matrices we 
 		eliminate nonzero entries from $M$ with convex sums involving $V_{j\left(\cdot\right)}$.
-		\item Begin by picking an $i,j$ such that $m_{ij} = \left\langle \hat{e}_i, M \hat{e}_j \right\rangle$
+		\item Begin by picking a pair $i,j$ such that $m_{ij} = \left\langle \hat{e}_i, M \hat{e}_j \right\rangle$
 		is the smallest $m_{ij} > 0$. Which we can always do because $M \vec{\mathbbm{1}} = \vec{\mathbbm{1}}$.
 		If $m_{ij} = 1$ then by definition $M$ is a vertex matrix and we are done.
 		\item By the same argument we can pick a function $f^{\left(1\right)}\left(k\right) : \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
@@ -447,25 +447,25 @@ only consider the vertex dual matrices for the first $p$ compositions of $j\left
 \begin{IEEEproof}
 	Calculating directly through the definition of the vertex $V_{j\left(\cdot\right)}$
 	\begin{IEEEeqnarray*}{+rCl+x*}
-		\left(I + C_{j\left(\cdot\right)}\right)^{n \bmod p}
+		\left(I + C_{j\left(\cdot\right)}\right)^n
 			& = & V_{j\left(\cdot\right)}^n\\
 			& = & V_{j^{n \bmod p}\left(\cdot\right)}\\
 			& = & I + C_{j^{n \bmod p} \left(\cdot\right)} & \IEEEQEDhere
 	\end{IEEEeqnarray*}
 \end{IEEEproof}
 The result in the previous corollary hints at the importance of permutations in elucidating
-the structure of the vertex dual matrices. To develop this further for a given function $j\left(\cdot\right)$
+the structure of the vertex dual matrices. To develop this further, for a given function $j\left(\cdot\right)$
 we recursively define a partition of the set $\left\lbrace 1,\dots,n \right\rbrace$; 
-composed of respectively the numbers for which $j\left(\cdot\right)$ is a permutation, and 
+composed respectively of the numbers for which $j\left(\cdot\right)$ is a permutation, and 
 the numbers for which $j\left(\cdot\right)$ is transient, of each order.
 \begin{definition}
-	The ergodic and transient subsets $E_{j\left(\cdot\right)}^{\left(n\right)} \subseteq \left\lbrace 1,\dots,n \right\rbrace$,
-	partitioned by $j\left(\cdot\right)$, are recursively:
+	The ergodic and transient subsets $E_{j\left(\cdot\right)}^{\left(m\right)} \subseteq \left\lbrace 1,\dots,n \right\rbrace$,
+	partitioned by $j\left(\cdot\right)$, are defined recursively as:
 	\begin{IEEEeqnarray*}{rCl}
 		E_{j\left(\cdot\right)}^{\left(0\right)}
 			& = & \left\lbrace i : \exists p_i > 0 \text{ where } j^{p_i}\left(i\right)=i \right\rbrace\\
-		E_{j\left(\cdot\right)}^{\left(n+1\right)}
-			& = & \left\lbrace i : j\left(i\right) \in E_{j\left(\cdot\right)}^{\left(n\right)} \right\rbrace
+		E_{j\left(\cdot\right)}^{\left(m+1\right)}
+			& = & \left\lbrace i : j\left(i\right) \in E_{j\left(\cdot\right)}^{\left(m\right)} \right\rbrace
 	\end{IEEEeqnarray*}
 \end{definition}
 The partitioning of the integers into an ergodic subset and transient subsets allows us to
@@ -482,8 +482,8 @@ construct restriction maps of $j\left(\cdot\right)$.
 	\end{IEEEeqnarray*}
 \end{definition}
 If $T$ is the highest order transient of $j\left(\cdot\right)$, so that $T$ is the smallest 
-$t$ such that $j^t\left(i\right) \in E_{j\left(\cdot\right)}^{\left(0\right)}$, then nearly
-without any further proof we can state the following observations
+$t$ such that $j^t\left(i\right) \in E_{j\left(\cdot\right)}^{\left(0\right)}$ for all $i$, 
+then nearly without any further proof we can state the observations
 \begin{observation}
 	The following relationships for $j\left(\cdot\right)$, and $j_n\left(\cdot\right)$ hold
 	\begin{enumerate}
@@ -502,7 +502,7 @@ without any further proof we can state the following observations
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{observation}
-The last observation admits a further generalization that will be of use in the following
+The last observation admits a further generalization that will be of use in the next
 calculations
 \begin{observation}
 	If $m < n \Rightarrow \left[A_n,A_m\right]= A_n A_m$ then
@@ -539,10 +539,10 @@ observations to simply.
 \end{proposition}
 The Pythagorean coefficients are so named because $\frac{\pi}{p}\csc\left(\frac{\pi}{p}\right)$ 
 is ratio of $\pi$ to the $p$ inner Pythagorean approximation of $\pi$. The coefficients in
-the case of period of $p=16$ are illustrated in figure \ref{fig:pythagorean-16}, and in the 
-case of period $p=17$ in figure \ref{fig:pythagorean-17}. For now the proposition remains 
-unproven. However, a hint of the direction to take can be seen by expanding the power 
-series.
+the case of a period of $p=16$ are illustrated in figure \ref{fig:pythagorean-16}, and in 
+the case of a period of $p=17$ in figure \ref{fig:pythagorean-17}. For now the proposition 
+remains unproven. However, a hint of the direction to take can be seen by expanding the 
+power series.
 \begin{IEEEeqnarray*}{rCl}
 	V_{j\left(\cdot\right)} 
 		& = & e^{-\sum_{n=1}^{p-1} \alpha_n} \sum_{m_1,\dots, m_{p-1} \ge 0} V^{\sum_{n=1}^{p-1} n m_{n}}_{j_0\left(\cdot\right)} \prod_{n=1}^{p-1}\frac{\alpha_n^{m_n}}{m_n!}
@@ -555,9 +555,9 @@ series.
 It should be clear now that $St(\hat{\mathbbm{1}})$ has a non-trivial structure; most
 importantly it is connected, but not simply connected. This can be seen because $St(\hat{\mathbbm{1}})$
 contains matrices with positive, negative, and complex determinants, while matrices with a 
-determinant of zero are excluded, because they are not invertible. There is a simply 
-connected normal sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance to 
-continuous time homogeneous Markov processes on finite state spaces.
+determinant of zero are excluded, because they are not invertible. There is, however, a 
+simply connected normal sub-group of $St(\hat{\mathbbm{1}})$ that has particular importance 
+to continuous time homogeneous Markov processes on finite state spaces.
 \begin{definition}
 	The stochastic contraction Lie group $St^{+}(\hat{\mathbbm{1}})$ is the set
 	of matrices such that $A \in St(\hat{\mathbbm{1}})$ and $\det A \in \mathbb{R}^{+}$
