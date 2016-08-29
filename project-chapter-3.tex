@@ -323,14 +323,14 @@ Taylor series as
 Using the same criteria as in the previous section yields a $\left[10/12\right]_f\left(x\right)$
 Pad\'{e} approximation for $f\left(x\right) = \sum_{n=0}^\infty \frac{n+1}{\left(n+3\right)!} x^n$.
 The coefficients of the Pad\'{e} approximation are summarized in table \ref{tab:bilinear}. 
-This approximation is then used in a pair of branches, one for the linear case \ref{alg:linear},
-the other for the bilinear case \ref{alg:bilinear}, in the calculation of the perturbation 
-to the Hessian of the matrix exponential \ref{alg:second}.
+This approximation is then used in a pair of branches, one for the linear case \ref{alg:linear}
+and the other for the bilinear case \ref{alg:bilinear}, in the calculation \ref{alg:second} 
+of the perturbation to the Hessian of the matrix exponential.
 
-Assuming that $\frac{\partial^2 X}{\partial x \partial y},\frac{\partial^2 X}{\partial y \partial x}$ 
-are continuous we have, by corollary to Clairaut's theorem, that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
-We can then compute the Hessian by symmetrizing the partial differential so that 
-antisymmetric terms cancel out.
+Assuming that $\frac{\partial^2 X}{\partial x \partial y}$ and $\frac{\partial^2 X}{\partial y \partial x}$ 
+are continuous, we have by corollary to Clairaut's theorem that $\frac{\partial^2 e^X}{\partial x \partial y} = \frac{\partial^2 e^X}{\partial y \partial x}$.
+We can then compute the Hessian by symmetrizing the partial derivatives so that
+antisymmetric terms cancel out:
 \begin{IEEEeqnarray*}{rCl}
 	\frac{1}{2} \left(\frac{\partial^2 e^X}{\partial x \partial y} + \frac{\partial^2 e^X}{\partial y \partial x}\right)
 		& = & \frac{1}{2} \frac{\partial}{\partial x} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
@@ -346,19 +346,19 @@ antisymmetric terms cancel out.
 		&   & +\: \frac{1}{2} \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial y} \right) e^X\\
 		&   & +\: \frac{1}{2} \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]
 \end{IEEEeqnarray*}
-To flush out the final algorithm for the Hessian lets consider each summand in the last 
+To flush out the final algorithm for the Hessian, let's consider each summand in the last 
 equality individually. The first term involving $\frac{\partial^2 X}{\partial x \partial y}$
 can be calculated using the non-commutative perturbation algorithm developed in the 
-preceding section
+preceding section as
 \begin{IEEEeqnarray*}{rCl}
 	\left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial^2 X}{\partial x \partial y} \right)
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\operatorname{ad}_X \frac{\partial^2 X}{\partial x \partial y} \right) + \frac{\partial^2 X}{\partial x \partial y}
 \end{IEEEeqnarray*}
 The next two summands together are the Poisson bracket of the non-commutative perturbations
-of the gradients $\frac{\partial e^X}{\partial x}$, and $\frac{\partial e^X}{\partial y}$. 
+of the gradients $\frac{\partial e^X}{\partial x}$ and $\frac{\partial e^X}{\partial y}$. 
 The final summand is the bilinear non-commutative perturbation. Taken together the algorithm 
 for the Hessian is then a sequence of calls to the non-commutative perturbation and the 
-bilinear non-commutative perturbation; as outlined in algorithm \ref{alg:hessian}.
+bilinear non-commutative perturbation, as outlined in algorithm \ref{alg:hessian}.
 
 As in the previous section, the algorithm we have developed for the Hessian of the matrix
 exponential is merely a starting point for further optimizations. In particular the bilinear
