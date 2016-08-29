@@ -525,13 +525,12 @@ We propose a trial solution for $V_{j\left(\cdot\right)}$, to which we apply the
 observations to simply.
 \begin{proposition}
 	For a function $j(i): \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
+	the vertex is given by
 	\begin{IEEEeqnarray*}{rCl}
 		V_{j\left(\cdot\right)} 
-			& = & \exp\left(\alpha_0 \sum_{l=1}^T C_{j_l\left(\cdot\right)} + \sum_{l=1}^{p-1} \alpha_l C_{j_0^l\left(\cdot\right)} \right)
+			& = & \lim_{\alpha_0 \rightarrow \infty} \exp\left(\alpha_0 \sum_{l=1}^T C_{j_l\left(\cdot\right)} + \sum_{l=1}^{p-1} \alpha_l C_{j_0^l\left(\cdot\right)} \right)
 	\end{IEEEeqnarray*}
-
-	With the vertex recovered by letting $\alpha_0 \rightarrow \infty$, and letting $\alpha_n$ 
-	take on the Pythagorean coefficients.
+	where $\alpha_n$ are the Pythagorean coefficients for a permutation of period $p$
 	\begin{IEEEeqnarray*}{rCl}
 		\alpha_n 
 			& = & 
