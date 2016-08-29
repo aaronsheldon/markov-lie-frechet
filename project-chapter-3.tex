@@ -112,11 +112,16 @@ first computing the approximation of $e^x$ and then subtracting $1$
 \footnote{Contemporary implementations of $e^x - 1$ approximate the function with $x$ in a
 small neighborhood of zero.}.
 
-While it is clear that $\frac{e^x}{x^2}\gamma\left(2,x\right) : x \mapsto \frac{e^{x} -1 - x}{x^2}$ 
-is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be approximated by a 
-Pad\'{e} series with coefficients in $\mathbb{C}$; that the rational approximation with the 
-same coefficients can be extended to $\operatorname{ad}_X \cdotp$ requires more careful 
-consideration.
+In the case of a field such as $\mathbb{R}$ or $\mathbb{C}$ the function $\frac{e^{x} -1 - x}{x^2}$
+is an analytic back into the field. It follows that Pad\'{e} approximation with coefficients 
+in the field will yield values in the field, and approximates within $\pm\epsilon$ on an 
+appropriate domain of convergence. However, in the case of a ring, such as bounded linear 
+operators on a Lie algebra, it is not as clear that Pad\'{e} approximation is valid. In 
+particular, the meaning of the polynomial denominator in the Pad\'{e} approximation needs 
+careful consideration when working in a ring that may not have inverses for every element, 
+such as the case with $\operatorname{ad}_X \cdotp$. Recall that $\operatorname{ad}_X \cdotp$ 
+is not invertible because $\ker\left(\operatorname{ad}_X \cdotp\right) = \left\lbrace Y : \left[X,Y\right]=0 \right\rbrace$, 
+and includes $aI+bX$, for any pair of scalars $a,b$ in the field of the Lie algebra. 
 
 When $X$ is in $\mathfrak{st}(\hat{\mathbbm{1}})$ the adjoint operator $\operatorname{ad}_X \cdotp$
 is a linear endomorphism on the vector space $\mathfrak{st}(\hat{\mathbbm{1}})$; and so 
