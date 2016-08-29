@@ -218,11 +218,11 @@ When calculating all the partial derivatives of the log-likelihood for a large d
 is more efficient to loop through the data once calculate all the partial derivatives at 
 each observation $n$, and then produce the sum of the derivatives \ref{alg:allpartials}. 
 
-While the gradient alone is sufficient for gradient decent searches for local maximum, the 
+While the gradient alone is sufficient for a gradient decent search for local maximum, the 
 maximization of the log-likelihood by the Newton-Raphson method requires calculation of the
 Hessian of the log-likelihood. By necessity the Hessian of the log-likelihood will be 
-complicated. For the second partial derivative let $y$ be any single parameter $x_{ij}$, 
-even possibly $x = y$, with $C_y$ elided equivalently; the second partial derivative is then
+complicated. For the second partial derivative, let $y$ be any single parameter $x_{ij}$, 
+even possibly $x = y$, with $C_y$ elided equivalently. The second partial derivative is then
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial^2 \Lambda_G}{\partial x \partial y}
 		& = & \sum_{n=1}^N \frac{\left\langle \hat{u}^{\left(n\right)}, \left(C_x \frac{\partial}{\partial y} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) + C_y \frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right)\right) \hat{v}^{\left(n\right)} \right\rangle}
