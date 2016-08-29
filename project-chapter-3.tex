@@ -141,17 +141,17 @@ convergence $Y_{mn} \rightarrow \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+2\rig
 is assured. 
 
 Recapitulating the definition of the $\left[n/m\right]_f\left(x\right)$ Pad\'{e} approximations, 
-we seek a rational polynomial approximation to the Taylor series.
+we seek a rational polynomial approximation to the Taylor series
 \begin{IEEEeqnarray*}{rCl}
 	\frac{P_n\left(x\right)}{Q_m\left(x\right)}
 		& =       & \frac{p_0 + p_1 x + \cdots + p_n x^n}{1 + q_1 x + \cdots + q_m x^m}\\
 		& \approx & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!}x^n
 \end{IEEEeqnarray*}
-Such that the first $n+m$ derivatives, $k$, of the rational polynomial approximation 
-evaluated at $x=0$ equal the first $n+m$ coefficients, $k$, of the Taylor series.
+such that the first $n+m-1$ derivatives of the rational polynomial approximation evaluated 
+at $x=0$ equal the first $n+m-1$ coefficients of the Taylor series, i.e.
 \begin{IEEEeqnarray*}{rCl}
 	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
-		& = & \frac{1}{\left(k+2\right)!}
+		& = & \frac{1}{\left(k+2\right)!} \text{ with } 0 \le k \le n+m-1.
 \end{IEEEeqnarray*}
 The symbolic computation of the exact rational coefficients of the $\left[11/12\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
