@@ -260,17 +260,17 @@ states
 \end{IEEEeqnarray*}
 A full implementation of both the Hessian of the log-likelihood, and the Newton-Raphson 
 method for likelihood maximization is complex undertaking \ref{alg:secondpartial}, but 
-fundamentally is not intractable. The Newton-Raphson method, in the notation developed in
-this chapter, calculates the $m+1$ estimation of $\tilde{G}^{\left(m+1\right)}$ as
+fundamentally is not intractable. The Newton-Raphson method calculates the $\left(m+1\right)^{th}$ 
+estimation $\tilde{G}^{\left(m+1\right)}$ as
 \begin{IEEEeqnarray*}{rCl}
 	\tilde{G}^{\left(m+1\right)}
 		& = & \tilde{G}^{\left(m\right)} - \left[ \vec{\frac{\partial^2 \Lambda_G}{\partial G^2}} \right]_{G=\tilde{G}^{\left(m\right)}}^{-1} \left[ \vec{\frac{\partial \Lambda_G}{\partial G}} \right]_{G=\tilde{G}^{\left(m\right)}}
 \end{IEEEeqnarray*}
-where $\vec{\frac{\partial \Lambda_G}{\partial G}}$ is the Fr\'{e}chet gradient with respect to the generator $G$, and 
+where $\vec{\frac{\partial \Lambda_G}{\partial G}}$ is the Fr\'{e}chet gradient with respect to the generator $G$ and 
 $\vec{\frac{\partial^2 \Lambda_G}{\partial G^2}}$ is the Fr\'{e}chet Hessian.
 
 For the most part, successful implementation requires patience and diligence on the part of 
-the developer, along with rigorous unit testing against known closed form solutions for the 
+the developer, along with rigorous unit testing against known closed-form solutions for the 
 gradient and Hessian of the matrix exponential.
 \clearpage
 \section{Figures and Illustrations}
