@@ -145,17 +145,17 @@ the observed first hitting time statistics $T_{u_{v \pm 1}}$ are given by
 		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} \left(\hat{e}_u \otimes \hat{e}_u\right) G\\
 		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} x_{u \left(u-1\right)}C_{u \left(u-1\right)} + x_{u \left(u+1\right)}C_{u \left(u+1\right)}.
 \end{IEEEeqnarray*}
-The distribution density of $T_{u_{v \pm 1}}$ can be concisely stated as
+The density function of $T_{u_{v \pm 1}}$ can be concisely stated as
 \begin{IEEEeqnarray*}{rCl}
 	p_G\left[T_{u_{v \pm 1}} = t \left\| X_0 = u_v \right.\right]
 		& = & \left\langle \hat{e}_{u_v}, G_v^\pm \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle\\
 		& = & \left\langle x_{u_v\left(u_v+1\right)}\hat{e}_{u_v+1} + x_{u_v\left(u_v-1\right)}\hat{e}_{{u_v}-1}, \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle\\
 		&   & \:- \left\langle \left(x_{u_v\left(u_v+1\right)}+x_{u_v\left(u_v-1\right)}\right)\hat{e}_{u_v}, \exp\left(t G_v^\pm \right) \hat{e}_{u_{v \pm 1}} \right\rangle
 \end{IEEEeqnarray*}
-The next step is to formulate the log-likelihood. This requires establishing the observed
-data, to do so we will again elide the explicit enumeration of the states so that we can
-emphasize the enumeration of the observations. We will start be considering the general
-first hitting time log-likelihood, and then specify the formulation for the aging process.
+The next step is to formulate the log-likelihood. This requires recognizing the observed
+data. To do so we will again elide the explicit enumeration of the states so that we can
+emphasize the enumeration of the observations. We will start with the general first hitting 
+time log-likelihood, and then specify the formulation for the aging process.
 
 Consider $N$ observations of first hitting time statistics $T_{\hat{v}}^{\left(n\right)} = t^{\left(n\right)}$,
 of transitions from state $\hat{u}^{\left(n\right)}$ to state $\hat{v}^{\left(n\right)}$,
