@@ -222,23 +222,24 @@ To proceed we need a pair of results focused on the binomial combinatorics of ad
 will use these results in developing the bilinear non-commutative perturbation of the
 Hessian.
 \begin{lemma}
-	For differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, any matrices $A,B$,
-	and integer $n \ge 0$
-	\begin{IEEEeqnarray*}{rCl}
-		\left[\frac{\partial}{\partial x}\operatorname{ad}_X^n \cdot\right]\left( A\right)
+	For any differentiable matrix function $X$ parameterized by $x \in \mathbb{R}$, matrices $A$ 
+	$B$, and integer $0 \le n$, we have
+	\begin{IEEEeqnarray*}{lrCl}
+		1\text{. } & \left[\frac{\partial}{\partial x}\operatorname{ad}_X^n \cdot\right]\left( A\right)
 			& = & \sum_{k=1}^n \left(\operatorname{ad}_X^{k-1} A \right)\left(\operatorname{ad}_{\frac{\partial X}{\partial x}} A\right)  \left(\operatorname{ad}_X^{n-k} A \right)\\
-		\operatorname{ad}_X^n AB
+		2\text{. } & \operatorname{ad}_X^n AB
 			& = & \sum_{k=0}^n \binom{n}{k} \left(\operatorname{ad}_X^k A \right)\left(\operatorname{ad}_X^{n-k} B \right)\\
-		\operatorname{ad}_X^n \left[A,B\right]
+		3\text{. } & \operatorname{ad}_X^n \left[A,B\right]
 			& = & \sum_{k=0}^n \binom{n}{k} \left[\operatorname{ad}_X^k A , \operatorname{ad}_X^{n-k} B \right]
 	\end{IEEEeqnarray*}
 \end{lemma}
 \begin{IEEEproof}
-	For each of the equalities we have:
+	For each of the numbered equalities we have:
 	\begin{enumerate}
-		\item Proceed by induction on $n$.
-		\item Proceed by induction on $n$.
-		\item Take the antisymmetric difference of previous equality.\hfill\IEEEQEDhere
+		\item For first equality proceed by induction on $n$.
+		\item For second equality proceed by induction on $n$.
+		\item For third equality take the antisymmetric difference $\operatorname{ad}_X^n AB - \operatorname{ad}_X^n BA$ 
+		of the second equality.\hfill\IEEEQEDhere
 	\end{enumerate}
 \end{IEEEproof}
 We will also find use of the following corollary to the binomial theorem.
