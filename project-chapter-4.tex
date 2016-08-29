@@ -157,10 +157,11 @@ data. To do so we will again elide the explicit enumeration of the states so tha
 emphasize the enumeration of the observations. We will start with the general first hitting 
 time log-likelihood, and then specify the formulation for the aging process.
 
-Consider $N$ observations of first hitting time statistics $T_{\hat{v}}^{\left(n\right)} = t^{\left(n\right)}$,
-of transitions from state $\hat{u}^{\left(n\right)}$ to state $\hat{v}^{\left(n\right)}$,
-the allowed states indicated by the projection $P^{\left(n\right)}$. The log-likelihood is
-then the sum over the observations
+Consider $N$ observations of first hitting time statistics $T_{\hat{v}}^{\left(n\right)} = t^{\left(n\right)}$
+of transitions from state $\hat{u}^{\left(n\right)}$ to state $\hat{v}^{\left(n\right)}$.
+Where the transition may be through any one of infinite number of obscured paths through the
+allowed states indicated by the projection $P^{\left(n\right)}$. The log-likelihood is then 
+the sum over the observations:
 \begin{IEEEeqnarray*}{rCl}
 	\Lambda_G
 		& = & \sum_{n=1}^N \ln p_G\left[ T_{\hat{v}}^{\left(n\right)} = t^{\left(n\right)} \left\| X_0 = \hat{u}^{\left(n\right)} \right.\right]\\
