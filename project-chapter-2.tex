@@ -361,7 +361,8 @@ For now we need to establish the claim implicit in the definition of the vertex 
 		is the smallest $m_{ij} > 0$. Which we can always do because $M \vec{\mathbbm{1}} = \vec{\mathbbm{1}}$.
 		If $m_{ij} = 1$ then by definition $M$ is a vertex matrix and we are done.
 		\item By the same argument we can pick a function $f^{\left(1\right)}\left(k\right) : \left\lbrace 1,\dots,n \right\rbrace \mapsto S \subseteq \left\lbrace 1,\dots,n \right\rbrace$
-		such that $f^{\left(1\right)}\left(i\right)=j$ and $m_{k f^{\left(1\right)}\left(k\right)} \ge m_{ij}$ for all other $k \ne i$.
+		such that $f^{\left(1\right)}\left(i\right)=j$ and $m_{k f^{\left(1\right)}\left(k\right)} \ge m_{ij}$ 
+		for all other $k \ne i$.
 		\item Letting $M^{\left(0\right)} = M$ we can decompose $M^{\left(1\right)}$ into the 
 		convex sum
 		\begin{IEEEeqnarray*}{rCl}
@@ -370,7 +371,8 @@ For now we need to establish the claim implicit in the definition of the vertex 
 		\end{IEEEeqnarray*}
 		It remains then to establish that $M^{\left(1\right)}$ is an element of the convex 
 		polytope of singly stochastic matrices.
-		\item Checking that $M^{\left(1\right)}$ has $\hat{\mathbbm{1}}$ as an Eigen vector with Eigen value $1$
+		\item Checking that $M^{\left(1\right)}$ has $\hat{\mathbbm{1}}$ as an eigen vector with
+		eigen value $1$
 		\begin{IEEEeqnarray*}{rCl}
 			M^{\left(1\right)} \hat{\mathbbm{1}}
 				& = & \frac{M^{\left(0\right)}  \hat{\mathbbm{1}} - m_{ij}V_{f^{\left(1\right)}\left(\cdot\right)}  \hat{\mathbbm{1}}}{1 - m_{ij}}\\
