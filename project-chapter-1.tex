@@ -30,11 +30,18 @@ through matrix exponentiation. Unfortunately parameterization of the generators 
 processes, in more than four states, does not, in general, yield tractable closed form
 transition probabilities. This is because any explicit formulation of the transition
 probabilities from the generator would require solving the characteristic polynomial of the
-generator, which is not generally possible in dimensions greater than four. Yet
-computational approximations of the matrix exponential have been well developed, with
+generator, which is not generally possible in dimensions greater than four. 
+
+Yet computational approximations of the matrix exponential have been well developed, with
 methods to compute the gradient receiving recent attention. The focus of this recent
 research has been on computing the condition number of numerical problems, as a measure of 
-convergence, and stability of the numerical solutions\cite{al-mohy_computing_2009}.
+convergence, and stability of the numerical solutions\cite{al-mohy_computing_2009}. In
+numerical computing the condition number is the absolute value, or multidimensional norm, 
+of the derivative, or gradient, of the function being numerically approximated. Large values
+of the condition number in a particular domain indicate that the numerical approximation 
+will be more sensitive to small perturbations, and possibly unstable. Thus a method of
+calculating the condition number can be used to define a domain over which the target 
+numerical approximation will be stable.
 
 Given a computational method to calculate the matrix exponential, it's gradient, and
 Hessian, an application of the chain rule then allows for the computation of maximum
