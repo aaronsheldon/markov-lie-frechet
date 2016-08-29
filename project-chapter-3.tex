@@ -189,10 +189,10 @@ It follows that $\frac{\partial e^X}{\partial x}$ can be computed by
 	\frac{\partial e^X}{\partial x}
 		& = & \operatorname{mat}\left(\sum_{n=0}^{\infty} \frac{1}{\left(n+2\right)!} \left(I \otimes X - X^\dagger \otimes I \right)^{n+1} \operatorname{vec}\left(\frac{\partial X}{\partial x}\right)\right) e^X + \frac{\partial X}{\partial x} e^X
 \end{IEEEeqnarray*}
-And thus can be approximated by
+and thus can be approximated by
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
-		& \approx & \operatorname{mat}\left(\frac{P_n\left(I \otimes X - X^\dagger \otimes I\right)}{Q_m \left(I \otimes X - X^\dagger \otimes I\right)} \left(I \otimes X - X^\dagger \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X
+		& \approx & \operatorname{mat}\left(\frac{P_{11}\left(I \otimes X - X^\dagger \otimes I\right)}{Q_{12} \left(I \otimes X - X^\dagger \otimes I\right)} \left(I \otimes X - X^\dagger \otimes I \right)\operatorname{vec}\left(\frac{\partial X}{\partial x}\right) \right) e^X + \frac{\partial X}{\partial x} e^X.
 \end{IEEEeqnarray*}
 By application of the chain rule this computational method is sufficient to calculate the
 derivative of any parameterization of $X$ in the matrix exponential $e^X$.
