@@ -17,14 +17,14 @@ phase type distributions, branching processes, birth-death processes, and hidden
 models.
 
 State of the art computational methods are focused on maximum likelihood parameter
-estimation by expectation maximization of hidden Markov Models; which assumes a finite state
+estimation by expectation maximization of hidden Markov Models; which assumes a finite-state
 space obscured by random noise, with discrete homogeneous time steps, and all times of
 transitions being observed. The discretization of time allows for the time evolution of
 transition probabilities to be explicitly parameterized through matrix multiplication. The
 discrete time construction of hidden Markov models is successfully exploited by the
 Baum-Welch, Viterbi, and forward-backward algorithms to estimate parameters.
 
-In contrast continuous time homogeneous Markov processes on a finite state space are more
+In contrast continuous time homogeneous Markov processes on a finite-state space are more
 naturally parameterized through the generator, because the time evolution is represented
 through matrix exponentiation. Unfortunately parameterization of the generators of Markov
 processes, in more than four states, does not, in general, yield tractable closed form
@@ -46,7 +46,7 @@ numerical approximation will be stable.
 Given a computational method to calculate the matrix exponential, it's gradient, and
 Hessian, an application of the chain rule then allows for the computation of maximum
 likelihood estimates of any differentiable parameterization of the generators of a
-continuous time homogeneous Markov process on a finite state space. Of particular interest
+continuous time homogeneous Markov process on a finite-state space. Of particular interest
 in such a method are stopped statistics, like the first hitting times of transitions from a
 fixed source state to a fixed target state. As such this work extends the current
 computational methods to include the Hessian of the matrix exponential; and further develops
@@ -126,7 +126,7 @@ calculation of a bilinear non-commutative perturbation to the Hessian.
 The fourth chapter seeks to illustrate the material developed in the preceding two chapters.
 First the cumulative distribution of the stopped statistic of first hitting times is recast 
 in the stochastic Lie algebra developed in chapter two. These results are then put to use in
-developing a model for an aging process; which is a finite state reversible birth-death
+developing a model for an aging process; which is a finite-state reversible birth-death
 process. The chapter concludes by laying out the algorithms to calculate the gradient and
 Hessian of the log-likelihood of the aging process, and hence a Newton-Raphson method for
 maximization.

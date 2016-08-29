@@ -18,7 +18,7 @@ of the process.
 To start, recall the definition of the projection operator on a finite dimensional vector
 space $P_i = \hat{e}_i \otimes \hat{e}_i$; which projects each vector in the space onto a
 fixed unit vector $\hat{e}_i$. Projection operators hold a special purpose in analyzing
-continuous time homogeneous Markov processes on a finite state spaces. The projection
+continuous time homogeneous Markov processes on a finite-state spaces. The projection
 operator $I-P_k$, when left multiplied to the generator $G = \sum_{ij}x_{ij}C_{ij}$, yields 
 a new process $\left(I-P_k\right)G$, where state $k$ is an absorbing state.
 
@@ -37,7 +37,7 @@ results in the exercises of Rogers and Williams \cite{rogers_diffusions_2000}.
 \end{theorem}
 \begin{IEEEproof}
 	The proof hinges on formalizing the intuition that once we know a continuous time 
-	homogeneous Markov process on a finite state space $X_t$ has first touched the state $k$ 
+	homogeneous Markov process on a finite-state space $X_t$ has first touched the state $k$ 
 	then we need no further information, and so we can work with the simpler process where $k$
 	is an absorbing state. Being mindful to assure that every set is $\mathscr{F}_t$ 
 	measurable, we calculate the cumulative distribution:
@@ -114,7 +114,7 @@ likelihood model possible, which would be notationally laborious given the infin
 permutations and combinations of models available, we will illustrate the formulation of
 the likelihood through a specific application to an aging process.
 
-An aging process is a continuous time homogeneous finite state birth death-process, where 
+An aging process is a continuous time homogeneous finite-state birth death-process, where 
 all the sequential transitions between states are reversible except for transitions to the 
 final state, which is an absorbing state representing death. In the context first hitting 
 time statistics, a finite subset of the states act as sentinel states, where the first 
