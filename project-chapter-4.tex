@@ -112,15 +112,15 @@ possibly most general likelihood model possible, which would be notationally lab
 the infinite number of permutations and combinations of models available, we will illustrate 
 the formulation of a log-likelihood through a specific application to an aging process.
 
-An aging process is a continuous time homogeneous finite-state birth-death process where 
-all the sequential transitions between states are reversible except for transitions to the 
-final state, which is an absorbing state representing death. In the context first hitting 
-time statistics, a finite subset of the states act as sentinel states, where the first 
-hitting time statistic for the transition between any pair of, possible non-adjacent, 
-sentinel states is observed. An example of this process is illustrated in figure \ref{fig:agingprocess},
-which displays a seven state aging process, with three sentinel states. The transitions
-between states that are not sentinel are not directly observed; but rather acts as a type
-of memory register that broadens the centrality of the distribution of first hitting times.
+An aging process is a continuous time homogeneous finite-state birth-death process where all 
+the sequential transitions between states are reversible except for transitions to the final 
+state, an absorbing state representing death. In the context of first hitting times, a 
+finite subset of states act as sentinel states, where the first hitting time statistic for 
+the transition between any pair of, possibly non-adjacent, sentinel states is observed. An 
+example of this process is illustrated in figure \ref{fig:agingprocess}, which displays a 
+seven-state aging process with three sentinel states. The transitions between states that 
+are not sentinel are not directly observed but rather act as a type of memory register 
+that broadens the centrality of the distribution of first hitting times.
 
 Given an $U$ state aging process, the generator takes on the simple sequential form:
 \begin{IEEEeqnarray*}{rCl}
