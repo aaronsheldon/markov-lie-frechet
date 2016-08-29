@@ -33,7 +33,7 @@ $\pm\epsilon$ error bounds.
 
 In this chapter we will develop an approximation for the first, and second order Fr\'{e}chet
 derivatives of the matrix exponential, by decomposing the derivatives into components that
-hold for the commutative condition, and components containing the perturbation due to 
+hold for the commutative condition and components containing the perturbation due to 
 non-commutativity. We will then derive the Pad\'{e} approximation for the non-commutative 
 perturbation.
 
@@ -66,12 +66,12 @@ commutative case. This can be seen when considering the condition $\left[X,\frac
 in which case $\frac{\partial e^X}{\partial x} = \frac{\partial X}{\partial x} e^X$. 
 
 Even though the multiplicative factorization provides a transparent representation of the 
-computational terms it is still far from optimal; because, when compared to matrix addition, 
-matrix multiplication is both computationally more expensive, and less numerically stable. 
-The numerical stability, and efficiency can be improved by decomposing the first 
-multiplicative factor into a linear sum of the non-commutative perturbation term, which will 
+computational terms, it is still far from optimal; because, when compared to matrix addition, 
+matrix multiplication is both computationally more expensive and less numerically stable. 
+The numerical stability and efficiency can be improved by decomposing the first 
+multiplicative factor into a linear sum of a non-commutative perturbation term, which will 
 reduce to $0$ when $\left[X,\frac{\partial X}{\partial x}\right]=0$, and an invariant term 
-that contains the commutative relationship for all $X$.
+that contains the commutative relationship for all $X$:
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial e^X}{\partial x}
 		& = & \left[\frac{e^{\operatorname{ad}_X \cdotp} - 1 - \operatorname{ad}_X \cdotp }{\operatorname{ad}_X^2 \cdotp} \right] \left(\operatorname{ad}_X \frac{\partial X}{\partial x} \right) e^X + \frac{\partial X}{\partial x} e^X\\
