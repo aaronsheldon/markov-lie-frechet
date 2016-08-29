@@ -49,25 +49,26 @@ results in the exercises of Rogers and Williams \cite{rogers_diffusions_2000}.
 			& = & 1 - \mathbb{P}_{\left(I - P_k\right)G}\left[\forall s \le t \enskip X_s \ne k \left\| X_0=l \right.\right]\mathbb{P}_{\left(I - P_k\right)G}\left[X_u = k, \enskip u > t \left\| X_t \ne k \right.\right]\\
 			& = & 1 - \mathbb{P}_{\left(I - P_k\right)G}\left[\forall s \le t \enskip X_s \ne k, \enskip X_u = k, \enskip u > t  \left\| X_0=l \right.\right]\\
 			& = & 1 - \mathbb{P}_{\left(I - P_k\right)G}\left[X_t = k \left\| X_0=l \right.\right]\\
-			& = & 1 - \left\langle \hat{e}_l, \exp\left(t\left(I - P_k\right) G\right) \hat{e}_k \right\rangle & \IEEEQEDhere
+			& = & 1 - \left\langle \hat{e}_l, \exp\left(t\left(I - P_k\right) G\right) \hat{e}_k \right\rangle. & \IEEEQEDhere
 	\end{IEEEeqnarray*}
 \end{IEEEproof}
-This result generalizes in a natural manner. To explain we will change notation slightly;
-eliding the explicit enumeration of states. Let $\hat{u} \ne \hat{v} \in \left\lbrace \hat{e}_1, \dots , \hat{e}_N \right\rbrace$
-be a pair of state representing unit vectors; where $\hat{u}$ is the initial state, and $\hat{v}$ 
-the final state, with first hitting time statistic $T_{\hat{v}}$. Further, suppose we have 
-additional data that the transition could only occur through any of the the allowed paths 
-through states $\hat{u}_1, \dots \hat{u}_M \in \left\lbrace \hat{e}_1, \dots , \hat{e}_N \right\rbrace$
-where $\hat{u}_k \ne \hat{u}, \hat{v}, \hat{u}_l$ with $k \ne l$. The cumulative
-distribution of $T_{\hat{v}}$ is given by
+This result generalizes in a natural manner. To explain the generalization we will change 
+notation slightly, eliding the explicit enumeration of states. Let $\hat{u} \ne \hat{v} \in \left\lbrace \hat{e}_1, \dots , \hat{e}_N \right\rbrace$
+be a pair of distinct unit vectors representing states of the process, where $\hat{u}$ is 
+the initial state, and $\hat{v}$ the final state with first hitting time statistic $T_{\hat{v}}$. 
+Further, suppose we have additional data that the transition could only occur through any of
+the allowed paths through states $\hat{u}_1, \dots \hat{u}_M \in \left\lbrace \hat{e}_1, \dots , \hat{e}_N \right\rbrace$
+where all the unit vectors are pairwise unequal, i.e. $\hat{u}_k \ne \hat{u}, \hat{v}, \hat{u}_l$
+for any $l \ne k$. The cumulative distribution of $T_{\hat{v}}$ is given by
 \begin{IEEEeqnarray*}{rCl}
 	\mathbb{P}_G\left[T_{\hat{v}} \le t \left\| X_0 = \hat{u} \right.\right]
-		& = & 1 - \left\langle \hat{u}, \exp\left(t P G\right) \hat{v} \right\rangle
+		& = & 1 - \left\langle \hat{u}, \exp\left(t P G\right) \hat{v} \right\rangle.
 \end{IEEEeqnarray*}
-where the projection operator $P$ is over $\hat{u}$ and the allowed intermediate states $\hat{u}_m$
+where the projection operator $P$ is over $\hat{u}$ and the allowed intermediate states
+$\hat{u}_m$'s, i.e.
 \begin{IEEEeqnarray*}{rCl}
 	P
-		& = & \hat{u} \otimes \hat{u}  + \sum_{m = 1}^M \hat{u}_m \otimes \hat{u}_m
+		& = & \hat{u} \otimes \hat{u}  + \sum_{m = 1}^M \hat{u}_m \otimes \hat{u}_m.
 \end{IEEEeqnarray*}
 This implies that if we can design our experiment to observe as many of the first hitting 
 times as possible, and to minimize the number of unknown paths through intermediate states,
