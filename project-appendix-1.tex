@@ -1,6 +1,6 @@
 \chapter{Julia Implementations}
-Proof of concept implementations of the numerical calculations and algorithms presented in 
-the Julia scientific computing language. All the algorithms will need carefully 
+Proof of concept implementations of the numerical calculations and algorithms are presented 
+in the Julia scientific computing language. All the algorithms will need careful 
 optimization, debugging, unit testing, error catching and documentation before they can be 
 released on a production scale.
 
@@ -26,7 +26,7 @@ of the permutation matrix of period $p$ is presented in listing \ref{lst:pythago
 The function returns a vector containing all the Pythagorean coefficients for a given 
 period $p$. It is further overloaded to compute in multiple types, and as listed denotes the
 period of the permutation as $n$.
-\begin{lstlisting}[language=Julia,label={lst:padeprogression},caption={Poor man's symbolic computation of the Pad\'{e} coefficients of the the Taylor series with coefficients given by inverse of the factorial of the arithmetic progression. This function requires the Polynomials package.}]
+\begin{lstlisting}[language=Julia,label={lst:padeprogression},caption={Poor man's symbolic computation of the Pad\'{e} coefficients of the Taylor series with coefficients given by inverse of the factorial of the arithmetic progression. This function requires the Polynomials package.}]
 function padeprogression(
 	n::Int64, 
 	m::Int64, 
