@@ -165,9 +165,9 @@ is the largest $64$ bit signed float with no loss of integer precision. This cho
 approximation will need further research to be better optimized.
 
 To make use of the Pad\'{e} approximation we need to be able to compute powers of $\operatorname{ad}_X \cdotp$.
-This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$, 
+This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$
 which requires representing the matrices of $\mathfrak{st}(\hat{\mathbbm{1}})$ as vectors. 
-The vector representation of a matrix is achieved by the matrix reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$; 
+The vector representation of a matrix is achieved by the matrix reshaping  operator $\operatorname{vec}\left(Y\right) = \vec{y}$
 which forms a vector $\vec{y}$ by concatenation of the columns of $Y$, called the 
 vectorization of the matrix. We denote the inverse operator to vectorization $\operatorname{mat}\left(\vec{y}\right) = \operatorname{vec}^{-1}\left(\vec{y}\right) = Y$,
 which reshapes a vector, of $n^2$ entries, into an $n \times n$ matrix.
