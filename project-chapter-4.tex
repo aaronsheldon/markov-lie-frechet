@@ -210,13 +210,13 @@ A single summand in the partial derivative requires, $G$, the generator of the p
 parameter \ref{alg:singlesummand}.
 
 For the aging process, given a single differential parameter $x_{k \Delta_k}$, we determine 
-the canonical generator $C_{k \Delta_k}$, and then loop through the data computing the 
+the canonical generator $C_{k \Delta_k}$ and then loop through the data computing the 
 sub-generator $G_v^\pm$, which is supplied to the algorithm to compute the partial 
 derivative of the matrix exponential. The terms are summed to produce the full partial 
-derivative of the log-likelihood with respect to $x_{k \Delta_k}$ \ref{alg:completesum}. In 
-the case of calculating all the partial derivatives of the log-likelihood, for large data 
-sets it is more efficient to loop through the data once, calculating all the partial 
-derivatives at each data point, and then producing the sum of the derivatives \ref{alg:allpartials}. 
+derivative of the log-likelihood with respect to $x_{k \Delta_k}$ \ref{alg:completesum}. 
+When calculating all the partial derivatives of the log-likelihood for a large data set, it 
+is more efficient to loop through the data once calculate all the partial derivatives at 
+each observation $n$, and then produce the sum of the derivatives \ref{alg:allpartials}. 
 
 While the gradient alone is sufficient for gradient decent searches for local maximum, the 
 maximization of the log-likelihood by the Newton-Raphson method requires calculation of the
