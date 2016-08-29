@@ -168,9 +168,10 @@ the sum over the observations:
 		& = & \sum_{n=1}^N \ln \left\langle \hat{u}^{\left(n\right)}, P^{\left(n\right)} G \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle\\
 		& = & \sum_{n=1}^N \ln \left\langle \hat{u}^{\left(n\right)}, G \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle
 \end{IEEEeqnarray*}
-For an aging process, if $\hat{u}^{\left(n\right)} = \hat{e}_u$, we denote $\hat{u}_{+}^{\left(n\right)} = \hat{e}_{u+1}$,
+For an aging process with $\hat{u}^{\left(n\right)} = \hat{e}_u$, we denote $\hat{u}_{+}^{\left(n\right)} = \hat{e}_{u+1}$,
 $\hat{u}_{-}^{\left(n\right)} = \hat{e}_{u-1}$, $x_{+}^{\left(n\right)} = x_{u\left(u+1\right)}$,
-$x_{-}^{\left(n\right)} = x_{u\left(u-1\right)}$, and $x^{\left(n\right)} = x_{+}^{\left(n\right)} + x_{-}^{\left(n\right)}$ the log-likelihood simplifies to
+$x_{-}^{\left(n\right)} = x_{u\left(u-1\right)}$, and $x^{\left(n\right)} = x_{+}^{\left(n\right)} + x_{-}^{\left(n\right)}$
+so that then the log-likelihood simplifies to
 \begin{IEEEeqnarray*}{rCl}
 	\Lambda_G
 		& = & \sum_{n=1}^N \ln \left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle
