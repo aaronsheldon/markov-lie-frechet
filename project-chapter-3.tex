@@ -22,13 +22,14 @@ We can further flush out the difficulties with using the derivative of the Pad\'
 approximation of a function to approximate the derivative of the function. By definition
 a Pad\'{e} approximation is the ratio of two polynomials, of order $m$ in the numerator
 and order $n$ in the denominator, so that the approximation has $m$ roots and $n$ poles. The
-$k$ derivative then has $m \times \left(n-1\right)^k$ roots, and $n$ poles. If  any of the 
-roots of the $k+1$ derivative occur on a particular domain, then the $k$ derivative can 
-become arbitrarily large, even if the Pad\'{e} approximation is within $\pm\epsilon$ of the 
-actual function, on the domain. This follows from the mean value theorem, which asserts that 
-if the function has a particular average slope on a domain, the upper limit of the slope is 
-inversely proportional to the lower limit of the slope. In essence, the Pad\'{e} 
-approximation can oscillate on a particular domain within the $\pm\epsilon$ error bounds.
+$k^{th}$ derivative then has $m \times \left(n-1\right)^k$ roots, and $n$ poles. If any of 
+the roots of the $\left(k+1\right)^{th}$ derivative occurs on a particular domain, then the 
+$k^{th}$ derivative can become arbitrarily large, even if the Pad\'{e} approximation is 
+within $\pm\epsilon$ of the actual function, on the domain. This follows from the mean value
+theorem, which asserts that if the function has a particular average slope on a domain, the
+upper limit of the slope is inversely proportional to the lower limit of the slope. In 
+essence, the Pad\'{e} approximation can oscillate on a particular domain within the 
+$\pm\epsilon$ error bounds.
 
 In this chapter we will develop an approximation for the first, and second order Fr\'{e}chet
 derivatives of the matrix exponential, by decomposing the derivatives into components that
