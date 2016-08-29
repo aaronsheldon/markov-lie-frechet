@@ -197,11 +197,11 @@ and thus can be approximated by
 By application of the chain rule this computational method is sufficient to calculate the
 derivative of any parameterization of $X$ in the matrix exponential $e^X$.
 
-We can summarize this work in an algorithm to compute the perturbation \ref{alg:perturbation},
-and matrix exponential \ref{alg:gradient}. This algorithm serves as a sketch only; 
+We can summarize this work in an algorithm to compute the perturbation \ref{alg:perturbation}
+and matrix exponential \ref{alg:gradient}. This algorithm serves as a sketch only
 highlighting the novel elements developed in this section. Many additional optimizations 
 could be implemented including minimizing memory assignments by carrying out in place 
-computations, conditioning matrices to improve numerical stability, and using recursive 
+computations, conditioning matrices to improve numerical stability and using recursive 
 squaring and summing methods to efficiently compute the matrix polynomials. The first 
 assignment of the Kronecker product is a point of concern about performance, because it 
 results in a quadratic increase in the amount of memory used. 
