@@ -268,8 +268,8 @@ formulation of Pad\'{e} approximation.
 	\end{IEEEeqnarray*}
 \end{corollary}
 \begin{IEEEproof}
-	Apply the previous results in the order they were stated to the symmetric sum of the two
-	terms.
+	Applying the previous results in the order they were stated to the symmetric sum of the two
+	terms, we have
 	\begin{IEEEeqnarray*}{rCl}
 		\IEEEeqnarraymulticol{3}{l}
 		{
@@ -288,9 +288,9 @@ formulation of Pad\'{e} approximation.
 			&   & +\: \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left[\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} ,\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} \right] \sum_{k=n}^{n+m} \binom{k}{n}\\
 			& = & \sum_{n,m \ge 0}^\infty \frac{1}{\left(n+m+2\right)!} \left(\binom{n+m+1}{n} - \binom{n+m+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n} \frac{\partial X}{\partial y} \right]\\
 			& = & \sum_{n \ge m \ge 0} \frac{1}{\left(n+2\right)!} \left(\binom{n+1}{m+1} - \binom{n+1}{m} \right) \left[\operatorname{ad}_X^{m} \frac{\partial X}{\partial x} ,\operatorname{ad}_X^{n-m} \frac{\partial X}{\partial y} \right]\\
-			& = & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} F_n
+			& = & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!} F_n,
 	\end{IEEEeqnarray*}
-	Where we have defined $F_n$ recursively as:
+	here we define $F_n$ recursively as
 	\begin{IEEEeqnarray*}{rCl}
 		F_0 & = & 0\\
 		F_{n+1} & = &  \left[\frac{\partial X}{\partial x},\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial y}\right] + \operatorname{ad}_X F_n - \left[\operatorname{ad}_X^{n+1} \frac{\partial X}{\partial x},\frac{\partial X}{\partial y}\right]
