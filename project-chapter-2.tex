@@ -751,7 +751,7 @@ and structure constants of $C_{ijn}$.
 	We proceed by calculating the terms of the products and then simplifying the 
 	cases; assuming $i \neq j$, $k \neq l$, and $i,j,k,l \neq n$.
 	\begin{enumerate}
-		\item Term wise computation of the Kronecker products yields
+		\item Term wise computation of the Kronecker products yields:
 		\begin{IEEEeqnarray*}{rCl}
 			C_{ijn}C_{kln}
 				& = & \left(\hat{e}_i \otimes \hat{e}_j - \hat{e}_i \otimes \hat{e}_i + \hat{e}_n \otimes \hat{e}_i - \hat{e}_n \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_n - \hat{e}_j \otimes \hat{e}_j\right)\\
@@ -762,7 +762,7 @@ and structure constants of $C_{ijn}$.
 				&   & + \delta_{jk}\left(\hat{e}_i \otimes \hat{e}_l - \hat{e}_i \otimes \hat{e}_k - \hat{e}_j \otimes \hat{e}_l + \hat{e}_j \otimes \hat{e}_k\right)\\
 				&   & + \delta_{jl}\left(\hat{e}_i \otimes \hat{e}_n - \hat{e}_i \otimes \hat{e}_l - \hat{e}_j \otimes \hat{e}_n + \hat{e}_j \otimes \hat{e}_l\right)\\
 				& = & C_{jkn} - C_{jjn} - C_{kkn} + \delta_{ik} \left(C_{lln} - C_{iln}\right) - \delta_{il} C_{iin}\\
-				&   & + \delta_{jk} \left(C_{jjn} + C_{iln} - C_{ijn} - C_{jln}\right) + \delta_{jl} \left(C_{iin} - C_{ijn}\right)
+				&   & + \delta_{jk} \left(C_{jjn} + C_{iln} - C_{ijn} - C_{jln}\right) + \delta_{jl} \left(C_{iin} - C_{ijn}\right).
 		\end{IEEEeqnarray*}
 		\item The cases follow from simplifying the $\delta$ functions, starting with $i=k$ and 
 		$j=l$:
@@ -798,7 +798,7 @@ and structure constants of $C_{ijn}$.
 			C_{ijn}C_{kjn}
 				& = & C_{jkn} - C_{jjn} - C_{kkn} + C_{iin} - C_{ijn}.
 		\end{IEEEeqnarray*}
-		\item When none of the conditions apply
+		\item When none of the conditions apply:
 		\begin{IEEEeqnarray*}{+rCl+x*}
 			C_{ijn}C_{kln}
 				& = & C_{jkn} - C_{jjn} - C_{kkn}. & \IEEEQEDhere
@@ -821,57 +821,57 @@ Moving immediately to the commutators we have:
 	\end{IEEEeqnarray*}
 \end{corollary}
 \begin{IEEEproof}
-	We work case wise through the equalities; assuming $i \neq j$, $k \neq l$, and 
+	We work case wise through the equalities, assuming $i \neq j$, $k \neq l$, and 
 	$i,j,k,l \neq n$.
 	\begin{enumerate}
-		\item Starting with $i=k$ and $j=l$
+		\item Starting with $i=k$ and $j=l$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{ijn}\right]
 				& = & C_{ijn}C_{ijn} - C_{ijn}C_{ijn}\\
-				& = & 0
+				& = & 0.
 		\end{IEEEeqnarray*}
-		\item When $i=l$ and $j=k$
+		\item When $i=l$ and $j=k$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jin}\right]
 				& = & C_{ijn}C_{jin} - C_{jin}C_{ijn}\\
 				& = & - \left(C_{ijn} + C_{jin}\right) + \left(C_{jin} + C_{ijn}\right)\\
-				& = & 0
+				& = & 0.
 		\end{IEEEeqnarray*}
-		\item When $i=k$
+		\item When $i=k$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{iln}\right]
 				& = & C_{ijn}C_{iln} - C_{iln}C_{ijn}\\
 				& = & \left(C_{jin} - C_{jjn} - C_{iin} + C_{lln} - C_{iln}\right)\\
 				&   & - \left(C_{lin} - C_{lln} - C_{iin} + C_{jjn} - C_{ijn}\right)\\
-				& = & C_{jin} - 2 C_{jjn} + 2 C_{lln} - C_{iln} - C_{lin} + C_{ijn}
+				& = & C_{jin} - 2 C_{jjn} + 2 C_{lln} - C_{iln} - C_{lin} + C_{ijn}.
 		\end{IEEEeqnarray*}
-		\item When $i=l$
+		\item When $i=l$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kin}\right]
 				& = & C_{ijn}C_{kin} - C_{kin}C_{ijn}\\
 				& = & \left(C_{jkn} - C_{jjn} - C_{kkn} - C_{iin}\right) - \left(C_{kjn} - C_{kin} - C_{ijn}\right)\\
-				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{iin} - C_{kjn} + C_{kin} + C_{ijn}
+				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{iin} - C_{kjn} + C_{kin} + C_{ijn}.
 		\end{IEEEeqnarray*}
-		\item When $j=k$
+		\item When $j=k$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{jln}\right]
 				& = & C_{ijn}C_{jln} - C_{jln}C_{ijn}\\
 				& = & \left(C_{iln} - C_{ijn} - C_{jln}\right) - \left(C_{lin} - C_{lln} - C_{iin} - C_{jjn}\right)\\
-				& = & C_{iln} - C_{ijn} - C_{jln} - C_{lin} + C_{lln} + C_{iin} + C_{jjn}
+				& = & C_{iln} - C_{ijn} - C_{jln} - C_{lin} + C_{lln} + C_{iin} + C_{jjn}.
 		\end{IEEEeqnarray*}
-		\item When $j=l$
+		\item When $j=l$:
 		\begin{IEEEeqnarray*}{rCl}
 			\left[C_{ijn},C_{kjn}\right]
 				& = & C_{ijn}C_{kjn} - C_{kjn}C_{ijn}\\
 				& = & \left(C_{jkn} - C_{jjn} - C_{kkn} + C_{iin} - C_{ijn}\right)\\
 				&   & - \left(C_{jin} - C_{jjn} - C_{iin} + C_{kkn} - C_{kjn}\right)\\
-				& = & C_{jkn} - 2 C_{kkn} + 2 C_{iin} - C_{ijn} - C_{jin} + C_{kjn}
+				& = & C_{jkn} - 2 C_{kkn} + 2 C_{iin} - C_{ijn} - C_{jin} + C_{kjn}.
 		\end{IEEEeqnarray*}
-		\item When none of the conditions apply
+		\item When none of the conditions apply:
 		\begin{IEEEeqnarray*}{+rCl+x*}
 			\left[C_{ijn},C_{kln}\right]
 				& = & C_{ijn}C_{kln} - C_{kln}C_{ijn}\\
-				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin} & \IEEEQEDhere
+				& = & C_{jkn} - C_{jjn} - C_{kkn} - C_{lin} + C_{lln} + C_{iin}. & \IEEEQEDhere
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{IEEEproof}
