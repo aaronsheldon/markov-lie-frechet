@@ -197,12 +197,17 @@ Using the same notation as for the log-likelihood, the partial derivative is
 			{\left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle}
 \end{IEEEeqnarray*}
 Eliding the state enumerating indexes $i,j$ into the data enumerating index $n$ clarifies
-the distinction between the provided data, and the parameters requiring estimation. Each 
-individual summand in the first partial derivative of the log-likelihood requires the data: $t^{\left(n\right)}$ 
-the observed time; $\hat{u}^{\left(n\right)}$ the observed initial state; $\hat{v}^{\left(n\right)}$ 
-the observed final state; and $P^{\left(n\right)}$ the allowed intermediate states, 
-including $\hat{u}^{\left(n\right)}$. A single summand in the partial derivative requires, 
-$G$, the generator of the process as a parameter \ref{alg:singlesummand}.
+the distinction between the provided data and the parameters requiring estimation. Each 
+individual summand in the first partial derivative of the log-likelihood requires the data
+for each observation $n$:
+\begin{enumerate}
+	\item the observed time $t^{\left(n\right)}$
+	\item the observed initial state $\hat{u}^{\left(n\right)}$
+	\item the observed final state $\hat{v}^{\left(n\right)}$
+	\item and the allowed intermediate states $P^{\left(n\right)}$ including $\hat{u}^{\left(n\right)}$
+\end{enumerate}
+A single summand in the partial derivative requires, $G$, the generator of the process as a 
+parameter \ref{alg:singlesummand}.
 
 For the aging process, given a single differential parameter $x_{k \Delta_k}$, we determine 
 the canonical generator $C_{k \Delta_k}$, and then loop through the data computing the 
