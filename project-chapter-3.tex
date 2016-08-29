@@ -206,16 +206,16 @@ squaring and summing methods to efficiently compute the matrix polynomials. The 
 assignment of the Kronecker product is a point of concern about performance, because it 
 results in a quadratic increase in the amount of memory used. 
 \section{The Hessian}
-Assuming parameterization of $X$ by $x,y \in \mathbb{R}$ is analytic, or at least twice 
-differentiable the Hessian of $e^X$ exists, and depends on three tangent matrices, $\frac{\partial X}{\partial x}$,
-$\frac{\partial X}{\partial y}$, and $\frac{\partial^2 X}{\partial x \partial y}$. In 
-general, none of these tangent matrices need commute with each other. Even the second 
-derivatives $\frac{\partial^2 X}{\partial x^2}$, will not generally commute with the first 
+The Hessian of $e^X$ exists when the parameterization of $X$ by $x,y \in \mathbb{R}$ is 
+analytic, or at least twice differentiable. Furthermore the Hessian is a linear map of three
+tangent matrices $\frac{\partial X}{\partial x}$, $\frac{\partial X}{\partial y}$, and $\frac{\partial^2 X}{\partial x \partial y}$.
+In general, none of these tangent matrices need commute with each other. Even the second 
+derivative $\frac{\partial^2 X}{\partial x^2}$ will not generally commute with the first 
 derivate $\frac{\partial X}{\partial x}$. While the additional terms complicate the 
 computations, they do not lead to intractable results in the same way that finding a closed
 form for $e^X$ in dimensions greater than four becomes intractable. Unfortunately in the 
-most general case when $X$ neither commutes with $\frac{\partial X}{\partial x}$, nor $\frac{\partial X}{\partial y}$ 
-we will find that we have to compute the Taylor series of bilinear operators, which is not 
+most general case when $X$ neither commutes with $\frac{\partial X}{\partial x}$ nor $\frac{\partial X}{\partial y}$,
+we will find that we have to compute the Taylor series of a bilinear operator, which is not 
 susceptible to Pad\'{e} approximation.
 
 To proceed we need a pair of results focused on the binomial combinatorics of adjoints. We
