@@ -122,7 +122,7 @@ seven-state aging process with three sentinel states. The transitions between st
 are not sentinel are not directly observed but rather act as a type of memory register 
 that broadens the centrality of the distribution of first hitting times.
 
-Given an $U$ state aging process, the generator takes on the simple sequential form:
+Given an $U$-state aging process, the generator $G$ takes on the simple sequential form
 \begin{IEEEeqnarray*}{rCl}
 	G 
 		& = & \sum_{u=1}^{U-1} x_{u\left(u+1\right)}C_{u\left(u+1\right)} 
@@ -130,20 +130,20 @@ Given an $U$ state aging process, the generator takes on the simple sequential f
 		& = & \sum_{u=1}^{U-1} x_{u\left(u+1\right)}\left(\hat{e}_u \otimes \hat{e}_{u+1} - \hat{e}_u \otimes \hat{e}_u\right)
 			+ \sum_{u=2}^{U-1} x_{u\left(u-1\right)}\left(\hat{e}_u \otimes \hat{e}_{u-1} - \hat{e}_u \otimes \hat{e}_u\right)
 \end{IEEEeqnarray*}
-The $U$ state aging process has $2U-3$ unknown parameters, $x_{u\left(u+1\right)}$ for $1 \le u \le U-1$,
-and $x_{u\left(u-1\right)}$ for $2 \le u \le U-1$, that require estimation by likelihood
-maximization. Of the $U$ states, a subset of $V \le U$ states are sentinel states, $1 \le u_1 < \cdots u_V \le U$,
-for which we observe the first hitting time statistics for the transitions between sentinel 
-states.
+The $U$-state aging process has $2U-3$ unknown parameters, $x_{u\left(u+1\right)}$ for $1 \le u \le U-1$,
+and $x_{u\left(u-1\right)}$ for $2 \le u \le U-1$, that are required to be estimated, for 
+example by likelihood maximization. Of the $U$ states, a subset of $V \le U$ states are 
+sentinel states denoted by $1 \le u_1 < \cdots u_V \le U$. We observe the first hitting time 
+statistics for the transitions between the $V$ sentinel states.
 
-Using the generalization of the theorem in the previous section the generators $G_v^\pm$ for
-the observed first hitting time statistics, $T_{u_{v \pm 1}}$, are given by 
+Using the generalization of the theorem in previous section, the generators $G_v^\pm$ for
+the observed first hitting time statistics $T_{u_{v \pm 1}}$ are given by 
 \footnote{Note the careful application of signs $\pm$ whose order must correspond on both sides of the equation.}
 \begin{IEEEeqnarray*}{rCl}
 	G_v^\pm
 		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} P_u G\\
 		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} \left(\hat{e}_u \otimes \hat{e}_u\right) G\\
-		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} x_{u \left(u-1\right)}C_{u \left(u-1\right)} + x_{u \left(u+1\right)}C_{u \left(u+1\right)}
+		& = & \sum_{u=u_{v}}^{u_{v \pm 1} \mp 1} x_{u \left(u-1\right)}C_{u \left(u-1\right)} + x_{u \left(u+1\right)}C_{u \left(u+1\right)}.
 \end{IEEEeqnarray*}
 The distribution density of $T_{u_{v \pm 1}}$ can be concisely stated as
 \begin{IEEEeqnarray*}{rCl}
