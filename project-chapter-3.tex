@@ -147,22 +147,22 @@ we seek a rational polynomial approximation to the Taylor series
 		& =       & \frac{p_0 + p_1 x + \cdots + p_n x^n}{1 + q_1 x + \cdots + q_m x^m}\\
 		& \approx & \sum_{n=0}^\infty \frac{1}{\left(n+2\right)!}x^n
 \end{IEEEeqnarray*}
-such that the first $n+m-1$ derivatives of the rational polynomial approximation evaluated 
-at $x=0$ equal the first $n+m-1$ coefficients of the Taylor series, i.e.
+such that the first $n+m$ derivatives of the rational polynomial approximation evaluated 
+at $x=0$ equal the first $n+m$ coefficients of the Taylor series, i.e.
 \begin{IEEEeqnarray*}{rCl}
 	\left.\frac{d^k}{d x^k}\frac{P_n\left(x\right)}{Q_m\left(x\right)}\right|_{x=0}
-		& = & \frac{1}{\left(k+2\right)!} \text{ with } 0 \le k \le n+m-1.
+		& = & \frac{1}{\left(k+2\right)!} \text{ with } 0 \le k \le n+m.
 \end{IEEEeqnarray*}
 The symbolic computation of the exact rational coefficients of the $\left[11/12\right]_f\left(x\right)$ 
 Pad\'{e} approximation was carried out in Julia programming language \cite{bezanson_julia:_2014}
-using big integer methods, and the Polynomials package. The results of the computation are 
+using big integer methods and the Polynomials package. The results of the computation are 
 displayed in table \ref{tab:perturbation}. The order of the Pad\'{e} approximation was 
 chosen so that the largest denominator in the rational coefficients of the numerator
-polynomial $\left(2698531355520000\right)$, and the largest denominator in the rational 
+polynomial $\left(2698531355520000\right)$ and the largest denominator in the rational 
 coefficients of the denominator polynomial $\left(2490952020480000\right)$ were the 
-largest integers less than the largest $64$ bit signed float, that has no loss of integer
-precision $\left(2^{53} = 9007199254740992\right)$. This choice of approximation will need
-further research to be better optimized.
+largest integers less than $2^{53}$ $\left(9007199254740992\right)$. The number $2^{53}$
+is the largest $64$ bit signed float with no loss of integer precision. This choice of 
+approximation will need further research to be better optimized.
 
 To make use of the Pad\'{e} approximation we need to be able to compute powers of $\operatorname{ad}_X \cdotp$.
 This can be accomplished through the Kronecker representation of $\operatorname{ad}_X \cdotp$, 
