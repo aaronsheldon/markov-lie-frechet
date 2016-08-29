@@ -176,10 +176,10 @@ so that then the log-likelihood simplifies to
 	\Lambda_G
 		& = & \sum_{n=1}^N \ln \left\langle x_{+}^{\left(n\right)} \hat{u}_{+}^{\left(n\right)} + x_{-}^{\left(n\right)} \hat{u}_{-}^{\left(n\right)} - x^{\left(n\right)} \hat{u}^{\left(n\right)},\exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) \hat{v}^{\left(n\right)} \right\rangle
 \end{IEEEeqnarray*}
-Maximization of the general model requires differentiation by each of the parameters $x_{ij}$.
-To simplify we elide the index and denote the general choice of parameter $x$; which could
-be any one of the parameters $x_{ij}$. We further elide the indexes of the canonical
-generator so that $C_x = C_{ij}$. Partial differentiation of the log-likelihood is then
+Maximization of the general model requires differentiation with respect to each parameter $x_{ij}$.
+For simplicity we elide the index and denote the parameter as $x$ which could be any one of 
+the parameters $x_{ij}$. We further elide the indexes of the canonical generator so that 
+$C_x = C_{ij}$. The partial derivative of the log-likelihood is then
 \begin{IEEEeqnarray*}{rCl}
 	\frac{\partial \Lambda_G}{\partial x}
 		& = & \sum_{n=1}^N \frac{\left\langle \hat{u}^{\left(n\right)}, \left(C_x \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right) + G \frac{\partial}{\partial x} \exp\left(t^{\left(n\right)} P^{\left(n\right)} G\right)\right) \hat{v}^{\left(n\right)} \right\rangle}
