@@ -98,18 +98,19 @@ As was discussed in the Moler and Van Loan \cite{moler_nineteen_1978,moler_ninet
 naive computation of the Taylor series itself results in an approximation that will converge 
 slowly, requiring a larger number of powers to be computed before the threshold of floating 
 point error is reached. Pad\'{e} approximation by rational functions remedies this problem, 
-by offering convergence to the threshold of floating point error in smaller powers, and 
+by offering convergence to the threshold of floating point error in smaller powers and 
 fewer computational steps.
 
-However the question remains, given that $\frac{e^{x} -1 - x}{x^2}$ is a rational 
-perturbation of $e^x$, why not simply reuse the polynomials of the Pad\'{e} approximation of 
-the exponential function to compute new polynomials for a rational approximation of the 
-non-commutative perturbation Taylor series. This method has two shortcomings: first, the 
-approximation found in this manner is not itself a Pad\'{e} approximation of the anomaly 
-Taylor series, and so is not bound by the same theoretical asymptotic results as Pad\'{e} 
-approximations; second, computation by $\frac{e^{x} - 1 - x}{x^2}$ suffers from the same 
-floating point errors near $0$ as naive computation of $e^x - 1$ by first computing the
-approximation of $e^x$ and then subtracting $1$.
+Given that $\frac{e^{x} -1 - x}{x^2}$ is a rational perturbation of $e^x$, why not simply 
+reuse the polynomials of the Pad\'{e} approximation of the exponential function to compute 
+new polynomials for a rational approximation of the non-commutative perturbation Taylor 
+series? This method has two shortcomings: first, the approximation found in this manner is 
+not itself a Pad\'{e} approximation of the anomaly Taylor series, and so is not bounded by 
+the same theoretical asymptotic results as Pad\'{e} approximations; second, computation by $\frac{e^{x} - 1 - x}{x^2}$ 
+suffers from the same floating point errors near $0$ as naive computation of $e^x - 1$ by 
+first computing the approximation of $e^x$ and then subtracting $1$
+\footnote{Contemporary implementations of $e^x - 1$ approximate the function with $x$ in a
+small neighborhood of zero.}.
 
 While it is clear that $\frac{e^x}{x^2}\gamma\left(2,x\right) : x \mapsto \frac{e^{x} -1 - x}{x^2}$ 
 is analytic for $x \in \mathbb{R}$ or $x \in \mathbb{C}$, and thus can be approximated by a 
