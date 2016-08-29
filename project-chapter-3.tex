@@ -37,8 +37,9 @@ hold for the commutative condition, and components containing the perturbation d
 non-commutativity. We will then derive the Pad\'{e} approximation for the non-commutative 
 perturbation.
 
-We begin by listing the eight forms of the Fr\'{e}chet derivative of exponential map, in the
-tangent direction $\frac{\partial X}{\partial x}$ at the point $X$ in the Lie algebra.
+We begin by listing the following eight forms of the Fr\'{e}chet derivative of exponential 
+map, in the tangent direction $\frac{\partial X}{\partial x}$ at the point $X$ in the Lie 
+algebra:
 {\setlength{\IEEEnormaljot}{18pt}
 \begin{IEEEeqnarray*}{rClls}
 	\frac{\partial e^X}{\partial x}
@@ -51,18 +52,18 @@ tangent direction $\frac{\partial X}{\partial x}$ at the point $X$ in the Lie al
 		& = & \left[ \frac{e^{\operatorname{ad}_X \cdotp} - 1}{\operatorname{ad}_X \cdotp} \right] \left(\frac{\partial X}{\partial x}\right) e^X & \smash{\left. \IEEEstrut[4\jot] \right\rbrace} & \text{right recursive}\\
 		& = & \left[\sum_{n=0}^{\infty} \frac{1}{\left(n+1\right)!} \operatorname{ad}_X^n \cdotp \right] \left(\frac{\partial X}{\partial x} \right) e^X & &
 \end{IEEEeqnarray*}}
+With respect to the adjoint operator, we are using the currying partial application notation
+of $\left[L f\left(\cdotp\right)\right]\left(y\right)$ to indicate the application of the 
+operator $L$ to $f\left(x\right)$ followed by evaluation of the result at $y$. We have also
+abused and confounded the notations for directional derivatives and partial derivatives here 
+by assuming that $X$ is parameterized by $x$ so that $\frac{\partial e^X}{\partial x}$ is 
+the derivative in the direction of change of $x$.
+
 The last equality demonstrates the non-commutative perturbation term most clearly. The first
 multiplicative factor in the derivative accounts for the lack of commutativity between $X$ 
 and $\frac{\partial X}{\partial x}$, and the last term resembles the derivative in the
 commutative case. This can be seen when considering the condition $\left[X,\frac{\partial X}{\partial x}\right]=0$,
 in which case $\frac{\partial e^X}{\partial x} = \frac{\partial X}{\partial x} e^X$. 
-\footnote{We have abused and confounded the notations for directional derivatives and 
-partial derivatives here by assuming that $X$ is parameterized by $x$ so that $\frac{\partial e^X}{\partial x}$
-is the derivative in the direction of change of $x$.}
-\footnote{With respect to the adjoint operator, we are using the currying partial 
-application notation of $\left[L f\left(\cdotp\right)\right]\left(y\right)$ to indicate the 
-application of the operator $L$ to $f\left(x\right)$ followed by evaluation of the result at
-$y$.}
 
 Even though the multiplicative factorization provides a transparent representation of the 
 computational terms it is still far from optimal; because, when compared to matrix addition, 
