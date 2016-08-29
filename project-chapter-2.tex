@@ -727,11 +727,12 @@ commutators, where for any $i,j \le n-1$,
 The state transitions of the improper commutators $C_{iin} + C_{jjn} - C_{ijn}$ are
 illustrated in figure \ref{fig:improperdoublestochastic}.
 
-The intuition being that any $n \times n$ matrix with fixed row and column sums can be 
-created by starting with any $\left(n-1\right) \times \left(n-1\right)$ matrix and appending
-a compensating $n$ row and $n$ column. This relationship is implicitly used extensively in
-proving the following lemma and corollary on the products, commutators, and structure
-constants of $C_{ijn}$.
+The intuition being that a $n \times n$ matrix with fixed row and column sums can be 
+constructed from any $\left(n-1\right) \times \left(n-1\right)$ matrix followed by appending
+a $n-1$ row that compensates for the column sums, a $n-1$ column that compensates for the 
+row sums, and the uniquely defined $n$ diagonal element. This relationship is implicitly 
+used extensively in proving the following lemma and corollary on the products, commutators, 
+and structure constants of $C_{ijn}$.
 \begin{lemma}
 	\begin{IEEEeqnarray*}{rCl}
 		C_{ijn}C_{kln} & = &
