@@ -12,11 +12,11 @@ models; that can be reasoned about using physical heuristic analogies, and intui
 phenomenological interpretations. To varying degrees of rigor, methods for both simulation,
 and parameter estimation have been developed for many types of observed random and
 pseudo-random processes such as the syntax of sentences, disease states, cancer survival,
-epidemiology, and demographics. To apply Markov process a number of simplifying assumptions
-are made, including discretization of time and state spaces, homogeneity of the process, and
-restrictions of the allowed transitions. The simplifications have resulted in models such as
-phase type distributions, branching processes, birth-death processes, and hidden Markov
-models.
+epidemiology, and demographics \cite{government_of_canada_modgen_2009}. To apply Markov 
+process a number of simplifying assumptions are made, including discretization of time and 
+state spaces, homogeneity of the process, and restrictions of the allowed transitions. The 
+simplifications have resulted in models such as phase type distributions, branching 
+processes, birth-death processes, and hidden Markov models.
 
 State of the art computational methods are focused on maximum likelihood parameter
 estimation by expectation maximization of hidden Markov Models; which assumes a finite-state
@@ -24,7 +24,8 @@ space obscured by random noise, with discrete homogeneous time steps, and all ti
 transitions being observed. The discretization of time allows for the time evolution of
 transition probabilities to be explicitly parameterized through matrix multiplication. The
 discrete time construction of hidden Markov models is successfully exploited by the
-Baum-Welch, Viterbi, and forward-backward algorithms to estimate parameters.
+Baum-Welch \cite{baum_maximization_1970,baum_statistical_1966}, Viterbi \cite{viterbi_error_1967}, 
+and forward-backward algorithms to estimate parameters.
 
 In contrast continuous time homogeneous Markov processes on a finite-state space are more
 naturally parameterized through the generator, because the time evolution is represented
@@ -104,10 +105,11 @@ In the context of Lie theory, the path $t$ is not continuous in the Lie algebra.
 From the perspective of Lie theory, classical parameter estimation of Markov processes has
 been a manifold first approach; starting with an explicit construction of an extrinsic
 smooth coordinate chart (parameterization) on a neighborhood of the sub-manifold to which
-the generators belong, and only then looking for computational simplifications and
-solutions. As hinted to in the previous section, we will proceed with an algebra first
-approach; developing the intrinsic algebraic structure of the generators of the Lie algebra,
-and then exploiting the chain rule to carry out computations in specific parameterizations.
+the generators belong \cite{sternberg_advanced_2014}, and only then looking for 
+computational simplifications and solutions. As hinted to in the previous section, we will 
+proceed with an algebra first approach; developing the intrinsic algebraic structure of the 
+generators of the Lie algebra, and then exploiting the chain rule to carry out computations 
+in specific parameterizations.
 
 The second chapter establishes the algebraic and analytic closure properties necessary for 
 chapter three, and establishes the notation used throughout all the following chapters.

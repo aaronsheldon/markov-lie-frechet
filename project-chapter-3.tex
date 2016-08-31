@@ -7,11 +7,11 @@ Moler and Van Loan seminally reviewed algorithms for calculating the matrix expo
 1978, and revisited that review in 2003 \cite{moler_nineteen_1978,moler_nineteen_2003}. 
 Building on the discussions of Moler and Van Loan, Higham established the standard 
 implementation of the matrix exponential based on scaling and scaring, and Pad\'{e} 
-approximation \cite{higham_scaling_2005,higham_functions_2008}. The Higham implementation was
-further optimized for $64$ bit architectures by Al-Mohy \cite{al-mohy_new_2009}. In the same
-work Al-Mohy developed an algorithm to approximate the derivative of the matrix exponential, 
-formulated by taking the derivative of the Pad\'{e} approximation of the matrix exponential 
-and then working out a recursive calculation for the derivatives of matrix 
+approximation \cite{higham_scaling_2009,higham_scaling_2005,higham_functions_2008}. The 
+Higham implementation was further optimized for $64$ bit architectures by Al-Mohy \cite{al-mohy_new_2009}. 
+In the same work Al-Mohy developed an algorithm to approximate the derivative of the matrix 
+exponential, formulated by taking the derivative of the Pad\'{e} approximation of the matrix 
+exponential and then working out a recursive calculation for the derivatives of matrix 
 powers \cite{al-mohy_computing_2009}.
 
 While the derivative of the Pad\'{e} approximation of an analytic function will converge to 
