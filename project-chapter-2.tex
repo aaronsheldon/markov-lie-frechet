@@ -1,4 +1,6 @@
 \chapter{The Lie Algebra of Markov Process Generators}
+In which we develop and explore the containing Lie algebras of the generators of continuous
+time homogeneous Markov processes on a finite-state spaces.
 \section{Stochastic Matrices}
 \subsection{Preliminaries}
 The classical Lie algebras of physics, like the infinitesimal symmetries of the special
@@ -506,8 +508,8 @@ then nearly without any further proof we can state the following observations
 		\end{IEEEeqnarray*}
 	\end{enumerate}
 \end{observation}
-The last observation admits a further generalization that will be of use in the next
-calculations.
+The last observation admits a further generalization on the ordering of linear operators 
+that will be of use in the next calculations.
 \begin{observation}
 	If $m < n \Rightarrow \left[A_n,A_m\right]= A_n A_m$ then
 	\begin{enumerate}
@@ -545,13 +547,14 @@ is ratio of $\pi$ to the $p$ inner Pythagorean approximation of $\pi$. The coeff
 the case of a period of $p=16$ are illustrated in figure \ref{fig:pythagorean-16}, and in 
 the case of a period of $p=17$ in figure \ref{fig:pythagorean-17}. For now the proposition 
 remains unproven. However, a hint of the direction to take can be seen by expanding the 
-power series for vertex $V_{j\left(\cdot\right)}$
+power series for vertex $V_{j\left(\cdot\right)}$ using the previous observations on the 
+ordering of powers of linear operators
 \begin{IEEEeqnarray*}{rCl}
 	V_{j\left(\cdot\right)} 
 		& = & e^{-\sum_{n=1}^{p-1} \alpha_n} \sum_{m_1,\dots, m_{p-1} \ge 0} V^{\sum_{n=1}^{p-1} n m_{n}}_{j_0\left(\cdot\right)} \prod_{n=1}^{p-1}\frac{\alpha_n^{m_n}}{m_n!}
 		+ (1 - e^{-\alpha_0}) \sum_{l=1}^T C_{j_l\left(\cdot\right)} + \cdots \\
 		&   & \cdots + \left(-1\right)^T C_{j_T\left(\cdot\right)} \cdots C_{j_1\left(\cdot\right)}
-		\sum_{m_0,\dots,m_T>0} \frac{\left(-\alpha_0\right)^{m_1} \cdots \left(-\alpha_0\right)^{m_T}}{\left(m_0 + \cdots + m_T\right)!}
+		\sum_{m_0,\dots,m_T>0} \frac{\left(-\alpha_0\right)^{\sum_{l=1}^T m_l}}{\left(m_0 + \cdots + m_T\right)!}
 		\left( \sum_{l=1}^{p-1} \alpha_l C_{j_0^l\left(\cdot\right)} \right)^{m_0}
 \end{IEEEeqnarray*}
 \subsection{Contraction and Dual Algebras}
