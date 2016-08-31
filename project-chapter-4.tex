@@ -83,9 +83,9 @@ and keeping $i \ne j$ fixed, the density of $T_j$ is
 	p_G\left[T_j=t \left\| X_0=i \right.\right]
 		& = & \frac{d}{dt} \mathbb{P}_G\left[ T_j\le t \left\| X_0=i \right.\right]\\
 		& = & \frac{d}{dt} \mathbb{P}_{P_i G}\left[ T_j\le t \left\| X_0=i \right.\right]\\
-		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(tP_iG\right) \hat{e}_j\right) \right\rangle\\
-		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(t\sum_{l \ne i} x_{il} C_{il}\right) \hat{e}_j\right) \right\rangle\\
-		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, e^{-tx_{ij}} \hat{e}_i\right) \right\rangle\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(tP_iG\right) \hat{e}_j\right\rangle\right)\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, \exp\left(t\sum_{l \ne i} x_{il} C_{il}\right) \hat{e}_j\right\rangle\right)\\
+		& = & \frac{d}{dt} \left(1 - \left\langle \hat{e}_i, e^{-tx_{ij}} \hat{e}_i\right\rangle\right)\\
 		& = & \frac{d}{dt} \left(1 - e^{-tx_{ij}}\right)\\
 		& = & x_{ij} e^{-tx_{ij}}
 \end{IEEEeqnarray*}
