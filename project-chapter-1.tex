@@ -92,11 +92,11 @@ for all $t \ge 1$. But it is not a Markov process because at $t = \ln 2$ the $\d
 so that the dual vector $\left[-1,1\right]$ representing the parity statistic on a two state
 process vanishes
 \begin{IEEEeqnarray*}{rCl}
-	\left[-1,1\right] M_t
+	\left[-1,1\right] M_{\ln 2}
 		& = & \left[-1,1\right]
 			\begin{bmatrix}
-				e^{-t} & 1 - e^{-t} \\
-				1 - e^{-t} & e^{-t}
+				\frac{1}{2} & \frac{1}{2} \\
+				\frac{1}{2} & \frac{1}{2}
 			\end{bmatrix}\\
 		& = & [0, 0]
 \end{IEEEeqnarray*}
@@ -122,10 +122,10 @@ non-trivial degeneracy of the branches of the matrix logarithm.
 
 The third chapter reviews the definition for the gradient of exponential map, and continues
 on to derive a Pad\'{e} approximation of the gradient of the exponential map. An analytic
-form for the Hessian of the exponential map is then developed, followed by an algorithm that
-to calculate the Hessian of the exponential map. The Hessian approximation algorithm
-involves a combination of a Pad\'{e} approximation of a linear term, and a novel recursive 
-calculation of a bilinear non-commutative perturbation to the Hessian.
+form for the Hessian of the exponential map is then developed, followed by an algorithm to 
+calculate the Hessian of the exponential map. The Hessian approximation algorithm involves a 
+combination of a Pad\'{e} approximation of a linear term, and a novel recursive calculation 
+of a bilinear non-commutative perturbation to the Hessian.
 
 The fourth chapter seeks to illustrate the material developed in the preceding two chapters.
 First the cumulative distribution of the stopped statistic of first hitting times is recast 
