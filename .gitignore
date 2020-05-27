@@ -1,0 +1,8 @@
+.*
+!.gitignore
+*.aux
+*.log
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.kilepr
